@@ -16,11 +16,11 @@
         </label>
       </form>
 
-      <button class="button button-block button-balanced" ng-click="loginWithEmail(useremail, password, '/loginMain')">
+      <button class="button button-block button-balanced" ng-click="loginWithEmail(useremail, password, '/')">
         이메일 로그인
       </button>
 
-      <button class="button button-block button-calm" ui-sref="resetPassword">
+      <button class="button button-block button-calm" ui-sref="app.resetPassword">
         Forgot Password?
       </button>
 
@@ -28,15 +28,15 @@
         소셜 로그인(구글만)
       </label>
 
-      <button class="button button-block button-assertive" ng-click="loginWithPortal('google', '/loginMain')">
+      <button class="button button-block button-assertive" ng-click="loginWithPortal('google', '/')">
         <i class="icon ion-social-googleplus-outline"></i> Google
       </button>
 
-      <button class="button button-block button-positive" ng-click="loginWithPortal('facebook', '/loginMain')">
+      <button class="button button-block button-positive" ng-click="loginWithPortal('facebook', '/')">
         <i class="icon ion-social-facebook-outline"></i> Facebook
       </button>
 
-      <button class="button button-block button-calm" ng-click="loginWithPortal('twitter', '/loginMain')">
+      <button class="button button-block button-calm" ng-click="loginWithPortal('twitter', '/')">
         <i class="icon ion-social-twitter-outline"></i> Twitter
       </button>
 

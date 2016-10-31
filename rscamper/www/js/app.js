@@ -24,12 +24,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
 
   // 로그인 로그아웃처리
   $firebaseAuth().$onAuthStateChanged(function (user) {
-    if (user) {
-      $rootScope.rootUser = Localstorage.getObject('user');
-    } else {
-      Localstorage.remove('user');
-      $rootScope.rootUser = Localstorage.getObject('user');
-    }
+      if (user) {
+        $rootScope.rootUser = Localstorage.getObject('user');
+      } else {
+        Localstorage.remove('user');
+        $rootScope.rootUser = Localstorage.getObject('user');
+      }
   })
 })
 
@@ -122,8 +122,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
     // 비밀번호 재설정 화면
     .state('app.resetPassword', {
       url: '/resetPassword',
-      controller: 'ResetPasswordController',
-      templateUrl: 'views/login/resetPassword.html'
+      views: {
+        'menuContent': {
+          controller: 'ResetPasswordController',
+          templateUrl: 'views/login/resetPassword.html'
+        }
+      }
     })
     // 프로필 화면
     .state('app.profile', {

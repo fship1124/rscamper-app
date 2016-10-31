@@ -235,7 +235,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
   };
 })
   .factory('DbService', ['$http', function ($http) {
-    var url = 'http://192.168.0.228:3001/rscamper-server/app';
+    var url = 'http://localhost:3001/rscamper-server/app';
     return {
       // 회원정보 입력 혹은 업데이트
       insertUser: function (userData, displayName, providerName, successCB) {
