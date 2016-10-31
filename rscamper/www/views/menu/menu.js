@@ -1,5 +1,11 @@
 angular.module('App')
 .controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location) {
+
+
+
+
+
+
   // Form data for the login modal
   $scope.loginData = {};
   var navIcons = document.getElementsByClassName('ion-navicon');
@@ -8,11 +14,6 @@ angular.module('App')
       this.classList.toggle('active');
     });
   }
-
-  var fab = document.getElementById('fab');
-  fab.addEventListener('click', function() {
-    return window && window.alert ? window.alert('일정짜기이런거?') : undefined;
-  });
 
   // .fromTemplate() method
   var template =  '<ion-popover-view>' +

@@ -1,0 +1,14 @@
+<ion-view view-title="Profile">
+  <ion-content>
+    <div class="item item-body">
+      유저정보
+      <p> UID <a ng-bind="user.userUid"></a> </p>
+      <p> Email <a ng-bind="user.email"></a> </p>
+      <p> DisplayName <a ng-bind="user.displayName"></a> </p>
+      <p> 프로필 이미지 </p>
+      <img src="{{user.photoUrl}}">
+      <p> 유저정보 </p>
+      <p> {{user}} </p>
+    </div>
+  </ion-content>
+</ion-view>

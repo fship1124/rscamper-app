@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
+var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService, MyPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,16 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
       StatusBar.styleDefault();
     }
   });
+
+  // 로그인 로그아웃처리
+  $firebaseAuth().$onAuthStateChanged(function (user) {
+    if (user) {
+      $rootScope.rootUser = Localstorage.getObject('user');
+    } else {
+      Localstorage.remove('user');
+      $rootScope.rootUser = Localstorage.getObject('user');
+    }
+  })
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -78,7 +88,53 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
           templateUrl: 'views/main/postTab.html'
         }
       }
-    });
+    })
+    // 로그인 메인 화면
+    .state('app.login', {
+      url: '/login',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/login/loginMain.html',
+          controller: 'LoginMainController'
+        }
+      }
+    })
+    // 로그인화면
+    .state('app.signin', {
+      url: '/signin',
+      views: {
+        'menuContent': {
+          controller: 'SigninController',
+          templateUrl: 'views/login/signin.html'
+        }
+      }
+    })
+    // 회원가입화면
+    .state('app.signup', {
+      url: '/signup',
+      views: {
+        'menuContent': {
+          controller: 'SignupController',
+          templateUrl: 'views/login/signup.html'
+        }
+      }
+    })
+    // 비밀번호 재설정 화면
+    .state('app.resetPassword', {
+      url: '/resetPassword',
+      controller: 'ResetPasswordController',
+      templateUrl: 'views/login/resetPassword.html'
+    })
+    // 프로필 화면
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        'menuContent': {
+          controller: 'ProfileController',
+          templateUrl: 'views/login/profile.html'
+        }
+      }
+    })
 
 
 
