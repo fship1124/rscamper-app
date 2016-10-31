@@ -1,0 +1,53 @@
+/* Empty. Add your own CSS if you like */
+.menu .bar.bar-header.expanded {
+  background-image: url('../img/material-graphite.jpg');
+  background-size: 120%;
+  background-position: 0%;
+  transition: all .5s ease-in-out;
+}
+
+.menu.menu-left * {
+  font-weight: bold;
+}
+
+.item-radio input:checked ~ .item-content {
+  background: transparent;
+}
+
+.menu-open .ion-navicon {
+  transform: rotate(-360deg);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+  content: "\f2ca";
+}
+
+/* menu custom 영은 */
+.menuTag {
+  font-weight:normal;
+  color: #e6b500;
+  font-size:11px;
+  text-decoration: none;
+}
+.menuTag:hover {
+  text-decoration: underline;
+}
+
+/* main custom 영은 */
+.mainTab {
+  height: 20px;
+}
+.mainTab-span {
+  font-size: 12px;
+}
+
+/* tourInfo custom 영은 */
+#map {
+  width: 100%;
+  height: 80%;
+}
+.scroll {
+  height: 100%;
+}

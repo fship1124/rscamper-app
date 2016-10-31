@@ -1,0 +1,15 @@
+<ion-view title="hello">
+  <ion-content>
+    <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
+    <!--<div class="list card">
+      <div class="item">
+        <h2>설명</h2>
+      </div>
+      <div class="item item-image">
+        <img ng-src="" src="img/ionic.png">
+      </div>
+    </div>-->
+    {{hello}}
+    <img collection-repeat="photo in photos" item-height="33%" item-width="33%" ng-src="{{photo}}">
+  </ion-content>
+</ion-view>
