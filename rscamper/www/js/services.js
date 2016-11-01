@@ -15,14 +15,8 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
               $firebaseAuth().$signOut();
               return;
             }
-            console.log('이메일 로그인 성공');
-            var userUid = result.uid;
-            DbService.selectUserByUid(userUid, function (userData) {
-              console.log(userData);
-              MyPopup.show('알림', '로그인 성공');
-              Localstorage.setObject('user', userData);
-              $location.path(redirectTo);
-            });
+            MyPopup.show('알림', '이메일 로그인 성공');
+            $location.path(redirectTo);
           })
           .catch(function (error) {
             var errorCode = error.code;
@@ -49,38 +43,19 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
               $cordovaOauth.google("506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com" + "&include_profile=true", ["email", "profile"]).then(function (result) {
                 var credential = firebase.auth.GoogleAuthProvider.credential(result.id_token);
                 firebase.auth().signInWithCredential(credential).then(function (result) {
-                  var user = firebase.auth().currentUser;
-                  var providerName = 'google';
-                  DbService.insertUser(user, user.displayName, providerName, function () {
-                    // DB에서 유저정보 가져오기
-                    DbService.selectUserByUid(user.uid, function (userData) {
-                      console.log(userData);
-                      Localstorage.setObject("user", userData);
-                      MyPopup.show('알림', '구글 로그인성공');
-                      $location.path(redirectTo);
-                    });
-                  })
+                  MyPopup.show('알림', '구글로그인 성공');
+                  $location.path(redirectTo);
                 }, function (error) {
-                  console.error("firebase: " + error);
                   MyPopup.show('실패', 'error');
                 });
               }, function (error) {
-                console.error("ERROR: " + error);
+                MyPopup.show('실패', 'error');
               });
             } else {
               var provider = new firebase.auth.GoogleAuthProvider();
-              provider.addScope('email');
-              provider.addScope('profile');
               firebase.auth().signInWithPopup(provider).then(function (result) {
-                DbService.insertUser(result.user, function () {
-                  // DB에서 유저정보 가져오기
-                  DbService.selectUserByUid(result.user.uid, function (userData) {
-                    console.log(userData);
-                    Localstorage.setObject("user", userData);
-                    MyPopup.show('알림', '구글 로그인성공');
-                    $location.path(redirectTo);
-                  });
-                })
+                MyPopup.show('알림', '구글 로그인성공');
+                $location.path(redirectTo);
               });
             }
             break;
@@ -91,24 +66,15 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
               $cordovaOauth.facebook("947628548702706", ["email"]).then(function (result) {
                 // Firebase에 토큰 가져가서 인증
                 $firebaseAuth().$authWithOAuthToken("facebook", result.access_token).then(function (authData) {
-                  console.log("소셜로그인성공")
                 }, function (error) {
-                  console.error("ERROR: " + error);
                 });
               }, function (error) {
-                console.error("ERROR: " + error);
               });
             } else {
               var provider = new firebase.auth.FacebookAuthProvider();
               firebase.auth().signInWithPopup(provider).then(function (result) {
-                DbService.insertUser(result.user, function () {
-                  DbService.selectUserByUid(result.user.uid, function (userData) {
-                    console.log(userData);
-                    Localstorage.setObject("user", userData);
-                    MyPopup.show('알림', '페이스북 로그인성공');
-                    $location.path(redirectTo);
-                  });
-                })
+                MyPopup.show('알림', '페이스북 로그인성공');
+                $location.path(redirectTo);
               });
             }
             break;
@@ -117,27 +83,17 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
             if (ionic.Platform.isWebView()) {
               $cordovaOauth.twitter("O0aubI3UlDJzlzaAVLGJ3BqVf", "qwyWjtCq0TDIXCB8PsoM854B30Pu7ANjKYAyLBaCOYFUWGxeUm").then(function (result) {
                 $firebaseAuth().$authWithOAuthToken("twitter", result.access_token).then(function (authData) {
-                  console.log("소셜로그인성공")
-                  console.log(JSON.stringify(authData));
-                  $localstorage.setObject('user', authData)
+                  MyPopup.show('알림', '트위터 로그인성공');
                   $location.path('/loginMain');
                 }, function (error) {
-                  console.error("ERROR: " + error);
                 });
               }, function (error) {
-                console.error("ERROR: " + error);
               });
             } else {
               var provider = new firebase.auth.TwitterAuthProvider();
               firebase.auth().signInWithPopup(provider).then(function (result) {
-                DbService.insertUser(result.user, function () {
-                  DbService.selectUserByUid(result.user.uid, function (userData) {
-                    console.log(userData);
-                    Localstorage.setObject("user", userData);
                     MyPopup.show('알림', '트위터 로그인성공');
                     $location.path(redirectTo);
-                  });
-                })
               });
             }
             break;
@@ -157,12 +113,9 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 
     // 이메일 회원가입 메소드
     register: function (username, useremail, password, redirectTo) {
-      console.log('회원가입');
       $firebaseAuth().$createUserWithEmailAndPassword(useremail, password)
         .then(function (result) {
-          var providerName = 'password';
-          DbService.insertUser(result, username, providerName, function () {
-            console.log('회원정보 DB입력 성공');
+          DbService.insertEmailUser(result, username, function () {
             // 인증 메일 발송
             firebase.auth().currentUser.sendEmailVerification().then(function () {
               MyPopup.show('회원가입 성공', '계정 활성화를 위해 이메일 인증을 해주시기 바랍니다.');
@@ -171,10 +124,9 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
               $location.path(redirectTo);
             });
           })
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+        }, function (error) {
+          MyPopup.show('오류', error);
+        });
     },
 
     // 비밀번호 초기화 메소드
@@ -190,7 +142,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
         } else if (errorCode == 'auth/user-not-found') {
           MyPopup.show('에러', '요청한 이메일이 존재하지 않습니다.');
         }
-        console.log(error);
+        MyPopup.show('에러', errorMessage);
       });
     },
 
@@ -220,39 +172,60 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
       }
     },
 
-    // 프로필 사진 수정 메소드
+    // TODO: 프로필 사진 수정 메소드
     updateProfilePhoto: function () {
 
     },
-    // 배경사진 수정 메소드
+    // TODO: 배경사진 수정 메소드
     updateBgPhoto : function () {
 
     },
-    //회원정보 수정 메소드
+    // TODO: 회원정보 수정 메소드
     updateProfile: function () {
 
     }
   };
 })
+  // [유틸] Db관련 메소드
   .factory('DbService', ['$http', function ($http) {
     var url = 'http://localhost:3001/rscamper-server/app';
     return {
-      // 회원정보 입력 혹은 업데이트
-      insertUser: function (userData, displayName, providerName, successCB) {
-        console.log(userData.displayName);
+      // 소셜 회원정보 입력
+      insertUser: function (userData, successCB) {
         $http({
           url: url + '/user/insert',
           method: 'POST',
           data: $.param({
             userUid: userData.uid,
-            displayName: displayName,
+            displayName: userData.displayName,
             email: userData.email,
             photoUrl: userData.photoURL,
-            providerName: providerName,
-            providerUid: userData.providerData.uid,
-            providerDisplayName: userData.providerData.displayName,
-            providerPhotoUrl: userData.providerData.photoUrl,
-            providerEmail: userData.providerData.email
+            providerName: userData.providerData[0].providerId,
+            providerUid: userData.providerData[0].uid,
+            providerDisplayName: userData.providerData[0].displayName,
+            providerPhotoUrl: userData.providerData[0].photoUrl,
+            providerEmail: userData.providerData[0].email
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
+        }).success(successCB);
+      },
+      // 이메일 회원정보 입력
+      insertEmailUser: function (userData, userName, successCB) {
+        $http({
+          url: url + '/user/insert',
+          method: 'POST',
+          data: $.param({
+            userUid: userData.uid,
+            displayName: userName,
+            email: userData.email,
+            photoUrl: userData.photoURL,
+            providerName: userData.providerData[0].providerId,
+            providerUid: userData.providerData[0].uid,
+            providerDisplayName: userData.providerData[0].displayName,
+            providerPhotoUrl: userData.providerData[0].photoUrl,
+            providerEmail: userData.providerData[0].email
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -309,7 +282,9 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           });
       },
       confirm: function (title, template) {
-        $ionicPopup.confirm({})
+        $ionicPopup.confirm({
+
+        })
           .then(function (res) {
           });
       }

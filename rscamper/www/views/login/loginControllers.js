@@ -23,13 +23,7 @@ app.controller('SigninController', function ($scope, AuthService) {
   })
 
   // 프로필 컨트롤러
-  .controller('ProfileController', function ($scope, AuthService) {
-
-    $scope.getUser = function () {
-      $scope.user = AuthService.getCurrentUser();
-      console.log('유저정보로딩', $scope.user);
-    }
-    $scope.getUser();
+  .controller('ProfileController', function ($rootScope, $scope, AuthService) {
 
   })
 ;

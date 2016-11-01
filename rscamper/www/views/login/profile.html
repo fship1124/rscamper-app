@@ -2,13 +2,13 @@
   <ion-content>
     <div class="item item-body">
       유저정보
-      <p> UID <a ng-bind="user.userUid"></a> </p>
-      <p> Email <a ng-bind="user.email"></a> </p>
-      <p> DisplayName <a ng-bind="user.displayName"></a> </p>
+      <p> UID <a ng-bind="rootUser.userUid"></a> </p>
+      <p> Email <a ng-bind="rootUser.email"></a> </p>
+      <p> DisplayName <a ng-bind="rootUser.displayName"></a> </p>
       <p> 프로필 이미지 </p>
-      <img src="{{user.photoUrl}}">
+      <img src="{{rootUser.photoUrl}}">
       <p> 유저정보 </p>
-      <p> {{user}} </p>
+      <p> {{rootUser}} </p>
     </div>
   </ion-content>
 </ion-view>

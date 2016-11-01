@@ -14,7 +14,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -24,11 +23,27 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
 
   // 로그인 로그아웃처리
   $firebaseAuth().$onAuthStateChanged(function (user) {
+
+      // 로그인 상태
       if (user) {
-        $rootScope.rootUser = Localstorage.getObject('user');
-      } else {
-        Localstorage.remove('user');
-        $rootScope.rootUser = Localstorage.getObject('user');
+        // 이메일 인증이 아닐경우 로그인시 회원정보 입력
+        if (user.providerData[0].providerId != 'password') {
+          DbService.insertUser(user, function () {
+            DbService.selectUserByUid(user.uid, function (result) {
+              $rootScope.rootUser = result;
+              console.log($rootScope.rootUser);
+            })
+          });
+          // 이메일 인증시 로그인
+        } else {
+          DbService.selectUserByUid(user.uid, function (result) {
+            $rootScope.userStatus = true;
+            $rootScope.rootUser = result;
+          });
+        }
+      } else { // 로그아웃 상태
+        $rootScope.userStatus = false;
+        $rootScope.rootUser ="";
       }
   })
 })
@@ -139,8 +154,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         }
       }
     })
-
-
 
 
   /*// setup an abstract state for the tabs directive
