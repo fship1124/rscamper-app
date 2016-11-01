@@ -1,5 +1,5 @@
 // 회원 관련 서비스
-app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, Localstorage, DbService, $cordovaCamera, $cordovaFileTransfer) {
+app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, Localstorage, DbService, $cordovaCamera, $cordovaFileTransfer, $rootScope, $timeout) {
   return {
     // 이메일 로그인 메소드
     loginWithEmail: function (useremail, password, redirectTo) {
@@ -158,21 +158,25 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 
     // 회원탈퇴 메소드
     resign: function () {
-      var user = firebase.auth().currentUser;
-      if (user) {
-        var userUid = user.uid;
-        user.delete().then(DbService.deleteUserByUid(userUid, function () {
-          $firebaseAuth().$signOut();
-          MyPopup.alert('성공', '회원탈퇴가 완료되었습니다.');
-        }), function (error) {
-          MyPopup.alert('에러', error);
-        });
-      } else {
-        MyPopup.alert('에러', '로그인 되어있지 않습니다.');
-      }
+      MyPopup.confirm('회원 탈퇴 확인', '정말로 탈퇴 하시겠습니까?', function () {
+        var user = firebase.auth().currentUser;
+        if (user) {
+          var userUid = user.uid;
+          user.delete().then(DbService.deleteUserByUid(userUid, function () {
+            $firebaseAuth().$signOut();
+            MyPopup.alert('성공', '회원탈퇴가 완료되었습니다.');
+          }), function (error) {
+            MyPopup.alert('에러', error);
+          });
+        } else {
+          MyPopup.alert('에러', '로그인 되어있지 않습니다.');
+        }
+      }, function () {
+
+      })
     },
 
-    // TODO: 프로필 사진 수정 메소드
+    // 프로필 사진 수정 메소드
     updateProfilePhoto: function ($event) {
       $event.stopPropagation();
       MyPopup.confirm('프로필 사진 수정 확인', '프로필 사진을 수정하시겠습니까?',
@@ -190,9 +194,8 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           $cordovaCamera.getPicture(options).then(function (imageData) {
 
             console.log(imageData);
-            console.log(options);
 
-            var url = 'http://192.168.0.228:3001/rscamper-server/app/user/upload/profileImage';
+            var url = 'http://192.168.1.13:3001/rscamper-server/app/user/upload/profileImage';
             var targetPath = imageData;
             var filename = targetPath.split("/").pop();
             var options = {
@@ -204,16 +207,23 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 
             $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
               console.log("SUCCESS: " + JSON.stringify(result.response));
-              var userUid = $rootScope.rootUser.uid;
-              var type = result.response.type;
-              var path = result.response.path;
-              var size = result.response.size;
-
+              var data = JSON.parse(result.response);
+              var userPhoto = {
+                userUid: $rootScope.rootUser.userUid,
+                type: data.type,
+                path: data.path,
+                size: data.size
+              }
+              DbService.updateProfileImage(userPhoto, function () {
+                DbService.selectUserByUid($rootScope.rootUser.userUid, function (result) {
+                  $rootScope.rootUser = result;
+                });
+              })
             }, function (err) {
               console.log("ERROR: " + JSON.stringify(err));
             }, function (progress) {
               $timeout(function () {
-                $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                // $scope.downloadProgress = (progress.loaded / progress.total) * 100;
               })
             });
           }, function (err) {
@@ -278,8 +288,23 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 })
   // [유틸] Db관련 메소드
   .factory('DbService', ['$http', function ($http) {
-    var url = 'http://192.168.0.228:3001/rscamper-server/app';
+    var url = 'http://192.168.1.13:3001/rscamper-server/app';
     return {
+      updateProfileImage: function (userPhoto, successCB) {
+        $http({
+          url: url + '/user/update/profileImage',
+          method: 'POST',
+          data: $.param({
+            userUid: userPhoto.userUid,
+            type: userPhoto.type,
+            path: userPhoto.path,
+            size: userPhoto.size
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
+        }).success(successCB);
+      },
       // 소셜 회원정보 입력
       insertUser: function (userData, successCB) {
         $http({
