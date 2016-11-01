@@ -38,14 +38,17 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
     controller: 'MenuCtrl'
     })
     .state('app.main', {
+      cache : false,
       url: '/main',
       views: {
         'menuContent': {
-          templateUrl: 'views/main/mainTabs.html'
+          templateUrl: 'views/main/mainTabs.html',
+          controller : 'MainCtrl'
         }
       }
     })
     .state('app.tourInfo', {
+      cache : false,
       url: '/tourInfo',
       views: {
         'menuContent': {
@@ -75,10 +78,54 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
       url: '/post',
       views: {
         'post-tab': {
-          templateUrl: 'views/main/postTab.html'
+          templateUrl: 'views/main/postTab.html',
+
+        }
+      }
+    })
+    .state('app.scheduleTab',{
+      cache : false,
+      url: '/schedule',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/schedule/scheduleTabs.html'
+        }
+      }
+    })
+    .state('app.scheduleTab.schedule', {
+      url: '/schedule',
+      views: {
+        's-tab': {
+          templateUrl: 'views/schedule/schedule.html',
+          controller : 'ScheduleCtrl'
         }
       }
     });
+
+ /* $stateProvider
+    .state('asdd', {
+      url: '/asdd',
+      abstract: true,
+      templateUrl: 'views/menu/menu.html',
+      controller: 'MenuCtrl'
+    })
+    .state('asdd.schedule', {
+      url: '/schedule',
+      views: {
+        'scheduleContent': {
+          templateUrl: 'views/schedule/scheduleTabs.html'
+        }
+      }
+    })
+    .state('asdd.schedule.main', {
+    url: '/schedule',
+    views: {
+      's-tab': {
+        templateUrl: 'views/schedule/schedule.html',
+        controller : 'ScheduleCtrl'
+      }
+    }
+  });*/
 
 
 

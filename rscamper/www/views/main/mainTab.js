@@ -10,7 +10,7 @@ angular.module('App')
   // }
   $scope.photos = [];
   for (var i = 0; i < 100; i++) {
-    $scope.photos.push('http://lorempixel.com/250/250?q='+(i%17));
+    // $scope.photos.push('http://lorempixel.com/250/250?q='+(i%17));
   };
 
   $scope.load = function () {

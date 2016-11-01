@@ -1,7 +1,8 @@
 angular.module('App')
-.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location) {
+.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $state) {
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.asd = 1;
   var navIcons = document.getElementsByClassName('ion-navicon');
   for (var i = 0; i < navIcons.length; i++) {
     navIcons[i].addEventListener('click', function() {
@@ -34,4 +35,5 @@ angular.module('App')
   $scope.$on('$destroy', function() {
     $scope.popover.remove();
   });
-})
+
+});
