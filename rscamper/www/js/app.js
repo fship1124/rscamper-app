@@ -22,6 +22,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
   });
 
   // 로그인 로그아웃처리
+  // rootUser : 로그인한 유저 정보(object)
+  // userStatus : 로그인했는지 안했는지 판단(boolean)
   $firebaseAuth().$onAuthStateChanged(function (user) {
 
       // 로그인 상태
@@ -31,16 +33,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           DbService.insertUser(user, function () {
             DbService.selectUserByUid(user.uid, function (result) {
               $rootScope.rootUser = result;
-              console.log($rootScope.rootUser);
             })
           });
           // 이메일 인증시 로그인
         } else {
           DbService.selectUserByUid(user.uid, function (result) {
-            $rootScope.userStatus = true;
             $rootScope.rootUser = result;
           });
         }
+        $rootScope.userStatus = true;
       } else { // 로그아웃 상태
         $rootScope.userStatus = false;
         $rootScope.rootUser ="";
