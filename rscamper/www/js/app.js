@@ -32,10 +32,10 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
   $stateProvider
 
     .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'views/menu/menu.html',
-    controller: 'MenuCtrl'
+      url: '/app',
+      abstract: true,
+      templateUrl: 'views/menu/menu.html',
+      controller: 'MenuCtrl'
     })
     .state('app.main', {
       url: '/main',
