@@ -1,6 +1,11 @@
 <ion-view view-title="Profile">
 
-  <ion-content>
+  <!--오른쪽에 내비게이션 버튼 추가-->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="show($event)"></button>
+  </ion-nav-buttons>
+
+  <ion-content overflow-scroll="false">
       <div class="list">
         <a class="item item-icon-left">
           <i class="icon ion-ionic"></i>UID

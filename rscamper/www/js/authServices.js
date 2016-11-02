@@ -1,10 +1,14 @@
-app.factory('MyConfig', function () {
+angular.module('App')
+  // 설정 정보 관련 서비스
+  .factory('MyConfig', function () {
   return {
-    backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
+    // backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
+    backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
     googleAuthURL: '506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com'
   };
 })
-// 회원 관련 서비스
+
+  // 인증관련 서비스
   .factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, DbService, $cordovaCamera, $cordovaFileTransfer, $rootScope, $timeout, MyConfig) {
     return {
       // 이메일 로그인 메소드
@@ -299,7 +303,7 @@ app.factory('MyConfig', function () {
     };
   })
 
-  // [유틸] Db관련 메소드
+  // HTTP관련 서비스
   .factory('DbService', ['$http', 'MyConfig', function ($http, MyConfig) {
     return {
       updateProfileImage: function (userPhoto, successCB) {
@@ -391,7 +395,7 @@ app.factory('MyConfig', function () {
     }
   }])
 
-  // [유틸] localStorage사용을 위한 셋팅
+  // LocalStorage사용을 위한 셋팅
   .factory('Localstorage', ['$window', function ($window) {
     return {
       set: function (key, value) {
@@ -412,7 +416,7 @@ app.factory('MyConfig', function () {
     }
   }])
 
-  // [유틸] 팝업창 사용을 위한 서비스
+  // 팝업창 사용을 위한 서비스
   .factory('MyPopup', ['$ionicPopup', function ($ionicPopup) {
     return {
       alert: function (title, template) {
@@ -440,6 +444,8 @@ app.factory('MyConfig', function () {
       }
     }
   }])
+
+  // 로딩 관련 서비스
   .factory('MyLoading', ['$ionicLoading'], function ($ionicLoading) {
     return {
       show: function (template, duration) {

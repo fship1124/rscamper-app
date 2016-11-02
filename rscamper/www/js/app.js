@@ -1,5 +1,4 @@
 var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth'])
-
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService, MyPopup) {
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -41,99 +40,86 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       })
     })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
-  // 메인
-    .state('main', {
-      url: '/main',
-      abstract: true,
-      templateUrl: 'views/main/mainTabs.html',
-    })
-    .state('main.main', {
-      url: '/main',
-      views: {
-        'main-tab': {
-          templateUrl: 'views/main/mainTab.html',
-        }
-      }
-    })
-    .state('main.tour', {
-      url: '/tour',
-      views: {
-        'tour-tab': {
-          templateUrl: 'views/main/tourTab.html'
-        }
-      }
-    })
-    .state('main.post', {
-      url: '/post',
-      views: {
-        'post-tab': {
-          templateUrl: 'views/main/postTab.html'
-        }
-      }
-    })
-    .state('tourInfo', {
-      url: '/tourInfo',
-      views: {
-        templateUrl: 'views/tour/tourInfo.html',
-        controller: 'TourInfoCtrl'
-      }
-    })
-    // 로그인 메인 화면
-    .state('login', {
-      url: '/login',
-      views: {
-        templateUrl: 'views/login/loginMain.html',
-        controller: 'LoginMainCtrl'
-      }
-    })
-    // 로그인화면
-    .state('signin', {
-      url: '/signin',
-      views: {
-        templateUrl: 'views/login/signin.html',
-        controller: 'SigninCtrl'
-      }
-    })
-    // 회원가입화면
-    .state('signup', {
-      url: '/signup',
-      views: {
-        templateUrl: 'views/login/signup.html',
-        controller: 'SignupCtrl'
-      }
-    })
-    // 비밀번호 재설정 화면
-    .state('resetPassword', {
-      url: '/resetPassword',
-      views: {
-        templateUrl: 'views/login/resetPassword.html',
-        controller: 'ResetPasswordCtrl'
-      }
-    })
-    // 셋팅 - 메인
-    .state('setting', {
-      url: '/setting',
-      views: {
-        templateUrl: 'views/setting/settingMain.html',
-        controller: 'SettingMainCtrl'
-      }
-    })
-    // 셋팅 - 프로필
-    .state('profile', {
-      url: '/profile',
-      views: {
-        templateUrl: 'views/setting/profile.html',
-        controller: 'ProfileCtrl'
-      }
-    });
+      $stateProvider
+      // 메인
+        .state('main', {
+          url: '/main',
+          abstract: true,
+          templateUrl: 'views/main/mainTabs.html',
+        })
+        .state('main.main', {
+          url: '/main',
+          views: {
+            'main-tab': {
+              templateUrl: 'views/main/mainTab.html',
+            }
+          }
+        })
+        .state('main.tour', {
+          url: '/tour',
+          views: {
+            'tour-tab': {
+              templateUrl: 'views/main/tourTab.html'
+            }
+          }
+        })
+        .state('main.post', {
+          url: '/post',
+          views: {
+            'post-tab': {
+              templateUrl: 'views/main/postTab.html'
+            }
+          }
+        })
+        .state('tourInfo', {
+          url: '/tourInfo',
+          templateUrl: 'views/tour/tourInfo.html',
+          controller: 'TourInfoCtrl'
+        })
+        // 로그인 메인 화면
+        .state('login', {
+          url: '/login',
+          templateUrl: 'views/login/loginMain.html',
+          controller: 'LoginMainCtrl'
+        })
+        // 로그인화면
+        .state('signin', {
+          url: '/signin',
+          templateUrl: 'views/login/signin.html',
+          controller: 'SigninCtrl'
+        })
+        // 회원가입화면
+        .state('signup', {
+          url: '/signup',
+          templateUrl: 'views/login/signup.html',
+          controller: 'SignupCtrl'
+        })
+        // 비밀번호 재설정 화면
+        .state('resetPassword', {
+          url: '/resetPassword',
+          templateUrl: 'views/login/resetPassword.html',
+          controller: 'ResetPasswordCtrl'
+        })
+        // 셋팅 - 메인
+        .state('setting', {
+          url: '/setting',
+          templateUrl: 'views/setting/settingMain.html',
+          controller: 'SettingMainCtrl'
+        })
+        // 셋팅 - 프로필
+        .state('profile', {
+          url: '/profile',
+          templateUrl: 'views/setting/profile.html',
+          controller: 'ProfileCtrl'
+        });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/main');
+      $urlRouterProvider.otherwise('/main/main');
 
     })
+
     .controller('MenuCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, AuthService, $ionicActionSheet) {
 
       $scope.updateProfilePhoto = AuthService.updateProfilePhoto;
