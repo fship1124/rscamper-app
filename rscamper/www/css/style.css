@@ -42,6 +42,26 @@
 .mainTab-span {
   font-size: 12px;
 }
+#main-weather-div {
+  background-color: #444444;
+}
+#main-weather-div * {
+  text-align: center;
+}
+#temperature-text {
+  font-weight: normal;
+  color: white;
+  margin: 0;
+  margin-bottom: 5px;
+}
+#main-location-text {
+  font-size: 11px;
+  color: white;
+}
+#main-location-icon {
+  font-size: 16px;
+  color: white;
+}
 
 /* tourInfo custom 영은 */
 #map {

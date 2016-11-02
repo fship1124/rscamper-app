@@ -9,7 +9,78 @@
         <img ng-src="" src="img/ionic.png">
       </div>
     </div>-->
-    {{hello}}
-    <img collection-repeat="photo in photos" item-height="33%" item-width="33%" ng-src="{{photo}}">
+    <div class="row" id="main-first-div" style="padding: 0">
+      <div class="col col-50" id="main-weather-div">
+          <div ng-switch on=today.sky.code>
+            <i id="main-location-icon" class="ion-location"></i> <span id="main-location-text"> {{loc}}</span>
+            <!--상태없음-->
+            <div ng-switch-when="SKY_A00">
+              <img width="100px" src="../../img/weather_icons/38.png">
+            </div>
+            <!--맑음-->
+            <div ng-switch-when="SKY_A01">
+              <img width="100px" src="../../img/weather_icons/01.png">
+            </div>
+            <!--구름조금-->
+            <div ng-switch-when="SKY_A02">
+              <img width="100px" src="../../img/weather_icons/02.png">
+            </div>
+            <!--구름많음-->
+            <div ng-switch-when="SKY_A03">
+              <img width="100px" src="../../img/weather_icons/03.png">
+            </div>
+            <!--구름많고 비-->
+            <div ng-switch-when="SKY_A04">
+              <img width="100px" src="../../img/weather_icons/12.png">
+            </div>
+            <!--구름많고 눈-->
+            <div ng-switch-when="SKY_A05">
+              <img width="100px" src="../../img/weather_icons/13.png">
+            </div>
+            <!--구름많고 비 또는 눈-->
+            <div ng-switch-when="SKY_A06">
+              <img width="100px" src="../../img/weather_icons/14.png">
+            </div>
+            <!--흐림-->
+            <div ng-switch-when="SKY_A07">
+              <img width="100px" src="../../img/weather_icons/18.png">
+            </div>
+            <!--흐리고 비-->
+            <div ng-switch-when="SKY_A08">
+              <img width="100px" src="../../img/weather_icons/21.png">
+            </div>
+            <!--흐리고 눈-->
+            <div ng-switch-when="SKY_A09">
+              <img width="100px" src="../../img/weather_icons/32.png">
+            </div>
+            <!--흐리고 비 또는 눈-->
+            <div ng-switch-when="SKY_A10">
+              <img width="100px" src="../../img/weather_icons/04.png">
+            </div>
+            <!--흐리고 낙뢰-->
+            <div ng-switch-when="SKY_A11">
+              <img width="100px" src="../../img/weather_icons/29.png">
+            </div>
+            <!--뇌우, 비-->
+            <div ng-switch-when="SKY_A12">
+              <img width="100px" src="../../img/weather_icons/26.png">
+            </div>
+            <!--뇌우, 눈-->
+            <div ng-switch-when="SKY_A13">
+              <img width="100px" src="../../img/weather_icons/27.png">
+            </div>
+            <!--뇌우, 비 또는 눈-->
+            <div ng-switch-when="SKY_A14">
+              <img width="100px" src="../../img/weather_icons/28.png">
+            </div>
+          </div>
+          <h3 id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
+      </div>
+      <div class="col col-50" style="padding: 0">
+        <div class="row" style="height: 50%; background-color: #5bc0de;">2-1</div>
+        <div class="row" style="height: 50%; background-color: #D1C4E9; margin-top: 0; padding-top: 5px;">2-2</div>
+      </div>
+    </div>
+    <!--<img collection-repeat="photo in photos" item-height="33%" item-width="33%" ng-src="{{photo}}">-->
   </ion-content>
 </ion-view>

@@ -32,12 +32,14 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
   $stateProvider
 
     .state('app', {
+      cache: false,
       url: '/app',
       abstract: true,
       templateUrl: 'views/menu/menu.html',
       controller: 'MenuCtrl'
     })
     .state('app.main', {
+      cache: false,
       url: '/main',
       views: {
         'menuContent': {
@@ -45,16 +47,8 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
         }
       }
     })
-    .state('app.tourInfo', {
-      url: '/tourInfo',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/tour/tourInfo.html',
-          controller: 'TourInfoCtrl'
-        }
-      }
-    })
     .state('app.main.main', {
+      cache: false,
       url: '/main',
       views: {
         'main-tab': {
@@ -64,6 +58,7 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
       }
     })
     .state('app.main.tour', {
+      cache: false,
       url: '/tour',
       views: {
         'tour-tab': {
@@ -72,10 +67,31 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
       }
     })
     .state('app.main.post', {
+      cache: false,
       url: '/post',
       views: {
         'post-tab': {
           templateUrl: 'views/main/postTab.html'
+        }
+      }
+    })
+    .state('app.tourInfo', {
+      cache: false,
+      url: '/tourInfo',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/tour/tourInfo.html',
+          controller: 'TourInfoCtrl'
+        }
+      }
+    })
+    .state('app.tourInfo.tourDetail', {
+      cache: false,
+      url: '/tourDetail',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/tour/tourDetail.html',
+          controller: 'TourDetailCtrl'
         }
       }
     });

@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('TourInfoCtrl', function ($scope, $http, $ionicLoading, $compile, $ionicPlatform, $cordovaGeolocation) {
+  .controller('TourInfoCtrl', function ($scope, $http, $ionicLoading, $compile, $ionicPlatform, $cordovaGeolocation, $ionicModal) {
     $ionicPlatform.ready(function () {
       if(window.cordova && window.cordova.plugins.keyboard) {
         cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -18,12 +18,9 @@ angular.module('App')
               current: true
             };
 
-/*            // 경주역
+            // 경주역
             $scope.location.lat = 35.8444002;
-            $scope.location.lang = 129.2157566;*/
-            // 제주도
-            $scope.location.lat = 33.5564922;
-            $scope.location.lang = 126.7905824;
+            $scope.location.lang = 129.2157566;
 
             initialize();
 
@@ -110,12 +107,22 @@ angular.module('App')
 
         var distance = computeDistance($scope.location.lang, $scope.location.lat, result.mapx, result.mapy);
 
-        var contentString = '<div id="content"><p>' + result.title + '</p><span>나와의 거리 : ' + distance.toFixed(2) + 'km</span></div>';
+
+        // <a href="https://www.youtube.com/watch?v=CxgELeHSkJA" target="_blank">
+        // var contentString = '<div id="content" style="font-size: 12px"><a href="#" ng-click="modal.show()">' + result.title + '</a><br><span>나와의 거리 : ' + distance.toFixed(2) + 'km</span></div>';
+        // var imgSrc = result.firstimage;
+        // var contentString = '<div class="list"><a class="item item-thumbnail-left" href="#"><img src=imgSrc + ""><p>dd</p></a></div>';
+        var contentString = '<div><img src="' + result.firstimage + '" style="width: 100px; height: 75px"><br><span style="font-size: 11px">' + result.title + '</span></div>';
         var infowindow = new google.maps.InfoWindow({
-          content: contentString
+          content: contentString,
+          maxWidth: 100
         });
         marker.addListener('click', function () {
           infowindow.open(map, marker);
+        });
+
+        google.maps.event.addListener(map, 'click', function () {
+          infowindow.close();
         });
 
         marker.setMap(map);
@@ -145,6 +152,19 @@ angular.module('App')
       var radians = (degrees * Math.PI) / 180;
       return radians;
     }
+
+    // 모달
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    // $scope.createContact = function(u) {
+    //   $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    //   $scope.modal.hide();
+    // };
   });
 
 
