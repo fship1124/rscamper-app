@@ -11,16 +11,11 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
 
-      <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
-      </ion-nav-buttons>
-
     </ion-nav-bar>
 
     <ion-nav-view name="menuContent"></ion-nav-view>
 
   </ion-side-menu-content>
-
 
 
   <!-- 사이드메뉴 -->
@@ -39,27 +34,27 @@
     <ion-header-bar class="expanded" ng-if="userStatus == true" style="background-image: url('{{rootUser.bgPhotoUrl}}');" ng-click="updateBgPhoto();">
       <img src="{{rootUser.photoUrl}}" class="avatar motion spin fade" ng-click="updateProfilePhoto($event);">
       <div class="menu-bottom">
-        <d nav-clear menu-close ui-sref="app.login" ng-click="$event.stopPropagation()"> {{rootUser.displayName}} </d><br>
-        <a nav-clear menu-close ui-sref="app.login" class="menuTag" ng-click="$event.stopPropagation()"><i class="icon ion-android-person"></i> 마이페이지</a>
+        <d nav-clear menu-close ui-sref="app.myPage.main" ng-click="$event.stopPropagation()"> {{rootUser.displayName}} </d><br>
+        <a nav-clear menu-close ui-sref="app.myPage.main" class="menuTag" ng-click="$event.stopPropagation()"><i class="icon ion-android-person"></i> 마이페이지</a>
       </div>
     </ion-header-bar>
 
     <!-- 사이드메뉴 메뉴 바디-->
     <ion-content class="stable-bg has-expanded-header">
       <ion-list>
-        <ion-item nav-clear menu-close ui-sref="app.main.main">
+        <ion-item nav-clear menu-close ui-sref="app.main">
           <i class="icon icon ion-home"></i> 홈
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.tourInfo">
           <i class="icon ion-earth"></i> 관광지
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="">
+        <ion-item nav-clear menu-close ui-sref="app.community">
           <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="">
+        <ion-item nav-clear menu-close ui-sref="app.myPage">
           <i class="icon ion-android-person"></i> 마이페이지
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="">
+        <ion-item nav-clear menu-close ui-sref="app.setting">
           <i class="icon ion-gear-a"></i> 설정
         </ion-item>
       </ion-list>

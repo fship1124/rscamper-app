@@ -1,61 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
 
-    <link rel="manifest" href="manifest.json">
-    <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="manifest" href="manifest.json">
+  <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet'
+        type='text/css'>
 
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>-->
 
-    <!-- compiled css output -->
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <!-- compiled css output -->
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 
-    <script src="lib/jquery/dist/jquery.min.js"></script>
+  <script src="lib/jquery/dist/jquery.min.js"></script>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
 
-    <!-- google maps javascript -->
-    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8"></script>
+  <!-- google maps javascript -->
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-    <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
-    <script src="cordova.js"></script>
-    <!-- Firebase -->
-    <script src="lib/firebase/firebase.js" ></script>
-    <!-- AngularFire -->
-    <script src="lib/angularfire/dist/angularfire.min.js"></script>
-    <!--init Firebase-->
-    <script src="js/initFirebase.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+  <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
+  <script src="cordova.js"></script>
+  <!-- Firebase -->
+  <script src="lib/firebase/firebase.js"></script>
+  <!-- AngularFire -->
+  <script src="lib/angularfire/dist/angularfire.min.js"></script>
+  <!--init Firebase-->
+  <script src="js/initFirebase.js"></script>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
 
-    <script src="views/menu/menu.js"></script>
-    <script src="views/main/mainTabs.js"></script>
-    <script src="views/main/mainTab.js"></script>
-    <script src="views/tour/tourInfo.js"></script>
-    <script src="views/login/loginControllers.js"></script>
+  <script src="views/main/mainTabs.js"></script>
+  <script src="views/main/mainTab.js"></script>
+  <script src="views/tour/tourInfo.js"></script>
+  <script src="views/login/loginControllers.js"></script>
+  <script src="views/setting/settingControllers.js"></script>
+</head>
 
-  </head>
+<body ng-app="App">
 
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
 
-  <body ng-app="App">
-  <ion-nav-view></ion-nav-view>
-  </body>
+    <ion-nav-bar class="bar-clear bar-energized">
+
+      <ion-nav-back-button class="no-text"></ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <!-- 사이드메뉴 -->
+  <ion-side-menu side="left" ng-controller="MenuCtrl">
+
+    <!-- 사이드메뉴 메뉴 헤더 -->
+    <ion-header-bar class="expanded" ng-if="!userStatus == true">
+      <img src="img/ionic.png" class="avatar motion spin fade">
+      <div class="menu-bottom">
+        Rscamper<br>
+        <a nav-clear menu-close ui-sref="login" class="menuTag"><i class="icon ion-android-unlock"></i> 로그인</a>
+        <a nav-clear menu-close ui-sref="login" class="menuTag"><i class="icon ion-android-person-add"></i> 회원가입</a>
+      </div>
+    </ion-header-bar>
+
+    <ion-header-bar class="expanded" ng-if="userStatus == true" style="background-image: url('{{rootUser.bgPhotoUrl}}');" ng-click="updateBgPhoto();">
+      <img src="{{rootUser.photoUrl}}" class="avatar motion spin fade" ng-click="updateProfilePhoto($event);">
+      <div class="menu-bottom">
+        <d nav-clear menu-close ui-sref="myPage" ng-click="$event.stopPropagation()">
+          {{rootUser.displayName}}
+        </d>
+        <br>
+        <a nav-clear menu-close ui-sref="myPage" class="menuTag" ng-click="$event.stopPropagation()"><i
+          class="icon ion-android-person"></i> 마이페이지</a>
+      </div>
+    </ion-header-bar>
+
+    <!-- 사이드메뉴 메뉴 바디-->
+    <ion-content class="stable-bg has-expanded-header">
+      <ion-list>
+        <ion-item nav-clear menu-close ui-sref="main.main">
+          <i class="icon icon ion-home"></i> 홈
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="tourInfo">
+          <i class="icon ion-earth"></i> 관광지
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="community">
+          <i class="icon ion-person-stalker"></i> 커뮤니티
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="myPage">
+          <i class="icon ion-android-person"></i> 마이페이지
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="setting">
+          <i class="icon ion-gear-a"></i> 설정
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+  </ion-side-menu>
+</ion-side-menus>
+
+<ion-nav-view>
+</ion-nav-view>
+</body>
+
 </html>
