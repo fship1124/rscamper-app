@@ -1,21 +1,21 @@
 <ion-view view-title="Account">
   <ion-content>
-    <button class="button button-block button-calm" ui-sref="app.signin">
+    <button class="button button-block button-calm" ui-sref="app.signin" ng-if="userStatus == false">
       로그인
     </button>
-    <button class="button button-block button-calm" ui-sref="app.signup">
+    <button class="button button-block button-calm" ui-sref="app.signup" ng-if="userStatus == false">
       회원가입
     </button>
-    <button class="button button-block button-calm" ui-sref="app.profile">
+    <button class="button button-block button-calm" ui-sref="app.profile" ng-if="userStatus == true">
       회원정보
     </button>
-    <button class="button button-block button-calm" ng-click="logout()">
+    <button class="button button-block button-calm" ng-click="logout()" ng-if="userStatus == true">
       로그아웃
     </button>
-    <button class="button button-block button-calm" ng-click="resign()">
+    <button class="button button-block button-calm" ng-click="resign()" ng-if="userStatus == true">
       회원탈퇴
     </button>
-    <button class="button button-block button-calm" ui-sref="app.main">
+    <button class="button button-block button-calm" ui-sref="app.main" >
       둘러보기
     </button>
   </ion-content>

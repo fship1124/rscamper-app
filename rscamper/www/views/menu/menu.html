@@ -12,8 +12,7 @@
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover"
-                ng-click="popover.show($event)"></button>
+        <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
       </ion-nav-buttons>
 
     </ion-nav-bar>
@@ -22,46 +21,46 @@
 
   </ion-side-menu-content>
 
+
+
+  <!-- 사이드메뉴 -->
   <ion-side-menu side="left">
 
-    <!-- 사이드메뉴 위에 -->
-
-
+    <!-- 사이드메뉴 메뉴 헤더 -->
     <ion-header-bar class="expanded" ng-if="!userStatus == true">
       <img src="img/ionic.png" class="avatar motion spin fade">
       <div class="menu-bottom">
         Rscamper<br>
-        <a nav-clear menu-close ui-sref="app.login" class="menuTag"><i class="icon ion-heart"></i>로그인</a>
-        <a nav-clear menu-close ui-sref="app.login" class="menuTag"><i class="icon ion-heart"></i>회원가입</a>
+        <a nav-clear menu-close ui-sref="app.login" class="menuTag"><i class="icon ion-android-unlock"></i> 로그인</a>
+        <a nav-clear menu-close ui-sref="app.login" class="menuTag"><i class="icon ion-android-person-add"></i> 회원가입</a>
       </div>
     </ion-header-bar>
 
-    <ion-header-bar class="expanded" ng-if="userStatus == true" style=" background-image: url('../img/material-graphite.jpg');" ng-click="updateBgPhoto();">
+    <ion-header-bar class="expanded" ng-if="userStatus == true" style="background-image: url('{{rootUser.bgPhotoUrl}}');" ng-click="updateBgPhoto();">
       <img src="{{rootUser.photoUrl}}" class="avatar motion spin fade" ng-click="updateProfilePhoto($event);">
       <div class="menu-bottom">
         <d nav-clear menu-close ui-sref="app.login" ng-click="$event.stopPropagation()"> {{rootUser.displayName}} </d><br>
-        <a nav-clear menu-close ui-sref="app.login" class="menuTag" ng-click="$event.stopPropagation()"><i class="icon ion-heart"></i>회원정보수정</a>
+        <a nav-clear menu-close ui-sref="app.login" class="menuTag" ng-click="$event.stopPropagation()"><i class="icon ion-android-person"></i> 마이페이지</a>
       </div>
     </ion-header-bar>
 
-    <!-- 사이드메뉴 메뉴-->
+    <!-- 사이드메뉴 메뉴 바디-->
     <ion-content class="stable-bg has-expanded-header">
       <ion-list>
         <ion-item nav-clear menu-close ui-sref="app.main.main">
-          <i class="icon ion-home"></i> 홈
-        </ion-item>
-        <ion-item nav-clear menu-close href="#"
-        /*ui-sref=""*/>
-        menu
+          <i class="icon icon ion-home"></i> 홈
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.tourInfo">
-          관광지
+          <i class="icon ion-earth"></i> 관광지
         </ion-item>
-        <ion-item nav-clear menu-close href="#">
-          menu
+        <ion-item nav-clear menu-close ui-sref="">
+          <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
-        <ion-item nav-clear menu-close href="#">
-          menu
+        <ion-item nav-clear menu-close ui-sref="">
+          <i class="icon ion-android-person"></i> 마이페이지
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="">
+          <i class="icon ion-gear-a"></i> 설정
         </ion-item>
       </ion-list>
     </ion-content>

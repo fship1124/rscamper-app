@@ -24,6 +24,6 @@ app.controller('SigninController', function ($scope, AuthService) {
 
   // 프로필 컨트롤러
   .controller('ProfileController', function ($rootScope, $scope, AuthService) {
-
+    $scope.updateProfile = AuthService.updateProfile;
   })
 ;

@@ -1,5 +1,12 @@
+
+
+app.factory('Settings', function () {
+  return {
+    backEndUrl: 'http://192.168.0.228:3001/rscamper-server/app'
+  };
+})
 // 회원 관련 서비스
-app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, Localstorage, DbService, $cordovaCamera, $cordovaFileTransfer, $rootScope, $timeout) {
+  .factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, DbService, $cordovaCamera, $cordovaFileTransfer, $rootScope, $timeout) {
   return {
     // 이메일 로그인 메소드
     loginWithEmail: function (useremail, password, redirectTo) {
@@ -32,7 +39,6 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 
     // 소셜 로그인 메소드
     loginWithSocial: function (providerName, redirectTo) {
-
       if ($firebaseAuth().$getAuth()) {
         $firebaseAuth().$signOut();
         MyPopup.alert('알림', '로그아웃');
@@ -62,13 +68,16 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
 
           case "facebook":
             if (ionic.Platform.isWebView()) {
-              // 페북에서 Oauth토근 가져와서
               $cordovaOauth.facebook("947628548702706", ["email"]).then(function (result) {
-                // Firebase에 토큰 가져가서 인증
-                $firebaseAuth().$authWithOAuthToken("facebook", result.access_token).then(function (authData) {
+                var credential = firebase.auth.FacebookAuthProvider.credential(result.id_token);
+                firebase.auth().signInWithCredential(credential).then(function (result) {
+                  MyPopup.alert('알림', '페북 로그인 성공');
+                  $location.path(redirectTo);
                 }, function (error) {
+                  MyPopup.alert('파이어베이스 : 실패', 'error');
                 });
               }, function (error) {
+                MyPopup.alert('페이스북AUTH : 실패', 'error');
               });
             } else {
               var provider = new firebase.auth.FacebookAuthProvider();
@@ -92,8 +101,8 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
             } else {
               var provider = new firebase.auth.TwitterAuthProvider();
               firebase.auth().signInWithPopup(provider).then(function (result) {
-                    MyPopup.alert('알림', '트위터 로그인성공');
-                    $location.path(redirectTo);
+                MyPopup.alert('알림', '트위터 로그인성공');
+                $location.path(redirectTo);
               });
             }
             break;
@@ -171,9 +180,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
         } else {
           MyPopup.alert('에러', '로그인 되어있지 않습니다.');
         }
-      }, function () {
-
-      })
+      }, function () {});
     },
 
     // 프로필 사진 수정 메소드
@@ -192,10 +199,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           };
 
           $cordovaCamera.getPicture(options).then(function (imageData) {
-
-            console.log(imageData);
-
-            var url = 'http://192.168.1.13:3001/rscamper-server/app/user/upload/profileImage';
+            var url = Settings.backEndUrl + '/user/upload/profileImage';
             var targetPath = imageData;
             var filename = targetPath.split("/").pop();
             var options = {
@@ -229,12 +233,10 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           }, function (err) {
             console.log(err);
           });
-      },
-        function () {
-          // 수정안한다.
-      });
+        },
+        function () {});
     },
-    // TODO: 배경 사진 수정 메소드
+    // 배경 사진 수정 메소드
     updateBgPhoto: function () {
       MyPopup.confirm('배경 사진 수정 확인', '배경 사진을 수정하시겠습니까?',
         function () {
@@ -249,12 +251,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           };
 
           $cordovaCamera.getPicture(options).then(function (imageData) {
-
-            console.log(imageData);
-            console.log(options);
-
-            var url = "http://localhost/";
-            //target path may be local or url
+            var url = Settings.backEndUrl + '/user/upload/bgImage';
             var targetPath = imageData;
             var filename = targetPath.split("/").pop();
             var options = {
@@ -263,21 +260,34 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
               chunkedMode: false,
               mimeType: "image/jpg"
             };
+
             $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
               console.log("SUCCESS: " + JSON.stringify(result.response));
+              var data = JSON.parse(result.response);
+              var userPhoto = {
+                userUid: $rootScope.rootUser.userUid,
+                type: data.type,
+                path: data.path,
+                size: data.size
+              }
+              DbService.updateBgImage(userPhoto, function () {
+                DbService.selectUserByUid($rootScope.rootUser.userUid, function (result) {
+                  $rootScope.rootUser = result;
+                });
+              })
             }, function (err) {
               console.log("ERROR: " + JSON.stringify(err));
             }, function (progress) {
               $timeout(function () {
-                $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                // $scope.downloadProgress = (progress.loaded / progress.total) * 100;
               })
             });
-
           }, function (err) {
             console.log(err);
           });
         },
         function () {
+
         });
     },
     // TODO: 회원정보 수정 메소드
@@ -286,13 +296,28 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
     }
   };
 })
-  // [유틸] Db관련 메소드
-  .factory('DbService', ['$http', function ($http) {
-    var url = 'http://192.168.1.13:3001/rscamper-server/app';
+
+// [유틸] Db관련 메소드
+  .factory('DbService', ['$http', 'Settings', function ($http, Settings) {
     return {
       updateProfileImage: function (userPhoto, successCB) {
         $http({
-          url: url + '/user/update/profileImage',
+          url: Settings.backEndUrl + '/user/update/profileImage',
+          method: 'POST',
+          data: $.param({
+            userUid: userPhoto.userUid,
+            type: userPhoto.type,
+            path: userPhoto.path,
+            size: userPhoto.size
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
+        }).success(successCB);
+      },
+      updateBgImage: function (userPhoto, successCB) {
+        $http({
+          url: url + '/user/update/bgImage',
           method: 'POST',
           data: $.param({
             userUid: userPhoto.userUid,
@@ -308,7 +333,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
       // 소셜 회원정보 입력
       insertUser: function (userData, successCB) {
         $http({
-          url: url + '/user/insert',
+          url: Settings.backEndUrl + '/user/insert',
           method: 'POST',
           data: $.param({
             userUid: userData.uid,
@@ -329,7 +354,7 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
       // 이메일 회원정보 입력
       insertEmailUser: function (userData, userName, successCB) {
         $http({
-          url: url + '/user/insert',
+          url: Settings.backEndUrl + '/user/insert',
           method: 'POST',
           data: $.param({
             userUid: userData.uid,
@@ -350,14 +375,14 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
       // 회원정보 삭제
       deleteUserByUid: function (userUid, successCB) {
         $http({
-          url: url + '/user/delete/oneUser?userUid=' + userUid,
+          url: Settings.backEndUrl + '/user/delete/oneUser?userUid=' + userUid,
           method: 'DELETE'
         }).success(successCB);
       },
       // 회원정보 UID로 조회
       selectUserByUid: function (userUid, successCB) {
         $http({
-          url: url + '/user/select/oneUser?userUid=' + userUid,
+          url: Settings.backEndUrl + '/user/select/oneUser?userUid=' + userUid,
           method: 'GET'
         }).success(successCB);
       }
@@ -399,10 +424,12 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
       confirm: function (title, template, yesCB, noCB) {
         $ionicPopup.confirm({
           title: title,
-          template: template
+          template: template,
+          cancelText: '취소',
+          okText: '확인'
         })
           .then(function (res) {
-            if(res) {
+            if (res) {
               yesCB();
             } else {
               noCB();
@@ -410,4 +437,22 @@ app.factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $h
           });
       }
     }
-  }]);
+  }])
+  .factory('MyLoading', ['$ionicLoading'], function ($ionicLoading) {
+    return {
+      show: function (template, duration) {
+        $ionicLoading.show({
+          template: template,
+          duration: duration
+        }).then(function () {
+
+        });
+      },
+      hide: function () {
+        $ionicLoading.hide().then(function(){
+
+        });
+      }
+    }
+  })
+;

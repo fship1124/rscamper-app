@@ -13,6 +13,7 @@ angular.module('App')
         this.classList.toggle('active');
       });
     }
+
     // .fromTemplate() method
     var template = '<ion-popover-view>' +
       '   <ion-header-bar>' +
