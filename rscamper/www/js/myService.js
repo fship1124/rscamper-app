@@ -1,6 +1,3 @@
-/**
- * Created by Bitcamp on 2016-11-01.
- */
 angular.module('App')
   .factory('tourSchedulePopup', function ($ionicPopup) {
     return {
@@ -15,17 +12,6 @@ angular.module('App')
             text.focus();
           },0);
         })
-      }
-    }
-  })
-  .factory('listCount', function () {
-    var conut = 0;
-    return {
-      setListCount : function (listCount) {
-        count = listCount;
-      },
-      getListCount : function () {
-        return conut;
       }
     }
   })

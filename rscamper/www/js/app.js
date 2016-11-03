@@ -42,19 +42,20 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
 
     .config(function ($stateProvider, $urlRouterProvider) {
 
-<<<<<<< HEAD
       $stateProvider
       // 메인
         .state('main', {
           url: '/main',
           abstract: true,
           templateUrl: 'views/main/mainTabs.html',
+          controller : 'MainCtrl'
         })
         .state('main.main', {
           url: '/main',
           views: {
             'main-tab': {
               templateUrl: 'views/main/mainTab.html',
+              controller: 'MainTabCtrl'
             }
           }
         })
@@ -79,6 +80,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/tour/tourInfo.html',
           controller: 'TourInfoCtrl'
         })
+        .state('tourInfo.tourDetail', {
+          url: '/tourDetail',
+          templateUrl: 'views/tour/tourDetail.html',
+          controller: 'TourDetailCtrl'
+        })
+
         // 로그인 메인 화면
         .state('login', {
           url: '/login',
@@ -114,7 +121,39 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/profile',
           templateUrl: 'views/setting/profile.html',
           controller: 'ProfileCtrl'
-        });
+        })
+
+
+        .state('scheduleTab',{
+        cache : false,
+        url: '/schedule',
+        templateUrl: 'views/schedule/scheduleTabs.html'
+      })
+        .state('scheduleTab.schedule', {
+          url: '/schedule',
+          views: {
+            's-tab': {
+              templateUrl: 'views/schedule/schedule.html',
+              controller: 'ScheduleCtrl'
+            }
+          }
+        })
+        .state('detailTab', {
+          cache : false,
+          url: '/detailSchedule',
+          templateUrl: 'views/schedule/detailTabs.html'
+        })
+        .state('detailTab.detailSchedule',{
+          url: '/:no',
+          views: {
+            'detailSchedule-tab': {
+              templateUrl: 'views/schedule/scheduleDetail.html',
+              controller : 'dScheduleCtrl'
+            }
+          }
+
+        })
+      ;
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/main/main');
@@ -143,164 +182,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         '       My Popover Contents' +
         '   </ion-content>' +
         '</ion-popover-view>';
-=======
-    .state('app', {
-      cache: false,
-      url: '/app',
-      abstract: true,
-      templateUrl: 'views/menu/menu.html',
-      controller: 'MenuCtrl'
-    })
-    .state('app.main', {
-      cache : false,
-      url: '/main',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/main/mainTabs.html',
-          controller : 'MainCtrl'
-        }
-      }
-    })
-    .state('app.main.main', {
-      cache: false,
-      url: '/main',
-      views: {
-        'main-tab': {
-          templateUrl: 'views/main/mainTab.html',
-          controller: 'MainTabCtrl'
-        }
-      }
-    })
-    .state('app.main.tour', {
-      cache: false,
-      url: '/tour',
-      views: {
-        'tour-tab': {
-          templateUrl: 'views/main/tourTab.html'
-        }
-      }
-    })
-    .state('app.main.post', {
-      cache: false,
-      url: '/post',
-      views: {
-        'post-tab': {
-          templateUrl: 'views/main/postTab.html',
-
-        }
-      }
-    })
-    .state('app.scheduleTab',{
-      cache : false,
-      url: '/schedule',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/schedule/scheduleTabs.html',
-          controller : 'ScheduleTabsCtrl'
-        }
-      }
-    })
-    .state('app.scheduleTab.schedule', {
-      url: '/schedule',
-      views: {
-        's-tab': {
-          templateUrl: 'views/schedule/schedule.html',
-          controller : 'ScheduleCtrl'
-        }
-      }
-    })
-    .state('app.detailTab', {
-      cache : false,
-      url: '/detailSchedule',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/schedule/detailTabs.html'
-        }
-      }
-    })
-    .state('app.detailTab.detailSchedule',{
-      url: '/:no',
-      views: {
-        'detailSchedule-tab': {
-          templateUrl: 'views/schedule/scheduleDetail.html',
-          controller : 'dScheduleCtrl'
-        }
-      }
-    })
-    // 로그인 메인 화면
-    .state('app.login', {
-      url: '/login',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/login/loginMain.html',
-          controller: 'LoginMainController'
-        }
-      }
-    })
-    // 로그인화면
-    .state('app.signin', {
-      url: '/signin',
-      views: {
-        'menuContent': {
-          controller: 'SigninController',
-          templateUrl: 'views/login/signin.html'
-        }
-      }
-    })
-    // 회원가입화면
-    .state('app.signup', {
-      url: '/signup',
-      views: {
-        'menuContent': {
-          controller: 'SignupController',
-          templateUrl: 'views/login/signup.html'
-        }
-      }
-    })
-    // 비밀번호 재설정 화면
-    .state('app.resetPassword', {
-      url: '/resetPassword',
-      views: {
-        'menuContent': {
-          controller: 'ResetPasswordController',
-          templateUrl: 'views/login/resetPassword.html'
-        }
-      }
-    })
-    // 프로필 화면
-    .state('app.profile', {
-      url: '/profile',
-      views: {
-        'menuContent': {
-          controller: 'ProfileController',
-          templateUrl: 'views/login/profile.html'
-        }
-      }
-    })
-    .state('app.tourInfo', {
-      cache: false,
-      url: '/tourInfo',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/tour/tourInfo.html',
-          controller: 'TourInfoCtrl'
-        }
-      }
-    })
-    .state('app.tourInfo.tourDetail', {
-      cache: false,
-      url: '/tourDetail',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/tour/tourDetail.html',
-          controller: 'TourDetailCtrl'
-        }
-      }
-    });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/main/main');
->>>>>>> master
 
       $scope.popover = $ionicPopover.fromTemplate(template, {
         scope: $scope
