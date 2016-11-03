@@ -73,16 +73,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         }
       }
     })
-    .state('app.tourInfo', {
-      cache : false,
-      url: '/tourInfo',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/tour/tourInfo.html',
-          controller: 'TourInfoCtrl'
-        }
-      }
-    })
     .state('app.main.main', {
       cache: false,
       url: '/main',
