@@ -1,14 +1,5 @@
 angular.module('App')
-.controller('MainTabCtrl', function ($scope, $http, $ionicPlatform, $cordovaGeolocation) {
-  // $scope.page = 0;
-  // $scope.total = 1;
-  // $scope.list = [];
-  //
-  // $scope.getLists = function () {
-  //   $scope.page++;
-  //   $http.get()
-  // }
-
+.controller('MainTabCtrl', function ($scope, $http, $ionicPlatform, $cordovaGeolocation, $ionicScrollDelegate) {
   $ionicPlatform.ready(function () {
     if(window.cordova && window.cordova.plugins.keyboard) {
       cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -49,11 +40,7 @@ angular.module('App')
     })
   });
 
-  $scope.photos = [];
-  for (var i = 0; i < 100; i++) {
-    $scope.photos.push('http://lorempixel.com/250/250?q='+(i%17));
-  };
-
+  // 위로 당겼을 때 새로고침
   $scope.load = function () {
     $http.get()
       .success(function () {
@@ -63,4 +50,16 @@ angular.module('App')
         $scope.$broadcast('scroll.refreshComplete');
       })
   }
+
+  // 슬라이드
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
+
+  // 글
+  $scope.photos = [];
+  for (var i = 0; i < 100; i++) {
+    $scope.photos.push({id: i, src:'http://lorempixel.com/250/250?q='+(i%17)});
+  };
 })

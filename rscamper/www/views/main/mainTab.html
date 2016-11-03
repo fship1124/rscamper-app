@@ -1,14 +1,6 @@
 <ion-view title="hello">
   <ion-content>
     <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
-    <!--<div class="list card">
-      <div class="item">
-        <h2>설명</h2>
-      </div>
-      <div class="item item-image">
-        <img ng-src="" src="img/ionic.png">
-      </div>
-    </div>-->
     <div class="row" id="main-first-div" style="padding: 0">
       <div class="col col-50" id="main-weather-div">
           <div ng-switch on=today.sky.code>
@@ -77,10 +69,34 @@
           <h3 id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
       </div>
       <div class="col col-50" style="padding: 0">
-        <div class="row" style="height: 50%; background-color: #5bc0de;">2-1</div>
-        <div class="row" style="height: 50%; background-color: #D1C4E9; margin-top: 0; padding-top: 5px;">2-2</div>
+        <div class="row" style="height: 50%; background-color: #c2d4dd;">2-1</div>
+        <div class="row" style="height: 50%; background-color: #b0aac0; margin-top: 0; padding-top: 5px;">2-2</div>
       </div>
     </div>
-    <!--<img collection-repeat="photo in photos" item-height="33%" item-width="33%" ng-src="{{photo}}">-->
+      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 30%">
+        <ion-slide>
+          <div style="background-color: deepskyblue; height: 100%;"></div>
+        </ion-slide>
+        <ion-slide>
+          <div style="background-color: yellowgreen; height: 100%;"></div>
+        </ion-slide>
+        <ion-slide>
+          <div style="background-color: hotpink; height: 100%;"></div>
+        </ion-slide>
+      </ion-slide-box>
+    <div style="height: 100%;">
+      <div class="row" ng-repeat="photo in photos" ng-if="$index % 2 === 0">
+        <div class="col col-50" ng-if="$index < photos.length">
+          <img ng-src="{{photos[$index].src}}" width="100%"/>
+          <span> 제목 Item {{ photos[$index].id }}</span><br>
+          <span> 작성자 </span>
+        </div>
+        <div class="col col-50" ng-if="$index + 1 < photos.length">
+          <img ng-src="{{photos[$index + 1].src}}" width="100%"/>
+          <span> 제목 Item {{ photos[$index+1].id}}</span><br>
+          <span> 작성자 </span>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
