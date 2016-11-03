@@ -79,7 +79,7 @@
 
     <!-- 사이드메뉴 메뉴 헤더 -->
     <ion-header-bar class="expanded" ng-if="!userStatus == true">
-      <img src="img/ionic.png" class="avatar motion spin fade">
+      <img src="img/User-Default.jpg" class="avatar motion spin fade">
       <div class="menu-bottom">
         Rscamper<br>
         <a nav-clear menu-close ui-sref="login" class="menuTag"><i class="icon ion-android-unlock"></i> 로그인</a>
@@ -88,7 +88,7 @@
     </ion-header-bar>
 
     <ion-header-bar class="expanded" ng-if="userStatus == true" style="background-image: url('{{rootUser.bgPhotoUrl}}');" ng-click="updateBgPhoto();">
-      <img src="{{rootUser.photoUrl}}" class="avatar motion spin fade" ng-click="updateProfilePhoto($event);">
+      <img ng-src="{{rootUser.photoUrl}}" class="avatar motion spin fade" ng-click="updateProfilePhoto($event);">
       <div class="menu-bottom">
         <d nav-clear menu-close ui-sref="myPage" ng-click="$event.stopPropagation()">
           {{rootUser.displayName}}

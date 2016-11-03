@@ -2,8 +2,8 @@ angular.module('App')
   // 설정 정보 관련 서비스
   .factory('MyConfig', function () {
   return {
-    // backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
-    backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
+    backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
+    // backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
     googleAuthURL: '506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com'
   };
 })
