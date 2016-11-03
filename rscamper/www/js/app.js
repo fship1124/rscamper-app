@@ -64,14 +64,32 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       controller: 'MenuCtrl'
     })
     .state('app.main', {
+<<<<<<< HEAD
       cache: false,
+=======
+      cache : false,
+>>>>>>> qqq
       url: '/main',
       views: {
         'menuContent': {
-          templateUrl: 'views/main/mainTabs.html'
+          templateUrl: 'views/main/mainTabs.html',
+          controller : 'MainCtrl'
         }
       }
     })
+<<<<<<< HEAD
+=======
+    .state('app.tourInfo', {
+      cache : false,
+      url: '/tourInfo',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/tour/tourInfo.html',
+          controller: 'TourInfoCtrl'
+        }
+      }
+    })
+>>>>>>> qqq
     .state('app.main.main', {
       cache: false,
       url: '/main',
@@ -96,9 +114,48 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       url: '/post',
       views: {
         'post-tab': {
-          templateUrl: 'views/main/postTab.html'
+          templateUrl: 'views/main/postTab.html',
+
         }
       }
+    })
+    .state('app.scheduleTab',{
+      cache : false,
+      url: '/schedule',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/schedule/scheduleTabs.html',
+          controller : 'ScheduleTabsCtrl'
+        }
+      }
+    })
+    .state('app.scheduleTab.schedule', {
+      url: '/schedule',
+      views: {
+        's-tab': {
+          templateUrl: 'views/schedule/schedule.html',
+          controller : 'ScheduleCtrl'
+        }
+      }
+    })
+    .state('app.detailTab', {
+      cache : false,
+      url: '/detailSchedule',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/schedule/detailTabs.html'
+        }
+      }
+    })
+    .state('app.detailTab.detailSchedule',{
+      url: '/:no',
+      views: {
+        'detailSchedule-tab': {
+          templateUrl: 'views/schedule/scheduleDetail.html',
+          controller : 'dScheduleCtrl'
+        }
+      }
+<<<<<<< HEAD
     })
     // 로그인 메인 화면
     .state('app.login', {
@@ -108,6 +165,53 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/login/loginMain.html',
           controller: 'LoginMainController'
         }
+=======
+    });
+
+ /* $stateProvider
+    .state('asdd', {
+      url: '/asdd',
+      abstract: true,
+      templateUrl: 'views/menu/menu.html',
+      controller: 'MenuCtrl'
+    })
+    .state('asdd.schedule', {
+      url: '/schedule',
+      views: {
+        'scheduleContent': {
+          templateUrl: 'views/schedule/scheduleTabs.html'
+        }
+      }
+    })
+    .state('asdd.schedule.main', {
+    url: '/schedule',
+    views: {
+      's-tab': {
+        templateUrl: 'views/schedule/schedule.html',
+        controller : 'ScheduleCtrl'
+      }
+    }
+  });*/
+
+
+
+
+  /*// setup an abstract state for the tabs directive
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+>>>>>>> qqq
       }
     })
     // 로그인화면

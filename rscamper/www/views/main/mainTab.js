@@ -1,4 +1,5 @@
 angular.module('App')
+<<<<<<< HEAD
 .controller('MainTabCtrl', function ($scope, $http, $ionicPlatform, $cordovaGeolocation, $ionicScrollDelegate) {
   $ionicPlatform.ready(function () {
     if(window.cordova && window.cordova.plugins.keyboard) {
@@ -39,6 +40,21 @@ angular.module('App')
         });
     })
   });
+=======
+.controller('MainTabCtrl', function ($scope, $http) {
+  // $scope.page = 0;
+  // $scope.total = 1;
+  // $scope.list = [];
+  //
+  // $scope.getLists = function () {
+  //   $scope.page++;
+  //   $http.get()
+  // }
+  $scope.photos = [];
+  for (var i = 0; i < 100; i++) {
+    // $scope.photos.push('http://lorempixel.com/250/250?q='+(i%17));
+  };
+>>>>>>> qqq
 
   // 위로 당겼을 때 새로고침
   $scope.load = function () {

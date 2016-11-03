@@ -23,9 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <file leaf-file-name="schedule.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/schedule.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state relative-caret-position="420">
               <caret line="129" column="14" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="14" />
@@ -33,27 +34,47 @@
             <state relative-caret-position="453">
               <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
 >>>>>>> ye
+=======
+            <state relative-caret-position="247">
+              <caret line="13" column="95" selection-start-line="13" selection-start-column="95" selection-end-line="13" selection-end-column="95" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
         </entry>
       </file>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="initFirebase.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/initFirebase.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+=======
+      <file leaf-file-name="makeSchedule.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/makeSchedule.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="menu.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/views/menu/menu.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="193">
               <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+=======
+      <file leaf-file-name="scheduleStyle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/css/scheduleStyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+>>>>>>> qqq
               <folding />
 =======
       <file leaf-file-name="mainTab.html" pinned="false" current-in-tab="true">
@@ -94,6 +115,7 @@
         </entry>
       </file>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="signin.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/login/signin.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -106,11 +128,19 @@
             <state relative-caret-position="54">
               <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
 >>>>>>> ye
+=======
+      <file leaf-file-name="menu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/menu/menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="16" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="loginControllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/login/loginControllers.js">
@@ -143,10 +173,29 @@
               <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
 >>>>>>> ye
               <folding />
+=======
+      <file leaf-file-name="scheduleDetail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleDetail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" column="100" selection-start-line="4" selection-start-column="100" selection-end-line="4" selection-end-column="100" />
+              <folding>
+                <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#1;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#2;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#4;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#5;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#6;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#7;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#1;n#div#3;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+              </folding>
+>>>>>>> qqq
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="loginMain.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/login/loginMain.html">
@@ -160,22 +209,62 @@
             <state relative-caret-position="76">
               <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
 >>>>>>> ye
+=======
+      <file leaf-file-name="schedule.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/schedule.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#44#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/myService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/login/profile.html">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
             <state relative-caret-position="280">
               <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+=======
+      <file leaf-file-name="scheduleDetail.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#44#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="31" column="94" selection-start-line="31" selection-start-column="94" selection-end-line="31" selection-end-column="94" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/services.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -195,6 +284,13 @@
             <state relative-caret-position="399">
               <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
 >>>>>>> ye
+=======
+      <file leaf-file-name="scheduleTabs.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleTabs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+>>>>>>> qqq
               <folding />
             </state>
           </provider>
@@ -205,6 +301,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
+=======
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+>>>>>>> qqq
         <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
@@ -229,9 +330,12 @@
         <option value="$PROJECT_DIR$/www/lib/ionic/css/ionic.css" />
         <option value="$PROJECT_DIR$/www/views/main/main.html" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <option value="$PROJECT_DIR$/www/views/menu/menu.html" />
 >>>>>>> ye
+=======
+>>>>>>> qqq
         <option value="$PROJECT_DIR$/www/views/main/tourTab.html" />
         <option value="$PROJECT_DIR$/www/views/main/mainTabs.html" />
         <option value="$PROJECT_DIR$/www/views/tour/tourInfoDetail.html" />
@@ -244,6 +348,7 @@
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/views/main/postTab.html" />
         <option value="$PROJECT_DIR$/www/css/style.css" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/www/views/main/mainTab.js" />
         <option value="$PROJECT_DIR$/www/views/main/mainTab.html" />
 <<<<<<< HEAD
@@ -266,6 +371,33 @@
         <option value="$PROJECT_DIR$/www/js/services.js" />
 =======
 >>>>>>> ye
+=======
+        <option value="$PROJECT_DIR$/www/views/tour/tourInfo.html" />
+        <option value="$PROJECT_DIR$/www/views/tour/tourInfo.js" />
+        <option value="$PROJECT_DIR$/www/views/scheduleMenu/menu.html" />
+        <option value="$PROJECT_DIR$/www/views/scheduleMenu/menu.js" />
+        <option value="$PROJECT_DIR$/www/views/main/mainTabs.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers.js" />
+        <option value="$PROJECT_DIR$/www/views/main/mainTabs.html" />
+        <option value="$PROJECT_DIR$/www/views/main/mainTab.html" />
+        <option value="$PROJECT_DIR$/www/views/main/mainTab.js" />
+        <option value="$PROJECT_DIR$/www/js/services.js" />
+        <option value="$PROJECT_DIR$/www/views/schedule/makeSchedule.html" />
+        <option value="$PROJECT_DIR$/www/views/schedule/scheduleTabs.html" />
+        <option value="$PROJECT_DIR$/www/views/schedule/scheduleTabs.js" />
+        <option value="$PROJECT_DIR$/www/views/schedule/DetailTabs.html" />
+        <option value="$PROJECT_DIR$/www/views/schedule/detailTabs.html" />
+        <option value="$PROJECT_DIR$/www/views/menu/menu.html" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/views/menu/menu.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
+        <option value="$PROJECT_DIR$/www/views/schedule/schedule.js" />
+        <option value="$PROJECT_DIR$/www/views/schedule/schedule.html" />
+        <option value="$PROJECT_DIR$/www/css/scheduleStyle.css" />
+        <option value="$PROJECT_DIR$/www/views/schedule/scheduleDetail.html" />
+        <option value="$PROJECT_DIR$/www/js/myService.js" />
+        <option value="$PROJECT_DIR$/www/views/schedule/scheduleDetail.js" />
+>>>>>>> qqq
       </list>
     </option>
   </component>
@@ -284,8 +416,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="-182" />
+    <option name="y" value="33" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -363,6 +495,7 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -385,6 +518,8 @@
               <option name="myItemId" value="menu" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+=======
+>>>>>>> qqq
           </PATH>
 <<<<<<< HEAD
 =======
@@ -406,7 +541,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="schedule" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -456,6 +591,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -479,6 +615,12 @@
             </PATH_ELEMENT>
           </PATH>
 >>>>>>> ye
+=======
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+>>>>>>> qqq
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -489,12 +631,17 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="vcs.CVS" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../webstorm/qweqwe" />
+>>>>>>> qqq
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="nodejs_interpreter_path" value="$PROJECT_DIR$/../../bin/nodejs/node" />
     <property name="js-jscs-nodeInterpreter" value="C:\java86\bin\nodejs\node.exe" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+<<<<<<< HEAD
     <property name="editor.config.accepted" value="true" />
   </component>
   <component name="RecentsManager">
@@ -506,6 +653,14 @@
       <recent name="C:\java86\rscamper\app\rscamper\www\img\weather_icons" />
       <recent name="C:\java86\rscamper\app\rscamper\www\img" />
 >>>>>>> ye
+=======
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\java86\rsamper\app\rscamper\www\img" />
+      <recent name="C:\java86\rsamper\app\rscamper\www\views\scheduleMenu" />
+>>>>>>> qqq
       <recent name="C:\java86\ionic-workspace\rscamper\www\views\main" />
       <recent name="C:\java86\ionic-workspace\rscamper\www\img" />
       <recent name="C:\java86\ionic-workspace\rscamper\www\views\menu" />
@@ -582,6 +737,7 @@
       <workItem from="1477389761119" duration="18282000" />
       <workItem from="1477476496210" duration="71887000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1477891494101" duration="1723000" />
       <workItem from="1477907706284" duration="6525000" />
       <workItem from="1477919160711" duration="2708000" />
@@ -591,15 +747,28 @@
       <workItem from="1477959976091" duration="60275000" />
       <workItem from="1478132482581" duration="10884000" />
 >>>>>>> ye
+=======
+      <workItem from="1477885877250" duration="22434000" />
+      <workItem from="1477958767547" duration="16399000" />
+      <workItem from="1477988250614" duration="9396000" />
+      <workItem from="1478002993383" duration="119000" />
+      <workItem from="1478045268772" duration="22354000" />
+      <workItem from="1478088125102" duration="1842000" />
+      <workItem from="1478132164161" duration="13367000" />
+>>>>>>> qqq
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="108848000" />
 =======
     <option name="totallyTimeSpent" value="181509000" />
 >>>>>>> ye
+=======
+    <option name="totallyTimeSpent" value="176080000" />
+>>>>>>> qqq
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -611,10 +780,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-182" y="33" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14791666" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49789253" order="9" side_tool="false" content_ui="tabs" />
@@ -624,6 +794,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49789253" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27272728" sideWeight="0.50632244" order="0" side_tool="true" content_ui="tabs" />
 >>>>>>> ye
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21496312" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49789253" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.30411255" sideWeight="0.50421494" order="0" side_tool="true" content_ui="tabs" />
+>>>>>>> qqq
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
@@ -662,6 +837,7 @@
   </component>
   <component name="editorHistoryManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/lib/ui.bootstrap/src/modal/test/modal.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
@@ -672,10 +848,22 @@
     <entry file="file://$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/tests.js" />
     <entry file="file://$PROJECT_DIR$/www/views/contents/main.js" />
     <entry file="file://$PROJECT_DIR$/www/views/contents/main.html" />
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/contents/main.js" />
+    <entry file="file://$PROJECT_DIR$/www/views/contents/main.html" />
+    <entry file="file://$PROJECT_DIR$/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="6" column="65" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> qqq
     <entry file="file://$PROJECT_DIR$/www/views/main/tabs.html" />
     <entry file="file://$PROJECT_DIR$/www/views/main/tabs.js" />
     <entry file="file://$PROJECT_DIR$/www/views/main/tour.js" />
     <entry file="file://$PROJECT_DIR$/www/views/main/tab.html" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/img/perry.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -692,11 +880,24 @@
           <folding />
         </state>
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/img/perry.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+>>>>>>> qqq
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/img/mike.png">
       <provider selected="true" editor-type-id="images">
         <state />
+<<<<<<< HEAD
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/css/ionic.app.css">
@@ -758,6 +959,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js" />
     <entry file="file://$PROJECT_DIR$/www/templates/tab-chats.html">
+=======
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/img/ionic.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/img/ben.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/img/adam.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/lib/ionic/css/ionic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="5088" column="11" selection-start-line="5088" selection-start-column="11" selection-end-line="5088" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+>>>>>>> qqq
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -765,24 +1000,41 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/templates/tab-account.html">
+=======
+    <entry file="file://$PROJECT_DIR$/package.json">
+>>>>>>> qqq
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/scheduleMenu/menu.html" />
+    <entry file="file://$PROJECT_DIR$/www/views/scheduleMenu/menu.js" />
+    <entry file="file://$PROJECT_DIR$/www/service-worker.js">
+>>>>>>> qqq
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/templates/chat-detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/scss/ionic.app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="77" selection-start-line="17" selection-start-column="77" selection-end-line="17" selection-end-column="77" />
+>>>>>>> qqq
         </state>
       </provider>
     </entry>
@@ -793,6 +1045,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/views/tour/tourInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -842,6 +1095,47 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/main/tourTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/main/mainTabs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/tour/tourInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1102">
+          <caret line="58" column="49" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/ionic.app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96862">
+          <caret line="5098" column="45" selection-start-line="5098" selection-start-column="45" selection-end-line="5098" selection-end-column="45" />
+>>>>>>> qqq
         </state>
       </provider>
     </entry>
@@ -852,6 +1146,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/img/ben.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -921,11 +1216,53 @@
         <state relative-caret-position="280">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/www/css/ionic.app.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/main/mainTabs.js">
+    <entry file="file://$PROJECT_DIR$/www/views/main/mainTabs.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/main/postTab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/main/tourTab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/tour/tourInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+>>>>>>> qqq
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleTabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="40">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
 =======
@@ -1017,9 +1354,32 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/views/main/postTab.js">
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/detailTabs.html">
+>>>>>>> qqq
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state relative-caret-position="0">
+<<<<<<< HEAD
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1040,10 +1400,21 @@
         <state relative-caret-position="214">
           <caret line="228" column="12" selection-start-line="228" selection-start-column="12" selection-end-line="228" selection-end-column="12" />
 >>>>>>> ye
+=======
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2242">
+          <caret line="118" column="38" selection-start-line="118" selection-start-column="38" selection-end-line="118" selection-end-column="38" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/views/login/signup.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1055,10 +1426,17 @@
         <state relative-caret-position="159">
           <caret line="43" column="1" selection-start-line="42" selection-start-column="18" selection-end-line="43" selection-end-column="1" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/views/login/loginControllers.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1085,6 +1463,12 @@
         <state relative-caret-position="38">
           <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/menu/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="16" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
@@ -1097,13 +1481,19 @@
 =======
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="273">
           <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
 >>>>>>> ye
+=======
+        <state relative-caret-position="330">
+          <caret line="31" column="94" selection-start-line="31" selection-start-column="94" selection-end-line="31" selection-end-column="94" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1115,10 +1505,17 @@
         <state relative-caret-position="76">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/css/scheduleStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/js/initFirebase.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1150,10 +1547,43 @@
         <state relative-caret-position="399">
           <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="100" selection-start-line="4" selection-start-column="100" selection-end-line="4" selection-end-column="100" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#1;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#2;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#4;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#5;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#6;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#7;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#1;n#div#3;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleTabs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/schedule.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="95" selection-start-line="13" selection-start-column="95" selection-end-line="13" selection-end-column="95" />
+>>>>>>> qqq
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/views/menu/menu.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1165,10 +1595,17 @@
         <state relative-caret-position="453">
           <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
 >>>>>>> ye
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/makeSchedule.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+>>>>>>> qqq
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/www/views/menu/menu.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1214,6 +1651,33 @@
             <element signature="n#style#0;n#div#0;n#ion-slide#1;n#ion-slide-box#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#ion-slide#2;n#ion-slide-box#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+          </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/schedule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/myService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+          <folding />
+>>>>>>> qqq
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/schedule/scheduleDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
