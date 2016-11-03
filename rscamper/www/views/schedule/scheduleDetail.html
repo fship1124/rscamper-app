@@ -12,7 +12,7 @@
       <div ng-show="updateBtn"><i class="ion-ios-more-outline" style="font-size: 35px"></i><br><span>더보기</span></div>
       <div ng-hide="updateBtn"><i class="ion-eye" style="font-size: 35px" ng-click="updateBtn = !updateBtn"></i><br><span>일정보기</span></div>
       <div ng-hide="updateBtn"><i class="ion-image" style="font-size: 35px" ng-click="changeCover()"></i><br><span>커버변경</span></div>
-      <div ng-hide="updateBtn"><i class="ion-ios-paper-outline" style="font-size: 35px"></i><br><span>인트로 수정</span></div>
+      <div ng-hide="updateBtn"><i class="ion-ios-paper-outline" style="font-size: 35px" ng-click="modal.show()"></i><br><span>인트로 수정</span></div>
       <div ng-hide="updateBtn"><i class="ion-ios-gear-outline" style="font-size: 35px" ng-click="httptest()"></i><br><span>test</span></div>
     </div>
     <div id="tourBodgetBox">여행 예산<span>KRW {{dSchedule.budGet}}<i class="ion-chevron-right"></i></span></div>

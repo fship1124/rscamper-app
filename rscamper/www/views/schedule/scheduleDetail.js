@@ -2,7 +2,7 @@
  * Created by Bitcamp on 2016-11-02.
  */
 angular.module('App')
-.controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout) {
+.controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
   $scope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;
   $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
@@ -96,4 +96,11 @@ angular.module('App')
       detailSchedule.changeCover(result);
     });
   }
+
+  $ionicModal.fromTemplateUrl('views/schedule/tourScheduleIntro.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
 });
