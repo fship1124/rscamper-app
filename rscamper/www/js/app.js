@@ -88,7 +88,8 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
       url: '/schedule',
       views: {
         'menuContent': {
-          templateUrl: 'views/schedule/scheduleTabs.html'
+          templateUrl: 'views/schedule/scheduleTabs.html',
+          controller : 'ScheduleTabsCtrl'
         }
       }
     })
@@ -98,6 +99,24 @@ angular.module('App', ['ionic', 'ionic-material', 'ngCordova'])
         's-tab': {
           templateUrl: 'views/schedule/schedule.html',
           controller : 'ScheduleCtrl'
+        }
+      }
+    })
+    .state('app.detailTab', {
+      cache : false,
+      url: '/detailSchedule',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/schedule/detailTabs.html'
+        }
+      }
+    })
+    .state('app.detailTab.detailSchedule',{
+      url: '/:no',
+      views: {
+        'detailSchedule-tab': {
+          templateUrl: 'views/schedule/scheduleDetail.html',
+          controller : 'dScheduleCtrl'
         }
       }
     });

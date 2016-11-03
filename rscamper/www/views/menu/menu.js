@@ -1,8 +1,9 @@
 angular.module('App')
-.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $state) {
+.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $state, $rootScope) {
   // Form data for the login modal
   $scope.loginData = {};
   $scope.asd = 1;
+  $rootScope.url = "http://192.168.0.190:";
   var navIcons = document.getElementsByClassName('ion-navicon');
   for (var i = 0; i < navIcons.length; i++) {
     navIcons[i].addEventListener('click', function() {
