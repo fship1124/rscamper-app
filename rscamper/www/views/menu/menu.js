@@ -1,15 +1,5 @@
 angular.module('App')
-<<<<<<< HEAD
-.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location) {
-
-
-
-
-
-
-=======
 .controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $state, $rootScope) {
->>>>>>> qqq
   // Form data for the login modal
   $scope.loginData = {};
   $scope.asd = 1;
