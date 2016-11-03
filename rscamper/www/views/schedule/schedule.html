@@ -1,0 +1,19 @@
+<ion-view view-title="여행일정">
+  <ion-content>
+    <br>
+    <button class="button button-bar" ng-click="modal.show()"><i class="ion-android-add" style="color: darkmagenta"></i> 새로운 일정 만들기</button>
+ <!--   <ion-list>
+      <ion-item id="scheduleBox" ng-repeat="schedule in scheduleList"  href="#/schedule/schedule/{{}}">
+        <img id="coverImg" src="img/defaultscheduleImg.jpg">
+        <button id="del-Btn" class="button-clear" ng-click="delSchedule(schedule.recordNo)"><i class="ion-trash-a" style="color: #e6b500; font-size: 25px;"></i></button>
+        <div id="scheduleTitle">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
+      </ion-item>
+    </ion-list>-->
+    <div id="scheduleBox" ng-repeat="schedule in scheduleList" ng-click="moveDetail(schedule.recordNo)">
+      <img class="coverImg" src="img/defaultscheduleImg.jpg" ng-if="schedule.picture == 0">
+      <img class="coverImg" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1">
+      <button id="del-Btn" class="button-clear" ng-click="delSchedule(schedule.recordNo)"><i class="ion-trash-a" style="color: #e6b500; font-size: 25px;"></i></button>
+      <div id="scheduleTitle">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
+    </div>
+  </ion-content>
+</ion-view>
