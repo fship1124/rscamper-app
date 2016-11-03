@@ -57,12 +57,14 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
   $stateProvider
 
     .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'views/menu/menu.html',
-    controller: 'MenuCtrl'
+      cache: false,
+      url: '/app',
+      abstract: true,
+      templateUrl: 'views/menu/menu.html',
+      controller: 'MenuCtrl'
     })
     .state('app.main', {
+      cache: false,
       url: '/main',
       views: {
         'menuContent': {
@@ -70,16 +72,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         }
       }
     })
-    .state('app.tourInfo', {
-      url: '/tourInfo',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/tour/tourInfo.html',
-          controller: 'TourInfoCtrl'
-        }
-      }
-    })
     .state('app.main.main', {
+      cache: false,
       url: '/main',
       views: {
         'main-tab': {
@@ -89,6 +83,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       }
     })
     .state('app.main.tour', {
+      cache: false,
       url: '/tour',
       views: {
         'tour-tab': {
@@ -97,6 +92,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       }
     })
     .state('app.main.post', {
+      cache: false,
       url: '/post',
       views: {
         'post-tab': {
@@ -104,6 +100,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         }
       }
     })
+<<<<<<< HEAD
     // 로그인 메인 화면
     .state('app.login', {
       url: '/login',
@@ -154,6 +151,30 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         }
       }
     })
+=======
+    .state('app.tourInfo', {
+      cache: false,
+      url: '/tourInfo',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/tour/tourInfo.html',
+          controller: 'TourInfoCtrl'
+        }
+      }
+    })
+    .state('app.tourInfo.tourDetail', {
+      cache: false,
+      url: '/tourDetail',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/tour/tourDetail.html',
+          controller: 'TourDetailCtrl'
+        }
+      }
+    });
+
+
+>>>>>>> ye
 
 
   /*// setup an abstract state for the tabs directive
