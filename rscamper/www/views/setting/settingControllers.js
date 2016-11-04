@@ -57,6 +57,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   });
 
   $scope.openModal = function() {
+    $scope.locations = DbService.getLocationList();
     $scope.modal.show();
   };
 
@@ -79,7 +80,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   });
 
 })
-// 셋팅 메인 컨트롤러
+  // 셋팅 메인 컨트롤러
   .controller('SettingMainCtrl', function ($rootScope, $scope, AuthService) {
     $scope.logout = AuthService.logout;
     $scope.resign = AuthService.resign;

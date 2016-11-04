@@ -33,7 +33,7 @@
       </a>
       <a class="item item-icon-left">
         <i class="icon ion-planet"></i>사는지역
-        <span class="item-note">{{rootUser.locationNo}}</span>
+        <span class="item-note">{{rootUser.locationName}}</span>
       </a>
       <a class="item item-icon-left">
         <i class="icon ion-happy"></i>가입일
@@ -85,13 +85,12 @@
               사는지역
             </div>
             <select>
-              <option selected>서울</option>
-              <option>서울</option>
+              <option ng-repeat="location in locations">{{location.locationName}}</option>
             </select>
           </label>
 
           <label for="introduce" class="item item-input">
-            <span class="input-label">자기소개</span><br>
+          <span class="input-label">자기소개</span><br>
           </label>
           <textarea id="introduce" ng-model="profile.introduce" placeholder="{{rootUser.introduce}}" rows="8" style="width:100%; margin: 5px;"></textarea>
 

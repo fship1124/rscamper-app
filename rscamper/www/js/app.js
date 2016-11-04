@@ -48,7 +48,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/main',
           abstract: true,
           templateUrl: 'views/main/mainTabs.html',
-          controller : 'MainCtrl'
+          controller: 'MainCtrl'
         })
         .state('main.main', {
           url: '/main',
@@ -124,11 +124,11 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
 
 
-        .state('scheduleTab',{
-        cache : false,
-        url: '/schedule',
-        templateUrl: 'views/schedule/scheduleTabs.html'
-      })
+        .state('scheduleTab', {
+          cache: false,
+          url: '/schedule',
+          templateUrl: 'views/schedule/scheduleTabs.html'
+        })
         .state('scheduleTab.schedule', {
           url: '/schedule',
           views: {
@@ -139,16 +139,16 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           }
         })
         .state('detailTab', {
-          cache : false,
+          cache: false,
           url: '/detailSchedule',
           templateUrl: 'views/schedule/detailTabs.html'
         })
-        .state('detailTab.detailSchedule',{
+        .state('detailTab.detailSchedule', {
           url: '/:no',
           views: {
             'detailSchedule-tab': {
               templateUrl: 'views/schedule/scheduleDetail.html',
-              controller : 'dScheduleCtrl'
+              controller: 'dScheduleCtrl'
             }
           }
 

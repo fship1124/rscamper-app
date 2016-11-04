@@ -2,8 +2,10 @@ angular.module('App')
 // 설정 정보 관련 서비스
   .factory('MyConfig', function () {
     return {
-      backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
-      // backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
+      // backEndURL: 'http://192.168.0.228:8081/rscamper-server/app', // 학원 내컴퓨터
+      // backEndURL: 'http://192.168.0.9:8081/rscamper-server/app', // 학원 서버 컴퓨터 로컬
+      backEndURL: 'http://14.32.66.104:8081/rscamper-server/app', // 학원 서버 컴퓨터 외부
+      // backEndURL: 'http://192.168.1.13:8081/rscamper-server/app', // 집
       googleAuthURL: '506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com'
     };
   })
@@ -416,6 +418,15 @@ angular.module('App')
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           }
         }).success(successCB);
+      },
+      // 로케이션 리스트 가져오는 메소드
+      getLocationList: function () {
+        $http({
+          url: MyConfig.backEndURL + '/user/select/locations',
+          method: 'GET',
+        }).success(function (result) {
+          return result;
+        });
       }
     }
   }])
