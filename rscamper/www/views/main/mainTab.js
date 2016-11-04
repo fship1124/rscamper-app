@@ -24,13 +24,10 @@ angular.module('App')
             headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
           })
             .success(function(data) {
-              console.log(data);
-              console.log(data.weather.minutely[0]);
               $scope.today = data.weather.minutely[0];
               $scope.cTem = parseFloat($scope.today.temperature.tc).toFixed(1);
 
               var locArr = $scope.location.city.split(" ");
-              console.log(locArr);
               $scope.loc = locArr[1] + " " + locArr[2] + " " + locArr[3];
             });
         })

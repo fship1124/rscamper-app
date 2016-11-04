@@ -1,10 +1,27 @@
 // 프로필 컨트롤러
-app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet) {
+app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService) {
 
-  $scope.updateProfile = function() {
+  $scope.updateProfile = function(result) {
     // TODO: 유효성 체크
-    $scope.modal.hide();
-    // AuthService.updateProfile();
+    // 이름(20자이하), 폰번호(폰번호형식), 웹사이트(인터넷주소형식), 소개글(200자이하), 생년월일(널과 미래만 아니면)
+
+    var profileData = {
+      uid: $rootScope.rootUser.userUid,
+      displayName: result.displayName,
+      birthday: result.birthday,
+      introduce: result.introduce,
+      phoneNumber: result.phoneNumber,
+      websiteUrl: result.websiteUrl,
+    }
+
+    AuthService.updateProfile(profileData, function () {
+      DbService.selectUserByUid(profileData.uid, function (result) {
+        $rootScope.rootUser = result;
+      })
+      MyPopup.alert('알림', '회원정보 수정을 완료했습니다.');
+      $scope.modal.hide();
+    })
+
   }
 
   // 액션 시트
@@ -31,6 +48,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
     }, 5000);
   };
 
+  // 모달
   $ionicModal.fromTemplateUrl('modal/modProfileModal.html', {
     scope: $scope,
     animation: 'slide-in-up'

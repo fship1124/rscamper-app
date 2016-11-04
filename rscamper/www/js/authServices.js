@@ -1,13 +1,14 @@
 angular.module('App')
-  // 설정 정보 관련 서비스
+// 설정 정보 관련 서비스
   .factory('MyConfig', function () {
-  return {
-    backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
-    // backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
-    googleAuthURL: '506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com'
-  };
-})
+    return {
+      backEndURL: 'http://192.168.0.228:3001/rscamper-server/app',
+      // backEndURL: 'http://192.168.1.13:3001/rscamper-server/app',
+      googleAuthURL: '506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com'
+    };
+  })
 
+  // TODO: 인증관련 오류메세지 처리
   // 인증관련 서비스
   .factory('AuthService', function ($location, $firebaseAuth, $cordovaOauth, $http, MyPopup, DbService, $cordovaCamera, $cordovaFileTransfer, $rootScope, $timeout, MyConfig) {
     return {
@@ -116,8 +117,14 @@ angular.module('App')
       // 로그아웃 메소드
       logout: function () {
         if (firebase.auth().currentUser) {
-          $firebaseAuth().$signOut();
-          MyPopup.alert('알림', '로그아웃');
+          MyPopup.confirm('로그아웃', '정말로 로그아웃 하시겠습니까?',
+            function () {
+              $firebaseAuth().$signOut();
+              MyPopup.alert('알림', '로그아웃');
+            },
+            function () {
+              return false;
+            });
         } else {
           MyPopup.alert('에러', '로그인 되어있지 않습니다.');
         }
@@ -159,7 +166,7 @@ angular.module('App')
         });
       },
 
-      // 인증메일 재발송
+      // TODO: 인증메일 재발송
       sendVerifyEmail: function (email) {
 
       },
@@ -169,7 +176,7 @@ angular.module('App')
         return Localstorage.getObject('user');
       },
 
-      // 회원탈퇴 메소드
+      // 회원탈퇴 메소드(TODO: 회원탈퇴시 정해진 메세지 입력받게 해서 탈퇴)
       resign: function () {
         MyPopup.confirm('회원 탈퇴 확인', '정말로 탈퇴 하시겠습니까?', function () {
           var user = firebase.auth().currentUser;
@@ -296,11 +303,11 @@ angular.module('App')
 
           });
       },
-      // TODO: 회원정보 수정 메소드
-      updateProfile: function () {
-
+      // 회원정보 수정 메소드
+      updateProfile: function (userData, successCB) {
+        DbService.updateUserByUid(userData, successCB);
       }
-    };
+    }
   })
 
   // HTTP관련 서비스
@@ -391,6 +398,24 @@ angular.module('App')
           url: MyConfig.backEndURL + '/user/select/oneUser?userUid=' + userUid,
           method: 'GET'
         }).success(successCB);
+      },
+      // 회원정보 UID로 수정
+      updateUserByUid: function (userData, successCB) {
+        $http({
+          url: MyConfig.backEndURL + '/user/update/oneUser',
+          method: 'POST',
+          data: $.param({
+            userUid: userData.uid,
+            displayName: userData.displayName,
+            birthday: userData.birthday,
+            introduce: userData.introduce,
+            phoneNumber: userData.phoneNumber,
+            websiteUrl: userData.websiteUrl
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          }
+        }).success(successCB);
       }
     }
   }])
@@ -462,6 +487,18 @@ angular.module('App')
         });
       }
     }
+  })
+
+  .factory('ValChk', function (type, value) {
+    switch (type) {
+      case 'password':
+        if (value) {
+
+          return true;
+        }
+        break;
+    }
+    return false;
   })
 
 
