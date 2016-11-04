@@ -8,6 +8,9 @@
     "highcharts-ng": "^0.0.13"
   },
   "dependencies": {
-    "ml-highcharts-ng": "^0.0.10"
+    "ml-highcharts-ng": "^0.0.10",
+    "ng-cordova-oauth": "^0.2.10",
+    "angularfire": "^2.1.0",
+    "jquery": "^3.1.1"
   }
 }

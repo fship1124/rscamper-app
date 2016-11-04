@@ -1,18 +1,15 @@
 angular.module('App')
-.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location) {
+.controller('MenuCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $state, $rootScope) {
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.asd = 1;
+  $rootScope.url = "http://192.168.0.190:";
   var navIcons = document.getElementsByClassName('ion-navicon');
   for (var i = 0; i < navIcons.length; i++) {
     navIcons[i].addEventListener('click', function() {
       this.classList.toggle('active');
     });
   }
-
-  var fab = document.getElementById('fab');
-  fab.addEventListener('click', function() {
-    return window && window.alert ? window.alert('일정짜기이런거?') : undefined;
-  });
 
   // .fromTemplate() method
   var template =  '<ion-popover-view>' +
@@ -34,4 +31,5 @@ angular.module('App')
   $scope.$on('$destroy', function() {
     $scope.popover.remove();
   });
-})
+
+});
