@@ -3,7 +3,6 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
 
   $scope.updateProfile = function(result) {
     // TODO: 유효성 체크
-    // 이름(20자이하), 폰번호(폰번호형식), 웹사이트(인터넷주소형식), 소개글(200자이하), 생년월일(널과 미래만 아니면)
 
     var profileData = {
       uid: $rootScope.rootUser.userUid,
