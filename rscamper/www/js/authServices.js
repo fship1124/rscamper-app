@@ -402,6 +402,7 @@ angular.module("App")
       },
       // 회원정보 UID로 수정
       updateUserByUid: function (userData, successCB) {
+        console.log(userData);
         $http({
           url: MyConfig.backEndURL + "/user/update/oneUser",
           method: "POST",
@@ -411,7 +412,8 @@ angular.module("App")
             birthday: userData.birthday,
             introduce: userData.introduce,
             phoneNumber: userData.phoneNumber,
-            websiteUrl: userData.websiteUrl
+            websiteUrl: userData.websiteUrl,
+            locationNo: userData.locationNo
           }),
           headers: {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -419,13 +421,11 @@ angular.module("App")
         }).success(successCB);
       },
       // 로케이션 리스트 가져오는 메소드
-      getLocationList: function () {
+      getLocationList: function (successCB) {
         $http({
           url: MyConfig.backEndURL + "/user/select/locations",
           method: "GET",
-        }).success(function (result) {
-          return result;
-        });
+        }).success(successCB);
       }
     }
   }])

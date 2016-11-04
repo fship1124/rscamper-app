@@ -5,7 +5,7 @@
     <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="show($event)"></button>
   </ion-nav-buttons>
 
-  <ion-content overflow-scroll="false">
+  <ion-content>
     <div class="list">
       <a class="item item-icon-left">
         <i class="icon ion-ionic"></i>UID
@@ -57,42 +57,42 @@
 
       </ion-header-bar>
 
-      <ion-content overflow-scroll="false">
+      <ion-content>
         <div class="list">
 
           <label class="item item-input">
             <span class="input-label">이름</span>
-            <input ng-model="profile.displayName" type="text" placeholder="{{rootUser.displayName}}" required>
+            <input ng-model="profile.displayName" type="text">
           </label>
 
           <label class="item item-input">
             <span class="input-label">핸드폰번호</span>
-            <input ng-model="profile.phoneNumber" type="text" placeholder="{{rootUser.phoneNumber}}" required>
+            <input ng-model="profile.phoneNumber" type="text">
           </label>
 
           <label class="item item-input">
             <span class="input-label">홈페이지주소</span>
-            <input ng-model="profile.websiteUrl" type="text" placeholder="{{rootUser.websiteUrl}}" required>
+            <input ng-model="profile.websiteUrl" type="text">
           </label>
 
           <label class="item item-input">
             <span class="input-label">생년월일</span>
-            <input ng-model="profile.birthday" type="date" placeholder="{{rootUser.birthday | date:'yyyy년 MM일 dd일'}}" required>
+            <input type="date" value="{{profile.birthday | date : 'yyyy-MM-dd' }}" >
           </label>
 
           <label class="item item-input item-select">
             <div class="input-label">
               사는지역
             </div>
-            <select>
-              <option ng-repeat="location in locations">{{location.locationName}}</option>
+            <select ng-model="profile.locationNo">
+              <option ng-repeat="location in locations" value="{{location.locationNo}}">{{location.locationName}}</option>
             </select>
           </label>
 
           <label for="introduce" class="item item-input">
           <span class="input-label">자기소개</span><br>
           </label>
-          <textarea id="introduce" ng-model="profile.introduce" placeholder="{{rootUser.introduce}}" rows="8" style="width:100%; margin: 5px;"></textarea>
+          <textarea id="introduce" ng-model="profile.introduce" rows="8" style="width:100%; margin: 5px;"></textarea>
 
           <button class="button button-full button-positive" ng-click="updateProfile(profile)">수정완료</button>
           <button class="button button-full button-positive" ng-click="closeModal()">취소</button>

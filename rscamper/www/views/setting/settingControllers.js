@@ -1,20 +1,25 @@
 // 프로필 컨트롤러
 app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService) {
 
-  $scope.updateProfile = function(result) {
+  $scope.updateProfile = function (result) {
     // TODO: 유효성 체크
+
+    var birthday = new Date();
+    console.log(result.birthday);
+    console.log(birthday);
 
     var profileData = {
       uid: $rootScope.rootUser.userUid,
       displayName: result.displayName,
-      birthday: result.birthday,
+      birthday: birthday,
       introduce: result.introduce,
       phoneNumber: result.phoneNumber,
       websiteUrl: result.websiteUrl,
+      locationNo: parseInt(result.locationNo)
     }
 
     AuthService.updateProfile(profileData, function () {
-      DbService.selectUserByUid(profileData.uid, function (result) {
+        DbService.selectUserByUid(profileData.uid, function (result) {
         $rootScope.rootUser = result;
       })
       MyPopup.alert('알림', '회원정보 수정을 완료했습니다.');
@@ -24,17 +29,17 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   }
 
   // 액션 시트
-  $scope.show = function() {
+  $scope.show = function () {
     // Show the action sheet
     var hideSheet = $ionicActionSheet.show({
       buttons: [
-      { text: '프로필 수정' },
+        {text: '프로필 수정'},
       ],
       cancelText: '취소',
-      cancel: function() {
+      cancel: function () {
 
       },
-      buttonClicked: function(index) {
+      buttonClicked: function (index) {
         hideSheet();
         if (index == 0) {
           $scope.openModal();
@@ -42,7 +47,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
         return index;
       }
     });
-    $timeout(function() {
+    $timeout(function () {
       hideSheet();
     }, 5000);
   };
@@ -51,35 +56,39 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   $ionicModal.fromTemplateUrl('modal/modProfileModal.html', {
     scope: $scope,
     animation: 'slide-in-up'
-  }).then(function(modal) {
+  }).then(function (modal) {
     $scope.modal = modal;
   });
 
-  $scope.openModal = function() {
-    $scope.locations = DbService.getLocationList();
-    $scope.modal.show();
+  $scope.openModal = function () {
+    DbService.getLocationList(function (result) {
+      $scope.locations = result;
+      $scope.profile = $rootScope.rootUser;
+      $scope.profile.locationNo = 0;
+      $scope.modal.show();
+    });
   };
 
-  $scope.closeModal = function() {
+  $scope.closeModal = function () {
     $scope.modal.hide();
   };
 
   // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
+  $scope.$on('$destroy', function () {
     $scope.modal.remove();
   });
 
   // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    $scope.profile = "";
+  $scope.$on('modal.hidden', function () {
+
   });
 
   // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
+  $scope.$on('modal.removed', function () {
   });
 
 })
-  // 셋팅 메인 컨트롤러
+// 셋팅 메인 컨트롤러
   .controller('SettingMainCtrl', function ($rootScope, $scope, AuthService) {
     $scope.logout = AuthService.logout;
     $scope.resign = AuthService.resign;
