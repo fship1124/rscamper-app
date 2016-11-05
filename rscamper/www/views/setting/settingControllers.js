@@ -4,9 +4,10 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   $scope.updateProfile = function (result) {
     // TODO: 유효성 체크
 
-    var birthday = new Date();
     console.log(result.birthday);
-    console.log(birthday);
+    console.log(new Date(result.birthday));
+    var birthday = new Date(result.birthday);
+    console.log(typeof(birthday));
 
     var profileData = {
       uid: $rootScope.rootUser.userUid,
@@ -64,7 +65,8 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
     DbService.getLocationList(function (result) {
       $scope.locations = result;
       $scope.profile = $rootScope.rootUser;
-      $scope.profile.locationNo = 0;
+      $scope.viewProfile = $rootScope.rootUser;
+      $scope.profile.locationNo = undefined;
       $scope.modal.show();
     });
   };

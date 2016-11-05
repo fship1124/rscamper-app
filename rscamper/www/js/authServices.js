@@ -451,6 +451,17 @@ angular.module("App")
     }
   }])
 
+  .factory("DateConverter", [function () {
+    return {
+      toDate: function (longTime) {
+        
+      },
+      toLongTime: function (date) {
+
+      }
+    }
+  }])
+
   // 팝업창 사용을 위한 서비스
   .factory("MyPopup", ["$ionicPopup", function ($ionicPopup) {
     return {
@@ -499,6 +510,7 @@ angular.module("App")
     }
   })
 
+  // TODO: 유효성 체크 서비스
   .factory("ValChk", function (type, value) {
     // Null 체크
     if (!value) {
