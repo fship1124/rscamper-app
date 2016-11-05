@@ -1,13 +1,17 @@
 // 프로필 컨트롤러
 app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService) {
+  $scope.profile = {
+    displayName: $rootScope.rootUser.displayName,
+    birthday: new Date($rootScope.rootUser.birthday),
+    introduce: $rootScope.rootUser.introduce,
+    phoneNumber: $rootScope.rootUser.phoneNumber,
+    websiteUrl: $rootScope.rootUser.websiteUrl,
+    locationNo: $rootScope.rootUser.locationNo
+  };
 
   $scope.updateProfile = function (result) {
     // TODO: 유효성 체크
-
-    console.log(result.birthday);
-    console.log(new Date(result.birthday));
-    var birthday = new Date(result.birthday);
-    console.log(typeof(birthday));
+    // TODO: 지역선택 SELECTED 문제 해결
 
     var profileData = {
       uid: $rootScope.rootUser.userUid,
@@ -64,9 +68,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   $scope.openModal = function () {
     DbService.getLocationList(function (result) {
       $scope.locations = result;
-      $scope.profile = $rootScope.rootUser;
-      $scope.viewProfile = $rootScope.rootUser;
-      $scope.profile.locationNo = undefined;
+      // $scope.profile = $rootScope.rootUser;
       $scope.modal.show();
     });
   };

@@ -122,6 +122,7 @@ angular.module("App")
             function () {
               $firebaseAuth().$signOut();
               MyPopup.alert("알림", "로그아웃");
+              $location.path("/");
             },
             function () {
               return false;
@@ -172,28 +173,29 @@ angular.module("App")
 
       },
 
-      // 로그인한 유저정보 가져오기
-      getCurrentUser: function () {
-        return Localstorage.getObject("user");
-      },
-
-      // 회원탈퇴 메소드(TODO: 회원탈퇴시 정해진 메세지 입력받게 해서 탈퇴)
+      // 회원탈퇴 메소드
       resign: function () {
-        MyPopup.confirm("회원 탈퇴 확인", "정말로 탈퇴 하시겠습니까?", function () {
-          var user = firebase.auth().currentUser;
-          if (user) {
-            var userUid = user.uid;
-            user.delete().then(DbService.deleteUserByUid(userUid, function () {
-              $firebaseAuth().$signOut();
-              MyPopup.alert("성공", "회원탈퇴가 완료되었습니다.");
-            }), function (error) {
-              MyPopup.alert("에러", error);
-            });
+        MyPopup.prompt("회원탈퇴", "회원을 탈퇴하시려면 [회원탈퇴] 라고 입력해주세요.", function (result) {
+          if (result == "회원탈퇴") {
+            var user = firebase.auth().currentUser;
+            if (user) {
+              var userUid = user.uid;
+              user.delete().then(DbService.deleteUserByUid(userUid, function () {
+                $firebaseAuth().$signOut();
+                MyPopup.alert("성공", "회원탈퇴가 완료되었습니다.");
+              }), function (error) {
+                MyPopup.alert("에러", error);
+              });
+            } else {
+              MyPopup.alert("에러", "로그인 되어있지 않습니다.");
+            }
+            $location.path("/");
           } else {
-            MyPopup.alert("에러", "로그인 되어있지 않습니다.");
+            MyPopup.alert("취소", "취소되었습니다.");
+            $location.path("/");
           }
-        }, function () {
-        });
+        })
+
       },
 
       // 프로필 사진 수정 메소드
@@ -451,17 +453,6 @@ angular.module("App")
     }
   }])
 
-  .factory("DateConverter", [function () {
-    return {
-      toDate: function (longTime) {
-        
-      },
-      toLongTime: function (date) {
-
-      }
-    }
-  }])
-
   // 팝업창 사용을 위한 서비스
   .factory("MyPopup", ["$ionicPopup", function ($ionicPopup) {
     return {
@@ -487,6 +478,14 @@ angular.module("App")
               noCB();
             }
           });
+      },
+      prompt: function (title, subTitle, resultCB) {
+        $ionicPopup.prompt({
+          title: title,
+          template: subTitle,
+          inputType: "text",
+          inputPlaceholder: "회원탈퇴 확인 메세지"
+        }).then(resultCB)
       }
     }
   }])
@@ -512,18 +511,14 @@ angular.module("App")
 
   // TODO: 유효성 체크 서비스
   .factory("ValChk", function (type, value) {
-    // Null 체크
-    if (!value) {
-      return false;
-    }
     switch (type) {
-      case "password": // 6~20자 문자숫자혼합(정규식)
+      case "password": // 널체크, 6~20자 문자숫자혼합(정규식)
         if (value) {
 
           return true;
         }
         break;
-      case "displayName": // 20자 이하
+      case "displayName": // 널체크, 20자 이하
         if (value) {
 
           return true;
