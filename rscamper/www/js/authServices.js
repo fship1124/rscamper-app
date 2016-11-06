@@ -72,7 +72,7 @@ angular.module("App")
               break;
 
             case "facebook":
-              if (ionic.Platform.isWebView()) { // 어플
+              if (ionic.Platform.isWebView()) { // TODO : 어플
                 $cordovaOauth.facebook("947628548702706", ["email"]).then(function (result) {
                   var credential = firebase.auth.FacebookAuthProvider.credential(result.id_token);
                   firebase.auth().signInWithCredential(credential).then(function (result) {
@@ -94,7 +94,7 @@ angular.module("App")
               break;
 
             case "twitter":
-              if (ionic.Platform.isWebView()) { // 어플
+              if (ionic.Platform.isWebView()) { // TODO : 어플
                 $cordovaOauth.twitter("O0aubI3UlDJzlzaAVLGJ3BqVf", "qwyWjtCq0TDIXCB8PsoM854B30Pu7ANjKYAyLBaCOYFUWGxeUm").then(function (result) {
                   $firebaseAuth().$authWithOAuthToken("twitter", result.access_token).then(function (authData) {
                     MyPopup.alert("알림", "트위터 로그인성공");
@@ -118,7 +118,7 @@ angular.module("App")
       // 로그아웃 메소드
       logout: function () {
         if (firebase.auth().currentUser) {
-          MyPopup.confirm("로그아웃", "정말로 로그아웃 하시겠습니까?",
+          MyPopup.confirm("로그아웃", "로그아웃 하시겠습니까?",
             function () {
               $firebaseAuth().$signOut();
               MyPopup.alert("알림", "로그아웃");
@@ -175,7 +175,7 @@ angular.module("App")
 
       // 회원탈퇴 메소드
       resign: function () {
-        MyPopup.prompt("회원탈퇴", "회원을 탈퇴하시려면 [회원탈퇴] 라고 입력해주세요.", function (result) {
+        MyPopup.prompt("회원탈퇴", "정말로 탈퇴하시겠습니까? 회원을 탈퇴하시려면 [회원탈퇴] 라고 입력해주세요.", function (result) {
           if (result == "회원탈퇴") {
             var user = firebase.auth().currentUser;
             if (user) {
@@ -189,9 +189,6 @@ angular.module("App")
             } else {
               MyPopup.alert("에러", "로그인 되어있지 않습니다.");
             }
-            $location.path("/");
-          } else {
-            MyPopup.alert("취소", "취소되었습니다.");
             $location.path("/");
           }
         })
@@ -432,27 +429,6 @@ angular.module("App")
     }
   }])
 
-  // LocalStorage사용을 위한 셋팅
-  .factory("Localstorage", ["$window", function ($window) {
-    return {
-      set: function (key, value) {
-        $window.localStorage[key] = value;
-      },
-      get: function (key, defaultValue) {
-        return $window.localStorage[key] || defaultValue;
-      },
-      setObject: function (key, value) {
-        $window.localStorage[key] = JSON.stringify(value);
-      },
-      getObject: function (key) {
-        return JSON.parse($window.localStorage[key] || "{}");
-      },
-      remove: function (key) {
-        $window.localStorage.removeItem(key);
-      }
-    }
-  }])
-
   // 팝업창 사용을 위한 서비스
   .factory("MyPopup", ["$ionicPopup", function ($ionicPopup) {
     return {
@@ -484,7 +460,11 @@ angular.module("App")
           title: title,
           template: subTitle,
           inputType: "text",
-          inputPlaceholder: "회원탈퇴 확인 메세지"
+          inputPlaceholder: "회원탈퇴 확인 메세지",
+          cancelText: '취소',
+          // cancelType:
+          okText: '확인',
+          // okType:
         }).then(resultCB)
       }
     }
@@ -561,4 +541,25 @@ angular.module("App")
     }
     return "에러";
   })
+
+  // LocalStorage사용을 위한 셋팅
+  .factory("Localstorage", ["$window", function ($window) {
+    return {
+      set: function (key, value) {
+        $window.localStorage[key] = value;
+      },
+      get: function (key, defaultValue) {
+        return $window.localStorage[key] || defaultValue;
+      },
+      setObject: function (key, value) {
+        $window.localStorage[key] = JSON.stringify(value);
+      },
+      getObject: function (key) {
+        return JSON.parse($window.localStorage[key] || "{}");
+      },
+      remove: function (key) {
+        $window.localStorage.removeItem(key);
+      }
+    }
+  }])
 ;
