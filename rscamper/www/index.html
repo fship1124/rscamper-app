@@ -25,7 +25,6 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/scheduleStyle.css" rel="stylesheet">
 
-
   <!-- jQuery -->
   <script src="lib/jquery/dist/jquery.min.js"></script>
 
@@ -55,11 +54,14 @@
   <script src="views/main/mainTabs.js"></script>
   <script src="views/main/mainTab.js"></script>
   <script src="views/tour/tourInfo.js"></script>
-  <script src="views/login/loginControllers.js"></script>
-  <script src="views/setting/settingControllers.js"></script>
   <script src="views/schedule/schedule.js"></script>
   <script src="views/schedule/scheduleTabs.js"></script>
   <script src="views/schedule/scheduleDetail.js"></script>
+
+  <script src="views/login/loginControllers.js"></script>
+  <script src="views/setting/settingControllers.js"></script>
+  <script src="views/myPage/myPageControllers.js"></script>
+  <script src="views/community/communityControllers.js"></script>
 </head>
 
 <body ng-app="App">
@@ -119,7 +121,7 @@
         <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule">
           <i class="icon ion-earth"></i> 일정
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="community">
+        <ion-item nav-clear menu-close ui-sref="community.main">
           <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="myPage">
