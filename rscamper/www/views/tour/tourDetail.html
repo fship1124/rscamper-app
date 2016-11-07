@@ -1,3 +1,13 @@
 <ion-view title="detail">
-  <ion-content></ion-content>
+  <ion-content>
+    <div class="item item-divider">
+      <i class="ion-images"></i>
+      my images
+    </div>
+    <a class="item item-list-detail">
+      <ion-scroll direction="x">
+        <img ng-repeat="image in imageList" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb">
+      </ion-scroll>
+    </a>
+  </ion-content>
 </ion-view>
