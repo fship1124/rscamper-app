@@ -17,11 +17,10 @@ angular.module('App')
             city: response.results[0].formatted_address,
             current: true
           };
-
           $http({
             method: "GET",
             url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-            headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
+            // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
           })
             .success(function(data) {
               $scope.today = data.weather.minutely[0];
@@ -29,6 +28,9 @@ angular.module('App')
 
               var locArr = $scope.location.city.split(" ");
               $scope.loc = locArr[1] + " " + locArr[2] + " " + locArr[3];
+            })
+            .error(function () {
+              $scope.today = { sky: {code: "SKY_A00"} };
             });
         })
         .error(function () {

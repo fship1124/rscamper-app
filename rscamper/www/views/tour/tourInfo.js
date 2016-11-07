@@ -18,9 +18,15 @@ angular.module('App')
               current: true
             };
 
-            // 경주역
-            $scope.location.lat = 35.8444002;
-            $scope.location.lang = 129.2157566;
+            // // 경주역
+            // $scope.location.lat = 35.8444002;
+            // $scope.location.lang = 129.2157566;
+            // 광안대교
+            $scope.location.lat = 35.1476738
+            $scope.location.lang = 129.1278484;
+            // 불국사
+            // $scope.location.lat = 35.7900971;
+            // $scope.location.lang = 129.3299037;
 
             initialize();
 
@@ -39,8 +45,18 @@ angular.module('App')
               }}
             )
               .success(function (data) {
-                var result = data.response.body.items.item;
-                drop(result, $scope.map);
+                $scope.mapList = data.response.body.items.item;
+                drop($scope.mapList, $scope.map);
+
+                // api 호출 데이터들과 나와의 거리 $scope.mapList에 추가
+                $scope.distanceList = [];
+                for (var i = 0; i < $scope.mapList.length; i++) {
+                  $scope.mapList[i].myDistance = computeDistance($scope.location.lang, $scope.location.lat, $scope.mapList[i].mapx, $scope.mapList[i].mapy);
+                  if(!$scope.mapList[i].firstimage) {
+                    $scope.mapList[i].firstimage = "../../img/default-thumbnail.jpg";
+                  }
+                }
+                console.log($scope.mapList);
               })
           })
           .error(function () {
@@ -61,7 +77,7 @@ angular.module('App')
       };
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-      var marker = new google.maps.Marker({
+      new google.maps.Marker({
         position: myLatlng,
         map: map,
         draggable: true
@@ -69,27 +85,8 @@ angular.module('App')
 
       $scope.map = map;
     }
-
-    $scope.centerOnMe = function() {
-      if(!$scope.map) {
-        return;
-      }
-
-      $scope.loading = $ionicLoading.show({
-        content: 'Getting current location...',
-        showBackdrop: false
-      });
-
-      navigator.geolocation.getCurrentPosition(function(pos) {
-        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        $scope.loading.hide();
-      }, function(error) {
-        alert('Unable to get location: ' + error.message);
-      });
-    };
-
-    function addMarkerWithTimeout(result, timeout, map) {
-      var myLatlng = new google.maps.LatLng(result.mapy, result.mapx);
+    function addMarkerWithTimeout(mapList, timeout, map) {
+      var myLatlng = new google.maps.LatLng(mapList.mapy, mapList.mapx);
 
       var image = {
         url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
@@ -105,14 +102,12 @@ angular.module('App')
           animation: google.maps.Animation.DROP
         });
 
-        var distance = computeDistance($scope.location.lang, $scope.location.lat, result.mapx, result.mapy);
-
-
         // <a href="https://www.youtube.com/watch?v=CxgELeHSkJA" target="_blank">
-        // var contentString = '<div id="content" style="font-size: 12px"><a href="#" ng-click="modal.show()">' + result.title + '</a><br><span>나와의 거리 : ' + distance.toFixed(2) + 'km</span></div>';
-        // var imgSrc = result.firstimage;
+        // var distance = computeDistance($scope.location.lang, $scope.location.lat, mapList.mapx, mapList.mapy);
+        // var contentString = '<div id="content" style="font-size: 12px"><a href="#" ng-click="modal.show()">' + mapList.title + '</a><br><span>나와의 거리 : ' + distance + 'km</span></div>';
+        // var imgSrc = mapList.firstimage;
         // var contentString = '<div class="list"><a class="item item-thumbnail-left" href="#"><img src=imgSrc + ""><p>dd</p></a></div>';
-        var contentString = '<div><img src="' + result.firstimage + '" style="width: 100px; height: 75px"><br><span style="font-size: 11px">' + result.title + '</span></div>';
+        var contentString = '<div><img src="' + mapList.firstimage + '" style="width: 100px; height: 75px"><br><span style="font-size: 11px">' + mapList.title + '</span></div>';
         var infowindow = new google.maps.InfoWindow({
           content: contentString,
           maxWidth: 100
@@ -129,9 +124,9 @@ angular.module('App')
       }, timeout);
     }
 
-    function drop(result, map) {
-      for (var i = 0; i < result.length; i++) {
-        addMarkerWithTimeout(result[i], i * 200, map);
+    function drop(mapList, map) {
+      for (var i = 0; i < mapList.length; i++) {
+        addMarkerWithTimeout(mapList[i], i * 200, map);
       }
     }
 
@@ -145,7 +140,7 @@ angular.module('App')
       var earthRadius = 6371;
       var distance = Math.acos(
           Math.sin(startLatRads) * Math.sin(destLatRads) + Math.cos(startLatRads) * Math.cos(destLatRads) * Math.cos(startLongRads - destLongRads)) * earthRadius;
-      return distance;
+      return distance.toFixed(2);
     }
 
     function degreesToRadians(degrees) {
@@ -153,36 +148,10 @@ angular.module('App')
       return radians;
     }
 
-    // 모달
-    $ionicModal.fromTemplateUrl('my-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-
-    // $scope.createContact = function(u) {
-    //   $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
-    //   $scope.modal.hide();
-    // };
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*  // 마커 만드는 함수
-  function makeMarker(map, result) {
-    var myLatlng = new google.maps.LatLng(result.mapy, result.mapx);
+  function makeMarker(map, mapList) {
+    var myLatlng = new google.maps.LatLng(mapList.mapy, mapList.mapx);
     /!*    var myIcon = {
 /!*      path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',*!/
       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -208,7 +177,7 @@ angular.module('App')
       animation: google.maps.Animation.DROP
     });
 
-    var contentString = '<div id="content"><span>' + result.title + '</span></div>';
+    var contentString = '<div id="content"><span>' + mapList.title + '</span></div>';
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
@@ -219,3 +188,35 @@ angular.module('App')
     // To add the marker to the map, call setMap();
     marker.setMap(map);
   }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// $scope.centerOnMe = function() {
+//   if(!$scope.map) {
+//     return;
+//   }
+//
+//   $scope.loading = $ionicLoading.show({
+//     content: 'Getting current location...',
+//     showBackdrop: false
+//   });
+//
+//   navigator.geolocation.getCurrentPosition(function(pos) {
+//     $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+//     $scope.loading.hide();
+//   }, function(error) {
+//     alert('Unable to get location: ' + error.message);
+//   });
+// };
