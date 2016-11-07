@@ -1,4 +1,4 @@
-<ion-view title="hello">
+<ion-view title="커뮤니티">
   <ion-tabs class="tabs-energized tabs-striped tabs-top">
     <ion-tab title="전체" ui-sref="community.main">
       <ion-nav-view name="community-main-tab"></ion-nav-view>
@@ -39,7 +39,6 @@
         <label class="item item-input">
           <span class="input-label">작성자</span>
           <input type="text" ng-model="writeBoard.displayName" ng-value="rootUser.displayName" readonly>
-          <input type="hidden" ng-model="writeBoard.userUid" ng-value="rootUser.userUid">
         </label>
 
         <label class="item item-input item-select">
@@ -56,19 +55,19 @@
           <input ng-model="writeBoard.title" type="text">
         </label>
 
-        <div id="content" ng-model="writeBoard.content" contenteditable="true" style="width: 90%; height: 300px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
+        <div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="writeBoard.content" contenteditable="true" style="width: 90%; height: 300px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
         <!--<textarea id="content" ng-model="writeBoard.content" rows="10" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>-->
       </div>
 
       <div class="bar bar-footer">
         <div class="tabs tabs-energized tabs-icon-left">
-          <a class="tab-item">
+          <a class="tab-item" ng-click="write(writeBoard);">
             <i class="icon ion-checkmark"></i> 작성완료
           </a>
-          <a class="tab-item">
+          <a class="tab-item" ng-click="resetModal();">
             <i class="icon ion-refresh"></i> 재작성
           </a>
-          <a class="tab-item" ng-click="closeModal()">
+          <a class="tab-item" ng-click="closeModal();">
             <i class="icon ion-close"></i> 취소
           </a>
         </div>

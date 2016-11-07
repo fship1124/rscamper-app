@@ -1,4 +1,4 @@
-<ion-view title="Community Main">
+<ion-view title="커뮤니티">
 
   <button id="fab" class="button button-balanced button-fab button-fab-bottom-right" ng-click="openModal(0);">
     <i class="icon ion-compose"></i>
@@ -11,10 +11,7 @@
 
     <!-- CARD -->
     <div class="list card stable-100-bg" ng-repeat="board in boardList">
-      <!-- TITLE -->
-      <div class="item item-divider">
-        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
-      </div>
+
       <!-- WRITER -->
       <div class="item item-avatar">
         <!-- writer img -->
@@ -25,10 +22,15 @@
         <p>{{board.regDate | date : 'short' }}</p>
       </div>
 
-      <div class="item item-body" style="max-height:200px; overflow: hidden">
-        <!-- CONTENT HTML -->
-        {{board.content}}
+      <!-- TITLE -->
+      <div class="item item-divider">
+        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
       </div>
+
+      <div class="item item-body" style="max-height:200px; overflow: hidden">
+        <div ng-bind-html="board.content"></div>
+      </div>
+
       <!-- BUTTONS -->
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">

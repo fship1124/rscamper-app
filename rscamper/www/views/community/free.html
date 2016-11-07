@@ -1,4 +1,4 @@
-<ion-view title="Free">
+<ion-view title="커뮤니티">
 
   <button id="fab" class="button button-balanced button-fab button-fab-bottom-right" ng-click="openModal(1);">
     <i class="icon ion-compose"></i>
@@ -26,9 +26,9 @@
       </div>
 
       <div class="item item-body" style="max-height:200px; overflow: hidden">
-        <!-- CONTENT HTML -->
-        {{board.content}}
+        <div ng-bind-html="board.content"></div>
       </div>
+
       <!-- BUTTONS -->
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
