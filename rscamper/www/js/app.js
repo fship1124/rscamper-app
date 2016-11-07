@@ -1,5 +1,5 @@
 var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth'])
-    .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService, MyPopup) {
+    .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -48,7 +48,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/main',
           abstract: true,
           templateUrl: 'views/main/mainTabs.html',
-          controller : 'MainCtrl'
+          controller: 'MainCtrl'
         })
         .state('main.main', {
           url: '/main',
@@ -76,16 +76,54 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           }
         })
         .state('tourInfo', {
+          cache: false,
           url: '/tourInfo',
           templateUrl: 'views/tour/tourInfo.html',
           controller: 'TourInfoCtrl'
         })
-        .state('tourInfo.tourDetail', {
-          url: '/tourDetail',
+        .state('tourDetail', {
+          url: '/tourInfo/:contentid',
           templateUrl: 'views/tour/tourDetail.html',
           controller: 'TourDetailCtrl'
         })
 
+
+
+
+        .state('scheduleTab', {
+          cache: false,
+          url: '/schedule',
+          templateUrl: 'views/schedule/scheduleTabs.html'
+        })
+        .state('scheduleTab.schedule', {
+          url: '/schedule',
+          views: {
+            's-tab': {
+              templateUrl: 'views/schedule/schedule.html',
+              controller: 'ScheduleCtrl'
+            }
+          }
+        })
+        .state('detailTab', {
+          cache: false,
+          url: '/detailSchedule',
+          templateUrl: 'views/schedule/detailTabs.html'
+        })
+        .state('detailTab.detailSchedule', {
+          url: '/:no',
+          views: {
+            'detailSchedule-tab': {
+              templateUrl: 'views/schedule/scheduleDetail.html',
+              controller: 'dScheduleCtrl'
+            }
+          }
+        })
+
+
+
+        /**
+         * 로그인 관련 메뉴
+         */
         // 로그인 메인 화면
         .state('login', {
           url: '/login',
@@ -110,6 +148,10 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/login/resetPassword.html',
           controller: 'ResetPasswordCtrl'
         })
+
+        /**
+         *  셋팅 메뉴
+         */
         // 셋팅 - 메인
         .state('setting', {
           url: '/setting',
@@ -123,80 +165,94 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'ProfileCtrl'
         })
 
-
-        .state('scheduleTab',{
-        cache : false,
-        url: '/schedule',
-        templateUrl: 'views/schedule/scheduleTabs.html'
-      })
-        .state('scheduleTab.schedule', {
-          url: '/schedule',
+        /**
+         *  커뮤니티 메뉴
+         */
+        // 커뮤니티 - 탭
+        .state('community', {
+          url: '/community',
+          abstract: true,
+          templateUrl: 'views/community/communityTabs.html',
+          controller: 'CommunityTabsCtrl'
+        })
+        // 커뮤니티 - 메인
+        .state('community.main', {
+          url: '/main',
           views: {
-            's-tab': {
-              templateUrl: 'views/schedule/schedule.html',
-              controller: 'ScheduleCtrl'
+            'community-main-tab': {
+              templateUrl: 'views/community/main.html',
+              controller: 'CommunityMainCtrl'
             }
           }
         })
-        .state('detailTab', {
-          cache : false,
-          url: '/detailSchedule',
-          templateUrl: 'views/schedule/detailTabs.html'
-        })
-        .state('detailTab.detailSchedule',{
-          url: '/:no',
+        // 커뮤니티 - 자유
+        .state('community.free', {
+          url: '/free',
           views: {
-            'detailSchedule-tab': {
-              templateUrl: 'views/schedule/scheduleDetail.html',
-              controller : 'dScheduleCtrl'
+            'community-free-tab': {
+              templateUrl: 'views/community/free.html',
+              controller: 'CommunityFreeCtrl'
             }
           }
         })
+        // 커뮤니티 - 여행기
+        .state('community.tourDiary', {
+          url: '/tourDiary',
+          views: {
+            'community-tourDiary-tab': {
+              templateUrl: 'views/community/tourDiary.html',
+              controller: 'CommunityTourDiaryCtrl'
+            }
+          }
+        })
+        // 커뮤니티 - 정보
+        .state('community.information', {
+          url: '/information',
+          views: {
+            'community-information-tab': {
+              templateUrl: 'views/community/information.html',
+              controller: 'CommunityInformationCtrl'
+            }
+          }
+        })
+<<<<<<< HEAD
         .state('findAttraction',{
           cache : false,
           url: '/findAttraction/:week',
           templateUrl: 'views/schedule/findAttraction.html',
           controller : 'findAttractionCtrl'
+=======
+        // 커뮤니티 - 리뷰
+        .state('community.review', {
+          url: '/review',
+          views: {
+            'community-review-tab': {
+              templateUrl: 'views/community/review.html',
+              controller: 'CommunityReviewCtrl'
+            }
+          }
+        })
+
+        /**
+         *  마이페이지 메뉴
+         */
+        // 마이페이지 - 메인
+        .state('myPage', {
+          url: '/myPage',
+          templateUrl: 'views/myPage/myPageMain.html',
+          controller: 'MyPageMainCtrl'
+>>>>>>> 09e96702e56c7438a929efa1c555f9781016e258
         })
       ;
 
-      // if none of the above states are matched, use this as the fallback
+      // 기초 페이지
       $urlRouterProvider.otherwise('/main/main');
 
     })
 
-    .controller('MenuCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, AuthService, $ionicActionSheet) {
-
+    .controller('MenuCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, AuthService) {
       $scope.updateProfilePhoto = AuthService.updateProfilePhoto;
       $scope.updateBgPhoto = AuthService.updateBgPhoto;
 
-      // Form data for the login modal
-      $scope.loginData = {};
-      var navIcons = document.getElementsByClassName('ion-navicon');
-      for (var i = 0; i < navIcons.length; i++) {
-        navIcons[i].addEventListener('click', function () {
-          this.classList.toggle('active');
-        });
-      }
-      // .fromTemplate() method
-      var template = '<ion-popover-view>' +
-        '   <ion-header-bar>' +
-        '       <h1 class="title">My Popover Title</h1>' +
-        '   </ion-header-bar>' +
-        '   <ion-content class="padding">' +
-        '       My Popover Contents' +
-        '   </ion-content>' +
-        '</ion-popover-view>';
-
-      $scope.popover = $ionicPopover.fromTemplate(template, {
-        scope: $scope
-      });
-      $scope.closePopover = function () {
-        $scope.popover.hide();
-      };
-      //Cleanup the popover when we're done with it!
-      $scope.$on('$destroy', function () {
-        $scope.popover.remove();
-      });
     })
   ;

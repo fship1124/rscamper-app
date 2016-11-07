@@ -27,6 +27,9 @@
         <entry file="file://$PROJECT_DIR$/www/views/schedule/schedule.html">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+            <state relative-caret-position="1786">
+=======
+<<<<<<< HEAD
             <state relative-caret-position="480">
               <caret line="114" column="34" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="34" />
 =======
@@ -36,6 +39,7 @@
               <caret line="129" column="14" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="14" />
 =======
             <state relative-caret-position="453">
+>>>>>>> master
               <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
 >>>>>>> ye
 =======
@@ -101,8 +105,8 @@
       <file leaf-file-name="mainTab.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="93" column="67" selection-start-line="93" selection-start-column="67" selection-end-line="93" selection-end-column="67" />
+            <state relative-caret-position="209">
+              <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="false" />
@@ -153,7 +157,7 @@
       <file leaf-file-name="mainTab.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
+            <state relative-caret-position="760">
               <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
 >>>>>>> ye
 =======
@@ -190,7 +194,7 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
+            <state relative-caret-position="817">
               <caret line="43" column="1" selection-start-line="42" selection-start-column="18" selection-end-line="43" selection-end-column="1" />
 >>>>>>> ye
               <folding />
@@ -348,6 +352,9 @@
         <entry file="file://$PROJECT_DIR$/www/views/setting/settingMain.html">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+            <state relative-caret-position="570">
+=======
+<<<<<<< HEAD
             <state relative-caret-position="-100">
               <caret line="1" column="38" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="38" />
 =======
@@ -355,6 +362,7 @@
               <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
 =======
             <state relative-caret-position="399">
+>>>>>>> master
               <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
 >>>>>>> ye
 =======
@@ -542,7 +550,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="Scratches" />
+=======
       <pane id="Scope" />
+>>>>>>> master
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -561,6 +573,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="rscamper" />
@@ -772,9 +786,9 @@
             </PATH_ELEMENT>
           </PATH>
 >>>>>>> qqq
+>>>>>>> master
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -917,6 +931,10 @@
       <workItem from="1477890290948" duration="20181000" />
       <workItem from="1477959976091" duration="60275000" />
       <workItem from="1478132482581" duration="10884000" />
+<<<<<<< HEAD
+      <workItem from="1478157410420" duration="2590000" />
+      <workItem from="1478217691800" duration="868000" />
+=======
 >>>>>>> ye
 =======
       <workItem from="1477885877250" duration="22434000" />
@@ -928,10 +946,14 @@
       <workItem from="1478132164161" duration="13367000" />
 >>>>>>> qqq
 >>>>>>> master
+>>>>>>> master
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="184967000" />
+=======
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="188855000" />
 =======
@@ -944,6 +966,7 @@
 =======
     <option name="totallyTimeSpent" value="176080000" />
 >>>>>>> qqq
+>>>>>>> master
 >>>>>>> master
   </component>
   <component name="TodoView">
@@ -959,6 +982,8 @@
 <<<<<<< HEAD
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
+<<<<<<< HEAD
+=======
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17552084" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -967,6 +992,7 @@
 =======
     <frame x="-182" y="33" width="1936" height="1056" extended-state="0" />
     <editor active="false" />
+>>>>>>> master
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
 <<<<<<< HEAD
@@ -988,6 +1014,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27272728" sideWeight="0.49367756" order="2" side_tool="false" content_ui="tabs" />
+=======
+<<<<<<< HEAD
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24841438" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
 =======
 <<<<<<< HEAD
@@ -995,6 +1024,7 @@
 =======
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27272728" sideWeight="0.49367756" order="2" side_tool="false" content_ui="tabs" />
 >>>>>>> ye
+>>>>>>> master
 >>>>>>> master
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1040,7 +1070,34 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scss/ionic.app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="77" selection-start-line="17" selection-start-column="77" selection-end-line="17" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/menu.html" />
+    <entry file="file://$PROJECT_DIR$/www/lib/ui.bootstrap/src/modal/test/modal.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/cordova-plugin-camera/tests/tests.js">
+=======
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/platforms/android/AndroidManifest.xml">
+>>>>>>> master
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
@@ -1105,10 +1162,13 @@
 <<<<<<< HEAD
         <state relative-caret-position="337">
           <caret line="5098" column="45" selection-start-line="5098" selection-start-column="45" selection-end-line="5098" selection-end-column="45" />
+<<<<<<< HEAD
+=======
 =======
         <state relative-caret-position="133">
           <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
 >>>>>>> ye
+>>>>>>> master
 >>>>>>> master
         </state>
       </provider>
@@ -1132,8 +1192,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/platforms/android/assets/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="261">
+          <caret line="5088" column="11" selection-start-line="5088" selection-start-column="11" selection-end-line="5088" selection-end-column="11" />
+=======
         <state relative-caret-position="320">
           <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -1622,9 +1687,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1753">
           <caret line="10" column="10724" selection-start-line="10" selection-start-column="10724" selection-end-line="10" selection-end-column="10724" />
+<<<<<<< HEAD
+=======
 >>>>>>> ye
 >>>>>>> master
           <folding />
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -1762,7 +1830,7 @@
 =======
     <entry file="file://$PROJECT_DIR$/www/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
+        <state relative-caret-position="817">
           <caret line="43" column="1" selection-start-line="42" selection-start-column="18" selection-end-line="43" selection-end-column="1" />
 >>>>>>> ye
 =======
@@ -1815,6 +1883,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+<<<<<<< HEAD
+=======
 >>>>>>> ye
 =======
     <entry file="file://$PROJECT_DIR$/www/views/menu/menu.js">
@@ -1824,6 +1894,7 @@
 >>>>>>> qqq
 >>>>>>> master
           <folding />
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -1906,17 +1977,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="114" column="69" selection-start-line="114" selection-start-column="69" selection-end-line="114" selection-end-column="69" />
-          <folding>
-            <marker date="1478000198796" expanded="true" signature="3796:3811" ph="..." />
-            <marker date="1478000198796" expanded="true" signature="4196:4222" ph="..." />
-            <marker date="1478000198796" expanded="true" signature="4241:4256" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/views/tour/tourInfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="570">
           <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
 >>>>>>> ye
 =======
@@ -1971,7 +2037,7 @@
 =======
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
+        <state relative-caret-position="1786">
           <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
 >>>>>>> ye
 =======
@@ -2018,7 +2084,7 @@
 =======
     <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="760">
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
 >>>>>>> ye
 >>>>>>> master
@@ -2028,8 +2094,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/views/main/mainTab.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="93" column="67" selection-start-line="93" selection-start-column="67" selection-end-line="93" selection-end-column="67" />
+        <state relative-caret-position="209">
+          <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
             <element signature="n#div#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="false" />

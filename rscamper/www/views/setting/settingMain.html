@@ -6,27 +6,39 @@
       <div class="item item-divider" ng-if="userStatus == true">
         계정 설정
       </div>
-
       <div class="item item-button-right" ui-sref="profile" ng-if="userStatus == true">
         회원정보
         <button class="button button-positive">
           <i class="icon ion-document-text"></i>
         </button>
       </div>
-
       <div class="item item-button-right" ng-click="logout()" ng-if="userStatus == true">
         로그아웃
         <button class="button button-positive">
           <i class="icon ion-android-exit"></i>
         </button>
       </div>
-
       <div class="item item-button-right"  ng-click="resign()" ng-if="userStatus == true">
         회원탈퇴
         <button class="button button-positive">
           <i class="icon ion-android-alert"></i>
         </button>
       </div>
+
+      <div class="item item-divider" ng-if="userStatus == true">
+        정보
+      </div>
+      <div class="item item-button-right"  ng-click="">
+        공지사항
+        <button class="button button-positive">
+          <i class="icon ion-android-list"></i>
+        </button>
+      </div>
+      <div class="item">
+        버전정보
+      </div>
+
+
 
     </div>
 

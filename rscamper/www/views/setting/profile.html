@@ -29,29 +29,31 @@
       </a>
       <a class="item item-icon-left">
         <i class="icon ion-calendar"></i>생년월일
-        <span class="item-note">{{rootUser.birthday}}</span>
+        <span class="item-note">{{rootUser.birthday | date:'MM/dd/yyyy'}}</span>
       </a>
       <a class="item item-icon-left">
         <i class="icon ion-planet"></i>사는지역
-        <span class="item-note">{{rootUser.locationNo}}</span>
+        <span class="item-note">{{rootUser.locationName}}</span>
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-happy"></i>가입일
+        <span class="item-note">{{rootUser.regDate}}</span>
       </a>
       <a class="item item-icon-left">
         <i class="icon ion-document-text"></i>자기소개
       </a>
-      <a class="item item-icon-left">
-        <i class="icon ion-document-text"></i>가입일
-      </a>
-      <p>{{rootUser.regDate}}</p>
+      <pre style="white-space: pre-wrap;">{{rootUser.introduce}}</pre>
     </div>
   </ion-content>
 
+
   <!-- 모달 폼 -->
   <script id="modal/modProfileModal.html" type="text/ng-template">
-    <ion-modal-view>
+
+    <ion-modal-view style="width: 100%; height: 100%;" >
 
       <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">Modify Profile</h1>
-        <button class="button button-clear button-primary" ng-click="closeModal()">취소</button>
       </ion-header-bar>
 
       <ion-content overflow-scroll="false">
@@ -59,43 +61,53 @@
 
           <label class="item item-input">
             <span class="input-label">이름</span>
-            <input ng-model="profile.displayName" type="text" placeholder="{{rootUser.displayName}}" required>
+            <input ng-model="profile.displayName" type="text">
           </label>
 
           <label class="item item-input">
             <span class="input-label">핸드폰번호</span>
-            <input ng-model="profile.phoneNumber" type="text" placeholder="{{rootUser.phoneNumber}}" required>
+            <input ng-model="profile.phoneNumber" type="text">
           </label>
 
           <label class="item item-input">
             <span class="input-label">홈페이지주소</span>
-            <input ng-model="profile.websiteUrl" type="text" placeholder="{{rootUser.websiteUrl}}" required>
+            <input type="text"ng-model="profile.websiteUrl">
           </label>
 
           <label class="item item-input">
             <span class="input-label">생년월일</span>
-            <input ng-model="profile.birthday" type="date" placeholder="{{rootUser.birthday}}" required>
+            <input type="date" ng-model="profile.birthday" >
           </label>
 
           <label class="item item-input item-select">
             <div class="input-label">
               사는지역
             </div>
-            <select>
-              <option selected>서울</option>
-              <option>서울</option>
+
+            <!-- TODO: 초기값 설정이 안됨-->
+            <select ng-options="location.locationName for location in locations track by location.locationNo" ng-model="profile.locationNo">
             </select>
+
           </label>
 
-          <label class="item item-input">
-            <span class="input-label">자기소개</span><br>
-            <textarea ng-model="profile.introduce" placeholder="{{rootUser.introduce}}"></textarea>
+          <label for="introduce" class="item item-input">
+          <span class="input-label">자기소개</span><br>
           </label>
-
-          <button class="button button-full button-positive" ng-click="updateProfile(profile)">회원정보수정</button>
-
+          <textarea id="introduce" ng-model="profile.introduce" rows="10" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>
         </div>
+
+        <button class="button button-full button-positive" ng-click="updateProfile(profile)">수정완료</button>
+        <button class="button button-full button-positive" ng-click="closeModal()">취소</button>
+
       </ion-content>
+
+      <!--TODO: 푸터에 깔끔하게 넣는 방법 모름-->
+      <!--<ion-footer-bar class="bar bar-footer bar-positive">-->
+          <!--&lt;!&ndash;<button class="button" ng-click="updateProfile(profile)">수정완료</button>&ndash;&gt;-->
+          <!--<button class="button button-full button-positive" ng-click="closeModal()">취소</button>-->
+      <!--</ion-footer-bar>-->
+
+
 
     </ion-modal-view>
   </script>

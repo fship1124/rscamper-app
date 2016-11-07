@@ -21,10 +21,15 @@
   <!-- compiled css output -->
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
+
   <link href="css/style.css" rel="stylesheet">
   <link href="css/scheduleStyle.css" rel="stylesheet">
+<<<<<<< HEAD
   <link href="css/proton.multi-list-picker.css" rel="stylesheet">
+=======
+>>>>>>> 09e96702e56c7438a929efa1c555f9781016e258
 
+  <!-- jQuery -->
   <script src="lib/jquery/dist/jquery.min.js"></script>
 
   <!-- ionic/angularjs js -->
@@ -38,11 +43,10 @@
   <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
   <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
   <script src="cordova.js"></script>
+
   <!-- Firebase -->
   <script src="lib/firebase/firebase.js"></script>
-  <!-- AngularFire -->
   <script src="lib/angularfire/dist/angularfire.min.js"></script>
-  <!--init Firebase-->
   <script src="js/initFirebase.js"></script>
   <script src="js/proton.multi-list-picker.min.js"></script>
 
@@ -51,16 +55,28 @@
   <script src="js/myService.js"></script>
   <script src="js/authServices.js"></script>
 
+  <!-- 컨트롤러들 -->
   <script src="views/main/mainTabs.js"></script>
   <script src="views/main/mainTab.js"></script>
   <script src="views/tour/tourInfo.js"></script>
+
+  <script src="views/tour/tourDetail.js"></script>
   <script src="views/login/loginControllers.js"></script>
   <script src="views/setting/settingControllers.js"></script>
+
   <script src="views/schedule/schedule.js"></script>
   <script src="views/schedule/scheduleTabs.js"></script>
   <script src="views/schedule/scheduleDetail.js"></script>
+<<<<<<< HEAD
   <script src="views/schedule/findAttraction.js"></script>
   <script src="views/schedule/addLocationInfo.js"></script>
+=======
+
+  <script src="views/login/loginControllers.js"></script>
+  <script src="views/setting/settingControllers.js"></script>
+  <script src="views/myPage/myPageControllers.js"></script>
+  <script src="views/community/communityControllers.js"></script>
+>>>>>>> 09e96702e56c7438a929efa1c555f9781016e258
 </head>
 
 <body ng-app="App">
@@ -76,6 +92,10 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
+
+      <!--<button id="fab" class="button button-positive button-fab button-fab-bottom-right">-->
+        <!--<i class="icon ion-social-twitter"></i>-->
+      <!--</button>-->
 
     </ion-nav-bar>
 
@@ -115,12 +135,12 @@
           <i class="icon icon ion-home"></i> 홈
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="tourInfo">
-          <i class="icon ion-earth"></i> 관광지
+          <i class="icon ion-android-train"></i> 주변관광지
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule">
           <i class="icon ion-earth"></i> 일정
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="community">
+        <ion-item nav-clear menu-close ui-sref="community.main">
           <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="myPage">
