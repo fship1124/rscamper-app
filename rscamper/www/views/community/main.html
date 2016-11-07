@@ -1,13 +1,21 @@
 <ion-view title="Community Main">
-  <ion-content>
 
-    <div class="card" style="border-top: 1px solid #ddd;">
+  <button id="fab" class="button button-energized button-fab button-fab-bottom-right">
+    <i class="icon ion-compose"></i>
+  </button>
+
+  <ion-content overflow-scroll="false">
+
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
+
+    <!-- CARD -->
+    <div class="list card stable-100-bg">
 
       <!-- TITLE -->
       <div class="item item-divider">
         <a>카테고리 </a> <b>글제목글제목글제목글제목글제목글제목글제목글제목</b>
       </div>
-
       <!-- WRITER -->
       <div class="item item-avatar">
         <!-- writer img -->
@@ -18,7 +26,6 @@
         <p>November 05, 1955</p>
       </div>
 
-      <!-- CONTENT -->
       <div class="item item-body" style="height:200px; overflow: hidden">
         <!-- CONTENT HTML -->
         <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
@@ -40,32 +47,18 @@
           consists of tabs, icons aligned left, within the card-footer.
         </p>
       </div>
-
-      <!-- TITLE -->
-      <div class="item item-divider">
-        <div class="button-bar">
-          <a class="button">좋아요</a>
-          <a class="button">댓글</a>
-          <a class="button">상세보기</a>
-        </div>
-      </div>
-
-      <!--
-      <div class="tabs tabs-icon-top">
-        <a class="tab-item">
-          <i class="icon ion-star"></i>
-          좋아요
+      <!-- BUTTONS -->
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
+          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #F44336;">10</b>
         </a>
-        <a class="tab-item">
-          <i class="icon ion-star"></i>
-          댓글
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
+          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #F44336;">9</b>
         </a>
-        <a class="tab-item">
-          <i class="icon ion-gear-a"></i>
-          상세보기
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
+          <i class="icon ion-document-text"></i> 더보기
         </a>
       </div>
-      -->
 
     </div>
 

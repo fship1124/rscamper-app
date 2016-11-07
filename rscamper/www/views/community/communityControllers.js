@@ -1,7 +1,10 @@
 angular.module('App')
+  // 커뮤니티 탭 컨트롤러
   .controller("CommunityTabsCtrl", function ($rootScope, $scope) {
     console.log("커뮤니티탭");
   })
+
+  // 커뮤니티 메인 컨트롤러
   .controller("CommunityMainCtrl", function ($rootScope, $scope, $http) {
     // 위로 당겼을 때 새로고침
     $scope.load = function () {
@@ -13,8 +16,9 @@ angular.module('App')
           $scope.$broadcast('scroll.refreshComplete');
         })
     }
-    console.log("커뮤니티 메인");
   })
+
+  // 커뮤
   .controller("CommunityFreeCtrl", function ($rootScope, $scope) {
     console.log("커뮤니티 자유");
   })
