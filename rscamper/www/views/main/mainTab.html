@@ -1,12 +1,14 @@
 <ion-view title="hello">
   <ion-content>
     <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
-    <div class="row" id="main-first-div" style="padding: 0">
+    <div class="row" id="main-first-div" style="padding: 0; height: 177px;">
       <div class="col col-50" id="main-weather-div">
           <div ng-switch on=today.sky.code>
-            <i id="main-location-icon" class="ion-location"></i> <span id="main-location-text"> {{loc}}</span>
+            <i id="main-location-icon" class="ion-location"></i>
+            <span ng-if="today.sky.code != 'SKY_A00'" class="main-location-text"> {{loc}}</span>
+            <span ng-if="today.sky.code == 'SKY_A00'" class="main-location-text"> 위치정보가 없습니다.</span>
             <!--상태없음-->
-            <div ng-switch-when="SKY_A00">
+            <div style="margin-top: 15px" ng-switch-when="SKY_A00">
               <img width="100px" src="../../img/weather_icons/38.png">
             </div>
             <!--맑음-->
@@ -66,7 +68,7 @@
               <img width="100px" src="../../img/weather_icons/28.png">
             </div>
           </div>
-          <h3 id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
+          <h3 ng-if="today.sky.code != 'SKY_A00'" id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
       </div>
       <div class="col col-50" style="padding: 0">
         <div class="row" style="height: 50%; background-color: #c2d4dd;">2-1</div>
@@ -100,3 +102,19 @@
     </div>
   </ion-content>
 </ion-view>
+
+
+
+<!--<ion-view title="hello">
+  <ion-content>
+    <div class="list card" ng-repeat="">
+      <div class="item">
+        <h2>설명</h2>
+      </div>
+      <div class="item item-image">
+        <img ng-src="" src="/www/img/ionic.png">
+      </div>
+    </div>&ndash;&gt;
+    <ion-infinite-scroll on-infinite="tourInfo()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>&ndash;&gt;
+  </ion-content>
+</ion-view>-->
