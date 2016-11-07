@@ -151,7 +151,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
               controller : 'dScheduleCtrl'
             }
           }
-
+        })
+        .state('findAttraction',{
+          cache : false,
+          url: '/findAttraction/:week',
+          templateUrl: 'views/schedule/findAttraction.html',
+          controller : 'findAttractionCtrl'
         })
       ;
 
