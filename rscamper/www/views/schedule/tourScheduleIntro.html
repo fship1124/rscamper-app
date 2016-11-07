@@ -6,18 +6,15 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <label class="item item-input">
-        <input id="tourTitle" type="text" ng-model="newSchedule.title" placeholder="여행 제목을 입력해주세요">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">출발일</span>
-        <input id="sDate" type="date" ng-model="newSchedule.startDate">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">도착일</span>
-        <input id="fDate" type="date" ng-model="newSchedule.finishDate">
-      </label>
-      <button class="button button-full button-positive" ng-click="createSchedule(newSchedule)">Create</button>
+      <div class="strapline">
+        소제목
+        <textarea id="straplineTitle" class="straplineText" style="resize: none; overflow: visible" ng-keyup="resize('straplineTitle')" ng-model ="strapline.title"></textarea>
+      </div>
+      <div class="strapline">
+        상세 소개글
+        <textarea id="straplineContent" class="straplineText" style="resize: none; overflow: visible" ng-keyup="resize('straplineContent')" ng-model="strapline.content"></textarea>
+      </div>
+      <button class="button button-full button-positive" ng-click="updateStrapline(strapline)">Create</button>
     </div>
   </ion-content>
 </ion-modal-view>

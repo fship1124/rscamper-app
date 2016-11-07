@@ -215,6 +215,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        .state('findAttraction', {
+          cache: false,
+          url: '/findAttraction/:week',
+          templateUrl: 'views/schedule/findAttraction.html',
+          controller: 'findAttractionCtrl'
+        })
         // 커뮤니티 - 리뷰
         .state('community.review', {
           url: '/review',
