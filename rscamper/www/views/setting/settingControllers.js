@@ -21,7 +21,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
       introduce: result.introduce,
       phoneNumber: result.phoneNumber,
       websiteUrl: result.websiteUrl,
-      locationNo: parseInt(result.locationNo.locationNo)
+      locationNo: result.locationNo
     }
 
     AuthService.updateProfile(profileData, function () {

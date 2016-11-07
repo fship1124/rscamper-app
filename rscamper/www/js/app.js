@@ -191,7 +191,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           views: {
             'community-free-tab': {
               templateUrl: 'views/community/free.html',
-              controller: 'CommunityFreeCtrl'
+              controller: 'CommunityMainCtrl'
             }
           }
         })
@@ -201,7 +201,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           views: {
             'community-tourDiary-tab': {
               templateUrl: 'views/community/tourDiary.html',
-              controller: 'CommunityTourDiaryCtrl'
+              controller: 'CommunityMainCtrl'
             }
           }
         })
@@ -211,7 +211,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           views: {
             'community-information-tab': {
               templateUrl: 'views/community/information.html',
-              controller: 'CommunityInformationCtrl'
+              controller: 'CommunityMainCtrl'
             }
           }
         })
@@ -221,9 +221,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           views: {
             'community-review-tab': {
               templateUrl: 'views/community/review.html',
-              controller: 'CommunityReviewCtrl'
+              controller: 'CommunityMainCtrl'
             }
           }
+        })
+        // 커뮤니티 - 디테일
+        .state('communityDetail', {
+          url: '/communityDetail',
+          templateUrl: 'views/community/detail.html',
+          controller: 'CommunityDetailCtrl'
         })
 
         /**
@@ -239,7 +245,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
 
       // 기초 페이지
       $urlRouterProvider.otherwise('/main/main');
-
     })
 
     .controller('MenuCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, AuthService) {
