@@ -2,12 +2,19 @@
   <ion-content>
     <div class="item item-divider">
       <i class="ion-images"></i>
-      my images
+      IMAGE
     </div>
     <a class="item item-list-detail">
       <ion-scroll direction="x">
-        <img ng-repeat="image in imageList" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb">
+        <img ng-show="isPhoto" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb" ng-repeat="image in imageList">
+        <img ng-hide="isPhoto" src="../../img/no_image.gif" ng-click="showImages($index)" class="image-list-thumb">
       </ion-scroll>
     </a>
+    <div class="item item-divider">
+      <i class="ion-cash"></i>
+      ADMISSION FEE
+    </div>
+    <div class="item item-list-detail" style="padding: 16px;" id="info-div">
+    </div>
   </ion-content>
 </ion-view>
