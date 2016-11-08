@@ -39,6 +39,8 @@ angular.module('App')
         console.log($scope.admissionFee);
         if ($scope.admissionFee) {
           document.querySelector("#info-div").innerHTML = $scope.admissionFee;
+        } else {
+          document.querySelector("#info-div").innerHTML = "정보가 없습니다.";
         }
       });
 
