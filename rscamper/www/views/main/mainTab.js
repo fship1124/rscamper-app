@@ -17,21 +17,7 @@ angular.module('App')
             city: response.results[0].formatted_address,
             current: true
           };
-          $http({
-            method: "GET",
-            url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-            // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
-          })
-            .success(function(data) {
-              $scope.today = data.weather.minutely[0];
-              $scope.cTem = parseFloat($scope.today.temperature.tc).toFixed(1);
-
-              var locArr = $scope.location.city.split(" ");
-              $scope.loc = locArr[1] + " " + locArr[2] + " " + locArr[3];
-            })
-            .error(function () {
-              $scope.today = { sky: {code: "SKY_A00"} };
-            });
+          loadWeather();
         })
         .error(function () {
           alert("현재 위치를 몰라용");
@@ -39,16 +25,32 @@ angular.module('App')
     })
   });
 
-  // 위로 당겼을 때 새로고침
-  $scope.load = function () {
-    $http.get()
-      .success(function () {
-        // db 불러오기
+  // 날씨 불러오기
+  function loadWeather() {
+    $http({
+      method: "GET",
+      url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
+      headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
+    })
+      .success(function(data) {
+        $scope.today = data.weather.minutely[0];
+        $scope.cTem = parseFloat($scope.today.temperature.tc).toFixed(1);
+
+        var locArr = $scope.location.city.split(" ");
+        $scope.loc = locArr[1] + " " + locArr[2] + " " + locArr[3];
+      })
+      .error(function () {
+        $scope.today = { sky: {code: "SKY_A00"} };
       })
       .finally(function () {
         $scope.$broadcast('scroll.refreshComplete');
       })
-  }
+    // 위로 당겼을 때 새로고침
+    $scope.load = function () {
+      loadWeather();
+      // TODO: db 불러오는 것도 추가해야함
+    }
+  };
 
   // 슬라이드
   // Called each time the slide changes
