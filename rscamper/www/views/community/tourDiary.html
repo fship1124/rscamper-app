@@ -33,15 +33,16 @@
       <!-- BUTTONS -->
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
-          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #F44336;">10</b>
+          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b>
         </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
-          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #F44336;">9</b>
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
+          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #0477f4;"> {{board.commentCnt}}</b>
         </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail">
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">
           <i class="icon ion-document-text"></i> 상세보기
         </a>
       </div>
+
     </div>
 
     <!-- 무한 스크롤 -->

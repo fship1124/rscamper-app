@@ -1,17 +1,14 @@
 <ion-view title="커뮤니티">
 
-  <!--오른쪽에 내비게이션 버튼 추가-->
+  <!-- 헤더 우측 상단 액션시트 버튼 -->
   <ion-nav-buttons side="right">
-    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="show($event)"></button>
+    <button class="button button-icon button-clear ion-android-share-alt" ng-click="share($event)"></button>
+    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="show($event)" ng-if="rootUser.userUid == board.userUid"></button>
   </ion-nav-buttons>
 
   <ion-content>
     <!-- CARD -->
     <div class="list card stable-100-bg">
-      <!-- TITLE -->
-      <div class="item item-divider">
-        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
-      </div>
       <!-- WRITER -->
       <div class="item item-avatar">
         <!-- writer img -->
@@ -22,22 +19,25 @@
         <p>{{board.regDate | date : 'short' }}</p>
       </div>
 
-      <div class="item item-body" style="min-height:200px;">
-        <!-- CONTENT HTML -->
-        {{board.content}}
+      <!-- TITLE -->
+      <div class="item item-divider">
+        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
       </div>
-      <!-- BUTTONS -->
-      <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
-          <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #F44336;">10</b>
-        </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
-          <i class="icon ion-chatbox"></i> 댓글 <b style="color: #F44336;">9</b>
-        </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail">
-          <i class="icon ion-document-text"></i> 상세보기
-        </a>
+
+      <div class="item item-body" style="min-height:200px; overflow: hidden">
+        <div ng-bind-html="board.content"></div>
       </div>
+
+      <div class="button-bar bar-balanced">
+        <a class="button button-raised ink-dark"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b></a>
+        <a class="button button-raised ink-dark"><span class="ion-archive"></span> 퍼가기 </a>
+      </div>
+
+
+
     </div>
+
   </ion-content>
 </ion-view>
+
+

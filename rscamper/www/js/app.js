@@ -236,7 +236,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 디테일
         .state('communityDetail', {
-          url: '/communityDetail',
+          cache: false,
+          url: '/communityDetail/:boardNo',
           templateUrl: 'views/community/detail.html',
           controller: 'CommunityDetailCtrl'
         })
