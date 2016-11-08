@@ -2,7 +2,7 @@
   <ion-content>
     <div id="map" data-tap-disabled="true"></div>
     <div id="mapList" class="list">
-      <a ng-repeat="map in mapList | orderBy : 'myDistance'" class="item item-thumbnail-left" ng-href="#/tourInfo/{{map.contentid}}"style="padding-bottom: 8px;">
+      <a ng-repeat="map in mapList | orderBy : 'myDistance'" class="item item-thumbnail-left" ng-href="#/tourInfo/{{map.contentid}}" style="padding-bottom: 8px;">
         <img ng-src="{{map.firstimage}}">
         <div style="height: 80px;">
           <h2>{{map.title}}</h2>

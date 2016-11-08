@@ -8,14 +8,40 @@ angular.module('App')
       }}
     )
       .success(function (data) {
-        console.log(data.response.body);
-        console.log(data.response.body.items);
-        console.log(data.response.body.items.item);
         $scope.zoomMin = 1;
-
         $scope.imageList = data.response.body.items.item;
-        console.log(data.response.body.items);
-        console.log(data.response.body.items.item);
+        $scope.isPhoto = true;
+        if(!$scope.imageList) {
+          $scope.isPhoto = false;
+        }
+        console.log("imageList", $scope.imageList);
+      });
+
+    $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
+      {params : {
+        contentId : $stateParams.contentid,
+        contentTypeId : 12,
+        MobileOS : 'ETC',
+        MobileApp : "AppTesting"
+      }}
+    )
+      .success(function (data) {
+        var itemList = data.response.body.items.item;
+        for (var i = 0; i < itemList.length; i++) {
+          var item = itemList[i];
+          item.infoname = item.infoname.replace(/ /gi, "");
+          console.log(item);
+          if (item.infoname == '입장료' || item.infoname == '관람료' || item.infoname == '시설이용료') {
+            $scope.admissionFee = item.infotext;
+          };
+        };
+        console.log("infoList", itemList);
+        console.log($scope.admissionFee);
+        if ($scope.admissionFee) {
+          document.querySelector("#info-div").innerHTML = $scope.admissionFee;
+        } else {
+          document.querySelector("#info-div").innerHTML = "정보가 없습니다.";
+        }
       });
 
     $scope.showImages = function (index) {

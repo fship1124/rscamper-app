@@ -19,14 +19,14 @@ angular.module('App')
             };
 
             // // 경주역
-            // $scope.location.lat = 35.8444002;
-            // $scope.location.lang = 129.2157566;
+            $scope.location.lat = 35.8444002;
+            $scope.location.lang = 129.2157566;
             // 광안대교
-            $scope.location.lat = 35.1476738
-            $scope.location.lang = 129.1278484;
+            // $scope.location.lat = 35.1476738
+            // $scope.location.lang = 129.1278484;
             // 불국사
-            // $scope.location.lat = 35.7900971;
-            // $scope.location.lang = 129.3299037;
+            $scope.location.lat = 35.7900971;
+            $scope.location.lang = 129.3299037;
 
             initialize();
 
