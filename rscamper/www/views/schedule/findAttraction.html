@@ -1,4 +1,4 @@
-<ion-view view-title="명소 찾기" ng-init="mama()">
+<ion-view view-title="명소 찾기">
   <!--오른쪽에 내비게이션 버튼 추가-->
   <ion-nav-buttons side="right">
     <button class="button button-icon button-clear ion-ios-search-strong" ng-click="qqwe()"></button>
@@ -9,10 +9,10 @@
         <i class="icon ion-ios-search placeholder-icon"></i>
         <input type="search" placeholder="Search" ng-model="userSearch.place">
       </label>
-      <button ng-click="searchLocation()" >검색</button>
+      <button ng-click="searchLocation()">검색</button>
     </div>
     <div class="list" ng-repeat="place in getPlaces" style="margin: 5px">
-      <a class="item item-thumbnail-left" style="padding-bottom: 8px" ng-click="showImages(place.contentid)">
+      <a class="item item-thumbnail-left" style="padding-bottom: 8px"on-tap="openPickerView(place)">
         <img ng-src="{{place.firstimage}}">
         <div style="height:80px;">
           <h2>{{place.title}}</h2>

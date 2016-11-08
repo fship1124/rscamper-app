@@ -128,3 +128,33 @@
 .scheduleSlide {
   transform: translate(0,0) !important;
 }
+#scheduleLocationInfo {
+  width: 100%;
+height: 80px;
+}
+#scheduleinfo-div div {
+  padding: 0px;
+}
+#scheduleLocationIcon {
+width: 12%;
+height: 100%;
+text-align: center;
+padding-top: 8%;
+color: #d9534f;
+}
+#scheduleImg {
+width: 30%;
+height: 100%;
+}
+#scheduleMap {
+width: 100%;
+height: 25%;
+margin-top: 2%;
+}
+.detailLocationBtn {
+float: left;
+width: 25%;
+height: 100%;
+box-sizing: border-box;
+text-align: center;
+}

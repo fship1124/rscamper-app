@@ -9,6 +9,16 @@ angular.module('App')
     title : "",
     content : ""
   }
+  $rootScope.getScheduleLocation = {};
+  $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getScheduleLocation',
+    {params : {
+      no : $stateParams.no
+    }})
+    .success(function (data) {
+      $rootScope.getScheduleLocation = data;
+      console.log(data);
+    })
+
   $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
     {params : {
       dDate : $scope.dSchedule.departureDate,
@@ -106,6 +116,16 @@ angular.module('App')
   }).then(function(modal) {
     $scope.modal = modal;
   });
+
+  $ionicModal.fromTemplateUrl('views/schedule/locationMemo.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.locationMemo = modal;
+  });
+
+  $scope.openMemo = function () {
+    $scope.locationMemo.show();
+  }
 
   $scope.resize = function (id) {
     var obj = document.getElementById(id);

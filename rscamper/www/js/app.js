@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth'])
+var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','ionic-numberpicker'])
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -110,6 +110,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/schedule/detailTabs.html'
         })
         .state('detailTab.detailSchedule', {
+          cache : false,
           url: '/:no',
           views: {
             'detailSchedule-tab': {
@@ -118,7 +119,22 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
-
+        .state('detailTab.locationInfo', {
+          cache: false,
+          url: '/:no/:locationNo',
+          views : {
+            'detailSchedule-tab' : {
+              templateUrl: 'views/schedule/detailLocationInfo.html',
+              controller: 'detailLocationInfoCtrl'
+            }
+          }
+        })
+        .state('findAttraction', {
+          cache: false,
+          url: '/findAttraction/:departureDate/:arriveDate/:recordNo',
+          templateUrl: 'views/schedule/findAttraction.html',
+          controller: 'findAttractionCtrl'
+        })
 
 
         /**
@@ -214,12 +230,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
               controller: 'CommunityInformationCtrl'
             }
           }
-        })
-        .state('findAttraction', {
-          cache: false,
-          url: '/findAttraction/:week',
-          templateUrl: 'views/schedule/findAttraction.html',
-          controller: 'findAttractionCtrl'
         })
         // 커뮤니티 - 리뷰
         .state('community.review', {

@@ -14,6 +14,7 @@
       <img class="coverImg" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1">
       <button id="del-Btn" class="button-clear" ng-click="delSchedule($event, schedule.recordNo)"><i class="ion-trash-a" style="color: #e6b500; font-size: 25px;"></i></button>
       <div id="scheduleTitle">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
+      <div style="position: absolute; top: 85%; width : 100%; background-color: gainsboro"><span style="font-weight: bold">{{schedule.strapline}}</span><br><span>{{schedule.introduce}}</span></div>
     </div>
   </ion-content>
 </ion-view>

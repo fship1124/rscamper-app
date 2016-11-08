@@ -1,0 +1,37 @@
+<ion-view view-title="{{detailInfo.title}}">
+  <ion-content>
+    <img ng-src="{{locationMap.firstimage}}" style="width: 100%; height: 45%">
+    <div style="width: 100%; height: 5%; border-bottom: 1px solid; border-color: silver; text-align: center"><span style="font-weight: bold; font-size: 20px">{{locationMap.title}}</span></div>
+    <div style="width: 100%; height: 7%; border-bottom: 1px solid; border-color: silver; text-align: center">
+      <div class="detailLocationBtn" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+      <div class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
+      <div class="detailLocationBtn"><i class="ion-android-create" style="font-size: x-large"></i><br><span style="font-size: xx-small">리뷰 쓰기</span></div>
+      <div class="detailLocationBtn"><i class="ion-android-share-alt" style="font-size: x-large"></i><br><span style="font-size: xx-small">공유 하기</span></div>
+    </div>
+    <div class="item item-divider">
+      <i class="ion-home"></i>
+      Address
+    </div>
+    <div class="item">{{locationMap.addr1}}<br>{{locationMap.addr2}}</div>
+    <div class="item item-divider">
+      <i class="ion-iphone"></i>
+      Number
+    </div>
+    <div class="item">{{locationMap.tel}}</div>
+    <div class="item item-divider">
+      <i class="ion-ios-navigate-outline"></i>
+      Location
+    </div>
+    <div id="scheduleMap" data-tap-disabled="true"></div>
+    <div class="item item-divider">
+      <i class="ion-images"></i>
+      Image
+    </div>
+    <a class="item item-list-detail">
+      <ion-scroll direction="x">
+        <img ng-show="isPhoto" ng-repeat="image in images" ng-src="{{image.originimgurl}}" ng-click="showImages($index)" class="image-list-thumb">
+        <img ng-hide="isPhoto" src="img/no_image.gif" class="image-list-thumb">
+      </ion-scroll>
+    </a>
+  </ion-content>
+</ion-view>
