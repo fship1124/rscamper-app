@@ -5,6 +5,10 @@ angular.module('App')
 .controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
   $scope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;
+  $scope.strapline = {
+    title : "",
+    content : ""
+  }
   $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
     {params : {
       dDate : $scope.dSchedule.departureDate,
@@ -103,4 +107,27 @@ angular.module('App')
     $scope.modal = modal;
   });
 
+  $scope.resize = function (id) {
+    var obj = document.getElementById(id);
+    obj.style.height = "1px";
+    obj.style.height = (20+obj.scrollHeight) + "px";
+  }
+
+  $scope.updateStrapline = function (s) {
+    $http({
+      url: $rootScope.url + '8090/rscamper-server/app/tourschedule/updateStrapline',
+      method: 'POST',
+      data: $.param({
+        no : $scope.dSchedule.recordNo,
+        title : s.title,
+        content : s.content
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    }).success(function (result) {
+      $scope.dSchedule = result;
+      $scope.modal.hide();
+    });
+  }
 });

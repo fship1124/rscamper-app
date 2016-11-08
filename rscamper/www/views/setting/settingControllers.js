@@ -1,10 +1,19 @@
 // 프로필 컨트롤러
 app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService) {
+  // 수정 모달에 올라갈 현재 프로필 정보 세팅
+  $scope.profile = {
+    displayName: $rootScope.rootUser.displayName,
+    birthday: new Date($rootScope.rootUser.birthday),
+    introduce: $rootScope.rootUser.introduce,
+    phoneNumber: $rootScope.rootUser.phoneNumber,
+    websiteUrl: $rootScope.rootUser.websiteUrl,
+    locationNo: $rootScope.rootUser.locationNo
+  };
 
-  $scope.updateProfile = function(result) {
+  // 프로필 수정 함수
+  $scope.updateProfile = function (result) {
     // TODO: 유효성 체크
-    // 이름(20자이하), 폰번호(폰번호형식), 웹사이트(인터넷주소형식), 소개글(200자이하), 생년월일(널과 미래만 아니면)
-
+    // TODO: 지역선택 SELECTED 문제 해결
     var profileData = {
       uid: $rootScope.rootUser.userUid,
       displayName: result.displayName,
@@ -12,6 +21,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
       introduce: result.introduce,
       phoneNumber: result.phoneNumber,
       websiteUrl: result.websiteUrl,
+      locationNo: result.locationNo
     }
 
     AuthService.updateProfile(profileData, function () {
@@ -21,21 +31,20 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
       MyPopup.alert('알림', '회원정보 수정을 완료했습니다.');
       $scope.modal.hide();
     })
-
   }
 
   // 액션 시트
-  $scope.show = function() {
+  $scope.show = function () {
     // Show the action sheet
     var hideSheet = $ionicActionSheet.show({
       buttons: [
-      { text: '프로필 수정' },
+        {text: '프로필 수정'},
       ],
       cancelText: '취소',
-      cancel: function() {
+      cancel: function () {
 
       },
-      buttonClicked: function(index) {
+      buttonClicked: function (index) {
         hideSheet();
         if (index == 0) {
           $scope.openModal();
@@ -43,7 +52,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
         return index;
       }
     });
-    $timeout(function() {
+    $timeout(function () {
       hideSheet();
     }, 5000);
   };
@@ -52,33 +61,28 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
   $ionicModal.fromTemplateUrl('modal/modProfileModal.html', {
     scope: $scope,
     animation: 'slide-in-up'
-  }).then(function(modal) {
+  }).then(function (modal) {
     $scope.modal = modal;
   });
-
-  $scope.openModal = function() {
-    $scope.modal.show();
+  $scope.openModal = function () {
+    DbService.getLocationList(function (result) {
+      // 지역 리스트 DB에서 가져옴
+      $scope.locations = result;
+      $scope.modal.show();
+    });
   };
-
-  $scope.closeModal = function() {
+  $scope.closeModal = function () {
     $scope.modal.hide();
   };
-
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
+  $scope.$on('$destroy', function () {
     $scope.modal.remove();
   });
-
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    $scope.profile = "";
+  $scope.$on('modal.hidden', function () {
   });
-
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
+  $scope.$on('modal.removed', function () {
   });
-
 })
+
 // 셋팅 메인 컨트롤러
   .controller('SettingMainCtrl', function ($rootScope, $scope, AuthService) {
     $scope.logout = AuthService.logout;
