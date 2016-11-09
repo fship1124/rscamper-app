@@ -3,14 +3,19 @@
   <!-- 헤더 우측 상단 액션시트 버튼 -->
   <ion-nav-buttons side="right">
     <button class="button button-icon button-clear ion-android-share-alt" ng-click="share($event)"></button>
-    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="show($event)" ng-if="rootUser.userUid == board.userUid"></button>
+    <button class="button button-icon button-clear ion-android-more-vertical" ng-click="showActionSheet($event)" ng-if="rootUser.userUid == board.userUid"></button>
   </ion-nav-buttons>
 
-  <ion-content>
-    <!-- CARD -->
+  <ion-content overflow-scroll="false">
+
+    <!-- 위로 드래그시 새로고침 -->
+    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+
+    <!-- BOARD -->
     <div class="list card stable-100-bg">
+
       <!-- WRITER -->
-      <div class="item item-avatar">
+      <div class="item item-avatar" style="padding-bottom: 5px;">
         <!-- writer img -->
         <img ng-src="{{board.photoUrl}}">
         <!-- writer displayName-->
@@ -24,20 +29,50 @@
         <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
       </div>
 
+      <!-- CONTENT -->
       <div class="item item-body" style="min-height:200px; overflow: hidden">
         <div ng-bind-html="board.content"></div>
       </div>
 
-      <div class="button-bar bar-balanced">
-        <a class="button button-raised ink-dark"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b></a>
-        <a class="button button-raised ink-dark"><span class="ion-archive"></span> 즐겨찾기 </a>
+      <!-- BUTTONS -->
+      <div class="button-bar bar-energized">
+        <a class="button button-raised ink-dark"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
+        <a class="button button-raised ink-dark"><span class="ion-bookmark"></span> 즐겨찾기 </a>
+        <a class="button button-raised ink-dark"><span class="ion-chatbubbles"></span> 댓글 <b style="color: #f49335;">{{board.commentCnt}}</b></a>
       </div>
-
-
 
     </div>
 
+    <!-- COMMENT -->
+    <div class="list card stable-100-bg" style="position: relative;" ng-repeat="comment in commentList">
+      <button class="button button-small button-energized ion-android-more-vertical" style="min-height: 25px; height: 25px; position: absolute; right:10px; top:12px; z-index: 99;"  ng-click="showCommentActionSheet('{{comment.userUid}}')"></button>
+      <b class="item item-avatar" style="padding-bottom: 2px; padding-top: 5px; min-height:50px; ">
+        <img src="img/User-Default.jpg" style="height: 30px; width: 30px;">
+        <h2>{{comment.displayName}}</h2>
+        <p style="font-size: 5px;">{{comment.regDate | date : 'short' }}</p>
+      </b>
+      <div class="item item-text-wrap" style="padding-left: 10px; padding-right: 10px;">
+        {{comment.content}}
+      </div>
+    </div>
+
+    <!-- 밑에 공간 -->
+    <div class="list card" style="position: relative; min-height:15px;">
+    </div>
+
+    <!-- 무한 스크롤 -->
+    <ion-infinite-scroll on-infinite="getCommentList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+
   </ion-content>
+
+  <!-- COMMENT INPUT -->
+  <div class="bar bar-footer bar-energized-100">
+    <label class="item-input-wrapper energized-100-bg">
+      <input type="text" placeholder="Type in your comment..." style="width: 100%;" ng-model="comment.commentContent">
+    </label>
+    <button class="button button-clear button-icon ion-chatbubbles" ng-click="writeComment();"></button>
+  </div>
+
 </ion-view>
 
 

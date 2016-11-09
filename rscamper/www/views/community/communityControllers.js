@@ -7,11 +7,6 @@ angular.module('App')
   // 커뮤니티 메인 리스트 컨트롤러
   .controller("CommunityMainCtrl", function ($rootScope, $scope, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup) {
 
-    // 게시판 리스트 페이징 변수
-    $scope.page = 0;
-    $scope.total = 1;
-    $scope.boardList = [];
-
     // 게시판 리스트 불러오기
     $scope.getBoardList = function () {
       $scope.page++;
@@ -75,9 +70,6 @@ angular.module('App')
       }
     }
 
-    // 페이지 로딩 시 식당 첫 페이지 데이터 불러오기
-    $scope.getBoardList();
-
     // 위로 당겼을 때 페이징 초기화 및 새로고침
     $scope.load = function () {
       $scope.page = 0;
@@ -124,13 +116,16 @@ angular.module('App')
     $scope.$on('modal.removed', function () {
     });
 
+    // 페이지 로딩 시 식당 첫 페이지 데이터 불러오기
+    $scope.load();
+
   })
 
   // 디테일 컨트롤러
   .controller("CommunityDetailCtrl", function ($rootScope, $scope, $stateParams, $state, $ionicHistory, $ionicLoading, $http, $ionicActionSheet, MyConfig, MyPopup, $timeout, $ionicModal) {
     console.log($stateParams);
 
-    // 뒤로가기 버튼 강제    활성화
+    // 뒤로가기 버튼 강제 활성화
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
     });
@@ -188,7 +183,7 @@ angular.module('App')
       })
     }
 
-    // 게시판 리스트 불러오기
+    // 게시글 불러오기
     $scope.getBoard = function () {
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
@@ -209,11 +204,8 @@ angular.module('App')
         });
     }
 
-    $scope.getBoard();
-
-
-    // 액션 시트
-    $scope.show = function () {
+    // 액션 시트 (게시글)
+    $scope.showActionSheet = function () {
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [
@@ -239,7 +231,6 @@ angular.module('App')
         hideSheet();
       }, 5000);
     };
-
 
     // 모달
     $ionicModal.fromTemplateUrl('community/updateFormModal.html', {
@@ -284,6 +275,7 @@ angular.module('App')
     });
     $scope.$on('modal.removed', function () {
     });
+
     // 글수정 폼 리셋
     $scope.resetModal = function () {
       $scope.updateBoard = {
@@ -295,4 +287,98 @@ angular.module('App')
         displayName: $scope.board.displayName
       }
     }
+
+    // 액션 시트(코멘트)
+    $scope.showCommentActionSheet = function (userUid) {
+      // Show the action sheet
+      if (userUid == $rootScope.rootUser.userUid) {
+        var buttons = [
+          {text: '댓글 작성'},
+          {text: '댓글 수정'},
+          {text: '댓글 삭제'}
+        ];
+      } else {
+        var buttons = [
+          {text: '댓글 작성'},
+        ];
+      }
+      var hideSheet = $ionicActionSheet.show({
+        buttons: buttons,
+        cancelText: '취소',
+        cancel: function () {
+
+        },
+        buttonClicked: function (index) {
+          hideSheet();
+          if (index == 0) {
+            // 커멘트 수정
+            $scope.writeComment();
+          } else if (index == 1) {
+            $scope.updateComment();
+          } else if (index == 2) {
+            $scope.deleteComment();
+          }
+          return index;
+        }
+      });
+      $timeout(function () {
+        hideSheet();
+      }, 5000);
+    };
+
+    // 위로 당겼을 때 페이징 초기화 및 새로고침
+    $scope.load = function () {
+      $scope.page = 0;
+      $scope.total = 1;
+      $scope.commentList = [];
+      $scope.getBoard();
+      $scope.getCommentList();
+    }
+
+    // 댓글 조회
+    $scope.getCommentList = function () {
+      $scope.page++;
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/select/comment?page=" + $scope.page + "&boardNo=" + $stateParams.boardNo,
+        method: "GET"
+      }).success(function (response) {
+        angular.forEach(response.comment, function (comment) {
+          $scope.commentList.push(comment);
+        })
+        $scope.total = response.totalPages;
+      })
+        .error(function (error) {
+          MyPopup.alert("에러", "서버접속불가");
+        })
+        .finally(function () {
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    };
+
+    // 댓글 작성
+    $scope.writeComment = function (targetCommentNo) {
+    };
+
+    // 댓글 수정
+    $scope.updateComment= function () {
+
+    };
+    // 댓글 삭제
+    $scope.deleteComment = function () {
+
+    };
+
+    // TODO: 공유
+    $scope.share = function () {
+      MyPopup.alert("TODO", "공유기능");
+    };
+
+    // 페이지 초기화
+    $scope.load();
+
   })

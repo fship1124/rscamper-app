@@ -243,6 +243,16 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        // 커뮤니티 - 질문
+        .state('community.qna', {
+          url: '/qna',
+          views: {
+            'community-qna-tab': {
+              templateUrl: 'views/community/qna.html',
+              controller: 'CommunityMainCtrl'
+            }
+          }
+        })
         // 커뮤니티 - 디테일
         .state('communityDetail', {
           cache: false,
