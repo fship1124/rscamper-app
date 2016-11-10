@@ -1,5 +1,11 @@
 <ion-view title="커뮤니티">
 
+  <!-- 우측 헤더 검색버튼 -->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-search" ng-click="search($event)"></button>
+  </ion-nav-buttons>
+
+  <!-- 글쓰기 FAB -->
   <button id="fab" class="button button-balanced button-fab button-fab-bottom-right" ng-click="openModal(5);">
     <i class="icon ion-compose"></i>
   </button>
@@ -18,7 +24,7 @@
         <!-- writer displayName-->
         <h2>{{board.displayName}}</h2>
         <!-- regdate -->
-        <p>{{board.regDate | date : 'short' }}</p>
+        <p>{{board.regDate | timesince : 'kr' }}</p>
       </div>
 
       <!-- TITLE -->

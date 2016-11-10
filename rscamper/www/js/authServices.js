@@ -192,7 +192,6 @@ angular.module("App")
             $location.path("/");
           }
         })
-
       },
 
       // 프로필 사진 수정 메소드
@@ -455,12 +454,13 @@ angular.module("App")
             }
           });
       },
-      prompt: function (title, subTitle, resultCB) {
+      prompt: function (title, subTitle, resultCB, defaultText) {
         $ionicPopup.prompt({
           title: title,
           template: subTitle,
-          inputType: "text",
-          inputPlaceholder: "회원탈퇴 확인 메세지",
+          inputType: 'text',
+          inputPlaceholder: '',
+          defaultText: defaultText,
           cancelText: '취소',
           // cancelType:
           okText: '확인',

@@ -7,6 +7,11 @@ angular.module('App')
   // 커뮤니티 메인 리스트 컨트롤러
   .controller("CommunityMainCtrl", function ($rootScope, $scope, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup) {
 
+    // TODO: 검색기능
+    $scope.search = function () {
+      MyPopup.alert("검색", "검색")
+    }
+
     // 게시판 리스트 불러오기
     $scope.getBoardList = function () {
       $scope.page++;
@@ -34,7 +39,6 @@ angular.module('App')
 
     // 글쓰기
     $scope.write = function (writeData) {
-      console.log(writeData);
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -56,7 +60,7 @@ angular.module('App')
         MyPopup.alert("에러", "서버접속불가");
       }).finally(function () {
         $ionicLoading.hide();
-        $scope.getBoardList();
+        $scope.load();
         $scope.closeModal();
       })
     }
@@ -123,7 +127,6 @@ angular.module('App')
 
   // 디테일 컨트롤러
   .controller("CommunityDetailCtrl", function ($rootScope, $scope, $stateParams, $state, $ionicHistory, $ionicLoading, $http, $ionicActionSheet, MyConfig, MyPopup, $timeout, $ionicModal) {
-    console.log($stateParams);
 
     // 뒤로가기 버튼 강제 활성화
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -175,7 +178,8 @@ angular.module('App')
         }).finally(function () {
           $ionicLoading.hide();
           // 페이지 이동
-          console.log('성공')
+          console.log('성공');
+          $scope.load();
           $state.go('community.main');
         })
       }, function () {
@@ -256,7 +260,6 @@ angular.module('App')
         method: "GET"
       })
         .success(function (response) {
-          console.log(response);
           $scope.categories = response;
           $scope.modal.show();
         })
@@ -289,17 +292,17 @@ angular.module('App')
     }
 
     // 액션 시트(코멘트)
-    $scope.showCommentActionSheet = function (userUid) {
+    $scope.showCommentActionSheet = function (userUid, commentNo, displayName, commentContent) {
       // Show the action sheet
       if (userUid == $rootScope.rootUser.userUid) {
         var buttons = [
-          {text: '댓글 작성'},
+          {text: '이 댓글에 댓글 작성'},
           {text: '댓글 수정'},
           {text: '댓글 삭제'}
         ];
       } else {
         var buttons = [
-          {text: '댓글 작성'},
+          {text: '이 댓글에 댓글 작성'},
         ];
       }
       var hideSheet = $ionicActionSheet.show({
@@ -312,11 +315,11 @@ angular.module('App')
           hideSheet();
           if (index == 0) {
             // 커멘트 수정
-            $scope.writeComment();
+            $scope.writeSubComment(commentNo, displayName);
           } else if (index == 1) {
-            $scope.updateComment();
+            $scope.updateComment(commentNo, commentContent);
           } else if (index == 2) {
-            $scope.deleteComment();
+            $scope.deleteComment(commentNo);
           }
           return index;
         }
@@ -333,6 +336,7 @@ angular.module('App')
       $scope.commentList = [];
       $scope.getBoard();
       $scope.getCommentList();
+      $scope.targetCommentNo = null;
     }
 
     // 댓글 조회
@@ -360,20 +364,101 @@ angular.module('App')
         });
     };
 
+    // 대댓글 작성
+    $scope.writeSubComment = function(targetCommentNo, displayName) {
+      $scope.targetCommentNo = targetCommentNo;
+      console.log("댓글 대상 번호 : " + targetCommentNo);
+      $scope.comment = {
+        commentContent: displayName + "에게 : "
+      };
+    }
+
     // 댓글 작성
-    $scope.writeComment = function (targetCommentNo) {
+    $scope.writeComment = function () {
+
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/insert/comment",
+        method: "POST",
+        data: $.param({
+          targetCommentNo: $scope.targetCommentNo,
+          boardNo: $stateParams.boardNo,
+          userUid: $rootScope.rootUser.userUid,
+          content: $scope.comment.commentContent
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      }).success(function (response) {
+        MyPopup.alert("성공", "댓글이 등록되었습니다.");
+      }).error(function (error) {
+        MyPopup.alert("에러", "서버접속불가");
+      }).finally(function () {
+        $ionicLoading.hide();
+        $scope.load();
+        $scope.comment = {
+          commentContent: ""
+        };
+      })
+    };
+
+    // 댓글 삭제
+    $scope.deleteComment = function (commentNo) {
+      MyPopup.confirm('삭제확인', '정말로 삭제하시겠습니까?', function () {
+        $ionicLoading.show({
+          template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+        });
+        $http({
+          url: MyConfig.backEndURL + "/community/delete/oneComment?commentNo=" + commentNo,
+          method: "DELETE"
+        }).success(function (response) {
+          MyPopup.alert('알림', '댓글이 삭제되었습니다.');
+        }).error(function (error) {
+          console.log(error);
+        }).finally(function () {
+          $ionicLoading.hide();
+          $scope.load();
+        })
+      }, function () {
+      })
     };
 
     // 댓글 수정
-    $scope.updateComment= function () {
-
+    $scope.updateComment= function (commentNo, commentContent) {
+      MyPopup.prompt('댓글', '수정할 댓글을 입력해 주세요', function (result) {
+        if (result) {
+          $ionicLoading.show({
+            template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+          });
+          $http({
+            url: MyConfig.backEndURL + "/community/update/oneComment",
+            method: "POST",
+            data: $.param({
+            commentNo: commentNo,
+            content: result
+          }),
+            headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+          }).success(function (response) {
+            MyPopup.alert('알림', '댓글이 수정되었습니다.');
+          }).error(function (error) {
+            console.log(error);
+          }).finally(function () {
+            $ionicLoading.hide();
+            $scope.load();
+          })
+        }
+      }, commentContent)
     };
-    // 댓글 삭제
-    $scope.deleteComment = function () {
 
-    };
+    $scope.focusCommentBox = function () {
+      $("#commentInputBox").focus();
+    }
 
-    // TODO: 공유
+    // TODO: 소셜에 공유하기
     $scope.share = function () {
       MyPopup.alert("TODO", "공유기능");
     };
