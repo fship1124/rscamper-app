@@ -30,7 +30,7 @@
       <h1 class="title">글작성</h1>
       <div class="buttons buttons-right header-item">
         <span class="right-buttons">
-          <button class="button button-icon button-clear ion-images">
+          <button class="button button-icon button-clear ion-images" ng-click="addPicture();">
           </button>
         </span>
       </div>
@@ -83,7 +83,7 @@
 
 
 <!-- 글수정 폼 모달  -->
-<script id="community/updateFormModal.html" type="text/ng-template">
+<script id="community/updateFormModal.html" type="text/ng-template" ng-click="addPicture();">
   <ion-modal-view>
 
     <ion-header-bar class="bar bar-header bar-energized">

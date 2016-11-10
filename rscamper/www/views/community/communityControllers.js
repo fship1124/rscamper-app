@@ -12,6 +12,11 @@ angular.module('App')
       MyPopup.alert("검색", "검색")
     }
 
+    // TODO: 그림 추가
+    $scope.addPicture = function () {
+      MyPopup.alert("그림", "그림")
+    };
+
     // 게시판 리스트 불러오기
     $scope.getBoardList = function () {
       $scope.page++;
