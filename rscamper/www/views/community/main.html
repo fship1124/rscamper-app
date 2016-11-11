@@ -39,7 +39,7 @@
 
       <!-- BUTTONS -->
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;">
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ng-click="likeBoard('{{board.boardNo}}', '{{$index}}')">
           <i class="icon ion-thumbsup"></i> 좋아요 <b style="color: #0477f4;"> {{board.likeCnt}}</b>
         </a>
         <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" style="color: white;" ui-sref="communityDetail({boardNo : board.boardNo})">

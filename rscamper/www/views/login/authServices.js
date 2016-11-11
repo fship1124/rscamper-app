@@ -489,7 +489,7 @@ angular.module("App")
     }
   })
 
-  // TODO: 유효성 체크 서비스
+  // TODO: 인증 관련 유효성 체크 서비스
   .factory("ValChk", function (type, value) {
     switch (type) {
       case "password": // 널체크, 6~20자 문자숫자혼합(정규식)
@@ -532,7 +532,7 @@ angular.module("App")
     return false;
   })
 
-  // TODO: 인증관련 오류메세지 처리
+  // TODO: 인증관련 오류메세지 처리 서비스
   .factory("FirebaseErrChk", function (errorCode) {
     switch (errorCode) {
       case "":

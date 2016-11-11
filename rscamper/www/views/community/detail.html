@@ -36,8 +36,8 @@
 
       <!-- BUTTONS -->
       <div class="button-bar bar-energized">
-        <a class="button button-raised ink-dark"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
-        <a class="button button-raised ink-dark"><span class="ion-bookmark"></span> 즐겨찾기 </a>
+        <a class="button button-raised ink-dark" ng-click="likeBoard();"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
+        <a class="button button-raised ink-dark" ng-click="addBookMark();"><span class="ion-bookmark" ></span> <b ng-if="bookMark"> 북마크취소</b> <b ng-if="!bookMark"> 북마크</b></a>
         <a class="button button-raised ink-dark" ng-click="focusCommentBox();"><span class="ion-chatbubbles"></span> 댓글 <b style="color: #f49335;">{{board.commentCnt}}</b></a>
       </div>
 

@@ -12,8 +12,7 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
 
   // 프로필 수정 함수
   $scope.updateProfile = function (result) {
-    // TODO: 유효성 체크
-    // TODO: 지역선택 SELECTED 문제 해결
+    // TODO: RESULT에 대한 유효성 체크
     var profileData = {
       uid: $rootScope.rootUser.userUid,
       displayName: result.displayName,

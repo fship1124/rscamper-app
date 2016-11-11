@@ -5,14 +5,44 @@ angular.module('App')
   })
 
   // 커뮤니티 메인 리스트 컨트롤러
-  .controller("CommunityMainCtrl", function ($rootScope, $scope, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup) {
+  .controller("CommunityMainCtrl", function ($rootScope, $scope, $stateParams, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup) {
+
+    // 좋아요
+    $scope.likeBoard = function (boardNo, index) {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/like",
+        method: "POST",
+        data: $.param({
+          targetNo: boardNo,
+          targetType: 1,
+          userUid: $rootScope.rootUser.userUid
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      }).success(function (response) {
+        if (response == true) {
+          $scope.boardList[index].likeCnt--;
+        } else {
+          $scope.boardList[index].likeCnt++;
+        }
+      }).error(function (error) {
+        MyPopup.alert("에러", "서버접속불가");
+      }).finally(function () {
+        $ionicLoading.hide();
+        $scope.closeModal();
+      })
+    };
 
     // TODO: 검색기능
     $scope.search = function () {
       MyPopup.alert("검색", "검색")
     }
 
-    // TODO: 그림 추가
+    // TODO: 글 작성시 그림 추가
     $scope.addPicture = function () {
       MyPopup.alert("그림", "그림")
     };
@@ -23,11 +53,18 @@ angular.module('App')
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
+
+      if ($stateParams.categoryNo) {
+        var url = MyConfig.backEndURL + "/community/select/boardByCategory?page=" + $scope.page + "&count=" + $scope.count + "&categoryNo=" + $stateParams.categoryNo;
+      } else {
+        var url = MyConfig.backEndURL + "/community/select/board?page=" + $scope.page + "&count=" + $scope.count;
+      }
+
       $http({
-        url: MyConfig.backEndURL + "/community/select/board?page=" + $scope.page,
-        method: "GET",
+        url: url,
+        method: "GET"
       }).success(function (response) {
-        angular.forEach(response.board, function (board) {
+        angular.forEach(response.boardList, function (board) {
           $scope.boardList.push(board);
         })
         $scope.total = response.totalPages;
@@ -44,6 +81,7 @@ angular.module('App')
 
     // 글쓰기
     $scope.write = function (writeData) {
+      // TODO: 유효성 체크
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -81,6 +119,7 @@ angular.module('App')
 
     // 위로 당겼을 때 페이징 초기화 및 새로고침
     $scope.load = function () {
+      $scope.count = 10;
       $scope.page = 0;
       $scope.total = 1;
       $scope.boardList = [];
@@ -105,7 +144,6 @@ angular.module('App')
         method: "GET"
       })
         .success(function (response) {
-          console.log(response);
           $scope.categories = response;
           $scope.modal.show();
         })
@@ -140,11 +178,12 @@ angular.module('App')
 
     // 게시글 수정
     $scope.update = function (updateData) {
+      // TODO: 유효성 체크
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
       $http({
-        url: MyConfig.backEndURL + "/community/update/board",
+        url: MyConfig.backEndURL + "/community/update/oneBoard",
         data: $.param({
           categoryNo: updateData.categoryNo,
           title: updateData.title,
@@ -162,7 +201,6 @@ angular.module('App')
       }).finally(function () {
         $ionicLoading.hide();
         // 페이지 이동
-        console.log('성공')
         $state.go('community.main');
       })
     };
@@ -183,7 +221,6 @@ angular.module('App')
         }).finally(function () {
           $ionicLoading.hide();
           // 페이지 이동
-          console.log('성공');
           $scope.load();
           $state.go('community.main');
         })
@@ -301,13 +338,13 @@ angular.module('App')
       // Show the action sheet
       if (userUid == $rootScope.rootUser.userUid) {
         var buttons = [
-          {text: '이 댓글에 댓글 작성'},
+          {text: displayName + '에게 댓글 작성'},
           {text: '댓글 수정'},
           {text: '댓글 삭제'}
         ];
       } else {
         var buttons = [
-          {text: '이 댓글에 댓글 작성'},
+          {text: displayName + '에게 댓글 작성'},
         ];
       }
       var hideSheet = $ionicActionSheet.show({
@@ -342,6 +379,7 @@ angular.module('App')
       $scope.getBoard();
       $scope.getCommentList();
       $scope.targetCommentNo = null;
+      $scope.isBookmarkStatus();
     }
 
     // 댓글 조회
@@ -354,7 +392,7 @@ angular.module('App')
         url: MyConfig.backEndURL + "/community/select/comment?page=" + $scope.page + "&boardNo=" + $stateParams.boardNo,
         method: "GET"
       }).success(function (response) {
-        angular.forEach(response.comment, function (comment) {
+        angular.forEach(response.commentList, function (comment) {
           $scope.commentList.push(comment);
         })
         $scope.total = response.totalPages;
@@ -372,7 +410,6 @@ angular.module('App')
     // 대댓글 작성
     $scope.writeSubComment = function(targetCommentNo, displayName) {
       $scope.targetCommentNo = targetCommentNo;
-      console.log("댓글 대상 번호 : " + targetCommentNo);
       $scope.comment = {
         commentContent: displayName + "에게 : "
       };
@@ -380,7 +417,7 @@ angular.module('App')
 
     // 댓글 작성
     $scope.writeComment = function () {
-
+      // TODO: 유효성 체크
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -433,6 +470,7 @@ angular.module('App')
     // 댓글 수정
     $scope.updateComment= function (commentNo, commentContent) {
       MyPopup.prompt('댓글', '수정할 댓글을 입력해 주세요', function (result) {
+        // TODO: 유효성 체크
         if (result) {
           $ionicLoading.show({
             template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
@@ -459,13 +497,93 @@ angular.module('App')
       }, commentContent)
     };
 
+    // 좋아요
+    $scope.likeBoard = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/like",
+        method: "POST",
+        data: $.param({
+          targetNo: $stateParams.boardNo,
+          targetType: 1,
+          userUid: $rootScope.rootUser.userUid
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      }).success(function (response) {
+        if (response == true) {
+        } else {
+        }
+      }).error(function (error) {
+        MyPopup.alert("에러", "서버접속불가");
+      }).finally(function () {
+        $ionicLoading.hide();
+        $scope.load();
+      })
+    };
+
+    // 북마크 여부 조회
+    $scope.isBookmarkStatus = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/select/bookMark?targetNo=" + $stateParams.boardNo + "&userUid="+ $rootScope.rootUser.userUid + "&targetType=1",
+        method: "GET"
+      })
+        .success(function (response) {
+          $scope.bookMark = response;
+        })
+        .error(function (err) {
+          console.log(err);
+        })
+        .finally(function () {
+
+        })
+    }
+
+    // 북마크 추가 삭제
+    $scope.addBookMark = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+      $http({
+        url: MyConfig.backEndURL + "/community/bookMark",
+        method: "POST",
+        data: $.param({
+          targetNo: $stateParams.boardNo,
+          targetType: 1,
+          userUid: $rootScope.rootUser.userUid
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      }).success(function (response) {
+        $scope.bookMark = response;
+        if (response == true) {
+          MyPopup.alert("알림", "게시글이 북마크에서 삭제 되었습니다.");
+        } else {
+          MyPopup.alert("알림", "게시글이 북마크에 등록 되었습니다.");
+        }
+      }).error(function (error) {
+        MyPopup.alert("에러", "서버접속불가");
+      }).finally(function () {
+        $ionicLoading.hide();
+        $scope.load();
+      })
+    };
+
+    // TODO: 댓글 입력 창에 포커스 주기(안됨)
     $scope.focusCommentBox = function () {
       $("#commentInputBox").focus();
     }
 
     // TODO: 소셜에 공유하기
     $scope.share = function () {
-      MyPopup.alert("TODO", "공유기능");
+      MyPopup.alert("TODO", "공유기능 해야함");
     };
 
     // 페이지 초기화

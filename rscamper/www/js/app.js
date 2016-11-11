@@ -205,7 +205,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 자유
         .state('community.free', {
-          url: '/free',
+          url: '/free/:categoryNo',
           views: {
             'community-free-tab': {
               templateUrl: 'views/community/free.html',
@@ -215,7 +215,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 여행기
         .state('community.tourDiary', {
-          url: '/tourDiary',
+          url: '/tourDiary/:categoryNo',
           views: {
             'community-tourDiary-tab': {
               templateUrl: 'views/community/tourDiary.html',
@@ -225,7 +225,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 정보
         .state('community.information', {
-          url: '/information',
+          url: '/information/:categoryNo',
           views: {
             'community-information-tab': {
               templateUrl: 'views/community/information.html',
@@ -235,7 +235,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 리뷰
         .state('community.review', {
-          url: '/review',
+          url: '/review/:categoryNo',
           views: {
             'community-review-tab': {
               templateUrl: 'views/community/review.html',
@@ -245,7 +245,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 질문
         .state('community.qna', {
-          url: '/qna',
+          url: '/qna/:categoryNo',
           views: {
             'community-qna-tab': {
               templateUrl: 'views/community/qna.html',
@@ -255,7 +255,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 디테일
         .state('communityDetail', {
-          cache: false,
           url: '/communityDetail/:boardNo',
           templateUrl: 'views/community/detail.html',
           controller: 'CommunityDetailCtrl'
@@ -280,81 +279,3 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       $scope.updateProfilePhoto = AuthService.updateProfilePhoto;
       $scope.updateBgPhoto = AuthService.updateBgPhoto;
     })
-
-  .filter('timesince',function(){
-
-    return timeSince; //return this parsing funciton
-
-    /** time since implementation */
-    function timeSince(date, lang) {
-
-      //i18n
-      var langs = {
-        en: {
-          years: " years ago",
-          months: " months ago",
-          days: " days ago",
-          hours: " hours ago",
-          minutes: " minutes ago",
-          seconds: " seconds ago",
-          now: "now"
-        },
-        it: {
-          years: " anni fa",
-          months: " mesi da",
-          days: " giorni fa",
-          hours: " ore fa",
-          minutes: " minuti fa",
-          seconds: " secondi fa",
-          now: "adesso"
-        },
-        kr: {
-          years: "년전",
-          months: "달전",
-          days: "일전",
-          hours: "시간전",
-          minutes: "분전",
-          seconds: "초전",
-          now: "조금전"
-        }
-      };
-
-      var selectedLang = langs.en;
-
-      if ( lang != null && langs[lang]!=null){
-        selectedLang = langs[lang];
-      }
-
-      if ( date == null)
-        return "";
-
-      date = new Date(date);
-
-      var seconds = Math.floor((new Date() - date) / 1000);
-      var interval = Math.floor(seconds / 31536000);
-      if (interval > 1) {
-        return interval + selectedLang.years;
-      }
-      interval = Math.floor(seconds / 2592000);
-      if (interval > 1) {
-        return interval + selectedLang.months;
-      }
-      interval = Math.floor(seconds / 86400);
-      if (interval > 1) {
-        return interval + selectedLang.days;
-      }
-      interval = Math.floor(seconds / 3600);
-      if (interval > 1) {
-        return interval + selectedLang.hours;
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval > 1) {
-        return interval + selectedLang.minutes;
-      }
-
-      if ( Math.floor(seconds) == 0 ){
-        return selectedLang.now;
-      }else
-        return Math.floor(seconds) + selectedLang.seconds;
-    }
-  });
