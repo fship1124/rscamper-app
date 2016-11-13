@@ -5,7 +5,7 @@ angular.module('App')
   })
 
   // 커뮤니티 메인 리스트 컨트롤러
-  .controller("CommunityMainCtrl", function ($rootScope, $scope, $stateParams, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup) {
+  .controller("CommunityMainCtrl", function ($rootScope, $scope, $stateParams, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup, ValChkService) {
 
     // 좋아요
     $scope.likeBoard = function (boardNo, index) {
@@ -54,6 +54,7 @@ angular.module('App')
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
 
+      // 카테고리가 있는지 없는지 판단
       if ($stateParams.categoryNo) {
         var url = MyConfig.backEndURL + "/community/select/boardByCategory?page=" + $scope.page + "&count=" + $scope.count + "&categoryNo=" + $stateParams.categoryNo;
       } else {
@@ -81,7 +82,10 @@ angular.module('App')
 
     // 글쓰기
     $scope.write = function (writeData) {
-      // TODO: 유효성 체크
+      if (ValChkService.validationCheck("null", writeData.categoryNo)) { return false;}
+      if (ValChkService.validationCheck("null", writeData.title)) { return false;}
+      if (ValChkService.validationCheck("null", writeData.content)) { return false;}
+
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -169,7 +173,7 @@ angular.module('App')
   })
 
   // 디테일 컨트롤러
-  .controller("CommunityDetailCtrl", function ($rootScope, $scope, $stateParams, $state, $ionicHistory, $ionicLoading, $http, $ionicActionSheet, MyConfig, MyPopup, $timeout, $ionicModal) {
+  .controller("CommunityDetailCtrl", function ($rootScope, $scope, $stateParams, $state, $ionicHistory, $ionicLoading, $http, $ionicActionSheet, MyConfig, MyPopup, $timeout, $ionicModal, ValChkService) {
 
     // 뒤로가기 버튼 강제 활성화
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -178,7 +182,10 @@ angular.module('App')
 
     // 게시글 수정
     $scope.update = function (updateData) {
-      // TODO: 유효성 체크
+      if (ValChkService.validationCheck("null", updateData.categoryNo)) { return false;}
+      if (ValChkService.validationCheck("null", updateData.title)) { return false;}
+      if (ValChkService.validationCheck("null", updateData.content)) { return false;}
+
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -417,7 +424,9 @@ angular.module('App')
 
     // 댓글 작성
     $scope.writeComment = function () {
-      // TODO: 유효성 체크
+      // 댓글 유효성 체크
+      if(!ValChkService.validationCheck("null", $scope.comment.commentContent)) { return false;}
+
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -468,32 +477,32 @@ angular.module('App')
     };
 
     // 댓글 수정
-    $scope.updateComment= function (commentNo, commentContent) {
+    $scope.updateComment = function (commentNo, commentContent) {
       MyPopup.prompt('댓글', '수정할 댓글을 입력해 주세요', function (result) {
-        // TODO: 유효성 체크
-        if (result) {
-          $ionicLoading.show({
-            template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
-          });
-          $http({
-            url: MyConfig.backEndURL + "/community/update/oneComment",
-            method: "POST",
-            data: $.param({
+        // 댓글 유효성 체크
+        if (!ValChkService.validationCheck("null", result)) {return false;}
+
+        $ionicLoading.show({
+          template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+        });
+        $http({
+          url: MyConfig.backEndURL + "/community/update/oneComment",
+          method: "POST",
+          data: $.param({
             commentNo: commentNo,
             content: result
           }),
-            headers: {
+          headers: {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
           }
-          }).success(function (response) {
-            MyPopup.alert('알림', '댓글이 수정되었습니다.');
-          }).error(function (error) {
-            console.log(error);
-          }).finally(function () {
-            $ionicLoading.hide();
-            $scope.load();
-          })
-        }
+        }).success(function (response) {
+          MyPopup.alert('알림', '댓글이 수정되었습니다.');
+        }).error(function (error) {
+          console.log(error);
+        }).finally(function () {
+          $ionicLoading.hide();
+          $scope.load();
+        })
       }, commentContent)
     };
 
