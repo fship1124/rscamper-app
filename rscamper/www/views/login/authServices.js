@@ -6,7 +6,11 @@ angular.module("App")
       // backEndURL: "http://192.168.0.9:8081/rscamper-server/app", // 학원 서버 컴퓨터 로컬
       // backEndURL: "http://192.168.0.228:8081/rscamper-server/app", // 학원 내컴퓨터
       // backEndURL: "http://192.168.1.13:8081/rscamper-server/app", // 집
-      googleAuthURL: "506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56.apps.googleusercontent.com"
+      googleAuthURL: "apps.googleusercontent.com",
+      googleClientId: "506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56",
+      facebookClientId: "947628548702706",
+      twitterConsumerKey: "O0aubI3UlDJzlzaAVLGJ3BqVf",
+      twitterConsumerSecret: "qwyWjtCq0TDIXCB8PsoM854B30Pu7ANjKYAyLBaCOYFUWGxeUm"
     };
   })
 
@@ -23,8 +27,14 @@ angular.module("App")
             .then(function (result) {
               // 이메일 인증 확인
               if (!result.emailVerified) {
-                MyPopup.alert("로그인 실패", "이메일 인증이 필요합니다.")
-                $firebaseAuth().$signOut();
+                MyPopup.confirm("로그인 실패", "이메일 인증이 필요합니다. 인증메일을 다시 받으시겠습니까?", function () {
+                  firebase.auth().currentUser.sendEmailVerification().then(function () {
+                    MyPopup.alert("인증메일 재발송", "계정 활성화를 위해 이메일 인증을 해주시기 바랍니다.");
+                    $firebaseAuth().$signOut();
+                  });
+                }, function () {
+                  $firebaseAuth().$signOut();
+                })
                 return;
               }
               MyPopup.alert("알림", "이메일 로그인 성공");
@@ -51,16 +61,16 @@ angular.module("App")
           switch (providerName) {
             case "google":
               if (ionic.Platform.isWebView()) {
-                $cordovaOauth.google(MyConfig.googleAuthURL + "&include_profile=true", ["email", "profile"]).then(function (result) {
+                $cordovaOauth.google(MyConfig.googleClientId + "."+ MyConfig.googleAuthURL + "&include_profile=true", ["email", "profile"]).then(function (result) {
                   var credential = firebase.auth.GoogleAuthProvider.credential(result.id_token);
                   firebase.auth().signInWithCredential(credential).then(function (result) {
                     MyPopup.alert("알림", "구글로그인 성공");
                     $location.path(redirectTo);
                   }, function (error) {
-                    MyPopup.alert("실패", "error");
+                    MyPopup.alert("실패", error);
                   });
                 }, function (error) {
-                  MyPopup.alert("실패", "error");
+                  MyPopup.alert("실패", error);
                 });
               } else {
                 var provider = new firebase.auth.GoogleAuthProvider();
@@ -73,16 +83,16 @@ angular.module("App")
 
             case "facebook":
               if (ionic.Platform.isWebView()) { // TODO : 어플
-                $cordovaOauth.facebook("947628548702706", ["email"]).then(function (result) {
-                  var credential = firebase.auth.FacebookAuthProvider.credential(result.id_token);
+                $cordovaOauth.facebook(MyConfig.facebookAuthURL, ["email", "public_profile"], {redirect_uri: "http://localhost/callback"}).then(function (result) {
+                  var credential = firebase.auth.FacebookAuthProvider.credential(result.access_token);
                   firebase.auth().signInWithCredential(credential).then(function (result) {
                     MyPopup.alert("알림", "페북 로그인 성공");
                     $location.path(redirectTo);
                   }, function (error) {
-                    MyPopup.alert("파이어베이스 : 실패", "error");
+                    MyPopup.alert("실패 : 파이어베이스", error);
                   });
                 }, function (error) {
-                  MyPopup.alert("페이스북AUTH : 실패", "error");
+                  MyPopup.alert("실패 : 페이스북 OAUTH", error);
                 });
               } else { // 웹
                 var provider = new firebase.auth.FacebookAuthProvider();
@@ -95,13 +105,16 @@ angular.module("App")
 
             case "twitter":
               if (ionic.Platform.isWebView()) { // TODO : 어플
-                $cordovaOauth.twitter("O0aubI3UlDJzlzaAVLGJ3BqVf", "qwyWjtCq0TDIXCB8PsoM854B30Pu7ANjKYAyLBaCOYFUWGxeUm").then(function (result) {
-                  $firebaseAuth().$authWithOAuthToken("twitter", result.access_token).then(function (authData) {
-                    MyPopup.alert("알림", "트위터 로그인성공");
-                    $location.path("/loginMain");
+                $cordovaOauth.twitter(MyConfig.twitterConsumerKey, MyConfig.twitterConsumerSecret).then(function (result) {
+                  var credential = firebase.auth.TwitterAuthProvider.credential(result.token, result.secret);
+                  firebase.auth().signInWithCredential(credential).then(function (result) {
+                    MyPopup.alert("알림", "트위터 로그인 성공");
+                    $location.path(redirectTo);
                   }, function (error) {
+                    MyPopup.alert("실패 : 파이어베이스", error);
                   });
                 }, function (error) {
+                  MyPopup.alert("실패 : 트위터 OAUTH", error);
                 });
               } else { // 웹
                 var provider = new firebase.auth.TwitterAuthProvider();
@@ -166,11 +179,6 @@ angular.module("App")
           }
           MyPopup.alert("에러", errorMessage);
         });
-      },
-
-      // TODO: 인증메일 재발송
-      sendVerifyEmail: function (email) {
-
       },
 
       // 회원탈퇴 메소드
@@ -489,57 +497,47 @@ angular.module("App")
     }
   })
 
-  // TODO: 인증 관련 유효성 체크 서비스
-  .factory("ValChk", function (type, value) {
-    switch (type) {
-      case "password": // 널체크, 6~20자 문자숫자혼합(정규식)
-        if (value) {
-
-          return true;
-        }
-        break;
-      case "displayName": // 널체크, 20자 이하
-        if (value) {
-
-          return true;
-        }
-        break;
-      case "phoneNumber": // 전화번호 형식
-        if (value) {
-
-          return true;
-        }
-        break;
-      case "websiteUrl":// 인터넷 주소 (정규식)
-        if (value) {
-
-          return true;
-        }
-        break;
-      case "introduce": // 200자이하
-        if (value) {
-
-          return true;
-        }
-        break;
-      case "birthday": // 미래인지 체크
-        if (value) {
-
-          return true;
-        }
-        break;
+  // 유효성 체크 서비스
+  .factory("ValChkService", function (MyPopup) {
+    return {
+     validationCheck: function (type, value) {
+       switch (type) {
+         case "email": // 이메일 형식 체크(정규식)(not null)
+           if(!value) { MyPopup.alert("알림", "이메일을 입력해 주세요."); return false; }
+           if(!value.match(/[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/)) { MyPopup.alert("알림", "올바른 이메일 형식이 아닙니다."); return false; }
+           return true;
+         case "password": // 6~20자 문자숫자혼합(정규식)(not null)
+           if(!value) { MyPopup.alert("알림", "비밀번호를 입력해 주세요"); return false; }
+           if(!value.match(/^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/)) { MyPopup.alert("알림", "올바른 비밀번호 형식(영문자/숫자조합 6~20자)이 아닙니다."); return false; }
+           return true;
+         case "displayName": // 20자 이하(not null)
+           if(!value) { MyPopup.alert("알림", "사용자 이름을 입력해 주세요."); return false; }
+           if(value.length > 20) { MyPopup.alert("알림", "입력된 사용자 이름이 너무 깁니다.(20자이하)"); return false; }
+           return true;
+         case "phoneNumber": // 전화번호 형식(정규식)(널가능)
+           if (value) {
+             if(!value.match(/^\d{2,3}-\d{3,4}-\d{4}$/)) { MyPopup.alert("알림", "올바른 전화번호를 입력해 주세요."); return false;}
+           }
+           return true;
+         case "websiteUrl":// 인터넷 주소(정규식)(널가능)
+           if (value) {
+             if(!value.match(/^(http?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w_\.-]*)*\/?$/)) { MyPopup.alert("알림", "올바른 인터넷 주소를 입력해 주세요."); return false;}
+           }
+           return true;
+         case "introduce": // 1000자이하(널가능)
+           if (value) {
+             if(value.length > 1000) { MyPopup.alert("알림", "입력된 자기소개 내용이 너무 깁니다.(1000자이하)"); return false; }
+           }
+           return true;
+         case "birthday": // 현재보다 과거인지 체크(널가능)
+           if (value) {
+             if(new Date() < new Date(value)) { MyPopup.alert("알림", "현재보다 과거를 선택해야 합니다."); return false;}
+           }
+           return true;
+       }
+       return false;
+     }
     }
-    return false;
-  })
-
-  // TODO: 인증관련 오류메세지 처리 서비스
-  .factory("FirebaseErrChk", function (errorCode) {
-    switch (errorCode) {
-      case "":
-        return "";
-        break;
-    }
-    return "에러";
   })
 
   // LocalStorage사용을 위한 셋팅

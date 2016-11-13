@@ -1,9 +1,9 @@
 angular.module("App")
+  // timesince 필터
   .filter('timesince',function(){
     return timeSince;
     function timeSince(date, lang) {
 
-      //i18n
       var langs = {
         en: {
           years: " years ago",
@@ -30,7 +30,7 @@ angular.module("App")
           hours: "시간전",
           minutes: "분전",
           seconds: "초전",
-          now: "조금전"
+          now: "지금"
         }
       };
 
