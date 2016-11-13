@@ -7,6 +7,16 @@ angular.module('App')
   // 커뮤니티 메인 리스트 컨트롤러
   .controller("CommunityMainCtrl", function ($rootScope, $scope, $stateParams, $http, $ionicModal, $ionicLoading, MyConfig, MyPopup, ValChkService) {
 
+    // TODO: 검색기능
+    $scope.search = function () {
+      MyPopup.alert("검색", "검색")
+    }
+
+    // TODO: 글 작성폼 에서 그림 추가
+    $scope.addPicture = function () {
+      MyPopup.alert("그림", "그림")
+    };
+
     // 좋아요
     $scope.likeBoard = function (boardNo, index) {
       $ionicLoading.show({
@@ -35,16 +45,6 @@ angular.module('App')
         $ionicLoading.hide();
         $scope.closeModal();
       })
-    };
-
-    // TODO: 검색기능
-    $scope.search = function () {
-      MyPopup.alert("검색", "검색")
-    }
-
-    // TODO: 글 작성시 그림 추가
-    $scope.addPicture = function () {
-      MyPopup.alert("그림", "그림")
     };
 
     // 게시판 리스트 불러오기
