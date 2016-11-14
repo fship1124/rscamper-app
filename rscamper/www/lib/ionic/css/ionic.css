@@ -3970,7 +3970,7 @@ a.subdued {
   .bar.bar-energized {
     border-color: #e6b500;
     background-color: #ffc900;
-    background-image: linear-gradient(0deg, #e6b500, #e6b500 50%, transparent 50%);
+    /*background-image: linear-gradient(0deg, #e6b500, #e6b500 50%, transparent 50%);*/
     color: #fff; }
     .bar.bar-energized .title {
       color: #fff; }
