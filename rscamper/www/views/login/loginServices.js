@@ -68,8 +68,8 @@ angular.module("App")
               break;
 
             case "facebook":
-              if (ionic.Platform.isWebView()) { // TODO : 어플
-                $cordovaOauth.facebook(MyConfig.facebookAuthURL, ["email", "public_profile"], {redirect_uri: "http://localhost/callback"}).then(function (result) {
+              if (ionic.Platform.isWebView()) {
+                $cordovaOauth.facebook(MyConfig.facebookClientId, ["email", "public_profile"], {redirect_uri: "http://localhost/callback"}).then(function (result) {
                   var credential = firebase.auth.FacebookAuthProvider.credential(result.access_token);
                   firebase.auth().signInWithCredential(credential).then(function (result) {
                     MyPopup.alert("알림", "페북 로그인 성공");
@@ -90,7 +90,8 @@ angular.module("App")
               break;
 
             case "twitter":
-              if (ionic.Platform.isWebView()) { // TODO : 어플
+              if (ionic.Platform.isWebView()) { // TODO : 어플(뭐가 문제인지 모르겠는데 안됨)
+                console.log(MyConfig.twitterConsumerKey, MyConfig.twitterConsumerSecret);
                 $cordovaOauth.twitter(MyConfig.twitterConsumerKey, MyConfig.twitterConsumerSecret).then(function (result) {
                   var credential = firebase.auth.TwitterAuthProvider.credential(result.token, result.secret);
                   firebase.auth().signInWithCredential(credential).then(function (result) {

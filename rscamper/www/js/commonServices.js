@@ -9,8 +9,8 @@ angular.module('App')
       googleAuthURL: "apps.googleusercontent.com",
       googleClientId: "506479374537-4o2pa5ghuj68ocudca9fbohmikfsth56",
       facebookClientId: "947628548702706",
-      twitterConsumerKey: "O0aubI3UlDJzlzaAVLGJ3BqVf",
-      twitterConsumerSecret: "qwyWjtCq0TDIXCB8PsoM854B30Pu7ANjKYAyLBaCOYFUWGxeUm"
+      twitterConsumerKey: "	ngAkhEdE4XsaQNJrtzfG4kNAH",
+      twitterConsumerSecret: "UD6mJDHCpIQnhsRhxbpbSY3oImf1ekFkO8oljs2Yctk1oCLdjf"
     };
   })
 
