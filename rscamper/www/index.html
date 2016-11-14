@@ -43,6 +43,8 @@
 
   <!-- sliding tabs -->
   <script src="js/slidingTabsDirective.js"></script>
+  <!-- JSSHA twitter oauth -->
+  <script src="lib/jsSHA/src/sha1.js"></script>
 
   <!-- google maps javascript -->
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8"></script>
@@ -57,11 +59,15 @@
   <script src="lib/angular-contenteditable/angular-contenteditable.js"></script>
 
   <!-- picker -->
-  <script src="js/proton.multi-list-picker.min.js"></script>
+  <script src="lib/proton-multi-list-picker/proton.multi-list-picker.min.js"></script>
+
   <!-- 모듈, 서비스 -->
   <script src="js/app.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/commonServices.js"></script>
   <script src="js/myService.js"></script>
-  <script src="js/authServices.js"></script>
+  <script src="views/login/loginServices.js"></script>
+  <script src="views/community/communityServices.js"></script>
 
   <!-- 컨트롤러들 -->
   <script src="views/main/mainTabs.js"></script>
@@ -69,17 +75,18 @@
   <script src="views/tour/tourInfo.js"></script>
   <script src="views/tour/tourDetail.js"></script>
 
+
+  <script src="views/login/loginControllers.js"></script>
+  <script src="views/setting/settingControllers.js"></script>
+  <script src="views/myPage/myPageControllers.js"></script>
+  <script src="views/community/communityControllers.js"></script>
+
+
   <script src="views/schedule/schedule.js"></script>
   <script src="views/schedule/scheduleTabs.js"></script>
   <script src="views/schedule/scheduleDetail.js"></script>
   <script src="views/schedule/findAttraction.js"></script>
   <script src="views/schedule/addLocationInfo.js"></script>
-
-  <script src="views/login/loginControllers.js"></script>
-  <script src="views/setting/settingControllers.js"></script>
-  <script src="views/myPage/myPageControllers.js"></script>
-  <script src="views/community/communityServices.js"></script>
-  <script src="views/community/communityControllers.js"></script>
   <script src="views/schedule/detailLocationInfo.js"></script>
 </head>
 

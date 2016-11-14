@@ -1,5 +1,5 @@
 // 프로필 컨트롤러
-app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService) {
+app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicModal, $timeout, $ionicActionSheet, MyPopup, DbService, ValChkService) {
   // 수정 모달에 올라갈 현재 프로필 정보 세팅
   $scope.profile = {
     displayName: $rootScope.rootUser.displayName,
@@ -12,8 +12,13 @@ app.controller('ProfileCtrl', function ($rootScope, $scope, AuthService, $ionicM
 
   // 프로필 수정 함수
   $scope.updateProfile = function (result) {
-    // TODO: 유효성 체크
-    // TODO: 지역선택 SELECTED 문제 해결
+    // 유효성 체크
+    if (!ValChkService.validationCheck("displayName", result.displayName)) {return false;}
+    if (!ValChkService.validationCheck("phoneNumber", result.phoneNumber)) {return false;}
+    if (!ValChkService.validationCheck("websiteUrl", result.websiteUrl)) {return false;}
+    if (!ValChkService.validationCheck("introduce", result.introduce)) {return false;}
+    if (!ValChkService.validationCheck("birthday", result.birthday)) {return false;}
+
     var profileData = {
       uid: $rootScope.rootUser.userUid,
       displayName: result.displayName,
