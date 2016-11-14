@@ -8,6 +8,8 @@ angular.module('App')
       StatusBar.styleDefault();
     }
 
+
+
     $cordovaGeolocation.getCurrentPosition().then(function (data) {
       $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude}})
         .success(function (response) {
@@ -30,7 +32,7 @@ angular.module('App')
     $http({
       method: "GET",
       url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-      headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
+      // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
     })
       .success(function(data) {
         $scope.today = data.weather.minutely[0];
