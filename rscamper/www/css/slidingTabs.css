@@ -3,11 +3,11 @@
 }
 
 ion-slide {
-    background-color: #f0f0f0;
+    /*background-color: #f0f0f0;*/
 }
 
 ion-slide:nth-child(2n) {
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
 .slider {

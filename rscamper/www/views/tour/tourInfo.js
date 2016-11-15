@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('TourInfoCtrl', function ($scope, $http, $ionicLoading, $compile, $ionicPlatform, $cordovaGeolocation, $ionicModal) {
+  .controller('TourInfoCtrl', function ($scope, $http, $ionicLoading, $compile, $ionicPlatform, $location, $ionicScrollDelegate, $ionicPosition, $cordovaGeolocation) {
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins.keyboard) {
         cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -13,6 +13,7 @@ angular.module('App')
           lat: position.coords.latitude,
           long: position.coords.longitude
         }
+
         console.log($scope.mylocation.long, $scope.mylocation.lat);
 
         initialize();
@@ -45,7 +46,7 @@ angular.module('App')
                 $scope.mapList[i].firstimage = "../../img/default-thumbnail.jpg";
               }
             }
-            console.log($scope.mapList);
+            console.log("mapList", $scope.mapList);
           })
       });
 
@@ -70,6 +71,8 @@ angular.module('App')
         $scope.map = map;
       }
 
+
+      var infowindow;
       // 마커 깃발로 만들고, 하나하나 차례 설정
       function addMarkerWithTimeout(mapList, timeout, map) {
         var myLatlng = new google.maps.LatLng(mapList.mapy, mapList.mapx);
@@ -88,27 +91,23 @@ angular.module('App')
             animation: google.maps.Animation.DROP
           });
 
-          // <a href="https://www.youtube.com/watch?v=CxgELeHSkJA" target="_blank">
-          // var distance = computeDistance($scope.location.lang, $scope.location.lat, mapList.mapx, mapList.mapy);
-          // var contentString = '<div id="content" style="font-size: 12px"><a href="#" ng-click="modal.show()">' + mapList.title + '</a><br><span>나와의 거리 : ' + distance + 'km</span></div>';
-          // var imgSrc = mapList.firstimage;
-          // var contentString = '<div class="list"><a class="item item-thumbnail-left" href="#"><img src=imgSrc + ""><p>dd</p></a></div>';
-          // var contentString = '<div><img src="' + mapList.firstimage + '" style="width: 100px; height: 75px"><br><span style="font-size: 11px">' + mapList.title + '</span></div>';
-          var contentString = '<div><span style="font-size: 11px">' + mapList.title + '</span></div>';
-          var infowindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 100
-          });
-          marker.addListener('click', function () {
+          infowindow = new google.maps.InfoWindow();
+          google.maps.event.addListener(marker, 'click', function () {
+            infowindow.close();
+            infowindow.setContent('<div><span style="font-size: 11px">' + mapList.title + '</span></div>');
             infowindow.open(map, marker);
-            console.log(marker.getPosition());
-            console.log(marker.getPosition().lat());
-            console.log(marker.getPosition().lng());
-            var mapItem = document.querySelector("#map-item");
-            console.log(mapItem);
+            $("a[id^='map-item-']").removeClass('item-myactive');
+            $("#map-item-" + mapList.contentid).addClass('item-myactive');
+
+            // 포커스 방법 1
+            $location.hash('map-item-' + mapList.contentid);
+            $ionicScrollDelegate.anchorScroll();
+            // 포커스 방법 2
+            // $("#map-item-" + mapList.contentid).focus();
           });
           google.maps.event.addListener(map, 'click', function () {
             infowindow.close();
+            $("a[id^='map-item-']").removeClass('item-myactive');
           });
           marker.setMap(map);
         }, timeout);

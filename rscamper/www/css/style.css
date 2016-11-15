@@ -71,15 +71,17 @@
 #map {
   width: 100%;
   height: 60%;
+  position: fixed;
 }
 .scroll {
   height: 100%;
 }
-
 #mapList {
-  /* 세로길이 지정할거면 !! */
-  /*max-height: 30%;*/
-  /*overflow: auto;*/
+  /*max-height: 100%;*/
+  /*overflow: scroll;*/
+}
+.item-myactive {
+  background-color: lightgray;
 }
 
 /* tourdetail custom 영은 */
