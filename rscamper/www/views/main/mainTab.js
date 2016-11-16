@@ -8,8 +8,6 @@ angular.module('App')
       StatusBar.styleDefault();
     }
 
-
-
     $cordovaGeolocation.getCurrentPosition().then(function (data) {
       $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude}})
         .success(function (response) {

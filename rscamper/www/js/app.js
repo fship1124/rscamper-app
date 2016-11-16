@@ -136,9 +136,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'findAttractionCtrl'
         })
 
-
-
-
         /**
          * 로그인 관련 메뉴
          */
