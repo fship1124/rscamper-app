@@ -111,7 +111,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         .state('detailTab.detailSchedule', {
           cache : false,
-          url: '/:no',
+          url: '/detail/:no',
           views: {
             'detailSchedule-tab': {
               templateUrl: 'views/schedule/scheduleDetail.html',
@@ -121,9 +121,29 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         .state('detailTab.locationInfo', {
           cache: false,
-          url: '/:no/:locationNo',
+          url: '/location/:no/:locationNo',
           views : {
             'detailSchedule-tab' : {
+              templateUrl: 'views/schedule/detailLocationInfo.html',
+              controller: 'detailLocationInfoCtrl'
+            }
+          }
+        })
+        .state('detailTab.scheduleMap', {
+          cache: false,
+          url: '/scheduleMap/:no',
+          views : {
+            'scheduleMap-tab' : {
+              templateUrl: 'views/schedule/scheduleMap.html',
+              controller : 'scheduleMapCtrl'
+            }
+          }
+        })
+        .state('detailTab.mapLocationInfo', {
+          cache: false,
+          url: '/mapLocation/:no/:locationNo',
+          views : {
+            'scheduleMap-tab' : {
               templateUrl: 'views/schedule/detailLocationInfo.html',
               controller: 'detailLocationInfoCtrl'
             }
@@ -134,6 +154,18 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/findAttraction/:departureDate/:arriveDate/:recordNo',
           templateUrl: 'views/schedule/findAttraction.html',
           controller: 'findAttractionCtrl'
+        })
+        .state('chat', {
+          cache : false,
+          url : '/chat',
+          templateUrl : '/views/chat/chatMain.html',
+          controller : 'chatMainCtrl'
+        })
+        .state('view', {
+          chche : false,
+          url : '/chat/:no',
+          templateUrl : '/views/chat/chatView.html',
+          controller : 'chatViewCtrl'
         })
 
 
@@ -270,5 +302,4 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       $scope.updateProfilePhoto = AuthService.updateProfilePhoto;
       $scope.updateBgPhoto = AuthService.updateBgPhoto;
 
-    })
-  ;
+    });
