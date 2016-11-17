@@ -1,16 +1,62 @@
-<ion-view title="hello">
-  <ion-tabs class="tabs-energized tabs-striped tabs-top">
-    <ion-tab title="전체" ui-sref="app.main.main">
+<ion-view title="hello"">
+<ion-content scroll="false">
+  <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs>
+    <ion-slide ion-slide-tab-label="전체" ui-sref="main.main">
       <ion-nav-view name="main-tab"></ion-nav-view>
-    </ion-tab>
-    <ion-tab title="추천여행지" ui-sref="app.main.tour">
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="추천여행지" ui-sref="main.tour">
       <ion-nav-view name="tour-tab"></ion-nav-view>
-    </ion-tab>
-    <ion-tab title="포스트" ui-sref="app.main.post">
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="추천여행지2" ui-sref="main.tour">
+      <ion-nav-view name="tour-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="추천여행지3" ui-sref="main.tour">
+      <ion-nav-view name="tour-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트" ui-sref="main.post">
       <ion-nav-view name="post-tab"></ion-nav-view>
-    </ion-tab>
-  </ion-tabs>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트2" ui-sref="main.post">
+      <ion-nav-view name="post-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트3" ui-sref="main.post">
+      <ion-nav-view name="post-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트4" ui-sref="main.post">
+      <ion-nav-view name="post-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트5" ui-sref="main.post">
+      <ion-nav-view name="post-tab"></ion-nav-view>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="포스트6" ui-sref="main.post">
+      <ion-nav-view name="post-tab"></ion-nav-view>
+    </ion-slide>
+  </ion-slide-box>
+  <!--<ion-slide-box slide-tabs-scrollable="true"  show-pager="false" ion-slide-tabs>-->
+  <!--<ion-slide ion-slide-tab-label="{{Height}}"><ion-nav-view name="main-tab"></ion-nav-view></ion-slide>-->
+  <!--<ion-slide ion-slide-tab-label="another tab <span>2</span>"><div ui-view="e" class="col col-dynamic-40" dynamic-md-layout></div></ion-slide>-->
+  <!--<ion-slide ion-slide-tab-label="tab3"><h1>Tab 3</h1><button ng-click="nextSlide()" >Next slide!</button></ion-slide>-->
+  <!--<ion-slide ion-slide-tab-label="another tab again"><h1>Tab 4</h1><button ng-click="nextSlidxe()">Next slide!</button></ion-slide>-->
+  <!--<ion-slide ion-slide-tab-label="a very large tab"><h1>Tab 5</h1><button ng-click="nextSlide()">Next slide!</button></ion-slide>-->
+  <!--<ion-slide ion-slide-tab-label="tab6"><h1>Tab 6</h1><button ng-click="nextSlide()">Next slide!</button></ion-slide>-->
+  <!--</ion-slide-box>-->
+</ion-content>
 </ion-view>
+
+
+<!--<ion-view title="hello">-->
+  <!--<ion-tabs class="tabs-energized tabs-striped tabs-top">-->
+    <!--<ion-tab title="전체" ui-sref="main.main">-->
+      <!--<ion-nav-view name="main-tab"></ion-nav-view>-->
+    <!--</ion-tab>-->
+    <!--<ion-tab title="추천여행지" ui-sref="main.tour">-->
+      <!--<ion-nav-view name="tour-tab"></ion-nav-view>-->
+    <!--</ion-tab>-->
+    <!--<ion-tab title="포스트" ui-sref="main.post">-->
+      <!--<ion-nav-view name="post-tab"></ion-nav-view>-->
+    <!--</ion-tab>-->
+  <!--</ion-tabs>-->
+<!--</ion-view>-->
 <!--<ion-view view-title="hello">-->
   <!--<ion-content>-->
     <!--<ion-tabs class="tabs-energized tabs-striped tabs-top">-->
@@ -20,6 +66,7 @@
     <!--</ion-tabs>-->
   <!--</ion-content>-->
 <!--</ion-view>-->
+
 <!--<ion-view view-title="hello">
   <ion-content>
     <div class="tabs-icon-top tabs-striped tabs-top tabs-color-energized mainTab-div" style="position: static; margin-bottom: 15px;">

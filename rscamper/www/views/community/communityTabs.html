@@ -3,17 +3,20 @@
     <ion-tab title="전체" ui-sref="community.main">
       <ion-nav-view name="community-main-tab"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="자유" ui-sref="community.free">
+    <ion-tab title="자유" ui-sref="community.free({categoryNo : 1})">
       <ion-nav-view name="community-free-tab"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="여행기" ui-sref="community.tourDiary">
+    <ion-tab title="여행기" ui-sref="community.tourDiary({categoryNo : 2})">
       <ion-nav-view name="community-tourDiary-tab"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="정보" ui-sref="community.information">
+    <ion-tab title="정보" ui-sref="community.information({categoryNo : 3})">
       <ion-nav-view name="community-information-tab"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="리뷰" ui-sref="community.review">
+    <ion-tab title="리뷰" ui-sref="community.review({categoryNo : 4})">
       <ion-nav-view name="community-review-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="질문" ui-sref="community.qna({categoryNo : 5})">
+      <ion-nav-view name="community-qna-tab"></ion-nav-view>
     </ion-tab>
   </ion-tabs>
 </ion-view>
@@ -27,7 +30,7 @@
       <h1 class="title">글작성</h1>
       <div class="buttons buttons-right header-item">
         <span class="right-buttons">
-          <button class="button button-icon button-clear ion-images">
+          <button class="button button-icon button-clear ion-images" ng-click="addPicture();">
           </button>
         </span>
       </div>
@@ -46,7 +49,7 @@
             카테고리
           </div>
           <select ng-model="writeBoard.categoryNo" ng-options="category.categoryNo as category.categoryName for category in categories" ng-required="true">
-            <option value="">선택해주세요...</option>
+            <option value="">선택해주세요</option>
           </select>
         </label>
 
@@ -55,8 +58,8 @@
           <input ng-model="writeBoard.title" type="text">
         </label>
 
-        <!--<div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="writeBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>-->
-        <textarea ng-model="writeBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>
+        <div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="writeBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
+        <!--<textarea ng-model="writeBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>-->
       </div>
 
       <div class="bar bar-footer">
@@ -80,7 +83,7 @@
 
 
 <!-- 글수정 폼 모달  -->
-<script id="community/updateFormModal.html" type="text/ng-template">
+<script id="community/updateFormModal.html" type="text/ng-template" ng-click="addPicture();">
   <ion-modal-view>
 
     <ion-header-bar class="bar bar-header bar-energized">
@@ -106,7 +109,7 @@
             카테고리
           </div>
           <select ng-model="updateBoard.categoryNo" ng-options="category.categoryNo as category.categoryName for category in categories" ng-required="true">
-            <option value="">선택해주세요...</option>
+            <option value="">선택해주세요</option>
           </select>
         </label>
 
@@ -115,8 +118,8 @@
           <input ng-model="updateBoard.title" type="text">
         </label>
 
-        <!--<div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="updateBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>-->
-        <textarea ng-model="updateBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>
+        <div strip-br="true" strip-tags="true" select-non-editable="true" ng-model="updateBoard.content" contenteditable="true" style="width: 90%; height: 400px; margin: 5%; border: 1px solid black; overflow: auto;"></div>
+        <!--<textarea ng-model="updateBoard.content" rows="20" style="width: 90%; margin: 5%; border: 1px solid black; resize: none;"></textarea>-->
       </div>
 
       <div class="bar bar-footer">

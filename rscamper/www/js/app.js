@@ -237,7 +237,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 자유
         .state('community.free', {
-          url: '/free',
+          url: '/free/:categoryNo',
           views: {
             'community-free-tab': {
               templateUrl: 'views/community/free.html',
@@ -247,7 +247,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 여행기
         .state('community.tourDiary', {
-          url: '/tourDiary',
+          url: '/tourDiary/:categoryNo',
           views: {
             'community-tourDiary-tab': {
               templateUrl: 'views/community/tourDiary.html',
@@ -257,7 +257,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 정보
         .state('community.information', {
-          url: '/information',
+          url: '/information/:categoryNo',
           views: {
             'community-information-tab': {
               templateUrl: 'views/community/information.html',
@@ -267,7 +267,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 리뷰
         .state('community.review', {
-          url: '/review',
+          url: '/review/:categoryNo',
           views: {
             'community-review-tab': {
               templateUrl: 'views/community/review.html',
@@ -275,9 +275,18 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        // 커뮤니티 - 질문
+        .state('community.qna', {
+          url: '/qna/:categoryNo',
+          views: {
+            'community-qna-tab': {
+              templateUrl: 'views/community/qna.html',
+              controller: 'CommunityMainCtrl'
+            }
+          }
+        })
         // 커뮤니티 - 디테일
         .state('communityDetail', {
-          cache: false,
           url: '/communityDetail/:boardNo',
           templateUrl: 'views/community/detail.html',
           controller: 'CommunityDetailCtrl'
@@ -301,5 +310,4 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
     .controller('MenuCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, AuthService) {
       $scope.updateProfilePhoto = AuthService.updateProfilePhoto;
       $scope.updateBgPhoto = AuthService.updateBgPhoto;
-
-    });
+    })

@@ -30,13 +30,11 @@ angular.module('App')
         for (var i = 0; i < itemList.length; i++) {
           var item = itemList[i];
           item.infoname = item.infoname.replace(/ /gi, "");
-          console.log(item);
           if (item.infoname == '입장료' || item.infoname == '관람료' || item.infoname == '시설이용료') {
             $scope.admissionFee = item.infotext;
           };
         };
         console.log("infoList", itemList);
-        console.log($scope.admissionFee);
         if ($scope.admissionFee) {
           document.querySelector("#info-div").innerHTML = $scope.admissionFee;
         } else {

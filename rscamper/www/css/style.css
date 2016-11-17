@@ -63,6 +63,9 @@
   font-size: 16px;
   color: white;
 }
+.my-tabs  > div {
+  height: 28px; !important;
+}
 
 /* tourInfo custom 영은 */
 #map {
