@@ -3,11 +3,17 @@
     <img ng-src="{{locationMap.firstimage}}" style="width: 100%; height: 45%">
     <div style="width: 100%; height: 5%; border-bottom: 1px solid; border-color: silver; text-align: center"><span style="font-weight: bold; font-size: 20px">{{locationMap.title}}</span></div>
     <div style="width: 100%; height: 7%; border-bottom: 1px solid; border-color: silver; text-align: center">
-      <div class="detailLocationBtn" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+      <div ng-hide="isLiked" class="detailLocationBtn" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
+      <div ng-show="isLiked" class="detailLocationBtn" ng-click="removeLiked(locationMap.contentid)"><i class="ion-heart" style="font-size: x-large; color: red"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
       <div class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
       <div class="detailLocationBtn"><i class="ion-android-create" style="font-size: x-large"></i><br><span style="font-size: xx-small">리뷰 쓰기</span></div>
       <div class="detailLocationBtn"><i class="ion-android-share-alt" style="font-size: x-large"></i><br><span style="font-size: xx-small">공유 하기</span></div>
     </div>
+    <div class="item item-divider">
+      <i class="ion-android-home"></i>
+      Info
+    </div>
+    <div class="item"><i class="ion-heart" style="color: red"></i>{{likeCount}}명이 가고 싶어합니다.</div>
     <div class="item item-divider">
       <i class="ion-home"></i>
       Address

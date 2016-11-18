@@ -3,13 +3,15 @@
  */
 angular.module('App')
 .controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
-  $scope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
+  var imgid = 1;
+  $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;
   $scope.strapline = {
     title : "",
     content : ""
   }
   $rootScope.getScheduleLocation = {};
+
   $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getScheduleLocation',
     {params : {
       no : $stateParams.no
@@ -21,12 +23,14 @@ angular.module('App')
 
   $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
     {params : {
-      dDate : $scope.dSchedule.departureDate,
-      aDate : $scope.dSchedule.arriveDate
+      dDate : $rootScope.dSchedule.departureDate,
+      aDate : $rootScope.dSchedule.arriveDate
     }})
     .success(function (result) {
-      $scope.period = result;
+      $rootScope.period = result;
+      console.log("기간 : " + result);
     });
+
 
   $scope.changeCover = function () {
 // Show the action sheet
@@ -54,7 +58,6 @@ angular.module('App')
         hideSheet();
       }, 5000);
   }
-
   $scope.choiceCamera = function () {
     var options = {
       quality : 75,
@@ -98,15 +101,15 @@ angular.module('App')
       url: $rootScope.url + '8090/rscamper-server/app/tourschedule/changeCover',
       method: 'POST',
       data: $.param({
-        no : $scope.dSchedule.recordNo,
-        isPhoto : $scope.dSchedule.picture,
+        no : $rootScope.dSchedule.recordNo,
+        isPhoto : $rootScope.dSchedule.picture,
         photo : 'data:image/jpeg;base64,' +  imageDATA
       }),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
     }).success(function (result) {
-      $scope.dSchedule = result;
+      $rootScope.dSchedule = result;
       detailSchedule.changeCover(result);
     });
   }
@@ -125,6 +128,12 @@ angular.module('App')
 
   $scope.openMemo = function () {
     $scope.locationMemo.show();
+    setTimeout(function () {
+      $("#edit-title").focus();
+    },0);
+    $("#edit-text").on('click',"img", function (e) {
+    $('img').remove("#"+e.target.id);
+    })
   }
 
   $scope.resize = function (id) {
@@ -138,7 +147,7 @@ angular.module('App')
       url: $rootScope.url + '8090/rscamper-server/app/tourschedule/updateStrapline',
       method: 'POST',
       data: $.param({
-        no : $scope.dSchedule.recordNo,
+        no : $rootScope.dSchedule.recordNo,
         title : s.title,
         content : s.content
       }),
@@ -146,8 +155,110 @@ angular.module('App')
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
     }).success(function (result) {
-      $scope.dSchedule = result;
+      $rootScope.dSchedule = result;
       $scope.modal.hide();
     });
   }
+
+  $scope.insertPicture = function () {
+    var editText = $("#edit-text");
+  }
+
+  $scope.qweqweqwe = function () {
+ /*   var asd = document.getElementById("edit-text");
+    $scope.imgId = 1;
+    var img = "<div id='div" + imgid + "'><img id='img"+ imgid + "' src='img/defaultscheduleImg.jpg' style='width: 100%; height: 100px'/></div><br>";
+    //document.execCommand('insertHTML',true, img);
+    asd.innerHTML += img;
+    setTimeout(function () {
+      $("#edit-text").select();
+    },0);
+    imgid++;*/
+
+    var input = document.getElementById("edit-text");
+    setTimeout(function () {
+      input.focus();
+      input.setSelectionRange(2,5);
+    },0);
+  }
+
+  $scope.textResult = function () {
+    console.log($("#edit-text").html());
+  }
+  $scope.delLocation = function (no) {
+    $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/delLocation',
+      {params : {
+        locationNo : no,
+        no : $stateParams.no
+      }})
+      .success(function (result) {
+        $rootScope.getScheduleLocation = result;
+      })
+  }
+
+  $scope.openCamera = function () {
+    var options = {
+      quality : 75,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : Camera.PictureSourceType.CAMERA,
+      allowEdit : true,
+      encodingType : Camera.EncodingType.JPEG,
+      targetWidth : 300,
+      targetHeight : 300,
+      popoverOptions : CameraPopoverOptions,
+      saveToPhotoAlbum : false
+    };
+    navigator.camera.getPicture(function (imageDATA) {
+      $scope.imgId = 1;
+      var img = "<img id='img"+ imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/>";
+      var diva = "<div id='div" + imgid + "'></div>";
+      document.execCommand('insertHTML',true, img);
+      var asd = document.getElementById("edit-text");
+      asd.innerHTML += img;
+      asd.innerHTML += diva;
+      asd.innerHTML += "　";
+      $("#edit-text").focus();
+      imgid++;
+    }, function (err) {
+
+    }, options);
+  }
+
+  $scope.openGallary = function () {
+    var options = {
+      quality : 75,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit : true,
+      encodingType : Camera.EncodingType.JPEG,
+      targetWidth : 300,
+      targetHeight : 300,
+      popoverOptions : CameraPopoverOptions,
+      saveToPhotoAlbum : false
+    };
+    navigator.camera.getPicture(function (imageDATA) {
+      var img = "<img id='img"+ imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/><div id='div" + imgid + "'></div>";
+      document.execCommand('insertHTML',true, img);
+      imgid++;
+      alert("asd");
+    }, function (err) {
+
+    }, options);
+  }
+
+  $scope.setBudget = function () {
+    alert($("#edit-text").html().length);
+  }
+
+  $("#cameraTest").click(function () {
+    var aaaa = document.getElementById('edit-text');
+    if (aaaa.createTextRange) {
+      var range = aaaa.createTextRange();
+      range.move('character', aaaa.value.length);    // input box 의 글자 수 만큼 커서를 뒤로 옮김
+      range.select();
+      console.log("Asdasd");
+    }
+    else if (this.selectionStart || this.selectionStart== '0')
+      this.selectionStart = this.value.length;
+  });
 });

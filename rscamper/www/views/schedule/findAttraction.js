@@ -146,6 +146,8 @@ angular.module('App')
 
     if (picker) {
       picker.then(function pickerViewFinish(output) {
+        console.log(place.mapx);
+        console.log(place.mapy);
         if (output) {
           // output is Array type
           $scope.pickerOutput = JSON.stringify(output);
@@ -156,10 +158,12 @@ angular.module('App')
               imgUrl : place.firstimage,
               contentCode : place.contentid,
               contentTypeId : place.contenttypeid,
-              recordNo : $stateParams.recordNo
+              recordNo : $stateParams.recordNo,
+              mapX : place.mapx,
+              mapY : place.mapy
           }})
             .success(function () {
-              $location.path("/detailSchedule/"+$stateParams.recordNo);
+              $location.path("/detailSchedule/detail/"+$stateParams.recordNo);
             })
         }
       });

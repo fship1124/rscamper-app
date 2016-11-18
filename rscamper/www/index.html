@@ -27,6 +27,8 @@
 
   <link href="css/scheduleStyle.css" rel="stylesheet">
   <link href="css/schedulePickerView.css" rel="stylesheet">
+  <link href="css/timeLine.css" rel="stylesheet">
+  <link href="css/chatStyle.css" rel="stylesheet">
 
   <!-- jQuery -->
   <script src="lib/jquery/dist/jquery.min.js"></script>
@@ -41,13 +43,17 @@
   <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
   <script src="cordova.js"></script>
 
+  <!-- moment -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+  <!-- angular moment -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.8.2/angular-moment.min.js"></script>
   <!-- sliding tabs -->
   <script src="js/slidingTabsDirective.js"></script>
   <!-- JSSHA twitter oauth -->
   <script src="lib/jsSHA/src/sha1.js"></script>
 
   <!-- google maps javascript -->
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8&signed_in=true&callback=initMap"></script>
 
   <!-- Firebase -->
   <script src="lib/firebase/firebase.js"></script>
@@ -75,6 +81,10 @@
   <script src="views/tour/tourInfo.js"></script>
   <script src="views/tour/tourDetail.js"></script>
 
+  <script src="views/schedule/schedule.js"></script>
+  <script src="views/schedule/scheduleTabs.js"></script>
+  <script src="views/schedule/scheduleDetail.js"></script>
+  <script src="views/schedule/findAttraction.js"></script>
 
   <script src="views/login/loginControllers.js"></script>
   <script src="views/setting/settingControllers.js"></script>
@@ -88,6 +98,9 @@
   <script src="views/schedule/findAttraction.js"></script>
   <script src="views/schedule/addLocationInfo.js"></script>
   <script src="views/schedule/detailLocationInfo.js"></script>
+  <script src="views/schedule/scheduleMap.js"></script>
+  <script src="views/chat/chatMain.js"></script>
+  <script src="views/chat/chatView.js"></script>
 </head>
 
 <body ng-app="App">
@@ -152,6 +165,9 @@
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
           <i class="icon ion-android-person"></i> 마이페이지
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="chat" ng-if="userStatus == true">
+          <i class="icon ion-chatboxes"></i> 채팅
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="setting">
           <i class="icon ion-gear-a"></i> 설정
