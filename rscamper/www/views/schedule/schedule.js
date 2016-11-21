@@ -79,7 +79,7 @@ angular.module('App')
       }
 
       $scope.moveDetail = function (no) {
-        $location.path("/detailSchedule/"+no);
+        $location.path("/detailSchedule/detail/"+no);
       }
 
   });

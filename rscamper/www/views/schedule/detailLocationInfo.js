@@ -5,6 +5,7 @@ angular.module('App')
   .controller('detailLocationInfoCtrl',function ($scope, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicPlatform, $ionicPopover, $ionicModal, $ionicScrollDelegate, pickerView, $location, detailLocationInfo) {
     $scope.detailInfo = detailLocationInfo.getLocationInfo($stateParams.locationNo);
     $scope.locationMap = {};
+    $scope.likeCount = 0;
     $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
       {params : {
         contentTypeId : $scope.detailInfo.contentTypeId,
@@ -40,6 +41,17 @@ angular.module('App')
             initialize();
           })
       });
+    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/checkedIsLike",
+      {params : {
+        no : $scope.detailInfo.contentCode,
+        uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+      }})
+      .success(function (data) {
+        $scope.isLiked = false;
+        if (data == true) {
+          $scope.isLiked = true;
+        }
+      });
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins.keyboard) {
         cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -69,6 +81,14 @@ angular.module('App')
       $scope.map = map;
     }
 
+    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/locationLikeCount",
+      {params : {
+        no : $scope.detailInfo.contentCode
+      }})
+      .success(function (data) {
+        $scope.likeCount = data;
+      })
+
     $scope.likePlus = function (code) {
       $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/insertLikePlus",
         {params : {
@@ -76,7 +96,20 @@ angular.module('App')
           uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
         }})
         .success(function (data) {
-          console.log(data);
+          $scope.isLiked = true;
+          $scope.likeCount = data;
+        })
+    }
+
+    $scope.removeLiked = function (code) {
+      $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/removeLiked",
+        {params : {
+          no : code,
+          uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+        }})
+        .success(function (data) {
+          $scope.isLiked = false;
+          $scope.likeCount = data;
         })
     }
   })
