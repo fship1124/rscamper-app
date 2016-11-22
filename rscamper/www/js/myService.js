@@ -49,6 +49,25 @@ angular.module('App')
       }
     }
   })
+  .factory('locationCategory', function ($rootScope, $http) {
+    var userCount = 0;
+    return {
+      detailCategory : function (no) {
+        for (var i = 0; i < $rootScope.codeTb.length; i++) {
+          if ($rootScope.codeTb[i].codeNo == no) {
+            return $rootScope.codeTb[i];
+          }
+        }
+      },
+      getChatRoom : function (no) {
+        for (var i = 0; i < $rootScope.roomList.length; i++) {
+          if ($rootScope.roomList[i].chatRoomInfoNo == no) {
+            return $rootScope.roomList[i];
+          }
+        }
+      }
+    }
+  })
   .factory('pickerView', ['$compile', '$rootScope', '$timeout', '$q', '$ionicScrollDelegate', '$ionicBackdrop',
     function($compile, $rootScope, $timeout, $q, $ionicScrollDelegate, $ionicBackdrop) {
 
