@@ -4,6 +4,29 @@
     <ion-slide ion-slide-tab-label="전체" ui-sref="main.main">
       <ion-nav-view name="main-tab"></ion-nav-view>
     </ion-slide>
+    <ion-slide ion-slide-tab-label="추천여행지4">
+     <div ng-include src="'views/main/tourTab.html'"></div>
+    </ion-slide>
+    <ion-slide ion-slide-tab-label="추천여행지5" ui-sref="main.tour">
+      <ion-nav-view>
+        <ion-content>
+          <div style="height: 100%;">
+            <div class="row" ng-repeat="photo in photos" ng-if="$index % 2 === 0">
+              <div class="col col-50" ng-if="$index < photos.length">
+                <img ng-src="{{photos[$index].src}}" width="100%"/>
+                <span> 제목 Item {{ photos[$index].id }}</span><br>
+                <span> 작성자 </span>
+              </div>
+              <div class="col col-50" ng-if="$index + 1 < photos.length">
+                <img ng-src="{{photos[$index + 1].src}}" width="100%"/>
+                <span> 제목 Item {{ photos[$index+1].id }}</span><br>
+                <span> 작성자 </span>
+              </div>
+            </div>
+          </div>
+        </ion-content>
+      </ion-nav-view>
+    </ion-slide>
     <ion-slide ion-slide-tab-label="추천여행지" ui-sref="main.tour">
       <ion-nav-view name="tour-tab"></ion-nav-view>
     </ion-slide>
@@ -57,33 +80,3 @@
     <!--</ion-tab>-->
   <!--</ion-tabs>-->
 <!--</ion-view>-->
-<!--<ion-view view-title="hello">-->
-  <!--<ion-content>-->
-    <!--<ion-tabs class="tabs-energized tabs-striped tabs-top">-->
-      <!--<ion-tab icon-on="ion-social-bitcoin" icon-off="ion-social-bitcoin-outline" ui-sref="app.main"></ion-tab>-->
-      <!--<ion-tab icon-on="ion-social-bitcoin" icon-off="ion-social-bitcoin-outline" ui-sref="app.main.tour"></ion-tab>-->
-      <!--<ion-tab icon-on="ion-social-bitcoin" icon-off="ion-social-bitcoin-outline" ui-sref="app.main.post"></ion-tab>-->
-    <!--</ion-tabs>-->
-  <!--</ion-content>-->
-<!--</ion-view>-->
-
-<!--<ion-view view-title="hello">
-  <ion-content>
-    <div class="tabs-icon-top tabs-striped tabs-top tabs-color-energized mainTab-div" style="position: static; margin-bottom: 15px;">
-      <div class="tabs mainTab" style="position: static;">
-        <a class="tab-item mainTab-a" ng-class="{active : tab == 'main'}" data-ink-color="#ef473a" data-ink-opacity=".35" ui-sref="app.main" ng-click="type('main')">
-          <span class="mainTab-span">전체</span>
-          &lt;!&ndash;<i class="icon ion-home"><span class="myTab-span">포스트</span></i>&ndash;&gt;
-        </a>
-        <a class="tab-item mainTab-a" ng-class="{active : tab == 'tour'}" data-ink-color="#ef473a" data-ink-opacity=".35" ui-sref="app.main.tour" ng-click="type('tour')">
-          <span class="mainTab-span">추천여행지</span>
-          &lt;!&ndash;<i class="icon ion-star"><span class="myTab-span">포스트</span></i>&ndash;&gt;
-        </a>
-        <a class="tab-item mainTab-a" ng-class="{active : tab == 'post'}" data-ink-color="#ef473a" data-ink-opacity=".35" ui-sref="app.main.post" ng-click="type('post')">
-          <span class="mainTab-span">포스트</span>
-          &lt;!&ndash;<i class="icon ion-gear-a"><span class="myTab-span">포스트</span></i>&ndash;&gt;
-        </a>
-      </div>
-    </div>
-  </ion-content>
-</ion-view>-->

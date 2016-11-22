@@ -11,7 +11,7 @@ angular.module('App')
 
 
     $cordovaGeolocation.getCurrentPosition().then(function (data) {
-      $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude}})
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
         .success(function (response) {
           $scope.location = {
             lat : data.coords.latitude,
@@ -66,3 +66,9 @@ angular.module('App')
     $scope.photos.push({id: i, src:'http://lorempixel.com/250/250?q='+(i%17)});
   };
 })
+  .controller('TourTabCtrl', function ($scope) {
+    $scope.photos = [];
+    for (var i = 0; i < 100; i++) {
+      $scope.photos.push({id: i, src:'http://lorempixel.com/250/250?q='+(i%17)});
+    };
+  });

@@ -2,13 +2,6 @@
   overflow-x: hidden;  /* default value is 'scroll' */
 }
 
-ion-slide {
-    background-color: #f0f0f0;
-}
-
-ion-slide:nth-child(2n) {
-    background-color: #fff;
-}
 
 .slider {
     height: 100%;

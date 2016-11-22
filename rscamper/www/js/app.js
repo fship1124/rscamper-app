@@ -63,7 +63,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/tour',
           views: {
             'tour-tab': {
-              templateUrl: 'views/main/tourTab.html'
+              templateUrl: 'views/main/tourTab.html',
+              controller: 'TourTabCtrl'
             }
           }
         })
@@ -71,7 +72,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/post',
           views: {
             'post-tab': {
-              templateUrl: 'views/main/postTab.html'
+              templateUrl: 'views/main/postTab.html',
+              controller: 'PostTabCtrl'
             }
           }
         })
@@ -161,11 +163,17 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl : '/views/chat/chatMain.html',
           controller : 'chatMainCtrl'
         })
-        .state('view', {
+        .state('categoryDetail', {
           chche : false,
-          url : '/chat/:no',
-          templateUrl : '/views/chat/chatView.html',
-          controller : 'chatViewCtrl'
+          url : '/categoryDetail/:no',
+          templateUrl : '/views/chat/chatRoomList.html',
+          controller : 'chatRoomListCtrl'
+        })
+        .state('chatRoom', {
+          chche : false,
+          url : '/chatRoom/:chatRoomNo',
+          templateUrl : '/views/chat/chatDetail.html',
+          controller : 'chatDetailCtrl'
         })
 
 
