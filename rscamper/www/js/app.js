@@ -158,7 +158,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'findAttractionCtrl'
         })
         .state('chat', {
-          cache : false,
           url : '/chat',
           templateUrl : '/views/chat/chatMain.html',
           controller : 'chatMainCtrl'

@@ -3,6 +3,7 @@
  */
 angular.module('App')
 .controller('chatMainCtrl',function ($scope, $ionicModal, $http, $rootScope) {
+  $rootScope.socket = io.connect($rootScope.url + "10001");
   $http.get($rootScope.url + "8090/rscamper-server/app/chat/getCodeName", {
     params : {
       codeName : 'areacode'

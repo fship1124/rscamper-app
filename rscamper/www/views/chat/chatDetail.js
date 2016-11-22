@@ -3,7 +3,7 @@
  */
 angular.module('App')
     .controller('chatDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicScrollDelegate, $http, $ionicSideMenuDelegate, locationCategory, $timeout, $ionicModal) {
-/*      $http.get($rootScope.url + "8090/rscamper-server/app/chat/getChatRoomInfo", {
+      /*     $http.get($rootScope.url + "8090/rscamper-server/app/chat/getChatRoomInfo", {
         params : {
           roomNo : $stateParams.chatRoomNo
         }
@@ -32,20 +32,23 @@ angular.module('App')
         $scope.userInfoList = data;
         $scope.userCount = data.length;
       });*/
+      var initData = {
+        type : 'join',
+        name : $rootScope.rootUser.displayName,
+        room : $stateParams.chatRoomNo,
+        photoUrl : $rootScope.rootUser.photoUrl,
+        uid : $rootScope.rootUser.userUid
+      }
+      $rootScope.socket.emit("connection", initData);
+
       var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
-      $scope.roomInfo = locationCategory.getChatRoom($stateParams.chatRoomNo);
+      $rootScope.roomInfo = locationCategory.getChatRoom($stateParams.chatRoomNo);
       $scope.scrollDown = true;
       $scope.toggleLeftSideMenu = function() {
         $ionicSideMenuDelegate.toggleRight();
       };
       console.log($rootScope.rootUser);
-      var socket = io.connect($rootScope.url + "10001");
-      socket.emit("connection",{
-        type : 'join',
-        name : $rootScope.rootUser.displayName,
-        room : $stateParams.chatRoomNo,
-        photoUrl : $rootScope.rootUser.photoUrl
-      });
+
 
   $scope.msgTextBox = [];
   $scope.msg = {
@@ -53,13 +56,11 @@ angular.module('App')
     msg : "hi"
   }
   //최초 접속
-  socket.on('system',function (data) {
+      $rootScope.socket.on('system',function (data) {
     var msgTextBox = document.getElementById('msgList');
     msgTextBox.innerHTML += "<div style='width: 100%; text-align: center'>" + data.message + "</div>";
   })
-      socket.on("message", function (data) {
-    /*$scope.msgTextBox.push($scope.msg);
-    console.log($scope.msgTextBox);*/
+      $rootScope.socket.on("message", function (data) {
     console.log(data);
     writeText(data,"other");
   });
@@ -68,7 +69,7 @@ angular.module('App')
     var msgList = document.getElementById('msgList');
     var html = '<div class="item" style="padding: 0 !important; border: none">';
     if (user == 'other') {
-      html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic left" src="img/adam.jpg" onerror="onProfilePicError(this)">';
+      html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic left" src="' + data.photoUrl + '" onerror="onProfilePicError(this)">';
       html += '<div class="chat-bubble left" style="white-space:normal;"><pre>' + data.message + '</pre>';
     }
     if (user =='user') {
@@ -91,9 +92,10 @@ angular.module('App')
   $scope.sendMsgText = function () {
     var data = {
       name : $rootScope.rootUser.displayName,
-      message : $scope.msgContent
+      message : $scope.msgContent,
+      uid : $rootScope.rootUser.userUid
     }
-    socket.emit('user',data);
+    $rootScope.socket.emit('user',data);
     writeText(data,"user");
     $scope.msgContent = "";
     $ionicScrollDelegate.scrollBottom();
@@ -124,7 +126,6 @@ angular.module('App')
       }).then(function(modal) {
         $scope.modal = modal;
       });
-
       $scope.closeModal = function () {
         $scope.modal.hide();
       }
