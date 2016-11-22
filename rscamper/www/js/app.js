@@ -63,7 +63,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/tour',
           views: {
             'tour-tab': {
-              templateUrl: 'views/main/tourTab.html'
+              templateUrl: 'views/main/tourTab.html',
+              controller: 'TourTabCtrl'
             }
           }
         })
@@ -71,7 +72,8 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/post',
           views: {
             'post-tab': {
-              templateUrl: 'views/main/postTab.html'
+              templateUrl: 'views/main/postTab.html',
+              controller: 'PostTabCtrl'
             }
           }
         })

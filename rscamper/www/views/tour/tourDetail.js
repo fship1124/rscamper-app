@@ -27,14 +27,16 @@ angular.module('App')
     )
       .success(function (data) {
         var itemList = data.response.body.items.item;
-        for (var i = 0; i < itemList.length; i++) {
-          var item = itemList[i];
-          item.infoname = item.infoname.replace(/ /gi, "");
-          if (item.infoname == '입장료' || item.infoname == '관람료' || item.infoname == '시설이용료') {
-            $scope.admissionFee = item.infotext;
+        if(itemList) {
+          for (var i = 0; i < itemList.length; i++) {
+            var item = itemList[i];
+            item.infoname = item.infoname.replace(/ /gi, "");
+            if (item.infoname == '입장료' || item.infoname == '관람료' || item.infoname == '시설이용료') {
+              $scope.admissionFee = item.infotext;
+            };
           };
-        };
-        console.log("infoList", itemList);
+          console.log("infoList", itemList);
+        }
         if ($scope.admissionFee) {
           document.querySelector("#info-div").innerHTML = $scope.admissionFee;
         } else {
