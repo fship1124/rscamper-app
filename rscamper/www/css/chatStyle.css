@@ -1,3 +1,9 @@
+.homeView {
+}
+/* allows the bar-footer to be elastic /*
+/* optionally set a max-height */
+/* maxlength on the textarea will prevent /*
+/* it from getting too large also */
 .bar-footer {
   overflow: visible !important;
 }
@@ -19,7 +25,24 @@ at the bottom as the textarea resizes */
   position: relative;
   height: 100%;
   width: 50px;
-  top: 7px;
+  right : 6%;
+}
+
+button.photo {
+  position: absolute;
+  bottom: 0px;
+  left: -43px;
+}
+
+.scrollDownBtn{
+  padding: 0 !important;
+  right: 10px;
+  bottom: 60px;
+}
+
+.scrollDownBtn:before{
+  background-color: white;
+  border-radius: 100%;
 }
 
 .footer-btn {
@@ -88,6 +111,11 @@ img.profile-pic.right {
   bottom: -7.5px;
 }
 
+.chat-bubble img{
+  max-width:100%;
+  max-height:300px;
+}
+
 .chat-bubble.left {
   background-color: #e6e5eb;
   float: left;
@@ -98,40 +126,26 @@ img.profile-pic.right {
   background-color: #e6e5eb;
   left: 10px;
   -webkit-transform: rotate(70deg) skew(5deg);
+  transform: rotate(70deg) skew(5deg);
 }
 
 .chat-bubble.right {
-  background-color: #158ffe;
+  background-color: #e42012;
   color: #fff;
   float: right;
   margin-right: 55px;
 }
 
 .chat-bubble.right:before {
-  background-color: #158ffe;
+  background-color: #e42012;
   right: 10px;
   -webkit-transform: rotate(118deg) skew(-5deg);
+  transform: rotate(118deg) skew(-5deg);
 }
 
 .chat-bubble.right a.autolinker {
   color: #fff;
   font-weight: bold;
-}
-
-.user-messages-top-icon {
-  font-size: 28px;
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  top: -3px;
-  right: 5px;
-}
-
-.msg-header-username {
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  top: -3px;
 }
 
 input, textarea, .item-input, .item-input-wrapper {
@@ -149,41 +163,4 @@ input, textarea, .item-input, .item-input-wrapper {
 a.autolinker {
   color: #3b88c3;
   text-decoration: none;
-}
-
-/* loading */
-.loader-center {
-  height: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-direction: normal;
-  -moz-box-direction: normal;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.loader .ion-loading-c {
-  font-size: 64px;
 }
