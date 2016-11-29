@@ -163,13 +163,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller : 'chatMainCtrl'
         })
         .state('categoryDetail', {
-          chche : false,
+          cache : false,
           url : '/categoryDetail/:no',
           templateUrl : '/views/chat/chatRoomList.html',
           controller : 'chatRoomListCtrl'
         })
         .state('chatRoom', {
-          chche : false,
           url : '/chatRoom/:chatRoomNo',
           templateUrl : '/views/chat/chatDetail.html',
           controller : 'chatDetailCtrl'

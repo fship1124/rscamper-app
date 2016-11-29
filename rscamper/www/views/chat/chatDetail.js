@@ -2,8 +2,12 @@
  * Created by 이성주 on 2016-11-17.
  */
 angular.module('App')
-    .controller('chatDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicScrollDelegate, $http, $ionicSideMenuDelegate, locationCategory, $timeout, $ionicModal) {
-      /*     $http.get($rootScope.url + "8090/rscamper-server/app/chat/getChatRoomInfo", {
+    .controller('chatDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicScrollDelegate, $http, $ionicSideMenuDelegate, locationCategory, $timeout, $ionicModal, $window) {
+      var initTextSize = $("#inputText").css('height');
+      var initFooterSize = $("#footerBar").css('height');
+
+      $rootScope.socket = io.connect("http://192.168.0.190:10001");
+      /*     $http.get($rootScope.url + "8081/app/chat/getChatRoomInfo", {
         params : {
           roomNo : $stateParams.chatRoomNo
         }
@@ -12,7 +16,8 @@ angular.module('App')
           $scope.roomInfo = data;
           console.log($scope.roomInfo);
         })*/
-      $http.get($rootScope.url + "8090/rscamper-server/app/chat/joinRoom", {
+      $scope.viewRecentlyChat = false;
+      $http.get($rootScope.url + "8081/app/chat/joinRoom", {
         params : {
           chatRoomInfoNo : $stateParams.chatRoomNo,
           userUid : $rootScope.rootUser.userUid
@@ -22,8 +27,10 @@ angular.module('App')
           $scope.userInfoList = data;
           $scope.userCount = data.length;
         });
+      var initList = document.getElementById('msgList');
+      initList.innerHTML = " ";
 
-     /* $http.get($rootScope.url + "8090/rscamper-server/app/chat/selectRoomUserList",{
+     /* $http.get($rootScope.url + "8081/app/chat/selectRoomUserList",{
         params : {
           chatRoomInfoNo : $stateParams.chatRoomNo
         }
@@ -32,14 +39,15 @@ angular.module('App')
         $scope.userInfoList = data;
         $scope.userCount = data.length;
       });*/
+
       var initData = {
-        type : 'join',
         name : $rootScope.rootUser.displayName,
         room : $stateParams.chatRoomNo,
         photoUrl : $rootScope.rootUser.photoUrl,
         uid : $rootScope.rootUser.userUid
       }
-      $rootScope.socket.emit("connection", initData);
+      //$rootScope.socket.emit("connection", initData);
+      $rootScope.socket.emit('joinRoom',initData);
 
       var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
       $rootScope.roomInfo = locationCategory.getChatRoom($stateParams.chatRoomNo);
@@ -54,33 +62,60 @@ angular.module('App')
   $scope.msg = {
     sendId : "aaa",
     msg : "hi"
-  }
+  };
   //최초 접속
-      $rootScope.socket.on('system',function (data) {
-    var msgTextBox = document.getElementById('msgList');
-    msgTextBox.innerHTML += "<div style='width: 100%; text-align: center'>" + data.message + "</div>";
-  })
-      $rootScope.socket.on("message", function (data) {
-    console.log(data);
-    writeText(data,"other");
+  $rootScope.socket.on('system',function (data) {
+    initList.innerHTML += "<div style='width: 100%; text-align: center'>" + data.message + "</div>";
   });
-
-  function writeText(data,user) {
+  $rootScope.socket.on("message", function (data) {
+    console.log(data);
+    var currentTop = viewScroll.getScrollPosition().top;
+    console.log("currentTop",currentTop);
+    var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
+    console.log("maxScrollableDistanceFromTop",maxScrollableDistanceFromTop);
+    writeText(data,"other", data.type);
+    if (maxScrollableDistanceFromTop - currentTop >= 100) {
+      $scope.writeRecentlyChat(data);
+/*      $("#chatUserImg").attr('src', data.photoUrl);
+      $("#chatUserName").html(data.name);
+      $("#chatUserContent").html(data.message);*/
+      console.log("Asdasd");
+    } else {
+      $ionicScrollDelegate.scrollBottom();
+    }
+  });
+  function writeText(data,user,type) {
     var msgList = document.getElementById('msgList');
     var html = '<div class="item" style="padding: 0 !important; border: none">';
-    if (user == 'other') {
-      html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic left" src="' + data.photoUrl + '" onerror="onProfilePicError(this)">';
-      html += '<div class="chat-bubble left" style="white-space:normal;"><pre>' + data.message + '</pre>';
+    if(type == 'text') {
+      if (user == 'other') {
+        html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic left" src="' + data.photoUrl + '" onerror="onProfilePicError(this)">';
+        html += '<div class="chat-bubble left" style="white-space:normal;"><pre>' + data.message + '</pre>';
+      }
+      if (user =='user') {
+        html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic right" src="' + $rootScope.rootUser.photoUrl + '" onerror="onProfilePicError(this)">';
+        html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + $scope.msgContent  + '</pre>';
+      }
     }
-    if (user =='user') {
-      html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic right" src="' + $rootScope.rootUser.photoUrl + '" onerror="onProfilePicError(this)">';
-      html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + $scope.msgContent  + '</pre>';
+    if (type == 'image') {
+      if (user == 'other') {
+        html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic left" src="' + data.photoUrl + '" onerror="onProfilePicError(this)" >';
+        html += '<div class="chat-bubble left" style="white-space:normal;"><img id="viewImg" src="' + data.imgUrl  +' " onclick="asdasd()"/>';
+      }
+      if (user =='user') {
+        html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic right" src="' + $rootScope.rootUser.photoUrl + '" onerror="onProfilePicError(this)">';
+        html += '<div class="chat-bubble right" style="white-space:normal;"><img src="' + data.imgUrl  +' " />';
+      }
     }
     html += '<div class="message-detail"><span class="bold">' + data.name + '</span>,';
     html += '<span>aaa</span></div>';
     html += '</div>';
     html += '</div>';
     msgList.innerHTML += html;
+
+    function asdsad() {
+      alert("asd");
+    }
   }
   for (var i = 0; i < $rootScope.codeTb.length; i++) {
     if ($stateParams.no == $rootScope.codeTb[i].codeNo) {
@@ -90,13 +125,17 @@ angular.module('App')
   }
 
   $scope.sendMsgText = function () {
+    $("#footerBar").css('height', initFooterSize);
+    $("#inputText").css('height', initTextSize);
+    $scope.putPhoto = true;
     var data = {
+      type : "text",
       name : $rootScope.rootUser.displayName,
       message : $scope.msgContent,
       uid : $rootScope.rootUser.userUid
     }
     $rootScope.socket.emit('user',data);
-    writeText(data,"user");
+    writeText(data,"user","text");
     $scope.msgContent = "";
     $ionicScrollDelegate.scrollBottom();
   }
@@ -115,6 +154,7 @@ angular.module('App')
         $timeout(function () {
           var currentTop = viewScroll.getScrollPosition().top;
           var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
+          console.log("maxScrollableDistanceFromTop",maxScrollableDistanceFromTop);
           $scope.scrollDown = (currentTop >= maxScrollableDistanceFromTop);
           $scope.$apply();
         }, 0);
@@ -128,5 +168,89 @@ angular.module('App')
       });
       $scope.closeModal = function () {
         $scope.modal.hide();
+      }
+
+      function readImage(input) {
+        if ( input.files && input.files[0] ) {
+          var FR= new FileReader();
+          FR.onload = function(e) {
+            var data = {
+              type : "image",
+              name : $rootScope.rootUser.displayName,
+              imgUrl : e.target.result,
+              uid : $rootScope.rootUser.userUid
+            }
+            $rootScope.socket.emit('user',data);
+            writeText(data,"user","image");
+            console.log(e.target.result);
+          };
+          FR.readAsDataURL( input.files[0] );
+        }
+      }
+      $("#imgTest").change(function () {
+        readImage(this);
+      });
+
+
+      $scope.writeRecentlyChat = function (data) {
+          var html = "";
+          html += '<div id="scrollMove" style="background-color: #b2b2b2; width: 100%; height: 100%; position: absolute; opacity: 0.7;">';
+          html += '<img id="chatUserImg" class="profile-pic left" src="'+ data.photoUrl + '" style="bottom: 4px; width: 34px; height: 34px"/>';
+          html += '<div id="chatUserName" style="position: absolute; left: 12%; width: 87%; height: 50%; font-weight: bold; color: black; font-size: small">' + data.name + '</div>';
+          html += '<div id="chatUserContent" style="position: absolute; left: 12%; top: 50%; width: 87%; height: 50%; color: black; text-overflow:ellipsis; white-space:nowrap; overflow:hidden">' + data.message + '</div>';
+          html += '</div>';
+
+          $("#recentlyChat").html(html);
+
+          $("#scrollMove").click(function () {
+            $ionicScrollDelegate.scrollBottom();
+            $("#recentlyChat").html("");
+          })
+      }
+
+/*      function viewChatMessage () {
+        $ionicScrollDelegate.scrollBottom();
+        $("#recentlyChat").html("");
+      }*/
+      $("#recentlyChat").css("height",$("#footerBar").css("height"));
+      $("#recentlyChat").css("top","-" + $("#footerBar").css("height"));
+      $scope.putPhoto = true;
+      $scope.resize = function () {
+        if($("#inputText").val() != "") {
+          $scope.putPhoto = false;
+        } else {
+          $scope.putPhoto = true;
+        }
+        var obj = document.getElementById('inputText');
+        obj.style.height = "1px";
+        obj.style.height = (5+obj.scrollHeight) + "px";
+        $("#footerBar").css("height",(19+obj.scrollHeight) + "px");
+        console.log(20+obj.scrollHeight);
+      }
+
+      $scope.putImg = function () {
+        var options = {
+          quality : 75,
+          destinationType : Camera.DestinationType.DATA_URL,
+          sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit : true,
+          encodingType : Camera.EncodingType.JPEG,
+          targetWidth : 300,
+          targetHeight : 300,
+          popoverOptions : CameraPopoverOptions,
+          saveToPhotoAlbum : false
+        };
+        navigator.camera.getPicture(function (imageDATA) {
+          var data = {
+            type : "image",
+            name : $rootScope.rootUser.displayName,
+            imgUrl : 'data:image/jpeg;base64,' + imageDATA,
+            uid : $rootScope.rootUser.userUid
+          }
+          $rootScope.socket.emit('user',data);
+          writeText(data,"user","image");
+        }, function (err) {
+
+        }, options);
       }
 })

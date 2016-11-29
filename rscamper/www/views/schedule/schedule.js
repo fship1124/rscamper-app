@@ -5,7 +5,7 @@ angular.module('App')
   .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule) {
     $rootScope.listCount = 0;
     $rootScope.url = "http://192.168.0.190:";
-    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/getschedule",{
+    $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
       params :{
         uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
       }
@@ -42,7 +42,7 @@ angular.module('App')
         tourSchedulePopup.alertPopup('도착 일자','도착 일자를 선택하세요.','fDate');
         return false;
       }
-        $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/insert",
+        $http.get($rootScope.url + "8081/app/tourschedule/insert",
           {params : {
             uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
             title : s.title,
@@ -63,7 +63,7 @@ angular.module('App')
         });
         confirmPopup.then(function (res) {
           if (res) {
-            $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/delSchedule',
+            $http.get($rootScope.url + '8081/app/tourschedule/delSchedule',
               {params : {
                 uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
                 no : no

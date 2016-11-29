@@ -1,8 +1,8 @@
 <ion-view title="detail">
   <ion-content>
     <div class="item item-divider">
-      <i class="ion-images"></i>
-      IMAGE
+      <i class="ion-images myIcon"></i>
+      이미지
     </div>
     <a class="item item-list-detail">
       <ion-scroll direction="x">
@@ -10,11 +10,60 @@
         <img ng-hide="isPhoto" src="../../img/no_image.gif" ng-click="showImages($index)" class="image-list-thumb">
       </ion-scroll>
     </a>
-    <div class="item item-divider">
-      <i class="ion-cash"></i>
-      ADMISSION FEE
+
+    <div id="test">
+      dd
     </div>
-    <div class="item item-list-detail" style="padding: 16px;" id="info-div">
+
+    <div ng-repeat="detail in detailList">
+      <div ng-if="detail.infoname == '요금'">
+        <div class="item item-divider">
+          <i class="ion-cash myDetailIcon"></i> 요금
+        </div>
+        <div class="item item-list-detail myDetailInfo">
+          {{detail.infotext}}
+        </div>
+      </div>
+      <div ng-if="detail.infoname == '촬영장소'">
+        <div class="item item-divider">
+          <i class="ion-film-marker myIcon"></i> 촬영장소
+        </div>
+        <div class="item item-list-detail myDetailInfo">
+          {{detail.infotext}}
+        </div>
+      </div>
+      <div ng-if="detail.infoname == '이용가능시설'">
+        <div class="item item-divider">
+          <i class="ion-ios-information-outline myIcon"></i> 이용가능시설
+        </div>
+        <div class="item item-list-detail myDetailInfo" id="aaasd">
+          {{detail.infotext}}
+        </div>
+      </div>
+      <div ng-if="detail.infoname == '화장실'">
+        <div class="item item-divider">
+          <i class="ion-woman myIcon"></i><i class="ion-man myIcon"></i> 화장실
+        </div>
+        <div class="item item-list-detail myDetailInfo">
+          {{detail.infotext}}
+        </div>
+      </div>
+      <div ng-if="detail.infoname == '시설이용료'">
+        <div class="item item-divider">
+          <i class="ion-card myIcon"></i> 시설이용료
+        </div>
+        <div class="item item-list-detail myDetailInfo">
+          {{detail.infotext}}
+        </div>
+      </div>
     </div>
+    </div>
+
+    <!--<div class="item item-divider">-->
+    <!--<i class="ion-cash"></i>-->
+    <!--요금-->
+    <!--</div>-->
+    <!--<div class="item item-list-detail" style="padding: 16px;" id="info-div">-->
+    <!--</div>-->
   </ion-content>
 </ion-view>

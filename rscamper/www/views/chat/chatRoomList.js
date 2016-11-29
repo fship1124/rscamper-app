@@ -5,7 +5,7 @@ angular.module("App")
 .controller('chatRoomListCtrl', function ($scope, $rootScope, $http, locationCategory, $stateParams) {
     $scope.location = locationCategory.detailCategory($stateParams.no);
 
-    $http.get($rootScope.url + "8090/rscamper-server/app/chat/getChatRoom", {
+    $http.get($rootScope.url + "8081/app/chat/getChatRoom", {
       params : {
         no : $stateParams.no
       }
@@ -14,4 +14,17 @@ angular.module("App")
         $rootScope.roomList = data;
         console.log($rootScope.roomList);
       })
+
+  $http.get($rootScope.url + "8081/app/chat/delChatUser", {
+    params : {
+      uid : $rootScope.rootUser.userUid
+    }
+  })
+    .success(function () {
+      console.log("삭제 완료");
+    });
+
+  $rootScope.socket.emit('exit',{
+    uid : $rootScope.rootUser.userUid
+  });
 })
