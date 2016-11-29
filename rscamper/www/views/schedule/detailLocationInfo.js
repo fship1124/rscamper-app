@@ -41,7 +41,7 @@ angular.module('App')
             initialize();
           })
       });
-    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/checkedIsLike",
+    $http.get($rootScope.url + "8081/app/tourschedule/checkedIsLike",
       {params : {
         no : $scope.detailInfo.contentCode,
         uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
@@ -81,7 +81,7 @@ angular.module('App')
       $scope.map = map;
     }
 
-    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/locationLikeCount",
+    $http.get($rootScope.url + "8081/app/tourschedule/locationLikeCount",
       {params : {
         no : $scope.detailInfo.contentCode
       }})
@@ -90,7 +90,7 @@ angular.module('App')
       })
 
     $scope.likePlus = function (code) {
-      $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/insertLikePlus",
+      $http.get($rootScope.url + "8081/app/tourschedule/insertLikePlus",
         {params : {
           no : code,
           uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
@@ -102,7 +102,7 @@ angular.module('App')
     }
 
     $scope.removeLiked = function (code) {
-      $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/removeLiked",
+      $http.get($rootScope.url + "8081/app/tourschedule/removeLiked",
         {params : {
           no : code,
           uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"

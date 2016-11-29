@@ -12,7 +12,7 @@ angular.module('App')
   }
   $rootScope.getScheduleLocation = {};
 
-  $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getScheduleLocation',
+  $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
     {params : {
       no : $stateParams.no
     }})
@@ -21,7 +21,7 @@ angular.module('App')
       console.log(data);
     })
 
-  $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
+  $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
     {params : {
       dDate : $rootScope.dSchedule.departureDate,
       aDate : $rootScope.dSchedule.arriveDate
@@ -98,7 +98,7 @@ angular.module('App')
 
   $scope.updateCover = function (imageDATA) {
     $http({
-      url: $rootScope.url + '8090/rscamper-server/app/tourschedule/changeCover',
+      url: $rootScope.url + '8081/app/tourschedule/changeCover',
       method: 'POST',
       data: $.param({
         no : $rootScope.dSchedule.recordNo,
@@ -144,7 +144,7 @@ angular.module('App')
 
   $scope.updateStrapline = function (s) {
     $http({
-      url: $rootScope.url + '8090/rscamper-server/app/tourschedule/updateStrapline',
+      url: $rootScope.url + '8081/app/tourschedule/updateStrapline',
       method: 'POST',
       data: $.param({
         no : $rootScope.dSchedule.recordNo,
@@ -186,7 +186,7 @@ angular.module('App')
     console.log($("#edit-text").html());
   }
   $scope.delLocation = function (no) {
-    $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/delLocation',
+    $http.get($rootScope.url + '8081/app/tourschedule/delLocation',
       {params : {
         locationNo : no,
         no : $stateParams.no
