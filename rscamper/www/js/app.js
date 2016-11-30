@@ -106,6 +106,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        .state('scheduleTab.bookMark', {
+          url: '/bookMark',
+          views: {
+            'bookMark-tab': {
+              templateUrl: 'views/myPage/myPageMain.html',
+              controller: 'MyPageMainCtrl'
+            }
+          }
+        })
         .state('detailTab', {
           cache: false,
           url: '/detailSchedule',
@@ -308,7 +317,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'MyPageMainCtrl'
         })
       ;
-        
+
       // 기초 페이지
       $urlRouterProvider.otherwise('/main/main');
     })

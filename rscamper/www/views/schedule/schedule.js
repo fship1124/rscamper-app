@@ -7,7 +7,7 @@ angular.module('App')
     $rootScope.url = "http://192.168.0.190:";
     $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
       params :{
-        uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+        uid : $rootScope.rootUser.userUid
       }
     })
       .success(function (result) {
@@ -44,7 +44,7 @@ angular.module('App')
       }
         $http.get($rootScope.url + "8081/app/tourschedule/insert",
           {params : {
-            uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
+            uid   : $rootScope.rootUser.userUid,
             title : s.title,
             sDate : s.startDate,
             fDate : s.finishDate
@@ -65,7 +65,7 @@ angular.module('App')
           if (res) {
             $http.get($rootScope.url + '8081/app/tourschedule/delSchedule',
               {params : {
-                uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
+                uid : $rootScope.rootUser.userUid,
                 no : no
               }})
               .success(function (result) {

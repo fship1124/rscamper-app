@@ -44,7 +44,7 @@ angular.module('App')
     $http.get($rootScope.url + "8081/app/tourschedule/checkedIsLike",
       {params : {
         no : $scope.detailInfo.contentCode,
-        uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+        uid : $rootScope.rootUser.userUid
       }})
       .success(function (data) {
         $scope.isLiked = false;
@@ -93,7 +93,7 @@ angular.module('App')
       $http.get($rootScope.url + "8081/app/tourschedule/insertLikePlus",
         {params : {
           no : code,
-          uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+          uid : $rootScope.rootUser.userUid
         }})
         .success(function (data) {
           $scope.isLiked = true;
@@ -105,7 +105,7 @@ angular.module('App')
       $http.get($rootScope.url + "8081/app/tourschedule/removeLiked",
         {params : {
           no : code,
-          uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+          uid : $rootScope.rootUser.userUid
         }})
         .success(function (data) {
           $scope.isLiked = false;
