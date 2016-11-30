@@ -182,6 +182,10 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl : '/views/chat/chatDetail.html',
           controller : 'chatDetailCtrl'
         })
+        .state('testasd', {
+          url : '/testasd',
+          templateUrl : '/views/tour/testasd.html'
+        })
 
 
 
