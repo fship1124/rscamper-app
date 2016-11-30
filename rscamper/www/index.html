@@ -161,17 +161,17 @@
         <ion-item nav-clear menu-close ui-sref="tourInfo">
           <i class="icon ion-android-train"></i> 주변관광지
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule">
-          <i class="icon ion-earth"></i> 일정
-        </ion-item>
         <ion-item nav-clear menu-close ui-sref="community.main">
           <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
+<!--        <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
           <i class="icon ion-android-person"></i> 마이페이지
-        </ion-item>
+        </ion-item>-->
         <ion-item nav-clear menu-close ui-sref="chat" ng-if="userStatus == true">
           <i class="icon ion-chatboxes"></i> 채팅
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule" ng-if="userStatus == true">
+          <i class="icon ion-android-person"></i> 마이페이지
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="setting">
           <i class="icon ion-gear-a"></i> 설정
