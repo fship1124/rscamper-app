@@ -4,6 +4,6 @@ angular.module('App')
 
     $scope.photos = [];
     for (var i = 0; i < 100; i++) {
-      $scope.photos.push({id: i, src:'nothing'});
+      $scope.photos.push({id: i, src:'http://lorempixel.com/250/250?q='+(i%17)});
     }
   });

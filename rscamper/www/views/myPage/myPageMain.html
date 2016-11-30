@@ -1,5 +1,25 @@
-<ion-view view-title="{{rootUser.displayName}}님의 페이지">
+<ion-view id="myPageView" view-title="{{rootUser.displayName}}님의 페이지">
   <ion-content overflow-scroll="false">
-
+    <ion-list>
+      <ion-item ng-repeat="my in myItems" class="item-light item-complex mypage-item">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="mypage-img" ng-src="{{images[$index]}}"/>
+          <div class="mypage-title">{{my}}</div>
+          <div class="mypage-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" src="../../img/User-Default.jpg">
+              <p class="mypage-author">여행또갈래</p>
+            </a>
+          </div>
+          <div class="mypage-delbtn" onclick="console.log('클릭')"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
+          <div class="mypage-info">
+            <div class="item-divider mypage-info-title">친구랑 같이 가서 시간 보내고 싶은 곳 총정리!</div>
+            <div class="item-text-wrap mypage-info-content">
+              내가 제주를 안 간 사이에 또 이렇게 좋은 곳이 많이 생겼다. 킵해두고 제주도 갈 때 꺼내봐야지
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

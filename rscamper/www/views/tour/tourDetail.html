@@ -1,7 +1,7 @@
 <ion-view title="detail">
   <ion-content>
-    <div class="item item-divider">
-      <i class="ion-images myIcon"></i>
+    <div class="item item-divider myDivider">
+      <i class="ion-images myDetailIcon"></i>
       이미지
     </div>
     <a class="item item-list-detail">
@@ -10,60 +10,38 @@
         <img ng-hide="isPhoto" src="../../img/no_image.gif" ng-click="showImages($index)" class="image-list-thumb">
       </ion-scroll>
     </a>
-
-    <div id="test">
-      dd
-    </div>
-
     <div ng-repeat="detail in detailList">
-      <div ng-if="detail.infoname == '요금'">
-        <div class="item item-divider">
-          <i class="ion-cash myDetailIcon"></i> 요금
+        <div ng-if="detail.infoname == '요금'">
+          <div class="item item-divider myDivider">
+            <i class="ion-cash myDetailIcon"></i> 요금
+          </div>
+          <div class="item item-list-detail myDetailInfo" ng-bind-html="detail.infotext"></div>
         </div>
-        <div class="item item-list-detail myDetailInfo">
-          {{detail.infotext}}
+        <div ng-if="detail.infoname == '촬영장소'">
+          <div class="item item-divider myDivider">
+            <i class="ion-film-marker myDetailIcon"></i> 촬영장소
+          </div>
+          <div class="item item-list-detail myDetailInfo" ng-bind-html="detail.infotext"></div>
         </div>
-      </div>
-      <div ng-if="detail.infoname == '촬영장소'">
-        <div class="item item-divider">
-          <i class="ion-film-marker myIcon"></i> 촬영장소
+        <div ng-if="detail.infoname == '이용가능시설'">
+          <div class="item item-divider myDivider">
+            <i class="ion-information-circled myDetailIcon"></i> 이용가능시설
+          </div>
+          <div class="item item-list-detail myDetailInfo" ng-bind-html="detail.infotext"></div>
         </div>
-        <div class="item item-list-detail myDetailInfo">
-          {{detail.infotext}}
+        <div ng-if="detail.infoname == '화장실'">
+          <div class="item item-divider myDivider">
+            <i class="ion-woman myDetailIcon"></i><i class="ion-man myDetailIcon"></i> 화장실
+          </div>
+          <div class="item item-list-detail myDetailInfo" ng-bind-html="detail.infotext"></div>
         </div>
-      </div>
-      <div ng-if="detail.infoname == '이용가능시설'">
-        <div class="item item-divider">
-          <i class="ion-ios-information-outline myIcon"></i> 이용가능시설
-        </div>
-        <div class="item item-list-detail myDetailInfo" id="aaasd">
-          {{detail.infotext}}
-        </div>
-      </div>
-      <div ng-if="detail.infoname == '화장실'">
-        <div class="item item-divider">
-          <i class="ion-woman myIcon"></i><i class="ion-man myIcon"></i> 화장실
-        </div>
-        <div class="item item-list-detail myDetailInfo">
-          {{detail.infotext}}
-        </div>
-      </div>
-      <div ng-if="detail.infoname == '시설이용료'">
-        <div class="item item-divider">
-          <i class="ion-card myIcon"></i> 시설이용료
-        </div>
-        <div class="item item-list-detail myDetailInfo">
-          {{detail.infotext}}
+        <div ng-if="detail.infoname == '시설이용료'">
+          <div class="item item-divider myDivider">
+            <i class="ion-card myDetailIcon"></i> 시설이용료
+          </div>
+          <div class="item item-list-detail myDetailInfo" ng-bind-html="detail.infotext"></div>
         </div>
       </div>
     </div>
-    </div>
-
-    <!--<div class="item item-divider">-->
-    <!--<i class="ion-cash"></i>-->
-    <!--요금-->
-    <!--</div>-->
-    <!--<div class="item item-list-detail" style="padding: 16px;" id="info-div">-->
-    <!--</div>-->
   </ion-content>
 </ion-view>

@@ -1,4 +1,4 @@
-angular.module('App')
+  angular.module('App')
   .controller('TourDetailCtrl', function ($scope, $stateParams, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicPlatform) {
     $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
       {params : {
@@ -16,6 +16,7 @@ angular.module('App')
         }
         console.log("imageList", $scope.imageList);
       });
+
     $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
       {params : {
         contentId : $stateParams.contentid,
@@ -30,7 +31,6 @@ angular.module('App')
           this.infoname = infoname;
           this.infotext = infotext;
         }
-
         $scope.detailList = [];
         if(itemList) {
           for (var i = 0; i < itemList.length; i++) {
@@ -42,10 +42,6 @@ angular.module('App')
               $scope.detailList.push(new detailInfo('촬영장소', item.infotext));
             } else if (item.infoname == '이용가능시설') {
               $scope.detailList.push(new detailInfo('이용가능시설', item.infotext));
-              var aaa = document.getElementById('aaasd');
-
-              var test = document.getElementById('test');
-              console.log(test);
             } else if (item.infoname == '화장실') {
               $scope.detailList.push(new detailInfo('화장실', item.infotext));
             } else if (item.infoname == '시설이용료') {
@@ -83,7 +79,4 @@ angular.module('App')
         $ionicSlideBoxDelegate.enableSlide(false);
       }
     };
-    $ionicPlatform.ready(function () {
-      console.log(document.querySelector('.myDetailInfo'));
-    })
   });
