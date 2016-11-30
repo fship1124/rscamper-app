@@ -122,3 +122,84 @@
   background-position: center, center;
 }
 
+
+/* myPage */
+#myPageView {
+  background-color: #e0e0e0;
+}
+.mypage-item {
+  margin: 10px 0px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.mypage-item-div {
+  position: relative;
+}
+.mypage-content {
+  padding: 0px !important;
+}
+.mypage-img {
+  width: 100%;
+  height: 150px;
+  opacity: 0.9;
+}
+.mypage-title {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  padding: 0px 50px;
+  white-space: normal;
+  text-shadow: 1px 1px 5px #303030;
+}
+.mypage-author-div {
+  position: absolute;
+  top: 0px;
+}
+.mypage-author-a {
+  padding: 0 0 0 30px;
+  margin: 10px;
+  min-height: 25px !important;
+}
+.mypage-author {
+  color: white !important;
+  font-size: 11px !important;
+  line-height: 25px;
+}
+.mypage-author-img {
+  max-height: 25px !important;
+  max-width: 25px !important;
+  top: 0px !important;
+  left: 0px !important;
+}
+.mypage-info {
+  padding: 0 10px 10px 10px;
+}
+.mypage-info-title {
+  font-weight: bold !important;
+  font-size: 13px !important;
+}
+.mypage-info-content {
+  font-size: 11px !important;
+  color: dimgray !important;
+}
+.mypage-delbtn {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  text-align: center;
+  border: none;
+  background-color: white;
+  left: 90%;
+  top: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 3px;
+}
+.mypage-delbtn-icon {
+  line-height: 20px;
+  color: #eeaa00;
+  font-size: 20px;
+}

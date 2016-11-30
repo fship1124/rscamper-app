@@ -308,7 +308,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'MyPageMainCtrl'
         })
       ;
-
+        
       // 기초 페이지
       $urlRouterProvider.otherwise('/main/main');
     })
