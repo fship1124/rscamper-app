@@ -15,16 +15,31 @@ angular.module("App")
         console.log($rootScope.roomList);
       })
 
-  $http.get($rootScope.url + "8081/app/chat/delChatUser", {
+ /* $http.get($rootScope.url + "8081/app/chat/delChatUser", {
     params : {
       uid : $rootScope.rootUser.userUid
     }
   })
     .success(function () {
       console.log("삭제 완료");
-    });
+    });*/
 
-  $rootScope.socket.emit('exit',{
+  $rootScope.socket.emit('outRoom',{
     uid : $rootScope.rootUser.userUid
   });
+
+  $rootScope.socket.on('roomList', function (data) {
+      console.log(data);
+      $rootScope.roomList = data;
+      $rootScope.socket.emit('exit', {
+        uid : $rootScope.rootUser.userUid
+      })
+  });
+
+  $rootScope.socket.on('outRoomUser', function () {
+    $rootScope.socket.emit('exit', {
+      uid : $rootScope.rootUser.userUid
+    })
+  });
+
 })

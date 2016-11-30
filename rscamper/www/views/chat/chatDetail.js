@@ -40,17 +40,19 @@ angular.module('App')
         $scope.userCount = data.length;
       });*/
 
+      $rootScope.roomInfo = locationCategory.getChatRoom($stateParams.chatRoomNo);
+
       var initData = {
         name : $rootScope.rootUser.displayName,
         room : $stateParams.chatRoomNo,
         photoUrl : $rootScope.rootUser.photoUrl,
-        uid : $rootScope.rootUser.userUid
+        uid : $rootScope.rootUser.userUid,
+        areacode : $rootScope.roomInfo.areacode
       }
+
       //$rootScope.socket.emit("connection", initData);
       $rootScope.socket.emit('joinRoom',initData);
-
       var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
-      $rootScope.roomInfo = locationCategory.getChatRoom($stateParams.chatRoomNo);
       $scope.scrollDown = true;
       $scope.toggleLeftSideMenu = function() {
         $ionicSideMenuDelegate.toggleRight();
@@ -68,7 +70,6 @@ angular.module('App')
     initList.innerHTML += "<div style='width: 100%; text-align: center'>" + data.message + "</div>";
   });
   $rootScope.socket.on("message", function (data) {
-    console.log(data);
     var currentTop = viewScroll.getScrollPosition().top;
     console.log("currentTop",currentTop);
     var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
@@ -252,5 +253,14 @@ angular.module('App')
         }, function (err) {
 
         }, options);
-      }
+      };
+
+      $rootScope.socket.on('getUserInfo', function (data) {
+        $scope.userInfoList = data;
+        $scope.userCount = data.length;
+      });
+
+      $rootScope.socket.on('outMsg', function (msg) {
+        initList.innerHTML += "<div style='width: 100%; text-align: center'>" + msg.message + "</div>";
+      });
 })
