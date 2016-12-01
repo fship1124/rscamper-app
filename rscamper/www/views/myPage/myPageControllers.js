@@ -7,9 +7,10 @@ app.controller("MyPageMainCtrl", function ($rootScope, $scope) {
   $scope.myItems.push('안녕 제목 안녕 제목');
 
   $scope.images = [];
-  $scope.images.push('img/example_img/000019620002.jpg');
-  $scope.images.push('img/example_img/000019620031.jpg');
-  $scope.images.push('img/example_img/000019630025.jpg');
-  $scope.images.push('img/example_img/000019650021.jpg');
-  $scope.images.push('img/example_img/000019660011.jpg');
+  for (var i = 0; i < 5; i++) {
+    var rNum = Math.floor(Math.random() * 14) + 1;
+    console.log(rNum);
+    var imgUrl = 'img/example_img/example' + rNum + '.jpg';
+    $scope.images.push(imgUrl);
+  }
 })
