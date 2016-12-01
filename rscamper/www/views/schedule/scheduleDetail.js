@@ -11,7 +11,6 @@ angular.module('App')
     content : ""
   }
   $rootScope.getScheduleLocation = {};
-
   $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
     {params : {
       no : $stateParams.no
@@ -126,7 +125,9 @@ angular.module('App')
     $scope.locationMemo = modal;
   });
 
-  $scope.openMemo = function () {
+  $scope.openMemo = function (data) {
+    console.log(data);
+    $scope.memoLocation = data;
     $scope.locationMemo.show();
     setTimeout(function () {
       $("#edit-title").focus();
@@ -247,7 +248,7 @@ angular.module('App')
   }
 
   $scope.setBudget = function () {
-    alert($("#edit-text").html().length);
+
   }
 
   $("#cameraTest").click(function () {
@@ -261,4 +262,8 @@ angular.module('App')
     else if (this.selectionStart || this.selectionStart== '0')
       this.selectionStart = this.value.length;
   });
+
+  $scope.updateBtnChange = function () {
+    $scope.updateBtn = !$scope.updateBtn;
+  }
 });

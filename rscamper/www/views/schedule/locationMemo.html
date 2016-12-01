@@ -3,15 +3,23 @@
     <h1 class="title">메모</h1>
 
     <button class="button button-clear" ng-click="locationMemo.hide()"><i class="ion-android-arrow-back"></i></button>
+    <button class="button button-clear" ng-click="locationMemo.hide()"><i class="ion-checkmark-round"></i></button>
   </ion-header-bar>
-  <ion-content class="padding has-footer" scroll="false">
-        <input id="edit-title" type="text" style="width: 100%" />
-        <div id="edit-text" contenteditable="true" style="width: 100%; height: 500px; border: 1px solid; white-space:normal; overflow-y: scroll">
+  <ion-content class="padding has-footer" scroll="false" style="background-color: white">
+    <div class="list" style="border-bottom: 1px solid #e0e0e0">
+      <label class="item item-input" style="background-color: white !important;">
+        <span class="input-label" >제목</span>
+        <input type="text" style="background-color: white !important;">
+      </label>
+    </div>
+        <div id="edit-text" contenteditable="true" style="width: 100%; height: 500px; border: 1px solid #e0e0e0; white-space:normal; overflow-y: scroll">
         </div>
-       <!-- <button class="button" ng-click="qweqweqwe()">사진</button>
-      <button class="button" ng-click="textResult()">결과</button>-->
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-energized">
+    <div style="color: #b1b1b1; position: absolute; top: -60%; left: 5%; font-size: smaller">
+      <i class="ion-location" style="margin-top: 2%; font-size: larger"></i>
+      {{memoLocation.title}}
+    </div>
     <div style="width: 100%; height: 100%">
       <div class="memoBtn" style="width: 33%; text-align: center">
         <button class="button button-clear" style="width: 100%; text-align: center" ng-click="qweqweqwe()"><i class="ion-camera"></i></button>

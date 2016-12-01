@@ -4,7 +4,6 @@
 angular.module('App')
   .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule) {
     $rootScope.listCount = 0;
-    $rootScope.url = "http://192.168.0.190:";
     $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
       params :{
         uid : $rootScope.rootUser.userUid

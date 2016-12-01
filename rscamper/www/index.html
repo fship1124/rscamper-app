@@ -53,7 +53,7 @@
   <script src="lib/jsSHA/src/sha1.js"></script>
 
   <!-- google maps javascript -->
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8"></script>
+  <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBB8nwZYT5YRSNiYLNJT7k7_1XdUyYRVqM&callback=initMap"  type="text/javascript"></script>
 
   <!-- Firebase -->
   <script src="lib/firebase/firebase.js"></script>
@@ -167,7 +167,7 @@
 <!--        <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
           <i class="icon ion-android-person"></i> 마이페이지
         </ion-item>-->
-        <ion-item nav-clear menu-close ui-sref="chat" ng-if="userStatus == true">
+        <ion-item nav-clear menu-close ui-sref="chat">
           <i class="icon ion-chatboxes"></i> 채팅
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule" ng-if="userStatus == true">
@@ -176,6 +176,9 @@
         <ion-item nav-clear menu-close ui-sref="setting">
           <i class="icon ion-gear-a"></i> 설정
         </ion-item>
+<!--        <ion-item nav-clear menu-close ui-sref="testda">
+          <i class="icon ion-gear-a"></i> 테스트
+        </ion-item>-->
       </ion-list>
     </ion-content>
   </ion-side-menu>

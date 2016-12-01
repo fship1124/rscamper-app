@@ -1,5 +1,6 @@
 var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','contenteditable', 'ngSanitize'])
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
+      $rootScope.url = "http://192.168.0.190:";
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -167,6 +168,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'findAttractionCtrl'
         })
         .state('chat', {
+          cache : false,
           url : '/chat',
           templateUrl : '/views/chat/chatMain.html',
           controller : 'chatMainCtrl'
@@ -182,6 +184,10 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl : '/views/chat/chatDetail.html',
           controller : 'chatDetailCtrl'
         })
+        .state('testda', {
+        url : '/testda',
+        templateUrl : '/views/schedule/testda.html'
+      })
 
 
 
