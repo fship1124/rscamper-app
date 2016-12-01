@@ -7,10 +7,12 @@ angular.module('App')
           template: content
         });
         alertPopup.then(function () {
-          var text = document.getElementById(focus);
-          setTimeout(function () {
-            text.focus();
-          },0);
+          if (focus != null) {
+            var text = document.getElementById(focus);
+            setTimeout(function () {
+              text.focus();
+            },0);
+          }
         })
       }
     }

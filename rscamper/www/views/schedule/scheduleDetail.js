@@ -266,4 +266,12 @@ angular.module('App')
   $scope.updateBtnChange = function () {
     $scope.updateBtn = !$scope.updateBtn;
   }
+
+  $scope.insertMemo = function () {
+    console.log('제목 : ', $("#memoTitle").val());
+    console.log($("#edit-text").html());
+    console.log($scope.memoLocation.contentCode);
+    console.log($stateParams.no);
+    $scope.locationMemo.hide();
+  }
 });

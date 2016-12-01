@@ -184,9 +184,10 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl : '/views/chat/chatDetail.html',
           controller : 'chatDetailCtrl'
         })
-        .state('testda', {
-        url : '/testda',
-        templateUrl : '/views/schedule/testda.html'
+        .state('scheduleList', {
+        url : '/scheduleList',
+        templateUrl : '/views/scheduleList/scheduleListMain.html',
+          controller : 'scheduleListMainCtrl'
       })
 
 
