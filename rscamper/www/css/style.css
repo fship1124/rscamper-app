@@ -140,11 +140,11 @@
 .mypage-img {
   width: 100%;
   height: 150px;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 .mypage-title {
   position: absolute;
-  top: 25%;
+  top: 60px;
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -167,6 +167,7 @@
   color: white !important;
   font-size: 11px !important;
   line-height: 25px;
+  text-shadow: 1px 1px 5px #303030;
 }
 .mypage-author-img {
   max-height: 25px !important;
