@@ -131,15 +131,11 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
-        .state('detailTab.locationInfo', {
+        .state('locationInfo', {
           cache: false,
-          url: '/location/:no/:locationNo',
-          views : {
-            'detailSchedule-tab' : {
-              templateUrl: 'views/schedule/detailLocationInfo.html',
-              controller: 'detailLocationInfoCtrl'
-            }
-          }
+          url: '/location/:locationNo',
+          templateUrl: 'views/schedule/detailLocationInfo.html',
+          controller: 'detailLocationInfoCtrl'
         })
         .state('detailTab.scheduleMap', {
           cache: false,
@@ -189,6 +185,11 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         templateUrl : '/views/scheduleList/scheduleListMain.html',
           controller : 'scheduleListMainCtrl'
       })
+        .state('scheduleListDetail', {
+          url : '/scheduleList/:recordNo',
+          templateUrl : '/views/scheduleList/scheduleListDetail.html',
+          controller : 'scheduleListDetailCtrl'
+        })
 
 
 

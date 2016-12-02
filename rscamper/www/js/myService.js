@@ -70,6 +70,17 @@ angular.module('App')
       }
     }
   })
+  .factory('scheduleListDetail', function ($rootScope) {
+    return {
+      getScheduleListDetail : function (no) {
+        for (var i = 0; i < $rootScope.allScheduleList.length; i++) {
+          if ($rootScope.allScheduleList[i].recordNo == no) {
+            return $rootScope.allScheduleList[i];
+          }
+        }
+      }
+    }
+  })
   .factory('pickerView', ['$compile', '$rootScope', '$timeout', '$q', '$ionicScrollDelegate', '$ionicBackdrop',
     function($compile, $rootScope, $timeout, $q, $ionicScrollDelegate, $ionicBackdrop) {
 

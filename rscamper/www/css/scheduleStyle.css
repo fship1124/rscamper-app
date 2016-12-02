@@ -249,3 +249,7 @@ text-align: center;
   border: 1px solid #e0e0e0
 }
 
+.mypage-item > a {
+  padding: 0px !important;
+}
+
