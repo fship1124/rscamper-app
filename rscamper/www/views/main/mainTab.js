@@ -46,7 +46,12 @@ angular.module('App')
         $scope.$broadcast('scroll.refreshComplete');
       })
     // 위로 당겼을 때 새로고침
-    $scope.load = function () {
+    $scope.refreshMain = function () {
+      $scope.count = 10;
+      $scope.page = 0;
+      $scope.total = 1;
+      $scope.myMainList = [];
+      $scope.getMainList();
       loadWeather();
       // TODO: db 불러오는 것도 추가해야함
     }
