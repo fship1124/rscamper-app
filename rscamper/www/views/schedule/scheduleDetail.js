@@ -3,6 +3,10 @@
  */
 angular.module('App')
 .controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
   var imgid = 1;
   $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;

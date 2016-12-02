@@ -4,7 +4,7 @@
     <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
 
     <ion-list>
-      <ion-item ng-repeat="bookMark in myBookMarkList" class="item-light item-complex mypage-item">
+      <ion-item ng-repeat="bookMark in myBookMarkList" class="item-light item-complex mypage-item" ng-click="moveDetail(bookMark.no, bookMark.targetType)">
         <div class="item-content mypage-content mypage-item-div">
           <img class="mypage-img" ng-src="{{bookMark.coverImgUrl}}"/>
           <div class="mypage-title">{{bookMark.title}}</div>
@@ -14,7 +14,7 @@
               <p class="mypage-author">{{bookMark.displayName}}</p>
             </a>
           </div>
-          <div class="mypage-delbtn" onclick="console.log('클릭')"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
+          <div class="mypage-delbtn" ng-click="deleteBookMark($event, bookMark.no, bookMark.targetType)"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
           <div class="mypage-info" ng-if="bookMark.targetType == 3 && (bookMark.strapline != '' || bookMark.introduce != '')">
             <div class="item-divider mypage-info-title">{{bookMark.strapline}}</div>
             <div class="item-text-wrap mypage-info-content">{{bookMark.introduce}}</div>

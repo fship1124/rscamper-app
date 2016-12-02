@@ -66,6 +66,33 @@
 .my-tabs  > div {
   height: 28px; !important;
 }
+.main-board-img {
+  height: 120px;
+}
+.main-board-info {
+  background-color: white;
+  padding: 5px 8px 10px 8px;
+  margin-top: -5px;
+}
+.main-board-short-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0px;
+  height: 30px;
+  line-height: 30px;
+}
+.main-board-long-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0px;
+  height: 30px;
+  line-height: 110%;
+}
+.main-board-author {
+  font-size: 11px;
+  color: dimgray;
+}
+
 
 /* tourInfo */
 #map {

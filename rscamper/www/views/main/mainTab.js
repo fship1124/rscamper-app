@@ -1,5 +1,5 @@
 angular.module('App')
-.controller('MainTabCtrl', function ($scope, $http, $ionicPlatform, $cordovaGeolocation, $ionicScrollDelegate) {
+.controller('MainTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location, $cordovaGeolocation, $ionicScrollDelegate) {
   $ionicPlatform.ready(function () {
     if(window.cordova && window.cordova.plugins.keyboard) {
       cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -7,8 +7,6 @@ angular.module('App')
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-
 
     $cordovaGeolocation.getCurrentPosition().then(function (data) {
       $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
@@ -60,11 +58,64 @@ angular.module('App')
     $scope.slideIndex = index;
   };
 
-  // 글
-  $scope.photos = [];
-  for (var i = 0; i < 100; i++) {
-    $scope.photos.push({id: i, src:'http://lorempixel.com/250/250?q='+(i%17)});
-  };
+  // 북마크 리스트 불러오기
+  $scope.getMainList = function () {
+    $scope.page++;
+    $ionicLoading.show({
+      template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+    });
+
+    $http({
+      // url: MyConfig.backEndURL + "main/list?page=" + $scope.page + "&count=" + $scope.count,
+      url: "http://192.168.0.187:8081/app/main/list?page=" + $scope.page + "&count=" + $scope.count,
+      method: "GET"
+    }).success(function (response) {
+      console.log(response)
+      angular.forEach(response.mainList, function (main) {
+        $scope.myMainList.push(main);
+      })
+      $scope.total = response.totalPages;
+
+      for (var i = 0; i < $scope.myMainList.length; i++) {
+        var rNum = Math.floor(Math.random() * 36) + 1;
+        if ($scope.myMainList[i].targetType == '1' || $scope.myMainList[i].picture == 0) {
+          $scope.myMainList[i].coverImgUrl = 'img/example_img/example' + rNum + '.jpg';
+        }
+      }
+    })
+      .error(function (error) {
+        MyPopup.alert("에러", "서버접속불가");
+      })
+      .finally(function () {
+        $ionicLoading.hide();
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+  }
+
+  // 위로 당겼을 때 페이징 초기화 및 새로고침
+  $scope.load = function () {
+    $scope.count = 10;
+    $scope.page = 0;
+    $scope.total = 1;
+    $scope.myMainList = [];
+    $scope.getMainList();
+  }
+
+  // 페이지 로딩 시 데이터 불러오기
+  $scope.load();
+
+  // 상세페이지 이동
+  $scope.moveDetail = function (no, targetType) {
+    switch (targetType) {
+      case '1':
+        $location.path("/communityDetail/"+no);
+        break;
+      case '3':
+        $location.path("/detailSchedule/detail/"+no);
+        break;
+    }
+  }
 })
   .controller('TourTabCtrl', function ($scope) {
     $scope.photos = [];
