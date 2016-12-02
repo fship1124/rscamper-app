@@ -38,6 +38,7 @@ app.controller("scheduleListMainCtrl", function ($rootScope, $scope, $stateParam
       })
       console.log($scope.allScheduleList);
       $scope.total = response.totalPages;
+      $scope.totalCount = response.totalCount;
     })
       .error(function (error) {
         MyPopup.alert("에러", "서버접속불가");
