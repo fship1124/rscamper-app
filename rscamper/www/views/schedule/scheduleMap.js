@@ -3,6 +3,10 @@
  */
 angular.module('App')
 .controller('scheduleMapCtrl', function ($scope, $http, $rootScope) {
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
   // 처음 맵 만드는 함수
   var infowindow;
   var markers = [];

@@ -1,6 +1,6 @@
-<ion-view title="hello">
+<ion-view title="hello" id="myPageView">
   <ion-content>
-    <ion-refresher on-refresh="load()" pulling-text="refresh" spinner="crescent"></ion-refresher>
+    <ion-refresher on-refresh="refreshMain()" pulling-text="refresh" spinner="crescent"></ion-refresher>
     <div class="row" id="main-first-div" style="padding: 0; height: 177px;">
       <div class="col col-50" id="main-weather-div">
           <div ng-switch on=today.sky.code>
@@ -75,7 +75,7 @@
         <div class="row" style="height: 50%; background-color: #b0aac0; margin-top: 0; padding-top: 5px;">2-2</div>
       </div>
     </div>
-      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 30%">
+      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 25%">
         <ion-slide>
           <div style="background-color: deepskyblue; height: 100%;"></div>
         </ion-slide>
@@ -86,35 +86,28 @@
           <div style="background-color: hotpink; height: 100%;"></div>
         </ion-slide>
       </ion-slide-box>
+
     <div style="height: 100%;">
-      <div class="row" ng-repeat="photo in photos" ng-if="$index % 2 === 0">
-        <div class="col col-50" ng-if="$index < photos.length">
-          <img ng-src="{{photos[$index].src}}" width="100%"/>
-          <span> 제목 Item {{ photos[$index].id }}</span><br>
-          <span> 작성자 </span>
+      <div class="row" ng-repeat="myMain in myMainList" ng-if="$index % 2 === 0" ng-click="moveDetail(myMain.no, myMain.targetType)">
+        <div class="col col-50" ng-if="$index < myMainList.length">
+          <img ng-src="{{myMainList[$index].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="myMainList[$index].title.length >= 15"> {{myMainList[$index].title}} </p>
+            <p class="main-board-short-title" ng-if="myMainList[$index].title.length < 15"> {{myMainList[$index].title}} </p>
+            <span class="main-board-author"> {{myMainList[$index].displayName}} </span>
+          </div>
         </div>
-        <div class="col col-50" ng-if="$index + 1 < photos.length">
-          <img ng-src="{{photos[$index + 1].src}}" width="100%"/>
-          <span> 제목 Item {{ photos[$index+1].id}}</span><br>
-          <span> 작성자 </span>
+        <div class="col col-50" ng-if="$index + 1 < myMainList.length">
+          <img ng-src="{{myMainList[$index + 1].coverImgUrl}}" class="main-board-img" width="100%"/>
+          <div class="main-board-info">
+            <p class="main-board-long-title" ng-if="myMainList[$index+1].title.length >= 15"> {{myMainList[$index+1].title}} </p>
+            <p class="main-board-short-title" ng-if="myMainList[$index+1].title.length < 15"> {{myMainList[$index+1].title}} </p>
+            <span class="main-board-author"> {{myMainList[$index+1].displayName}} </span>
+          </div>
         </div>
       </div>
     </div>
+
+    <ion-infinite-scroll on-infinite="getMainList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
   </ion-content>
 </ion-view>
-
-
-
-<!--<ion-view title="hello">
-  <ion-content>
-    <div class="list card" ng-repeat="">
-      <div class="item">
-        <h2>설명</h2>
-      </div>
-      <div class="item item-image">
-        <img ng-src="" src="/www/img/ionic.png">
-      </div>
-    </div>&ndash;&gt;
-    <ion-infinite-scroll on-infinite="tourInfo()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>&ndash;&gt;
-  </ion-content>
-</ion-view>-->
