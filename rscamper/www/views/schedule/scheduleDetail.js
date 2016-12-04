@@ -21,6 +21,9 @@ angular.module('App')
     }})
     .success(function (data) {
       $rootScope.getScheduleLocation = data;
+      for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
+        $rootScope.getScheduleLocation[i].isScheduleDetail = true;
+      }
       console.log(data);
     })
 

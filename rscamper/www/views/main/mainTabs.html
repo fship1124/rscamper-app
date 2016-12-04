@@ -1,11 +1,11 @@
-<ion-view title="hello"">
+<ion-view title="hello">
 <ion-content scroll="false">
   <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs>
     <ion-slide ion-slide-tab-label="전체" ui-sref="main.main">
       <ion-nav-view name="main-tab"></ion-nav-view>
     </ion-slide>
-    <ion-slide ion-slide-tab-label="추천여행지4">
-     <div ng-include src="'views/main/tourTab.html'"></div>
+    <ion-slide ion-slide-tab-label="추천여행지4" href="#/main/tour">
+      <ion-nav-view name="tour-tab"></ion-nav-view>
     </ion-slide>
     <ion-slide ion-slide-tab-label="추천여행지5" ui-sref="main.tour">
       <ion-nav-view>

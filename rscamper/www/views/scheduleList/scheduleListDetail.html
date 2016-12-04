@@ -1,10 +1,13 @@
-<ion-view id="myPageView" view-title="<i class='ion-thumbsup' style='font-size: larger'></i> {{scheduleListDetail.likeCnt}">
+<ion-view id="myPageView" view-title="<i class='ion-thumbsup' style='font-size: larger'></i> {{scheduleListDetail.likeCnt}}">
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="commentOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
   <ion-content>
 
     <ion-list>
       <ion-item class="item-light item-complex mypage-item">
         <div class="item-content mypage-content mypage-item-div">
-          <img class="detail-img" ng-src="{{dSchedule.cover.filePath}}" ng-if="scheduleListDetail.picture == 1"/>
+          <img class="detail-img" ng-src="{{scheduleListDetail.cover.filePath}}" ng-if="scheduleListDetail.picture == 1"/>
           <img class="detail-img" src="img/defaultscheduleImg.jpg" ng-if="scheduleListDetail.picture == 0">
           <div class="detail-title">{{scheduleListDetail.title}}<br><br><span>{{scheduleListDetail.period}}</span></div>
           <div class="detail-author-div">
@@ -16,7 +19,8 @@
           <div class="detail-info">
             <div ng-show="isLiked"><i class="ion-thumbsup" ng-click="recommendSchedule()"></i><br><span>추천</span></div>
             <div ng-hide="isLiked"><i class="ion-thumbsup" style="color: red" ng-click="cancelRecommend()"></i><br><span>추천</span></div>
-            <div><i class="ion-ios-download-outline"></i><br><span>북마크</span></div>
+            <div ng-show="isBookMark"><i class="ion-ios-download-outline" ng-click="addBookmark()"></i><br><span>북마크</span></div>
+            <div ng-hide="isBookMark"><i class="ion-ios-download-outline" style="color: red" ng-click="cancelBookMark()"></i><br><span>북마크</span></div>
             <div ng-show="isCustomizing"><i class="ion-clipboard" ng-click="customizing()"></i><br><span>커스텀마이징</span></div>
             <div ng-hide="isCustomizing"><i class="ion-clipboard" style="color : red" ng-click="cancelCustomizing()"></i><br><span>커스텀마이징</span></div>
             <div><i class="ion-ios-more-outline"></i><br><span>더보기</span></div>
@@ -47,10 +51,10 @@
                 <i class="ion-android-train timelineIcon"></i>
               </div>
               <div class="cd-timeline-content padding energized">
-                <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/location/{{location.contentCode}}">{{location.title}}</a>
-                <p class="marginTop5 cd-author">hi</p>
-                <p class="timelineText"><a ng-href="#/location/{{location.contentCode}}"><img ng-src="{{location.imageUrl}}" style="width: 60%; height: 100px"></a></p>
-                <i class="ion-heart" style="color: red"></i> {{location.likeCount}}
+                <h5 class="marginBottom0 marginTop0"><a style="text-decoration: none; font-weight: bold" ng-href="#/location/{{location.contentCode}}">{{location.title}}</a> <span ng-click="location.isScheduleDetail = !location.isScheduleDetail"><i class="ion-android-arrow-dropdown" style="font-size: x-large"></i></span>
+                <p ng-show="location.isScheduleDetail" class="marginTop5 cd-author">{{location.detailDepartureDate | date:"hh:mma"}}</p>
+                <p ng-show="location.isScheduleDetail" class="timelineText"><a ng-href="#/location/{{location.contentCode}}"><img ng-src="{{location.imageUrl}}" style="width: 60%; height: 100px"></a></p>
+                <i ng-show="location.isScheduleDetail" class="ion-heart" style="color: red"></i> <span ng-show="location.isScheduleDetail">{{location.likeCount}} </span>
               </div>
             </div>
           </div>

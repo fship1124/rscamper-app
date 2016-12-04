@@ -53,7 +53,7 @@ app.controller("MyPageMainCtrl", function ($rootScope, $scope, $stateParams, $ht
         $location.path("/communityDetail/"+no);
         break;
       case '3':
-        $location.path("/detailSchedule/detail/"+no);
+        $location.path("/scheduleList/"+no);
         break;
     }
   }

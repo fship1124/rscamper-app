@@ -16,6 +16,7 @@ angular.module('App')
     })
       .success(function (data) {
         $scope.detailInfo = data.response.body.items.item;
+        console.log($scope.detailInfo);
 
 
         $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',

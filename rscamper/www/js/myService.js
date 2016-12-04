@@ -14,6 +14,13 @@ angular.module('App')
             },0);
           }
         })
+      },
+      comfirmPopup : function (title, content) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: title,
+          template: content
+        });
+        return confirmPopup;
       }
     }
   })
