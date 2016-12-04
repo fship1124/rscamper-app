@@ -14,6 +14,13 @@ angular.module('App')
             },0);
           }
         })
+      },
+      comfirmPopup : function (title, content) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: title,
+          template: content
+        });
+        return confirmPopup;
       }
     }
   })
@@ -65,6 +72,17 @@ angular.module('App')
         for (var i = 0; i < $rootScope.roomList.length; i++) {
           if ($rootScope.roomList[i].chatRoomInfoNo == no) {
             return $rootScope.roomList[i];
+          }
+        }
+      }
+    }
+  })
+  .factory('scheduleListDetail', function ($rootScope) {
+    return {
+      getScheduleListDetail : function (no) {
+        for (var i = 0; i < $rootScope.allScheduleList.length; i++) {
+          if ($rootScope.allScheduleList[i].recordNo == no) {
+            return $rootScope.allScheduleList[i];
           }
         }
       }
