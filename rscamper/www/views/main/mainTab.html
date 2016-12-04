@@ -86,7 +86,6 @@
           <div style="background-color: hotpink; height: 100%;"></div>
         </ion-slide>
       </ion-slide-box>
-
     <div style="height: 100%;">
       <div class="row" ng-repeat="myMain in myMainList" ng-if="$index % 2 === 0" ng-click="moveDetail(myMain.no, myMain.targetType)">
         <div class="col col-50" ng-if="$index < myMainList.length">
@@ -107,7 +106,6 @@
         </div>
       </div>
     </div>
-
     <ion-infinite-scroll on-infinite="getMainList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

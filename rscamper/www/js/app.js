@@ -52,29 +52,36 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'MainCtrl'
         })
         .state('main.main', {
+          cache: false,
           url: '/main',
           views: {
             'main-tab': {
               templateUrl: 'views/main/mainTab.html',
               controller: 'MainTabCtrl'
-            }
-          }
-        })
-        .state('main.tour', {
-          url: '/tour',
-          views: {
+            },
             'tour-tab': {
               templateUrl: 'views/main/tourTab.html',
               controller: 'TourTabCtrl'
-            }
-          }
-        })
-        .state('main.post', {
-          url: '/post',
-          views: {
-            'post-tab': {
-              templateUrl: 'views/main/postTab.html',
-              controller: 'PostTabCtrl'
+            },
+            'schedule-tab': {
+              templateUrl: 'views/main/scheduleTab.html',
+              controller: 'ScheduleTabCtrl'
+            },
+            'route-tab': {
+              templateUrl: 'views/main/routeTab.html',
+              controller: 'RouteTabCtrl'
+            },
+            'info-tab': {
+              templateUrl: 'views/main/infoTab.html',
+              controller: 'InfoTabCtrl'
+            },
+            'review-tab': {
+              templateUrl: 'views/main/reviewTab.html',
+              controller: 'ReviewTabCtrl'
+            },
+            'freeBoard-tab': {
+              templateUrl: 'views/main/freeBoardTab.html',
+              controller: 'freeBoardTabCtrl'
             }
           }
         })

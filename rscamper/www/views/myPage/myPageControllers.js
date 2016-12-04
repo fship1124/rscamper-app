@@ -12,7 +12,6 @@ app.controller("MyPageMainCtrl", function ($rootScope, $scope, $stateParams, $ht
       method: "GET"
     }).success(function (response) {
       angular.forEach(response.bookMarkList, function (bookMark) {
-        console.log(bookMark);
         $scope.myBookMarkList.push(bookMark);
       })
       $scope.total = response.totalPages;
