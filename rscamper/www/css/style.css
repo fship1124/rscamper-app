@@ -63,6 +63,20 @@
   font-size: 16px;
   color: white;
 }
+.main-comment-list-div {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ebcccc;
+}
+.main-comment-list {
+  width: 100%;
+  font-size: 11px;
+  padding: 3px 5px 0px 5px;
+  height: 20px !important;
+  min-height: 20px !important;
+  box-sizing: border-box;
+
+}
 .my-tabs  > div {
   height: 28px; !important;
 }
@@ -213,6 +227,12 @@
 .mypage-info-content {
   font-size: 11px !important;
   color: dimgray !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 .mypage-delbtn {
   width: 25px;
