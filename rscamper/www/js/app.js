@@ -1,5 +1,6 @@
 var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','contenteditable', 'ngSanitize'])
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
+      $rootScope.url = "http://192.168.0.190:";
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -51,29 +52,36 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'MainCtrl'
         })
         .state('main.main', {
+          cache: false,
           url: '/main',
           views: {
             'main-tab': {
               templateUrl: 'views/main/mainTab.html',
               controller: 'MainTabCtrl'
-            }
-          }
-        })
-        .state('main.tour', {
-          url: '/tour',
-          views: {
+            },
             'tour-tab': {
               templateUrl: 'views/main/tourTab.html',
               controller: 'TourTabCtrl'
-            }
-          }
-        })
-        .state('main.post', {
-          url: '/post',
-          views: {
-            'post-tab': {
-              templateUrl: 'views/main/postTab.html',
-              controller: 'PostTabCtrl'
+            },
+            'schedule-tab': {
+              templateUrl: 'views/main/scheduleTab.html',
+              controller: 'ScheduleTabCtrl'
+            },
+            'route-tab': {
+              templateUrl: 'views/main/routeTab.html',
+              controller: 'RouteTabCtrl'
+            },
+            'info-tab': {
+              templateUrl: 'views/main/infoTab.html',
+              controller: 'InfoTabCtrl'
+            },
+            'review-tab': {
+              templateUrl: 'views/main/reviewTab.html',
+              controller: 'ReviewTabCtrl'
+            },
+            'freeBoard-tab': {
+              templateUrl: 'views/main/freeBoardTab.html',
+              controller: 'freeBoardTabCtrl'
             }
           }
         })
@@ -106,6 +114,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        .state('scheduleTab.bookMark', {
+          url: '/bookMark',
+          views: {
+            'bookMark-tab': {
+              templateUrl: 'views/myPage/myPageMain.html',
+              controller: 'MyPageMainCtrl'
+            }
+          }
+        })
         .state('detailTab', {
           cache: false,
           url: '/detailSchedule',
@@ -121,15 +138,11 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
-        .state('detailTab.locationInfo', {
+        .state('locationInfo', {
           cache: false,
-          url: '/location/:no/:locationNo',
-          views : {
-            'detailSchedule-tab' : {
-              templateUrl: 'views/schedule/detailLocationInfo.html',
-              controller: 'detailLocationInfoCtrl'
-            }
-          }
+          url: '/location/:locationNo',
+          templateUrl: 'views/schedule/detailLocationInfo.html',
+          controller: 'detailLocationInfoCtrl'
         })
         .state('detailTab.scheduleMap', {
           cache: false,
@@ -164,16 +177,27 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller : 'chatMainCtrl'
         })
         .state('categoryDetail', {
-          chche : false,
+          cache : false,
           url : '/categoryDetail/:no',
           templateUrl : '/views/chat/chatRoomList.html',
           controller : 'chatRoomListCtrl'
         })
         .state('chatRoom', {
-          chche : false,
           url : '/chatRoom/:chatRoomNo',
           templateUrl : '/views/chat/chatDetail.html',
           controller : 'chatDetailCtrl'
+        })
+        .state('scheduleList', {
+          cache : false,
+        url : '/scheduleList',
+        templateUrl : '/views/scheduleList/scheduleListMain.html',
+          controller : 'scheduleListMainCtrl'
+      })
+        .state('scheduleListDetail', {
+          cache : false,
+          url : '/scheduleList/:recordNo',
+          templateUrl : '/views/scheduleList/scheduleListDetail.html',
+          controller : 'scheduleListDetailCtrl'
         })
 
         /**

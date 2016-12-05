@@ -1,5 +1,5 @@
-angular.module('App')
-  .controller('TourDetailCtrl', function ($scope, $stateParams, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+  angular.module('App')
+  .controller('TourDetailCtrl', function ($scope, $stateParams, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicPlatform) {
     $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
       {params : {
         contentId : $stateParams.contentid,
@@ -27,23 +27,31 @@ angular.module('App')
     )
       .success(function (data) {
         var itemList = data.response.body.items.item;
+        function detailInfo(infoname, infotext) {
+          this.infoname = infoname;
+          this.infotext = infotext;
+        }
+        $scope.detailList = [];
         if(itemList) {
           for (var i = 0; i < itemList.length; i++) {
             var item = itemList[i];
             item.infoname = item.infoname.replace(/ /gi, "");
             if (item.infoname == '입장료' || item.infoname == '관람료' || item.infoname == '시설이용료') {
-              $scope.admissionFee = item.infotext;
-            };
+              $scope.detailList.push(new detailInfo('요금', item.infotext));
+            } else if (item.infoname == '촬영장소') {
+              $scope.detailList.push(new detailInfo('촬영장소', item.infotext));
+            } else if (item.infoname == '이용가능시설') {
+              $scope.detailList.push(new detailInfo('이용가능시설', item.infotext));
+            } else if (item.infoname == '화장실') {
+              $scope.detailList.push(new detailInfo('화장실', item.infotext));
+            } else if (item.infoname == '시설이용료') {
+              $scope.detailList.push(new detailInfo('시설이용료', item.infotext));
+            }
           };
           console.log("infoList", itemList);
-        }
-        if ($scope.admissionFee) {
-          document.querySelector("#info-div").innerHTML = $scope.admissionFee;
-        } else {
-          document.querySelector("#info-div").innerHTML = "정보가 없습니다.";
+          console.log("detailList", $scope.detailList);
         }
       });
-
     $scope.showImages = function (index) {
       $scope.activeSlide = index;
       $scope.showModal('templates/gallery-zoomview.html');

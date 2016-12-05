@@ -3,6 +3,10 @@
  */
 angular.module('App')
 .controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
   var imgid = 1;
   $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;
@@ -11,17 +15,19 @@ angular.module('App')
     content : ""
   }
   $rootScope.getScheduleLocation = {};
-
-  $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getScheduleLocation',
+  $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
     {params : {
       no : $stateParams.no
     }})
     .success(function (data) {
       $rootScope.getScheduleLocation = data;
+      for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
+        $rootScope.getScheduleLocation[i].isScheduleDetail = true;
+      }
       console.log(data);
     })
 
-  $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/getTourDate',
+  $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
     {params : {
       dDate : $rootScope.dSchedule.departureDate,
       aDate : $rootScope.dSchedule.arriveDate
@@ -98,7 +104,7 @@ angular.module('App')
 
   $scope.updateCover = function (imageDATA) {
     $http({
-      url: $rootScope.url + '8090/rscamper-server/app/tourschedule/changeCover',
+      url: $rootScope.url + '8081/app/tourschedule/changeCover',
       method: 'POST',
       data: $.param({
         no : $rootScope.dSchedule.recordNo,
@@ -126,7 +132,9 @@ angular.module('App')
     $scope.locationMemo = modal;
   });
 
-  $scope.openMemo = function () {
+  $scope.openMemo = function (data) {
+    console.log(data);
+    $scope.memoLocation = data;
     $scope.locationMemo.show();
     setTimeout(function () {
       $("#edit-title").focus();
@@ -144,7 +152,7 @@ angular.module('App')
 
   $scope.updateStrapline = function (s) {
     $http({
-      url: $rootScope.url + '8090/rscamper-server/app/tourschedule/updateStrapline',
+      url: $rootScope.url + '8081/app/tourschedule/updateStrapline',
       method: 'POST',
       data: $.param({
         no : $rootScope.dSchedule.recordNo,
@@ -186,7 +194,7 @@ angular.module('App')
     console.log($("#edit-text").html());
   }
   $scope.delLocation = function (no) {
-    $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/delLocation',
+    $http.get($rootScope.url + '8081/app/tourschedule/delLocation',
       {params : {
         locationNo : no,
         no : $stateParams.no
@@ -247,7 +255,7 @@ angular.module('App')
   }
 
   $scope.setBudget = function () {
-    alert($("#edit-text").html().length);
+
   }
 
   $("#cameraTest").click(function () {
@@ -261,4 +269,16 @@ angular.module('App')
     else if (this.selectionStart || this.selectionStart== '0')
       this.selectionStart = this.value.length;
   });
+
+  $scope.updateBtnChange = function () {
+    $scope.updateBtn = !$scope.updateBtn;
+  }
+
+  $scope.insertMemo = function () {
+    console.log('제목 : ', $("#memoTitle").val());
+    console.log($("#edit-text").html());
+    console.log($scope.memoLocation.contentCode);
+    console.log($stateParams.no);
+    $scope.locationMemo.hide();
+  }
 });

@@ -17,6 +17,16 @@
         <span class="input-label">도착일</span>
         <input id="fDate" type="date" ng-model="newSchedule.finishDate">
       </label>
+      <label class="item" style="padding: 0px !important;">
+        <div class="row" style="padding-left: 0px !important;">
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="1">공개</ion-radio>
+          </div>
+          <div class="col col-50 makeScheduleRadioBtn">
+            <ion-radio ng-model="newSchedule.isOpen" ng-value="2">비공개</ion-radio>
+          </div>
+        </div>
+      </label>
       <button class="button button-full button-positive" ng-click="createSchedule(newSchedule)">Create</button>
     </div>
   </ion-content>

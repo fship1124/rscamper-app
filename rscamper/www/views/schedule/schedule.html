@@ -1,7 +1,6 @@
-<ion-view view-title="여행일정">
-  <ion-content>
-    <br>
-    <button class="button button-bar" ng-click="modal.show()"><i class="ion-android-add" style="color: darkmagenta"></i> 새로운 일정 만들기</button>
+<ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
+  <ion-content  overflow-scroll="false">
+    <button class="button button-bar" ng-click="openNewSchedule()" style="margin-top: 10px"><i class="ion-android-add" style="color: darkmagenta"></i> 새로운 일정 만들기</button>
  <!--   <ion-list>
       <ion-item id="scheduleBox" ng-repeat="schedule in scheduleList"  href="#/schedule/schedule/{{}}">
         <img id="coverImg" src="img/defaultscheduleImg.jpg">
@@ -9,12 +8,36 @@
         <div id="scheduleTitle">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
       </ion-item>
     </ion-list>-->
-    <div id="scheduleBox" ng-repeat="schedule in scheduleList" ng-click="moveDetail(schedule.recordNo)">
+   <!-- <div id="scheduleBox" ng-repeat="schedule in scheduleList" ng-click="moveDetail(schedule.recordNo)">
       <img class="coverImg" src="img/defaultscheduleImg.jpg" ng-if="schedule.picture == 0">
       <img class="coverImg" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1">
       <button style="opacity: 0.7" id="del-Btn" class="button-clear" ng-click="delSchedule($event, schedule.recordNo)"><i class="ion-trash-a" style="color: #e6b500; font-size: 25px;"></i></button>
       <div id="scheduleTitle">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
       <div style="position: absolute; top: 85%; width : 100%; background-color: gainsboro"><span style="font-weight: bold">{{schedule.strapline}}</span><br><span>{{schedule.introduce}}</span></div>
-    </div>
+    </div>-->
+
+    <ion-list>
+      <ion-item ng-repeat="schedule in scheduleList" class="item-light item-complex mypage-item" ng-click="moveDetail(schedule.recordNo)">
+        <div class="item-content mypage-content mypage-item-div">
+          <img class="mypage-img" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1"/>
+          <img class="mypage-img" src="img/defaultscheduleImg.jpg" ng-if="schedule.picture == 0">
+          <div class="mypage-title">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
+          <div class="mypage-author-div">
+            <a class="item item-avatar mypage-author-a" href="#">
+              <img class="mypage-author-img" src="../../img/User-Default.jpg" ng-if="!userStatus == true">
+              <img class="mypage-author-img" ng-src="{{rootUser.photoUrl}}" ng-if="userStatus == true">
+              <p class="mypage-author">{{rootUser.displayName}}</p>
+            </a>
+          </div>
+          <div class="mypage-delbtn" ng-click="delSchedule($event, schedule.recordNo)"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
+          <div class="mypage-info">
+            <div class="item-divider mypage-info-title">{{schedule.strapline}}</div>
+            <div class="item-text-wrap mypage-info-content">
+              {{schedule.introduce}}
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

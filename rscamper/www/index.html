@@ -28,6 +28,7 @@
   <link href="css/scheduleStyle.css" rel="stylesheet">
   <link href="css/schedulePickerView.css" rel="stylesheet">
   <link href="css/timeLine.css" rel="stylesheet">
+  <link href="css/scheduleListStyle.css" rel="stylesheet">
 
   <link href="css/animate.css" rel="stylesheet">
   <link href="css/ionic-animated-modal.css" rel="stylesheet">
@@ -53,7 +54,7 @@
   <script src="lib/jsSHA/src/sha1.js"></script>
 
   <!-- google maps javascript -->
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCre4M2p16qKyp864LIXVO3QGR1XrY7qk8&signed_in=true&callback=initMap"></script>
+  <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBB8nwZYT5YRSNiYLNJT7k7_1XdUyYRVqM&callback=initMap"  type="text/javascript"></script>
 
   <!-- Firebase -->
   <script src="lib/firebase/firebase.js"></script>
@@ -70,6 +71,9 @@
   <!-- socket.io -->
   <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
+  <!-- moment.js -->
+  <script src="js/moment.js"></script>
+
   <!-- 모듈, 서비스 -->
   <script src="js/app.js"></script>
   <script src="js/filters.js"></script>
@@ -80,7 +84,7 @@
 
   <!-- 컨트롤러들 -->
   <script src="views/main/mainTabs.js"></script>
-  <script src="views/main/mainTab.js"></script>
+  <script src="views/main/mainController.js"></script>
   <script src="views/tour/tourInfo.js"></script>
   <script src="views/tour/tourDetail.js"></script>
 
@@ -99,9 +103,13 @@
   <script src="views/schedule/scheduleTabs.js"></script>
   <script src="views/schedule/scheduleDetail.js"></script>
   <script src="views/schedule/findAttraction.js"></script>
-  <script src="views/schedule/addLocationInfo.js"></script>
   <script src="views/schedule/detailLocationInfo.js"></script>
   <script src="views/schedule/scheduleMap.js"></script>
+
+  <script src="views/scheduleList/scheduleListMain.js"></script>
+  <script src="views/scheduleList/scheduleListDetail.js"></script>
+
+
   <script src="views/chat/chatMain.js"></script>
   <script src="views/chat/chatView.js"></script>
   <script src="views/chat/chatDetail.js"></script>
@@ -162,21 +170,27 @@
         <ion-item nav-clear menu-close ui-sref="tourInfo">
           <i class="icon ion-android-train"></i> 주변관광지
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule">
-          <i class="icon ion-earth"></i> 일정
+        <ion-item nav-clear menu-close ui-sref="scheduleList">
+          <i class="icon ion-search"></i> 일정 찾기
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="community.main">
           <i class="icon ion-person-stalker"></i> 커뮤니티
         </ion-item>
-        <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
+<!--        <ion-item nav-clear menu-close ui-sref="myPage" ng-if="userStatus == true">
           <i class="icon ion-android-person"></i> 마이페이지
-        </ion-item>
-        <ion-item nav-clear menu-close ui-sref="chat" ng-if="userStatus == true">
+        </ion-item>-->
+        <ion-item nav-clear menu-close ui-sref="chat">
           <i class="icon ion-chatboxes"></i> 채팅
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule" ng-if="userStatus == true">
+          <i class="icon ion-android-person"></i> 마이페이지
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="setting">
           <i class="icon ion-gear-a"></i> 설정
         </ion-item>
+<!--        <ion-item nav-clear menu-close ui-sref="testda">
+          <i class="icon ion-gear-a"></i> 테스트
+        </ion-item>-->
       </ion-list>
     </ion-content>
   </ion-side-menu>

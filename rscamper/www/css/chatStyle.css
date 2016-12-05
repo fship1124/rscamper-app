@@ -25,7 +25,6 @@ at the bottom as the textarea resizes */
   position: relative;
   height: 100%;
   width: 50px;
-  right : 6%;
 }
 
 button.photo {

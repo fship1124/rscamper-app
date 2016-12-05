@@ -4,10 +4,9 @@
 angular.module('App')
   .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule) {
     $rootScope.listCount = 0;
-    $rootScope.url = "http://192.168.0.190:";
-    $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/getschedule",{
+    $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
       params :{
-        uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1"
+        uid : $rootScope.rootUser.userUid
       }
     })
       .success(function (result) {
@@ -19,15 +18,21 @@ angular.module('App')
     $scope.newSchedule = {
       title : "",
       startDate : "",
-      finishDate : ""
+      finishDate : "",
+      isOpen : 0
     };
-
     $ionicModal.fromTemplateUrl('views/schedule/makeSchedule.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
     $scope.createSchedule = function (s) {
+      console.log(s);
+      if (s.isOpen == 0) {
+        tourSchedulePopup.alertPopup('공개 여부','공개 여부를 선택하세요.', null);
+        return false;
+      }
+
       if (s.title == "") {
         tourSchedulePopup.alertPopup('여행 제목','여행 제목을 입력해주세요.','tourTitle');
         return false;
@@ -42,12 +47,13 @@ angular.module('App')
         tourSchedulePopup.alertPopup('도착 일자','도착 일자를 선택하세요.','fDate');
         return false;
       }
-        $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/insert",
+        $http.get($rootScope.url + "8081/app/tourschedule/insert",
           {params : {
-            uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
+            uid   : $rootScope.rootUser.userUid,
             title : s.title,
             sDate : s.startDate,
-            fDate : s.finishDate
+            fDate : s.finishDate,
+            isOpen : s.isOpen
           }})
           .success(function (result) {
             $rootScope.scheduleList = result;
@@ -63,9 +69,9 @@ angular.module('App')
         });
         confirmPopup.then(function (res) {
           if (res) {
-            $http.get($rootScope.url + '8090/rscamper-server/app/tourschedule/delSchedule',
+            $http.get($rootScope.url + '8081/app/tourschedule/delSchedule',
               {params : {
-                uid : "3SeiZsCViyRVLbjMmnXuVEslLHk1",
+                uid : $rootScope.rootUser.userUid,
                 no : no
               }})
               .success(function (result) {
@@ -82,4 +88,13 @@ angular.module('App')
         $location.path("/detailSchedule/detail/"+no);
       }
 
+      $scope.openNewSchedule = function () {
+        $scope.newSchedule = {
+          title : "",
+          startDate : "",
+          finishDate : "",
+          isOpen : 0
+        };
+        $scope.modal.show();
+      }
   });

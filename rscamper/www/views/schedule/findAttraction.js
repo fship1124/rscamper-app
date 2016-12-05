@@ -6,7 +6,7 @@ angular.module('App')
   console.log($stateParams.arriveDate);
   console.log($stateParams.departureDate);
   var qweqwe = [];
-  $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/getTourDate",
+  $http.get($rootScope.url + "8081/app/tourschedule/getTourDate",
     {params : {
       dDate : $stateParams.departureDate,
       aDate : $stateParams.arriveDate
@@ -151,7 +151,7 @@ angular.module('App')
         if (output) {
           // output is Array type
           $scope.pickerOutput = JSON.stringify(output);
-          $http.get($rootScope.url + "8090/rscamper-server/app/tourschedule/addScheduleLocation",
+          $http.get($rootScope.url + "8081/app/tourschedule/addScheduleLocation",
             {params : {
               add : $scope.pickerOutput,
               title : place.title,
