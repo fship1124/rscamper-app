@@ -1,3 +1,4 @@
 [1102/212012:WARNING:in_range_cast.h(38)] value 504409755419149312 out of range
 [1102/212013:WARNING:in_range_cast.h(38)] value 4251461820868474880 out of range
 [1102/212013:WARNING:in_range_cast.h(38)] value 7998513886317800448 out of range
+[1205/122730:ERROR:file_io.cc(41)] write: 파이프가 닫히는 중입니다. (0xE8)
