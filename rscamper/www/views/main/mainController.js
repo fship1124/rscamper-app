@@ -52,10 +52,42 @@ angular.module('App')
         $scope.page = 0;
         $scope.total = 1;
         $scope.myMainList = [];
+        $scope.myMainCommentList = [];
         $scope.getMainList();
+        if ($rootScope.rootUser.userUid) {
+          $scope.getMainCommentList();
+        }
         loadWeather();
       }
     };
+
+    // 댓글 불러오기
+    $scope.getMainCommentList = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+
+      $http.get("http://192.168.0.187:8081/app/main/commentList", {
+        params :{
+          userUid : $rootScope.rootUser.userUid
+        }
+      }).success(function (response) {
+        angular.forEach(response, function (comment) {
+          $scope.myMainCommentList.push(comment);
+        });
+
+        for (var i = 0; i < $scope.myMainCommentList.length; i++) {
+          if ($scope.myMainCommentList[i].title.length >= 4) {
+            $scope.myMainCommentList[i].title = $scope.myMainCommentList[i].title.substring(0, 3) + '...';
+          }
+        }
+      })
+        .finally(function () {
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    }
 
     // 슬라이드
     // Called each time the slide changes
@@ -103,7 +135,11 @@ angular.module('App')
       $scope.page = 0;
       $scope.total = 1;
       $scope.myMainList = [];
+      $scope.myMainCommentList = [];
       $scope.getMainList();
+      if ($rootScope.rootUser.userUid) {
+        $scope.getMainCommentList();
+      }
     }
 
     // 페이지 로딩 시 데이터 불러오기
@@ -116,7 +152,7 @@ angular.module('App')
           $location.path("/communityDetail/"+no);
           break;
         case '3':
-          $location.path("/detailSchedule/detail/"+no);
+          $location.path("/scheduleList/"+no);
           break;
       }
     }
@@ -198,9 +234,6 @@ angular.module('App')
             $scope.mainRecordList[i].coverImgUrl = 'img/example_img/example' + rNum + '.jpg';
           }
         }
-
-
-        console.log($scope.mainRecordList);
       })
         .error(function (error) {
           MyPopup.alert("에러", "서버접속불가");

@@ -71,19 +71,35 @@
           <h3 ng-if="today.sky.code != 'SKY_A00'" id="temperature-text"> <i class="ion-thermometer"></i> {{cTem}}˚C</h3>
       </div>
       <div class="col col-50" style="padding: 0">
-        <div class="row" style="height: 50%; background-color: #c2d4dd;">2-1</div>
-        <div class="row" style="height: 50%; background-color: #b0aac0; margin-top: 0; padding-top: 5px;">2-2</div>
+        <div class="row" style="height: 50%; background-color: #c2d4dd;">
+
+        </div>
+        <div class="row" style="height: 50%; margin-top: 0; padding-top: 5px; padding-bottom: 0px;">
+          <div class="list main-comment-list-div" ng-if="myMainCommentList.length != 0">
+            <div class="item main-comment-list" ng-repeat="myMainComment in myMainCommentList" ng-click="moveDetail(myMainComment.no, ''+ myMainComment.targetType);">
+              [{{myMainComment.title}}] 에 댓글이 달렸습니다.</div>
+          </div>
+          <div class="list main-comment-list-div" style="height: 100%;" ng-if="myMainCommentList.length == 0">
+            <div class="item main-comment-list" style="height: 100%;">로그인 정보가 없습니다.</div>
+          </div>
+        </div>
       </div>
     </div>
-      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 25%">
+      <ion-slide-box show-pager="true" auto-play="true" slide-interval="2000" does-continue="true" on-slide-changed="" style="height: 25%; margin-top: 10px">
         <ion-slide>
-          <div style="background-color: deepskyblue; height: 100%;"></div>
+          <div style="height: 100%;">
+            <img height="100%" src="../../img/slide_img/slide03.png">
+          </div>
         </ion-slide>
         <ion-slide>
-          <div style="background-color: yellowgreen; height: 100%;"></div>
+          <div style="height: 100%;">
+            <img height="100%" src="../../img/slide_img/slide02.png">
+          </div>
         </ion-slide>
         <ion-slide>
-          <div style="background-color: hotpink; height: 100%;"></div>
+          <div style="height: 100%;">
+            <img height="100%" src="../../img/slide_img/slide01.png">
+          </div>
         </ion-slide>
       </ion-slide-box>
     <div style="height: 100%;">
