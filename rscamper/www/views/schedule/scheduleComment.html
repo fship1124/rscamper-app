@@ -1,7 +1,7 @@
 <ion-modal-view id="myPageView">
   <ion-header-bar class="bar bar-header bar-energized">
     <h1 class="title">댓글</h1>
-    <button class="button button-clear" ng-click="modal.hide()"><i class="ion-android-arrow-back"></i></button>
+    <button class="button button-clear" ng-click="commentModal.hide()"><i class="ion-android-arrow-back"></i></button>
   </ion-header-bar>
   <ion-content>
     <ion-list>
@@ -9,7 +9,7 @@
         <div class="scheduleList-author-div">
           <a class="item item-avatar scheduleList-author-a">
             <img class="scheduleList-author-img" ng-src="{{comment.photoUrl}}">
-            <span class="scheduleList-author scheduleList-autor-time">{{comment.regDate | timesince : 'kr' }}</span>
+            <span class="scheduleList-author scheduleList-autor-time">10시간</span>
             <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid == rootUser.userUid" ng-click="delComment(comment.commentNo)"><i class="ion-close-round"></i></div>
             <p class="scheduleList-author">{{comment.displayName}}</p>
             <div class="item-text-wrap mypage-info-content">{{comment.content}}</div>

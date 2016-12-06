@@ -1,4 +1,8 @@
 <ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
+
+  <button class="button button-balanced button-fab button-fab-bottom-right" ng-click="commentOpen();">
+    <i class="icon ion-compose"></i>
+  </button>
   <ion-content>
 
     <ion-list>
@@ -106,6 +110,32 @@
                 <i ng-show="location.isScheduleDetail" class="ion-heart" style="color: red"></i> <span ng-show="location.isScheduleDetail">{{location.likeCount}} </span>
                 <button ng-show="location.isScheduleDetail && !updateBtn" class="button" style="width: 100%; height: 30px; text-align: center; color: #333333" ng-hide="updateBtn" ng-click="openMemo(location)"><i class="ion-edit" style="font-size: 20px; color: #d9534f"></i>메모 작성</button>
               </div>
+
+              <!-- 메모 부분-->
+              <ion-list ng-repeat="scheduleMemo in scheduleMemoList">
+                <ion-item class="item-light item-complex mypage-item" ng-if="scheduleMemo.contentId == location.contentCode" ng-click="moveMemoDetail(scheduleMemo.scheduleMemoNo)">
+                  <div class="mypage-info">
+                      <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0">
+                        <span ng-if="scheduleMemo.memoType == 1" style="color: #1bb556; font-weight: bold">메모</span>
+                        <span ng-if="scheduleMemo.memoType == 2" style="color: #3333b5; font-weight: bold">정보</span>
+                        {{scheduleMemo.title}}
+                      </div>
+                      <div class="item-text-wrap mypage-info-content" ng-bind-html="scheduleMemo.content">
+                      </div>
+                  </div>
+                  <div class="row" style="border-top: 1px solid #e0e0e0">
+                    <div class="col col-50 mypage-info-content" style="text-align: center" ng-if="scheduleMemo.isLike == 0" ng-click="recommedComment($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup"></i> 추천 {{scheduleMemo.likeCnt}}
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center; color: #b56216"  ng-if="scheduleMemo.isLike == 1" ng-click="cancelCommentLike($event, scheduleMemo.scheduleMemoNo)">
+                      <i class="ion-thumbsup" style="color: #b56216"></i> <span style="color : #b56216">추천 {{scheduleMemo.likeCnt}}</span>
+                    </div>
+                    <div class="col col-50 mypage-info-content" style="text-align: center">
+                      <i class="ion-edit"></i> 댓글 {{scheduleMemo.commentCnt}}
+                    </div>
+                  </div>
+                </ion-item>
+              </ion-list>
             </div>
           </div>
           <div class="cd-timeline-block1" ng-hide="updateBtn">

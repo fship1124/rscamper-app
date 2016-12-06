@@ -2,7 +2,7 @@
  * Created by 이성주 on 2016-12-01.
  */
 angular.module('App')
-.controller('scheduleListDetailCtrl', function ($rootScope, $scope, $stateParams, $http, scheduleListDetail, $ionicModal, tourSchedulePopup) {
+.controller('scheduleListDetailCtrl', function ($rootScope, $scope, $stateParams, $http, scheduleListDetail, $ionicModal, tourSchedulePopup, $location) {
  /* $scope.scheduleListDetail = scheduleListDetail.getScheduleListDetail($stateParams.recordNo);*/
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = true;
@@ -31,6 +31,17 @@ angular.module('App')
             $rootScope.getScheduleLocation[i].isScheduleDetail = true;
           }
           console.log($rootScope.getScheduleLocation);
+        })
+
+      $http.get($rootScope.url + '8081/app/tourschedule/getScheduleMemo', {
+        params : {
+          recordNo : $stateParams.recordNo,
+          userUid : $rootScope.rootUser.userUid
+        }
+      })
+        .success(function (result) {
+          $scope.scheduleMemoList = result;
+          console.log("메모", $scope.scheduleMemoList);
         })
 
       $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
@@ -161,7 +172,8 @@ angular.module('App')
           $scope.commentList = result;
           console.log(result);
           for(var i =0; i < result.length; i++) {
-            console.log(moment().startOf(result.regDate,'day').fromNow())
+            console.log(result[i].regDate);
+            console.log(moment(new Date(result[i].regDate)).fromNow())
           }
         });
       $scope.commentOpen = function () {
@@ -219,5 +231,46 @@ angular.module('App')
         })
       }
 
+
+      $scope.recommedComment = function ($event, commentNo) {
+        $event.stopPropagation();
+        $http.get($rootScope.url + '8081/app/tourschedule/addScheduleMemoLike', {
+          params : {
+            scheduleMemoNo : commentNo,
+            userUid : $rootScope.rootUser.userUid
+          }
+        })
+          .success(function (data) {
+            console.log("추천수 : ", data);
+            for (var i = 0; i < $scope.scheduleMemoList.length; i++) {
+              if ($scope.scheduleMemoList[i].scheduleMemoNo == commentNo) {
+                $scope.scheduleMemoList[i].likeCnt = data;
+                $scope.scheduleMemoList[i].isLike = 1;
+              }
+            }
+          })
+      }
+
+      $scope.cancelCommentLike = function ($event, commentNo) {
+        $event.stopPropagation();
+        $http.get($rootScope.url + '8081/app/tourschedule/cancelScheduleMemoLike', {
+          params : {
+            scheduleMemoNo : commentNo,
+            userUid : $rootScope.rootUser.userUid
+          }
+        })
+          .success(function (data) {
+            for (var i = 0; i < $scope.scheduleMemoList.length; i++) {
+              if ($scope.scheduleMemoList[i].scheduleMemoNo == commentNo) {
+                $scope.scheduleMemoList[i].likeCnt = data;
+                $scope.scheduleMemoList[i].isLike = 0;
+              }
+            }
+          })
+      }
+
+      $scope.moveMemoDetail = function (no) {
+        $location.path("/postDetail/"+no);
+      }
     });
 });

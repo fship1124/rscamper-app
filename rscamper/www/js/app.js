@@ -106,6 +106,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/schedule/scheduleTabs.html'
         })
         .state('scheduleTab.schedule', {
+          cache : false,
           url: '/schedule',
           views: {
             's-tab': {
@@ -122,6 +123,22 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
               controller: 'MyPageMainCtrl'
             }
           }
+        })
+        .state('scheduleTab.userPost', {
+          cache : false,
+          url: '/post',
+          views: {
+            'userPost-tab': {
+              templateUrl: 'views/post/schedulePost.html',
+              controller : 'schedulePostCtrl'
+            }
+          }
+        })
+        .state('detailPost', {
+          cache : false,
+          url: '/postDetail/:postNo',
+          templateUrl: 'views/post/schedulePostDetail.html',
+          controller : 'schedulePostDetailCtrl'
         })
         .state('detailTab', {
           cache: false,

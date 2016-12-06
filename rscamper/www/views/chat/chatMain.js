@@ -6,7 +6,7 @@ angular.module('App')
   $rootScope.socket = io.connect("http://192.168.0.190:10001");
   $http.get($rootScope.url + "8081/app/chat/getCodeName", {
     params : {
-      codeName : 'areacode'
+      codeName : 'chat_areacode'
     }})
     .success(function (result) {
       $rootScope.codeTb = result;

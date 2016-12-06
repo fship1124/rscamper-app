@@ -2,7 +2,7 @@
  * Created by Bitcamp on 2016-11-02.
  */
 angular.module('App')
-.controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal) {
+.controller('dScheduleCtrl', function ($scope, $rootScope,$stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal, tourSchedulePopup, $location) {
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = true;
   });
@@ -64,6 +64,18 @@ angular.module('App')
         hideSheet();
       }, 5000);
   }
+
+  $http.get($rootScope.url + '8081/app/tourschedule/getScheduleMemo', {
+    params : {
+      recordNo : $stateParams.no,
+      userUid : $rootScope.rootUser.userUid
+    }
+  })
+    .success(function (result) {
+      $scope.scheduleMemoList = result;
+      console.log("메모", $scope.scheduleMemoList);
+    })
+
   $scope.choiceCamera = function () {
     var options = {
       quality : 75,
@@ -275,10 +287,143 @@ angular.module('App')
   }
 
   $scope.insertMemo = function () {
-    console.log('제목 : ', $("#memoTitle").val());
+/*    console.log('제목 : ', $("#memoTitle").val());
     console.log($("#edit-text").html());
     console.log($scope.memoLocation.contentCode);
     console.log($stateParams.no);
+    console.log($("#memoType").val());*/
+
+    /* memoType == 1 :  메모*/
+    /* memoType == 2 :  정보*/
+    $http({
+      url: $rootScope.url + '8081/app/tourschedule/addScheduleMemo',
+      method: 'POST',
+      data: $.param({
+        recordNo : $stateParams.no,
+        contentId : $scope.memoLocation.contentCode,
+        userUid : $rootScope.rootUser.userUid,
+        title : $("#memoTitle").val(),
+        content : $("#edit-text").html(),
+        regDate : new Date(),
+        memoType : $("#memoType").val()
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    }).success(function (result) {
+      tourSchedulePopup.alertPopup("등록 완료", "등록이 완료되었습니다.", null);
+      $scope.scheduleMemoList = result;
+    });
+
     $scope.locationMemo.hide();
+  }
+
+  // 댓글 부분
+  $ionicModal.fromTemplateUrl('views/schedule/scheduleComment.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.commentModal = modal;
+  });
+  $http.get($rootScope.url + '8081/app/tourschedule/getScheduleListComment', {
+    params : {
+      recordNo : $scope.dSchedule.recordNo
+    }
+  })
+    .success(function (result) {
+      $scope.commentList = result;
+      console.log(result);
+      for(var i =0; i < result.length; i++) {
+        console.log(moment().startOf(result.regDate,'day').fromNow())
+      }
+    });
+  $scope.commentOpen = function () {
+    $scope.commentModal.show();
+  }
+
+  $scope.resize = function () {
+    var obj = document.getElementById('inputText');
+    obj.style.height = "1px";
+    obj.style.height = (5+obj.scrollHeight) + "px";
+    $("#footerBar").css("height",(19+obj.scrollHeight) + "px");
+  }
+
+  $scope.insertComment = function (data) {
+    $http({
+      url: $rootScope.url + '8081/app/tourschedule/insertScheduleListComment',
+      method: 'POST',
+      data: $.param({
+        userUid : $rootScope.rootUser.userUid,
+        content : data,
+        recordNo : $scope.dSchedule.recordNo
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    })
+      .success(function (result) {
+        console.log(result);
+        $scope.commentList = result;
+        $("#inputText").val("");
+      });
+  }
+
+  $scope.delComment = function (commentNo) {
+    console.log(commentNo);
+    $scope.comfirmPop = tourSchedulePopup.comfirmPopup("삭제","정말 삭제하시겠습니까?");
+    $scope.comfirmPop.then(function (res) {
+      if (res) {
+        $http.get($rootScope.url + '8081/app/tourschedule/delScheduleListComment', {
+          params : {
+            commentNo : commentNo,
+            recordNo : $scope.dSchedule.recordNo
+          }
+        })
+          .success(function (result) {
+            tourSchedulePopup.alertPopup("삭제 완료", "삭제가 완료되었습니다.", null);
+            $scope.commentList = result;
+          })
+      }
+    })
+  }
+
+  $scope.recommedComment = function ($event, commentNo) {
+    $event.stopPropagation();
+    $http.get($rootScope.url + '8081/app/tourschedule/addScheduleMemoLike', {
+      params : {
+        scheduleMemoNo : commentNo,
+        userUid : $rootScope.rootUser.userUid
+      }
+    })
+      .success(function (data) {
+        console.log("추천수 : ", data);
+        for (var i = 0; i < $scope.scheduleMemoList.length; i++) {
+          if ($scope.scheduleMemoList[i].scheduleMemoNo == commentNo) {
+            $scope.scheduleMemoList[i].likeCnt = data;
+            $scope.scheduleMemoList[i].isLike = 1;
+          }
+        }
+      })
+  }
+
+  $scope.cancelCommentLike = function ($event, commentNo) {
+    $event.stopPropagation();
+    $http.get($rootScope.url + '8081/app/tourschedule/cancelScheduleMemoLike', {
+      params : {
+        scheduleMemoNo : commentNo,
+        userUid : $rootScope.rootUser.userUid
+      }
+    })
+      .success(function (data) {
+        for (var i = 0; i < $scope.scheduleMemoList.length; i++) {
+          if ($scope.scheduleMemoList[i].scheduleMemoNo == commentNo) {
+            $scope.scheduleMemoList[i].likeCnt = data;
+            $scope.scheduleMemoList[i].isLike = 0;
+          }
+        }
+      })
+  }
+
+  $scope.moveMemoDetail = function (no) {
+    $location.path("/postDetail/"+no);
   }
 });
