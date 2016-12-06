@@ -36,7 +36,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           $rootScope.userStatus = true;
         } else { // 로그아웃 상태
           $rootScope.userStatus = false;
-          $rootScope.rootUser = "";
+          $rootScope.rootUser.userUid = "";
         }
       })
     })

@@ -258,9 +258,14 @@ angular.module('App')
     };
     navigator.camera.getPicture(function (imageDATA) {
       var img = "<img id='img"+ imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/><div id='div" + imgid + "'></div>";
+      var diva = "<div id='div" + imgid + "'></div>";
       document.execCommand('insertHTML',true, img);
       imgid++;
-      alert("asd");
+      var asd = document.getElementById("edit-text");
+      asd.innerHTML += img;
+      asd.innerHTML += diva;
+      asd.innerHTML += "　";
+      $("#edit-text").focus();
     }, function (err) {
 
     }, options);

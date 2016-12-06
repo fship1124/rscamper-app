@@ -9,6 +9,7 @@ angular.module('App')
     /*$scope.detailInfo = detailLocationInfo.getLocationInfo($stateParams.locationNo);*/
     $scope.locationMap = {};
     $scope.likeCount = 0;
+    console.log("정보 : ",$stateParams.locationNo);
     $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y',{
       params : {
         contentId : $stateParams.locationNo

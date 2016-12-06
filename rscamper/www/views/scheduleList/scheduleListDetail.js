@@ -272,5 +272,9 @@ angular.module('App')
       $scope.moveMemoDetail = function (no) {
         $location.path("/postDetail/"+no);
       }
+
+      $scope.toUserComment = function (comment) {
+        console.log(comment);
+      }
     });
 });

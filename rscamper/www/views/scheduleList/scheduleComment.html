@@ -11,9 +11,27 @@
             <img class="scheduleList-author-img" ng-src="{{comment.photoUrl}}">
             <span class="scheduleList-author scheduleList-autor-time">{{comment.regDate | timesince : 'kr' }}</span>
             <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid == rootUser.userUid" ng-click="delComment(comment.commentNo)"><i class="ion-close-round"></i></div>
+            <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid != rootUser.userUid" ng-click="toUserComment(comment)"><i class="ion-ios-undo-outline"></i></div>
             <p class="scheduleList-author">{{comment.displayName}}</p>
             <div class="item-text-wrap mypage-info-content">{{comment.content}}</div>
           </a>
+        </div>
+        <div class="scheduleList-author-div" style="border-top: 1px solid #e0e0e0;">
+          <div class="row" style="padding: 0 !important;">
+            <div class="col col-10" style="padding: 0 !important; text-align: center">
+              <i class="ion-ios-undo-outline" style="-webkit-transform: rotate(90deg); font-weight: bold; font-size: x-large; line-height: 60px"></i>
+            </div>
+            <div class="col col-90" style="padding: 0 !important;">
+              <a class="item item-avatar scheduleList-author-a">
+                <img class="scheduleList-author-img" ng-src="{{comment.photoUrl}}">
+                <span class="scheduleList-author scheduleList-autor-time">{{comment.regDate | timesince : 'kr' }}</span>
+                <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid == rootUser.userUid" ng-click="delComment(comment.commentNo)"><i class="ion-close-round"></i></div>
+                <div class="scheduleList-autor-time" style="left: 93%" ng-if="comment.userUid != rootUser.userUid" ng-click="delComment(comment.commentNo)"><i class="ion-ios-undo-outline"></i></div>
+                <p class="scheduleList-author">{{comment.displayName}}</p>
+                <div class="item-text-wrap mypage-info-content"><span style="color: #d58512">{{comment.displayName}} : </span>{{comment.content}}</div>
+              </a>
+            </div>
+          </div>
         </div>
       </ion-item>
     </ion-list>
