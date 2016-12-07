@@ -1,37 +1,36 @@
 angular.module('App')
   // 전체
-  .controller('MainTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location, $cordovaGeolocation, $ionicScrollDelegate) {
+  .controller('MainTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location, $cordovaGeolocation, $ionicScrollDelegate, $timeout) {
     $ionicPlatform.ready(function () {
-      if(window.cordova && window.cordova.plugins.keyboard) {
+      if (window.cordova && window.cordova.plugins.keyboard) {
         cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
       }
-      if(window.StatusBar) {
+      if (window.StatusBar) {
         StatusBar.styleDefault();
       }
-
-      $cordovaGeolocation.getCurrentPosition().then(function (data) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
-          .success(function (response) {
-            $scope.location = {
-              lat : data.coords.latitude,
-              long: data.coords.longitude,
-              city: response.results[0].formatted_address,
-              current: true
-            };
-            loadWeather();
-          })
-          .error(function () {
-            alert("현재 위치를 몰라용");
-          });
-      })
-    });
+      $scope.loadMain = function () {
+        $cordovaGeolocation.getCurrentPosition().then(function (data) {
+          $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
+            .success(function (response) {
+              $scope.location = {
+                lat : data.coords.latitude,
+                long: data.coords.longitude,
+                city: response.results[0].formatted_address,
+                current: true
+              };
+              loadWeather();
+            })
+            .error(function () {
+              alert("현재 위치를 몰라용");
+            });
+        })
 
     // 날씨 불러오기
     function loadWeather() {
       $http({
         method: "GET",
         url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-       /* headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}*/
+        /* headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}*/
       })
         .success(function(data) {
           $scope.today = data.weather.minutely[0];
@@ -156,6 +155,12 @@ angular.module('App')
           break;
       }
     }
+  }
+    })
+
+    $timeout(function () {
+      $scope.loadMain();
+    },2000);
   })
   // 베스트 여행기
   .controller('TourTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {

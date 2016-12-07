@@ -23,3 +23,10 @@
   font-size: 10px !important;
   color : #898989 !important;
 }
+.introduce-content {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap:break-word;
+}

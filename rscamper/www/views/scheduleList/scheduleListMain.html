@@ -5,6 +5,7 @@
         <i class="ion-clipboard title-left" style="color: #9c9c9c;"></i>
         <span style="color: #d1782d; font-size: small">{{totalCount}}</span>
         <span style="color: #9c9c9c; font-size: small">개의 여행일정이 있습니다.</span>
+        <span><i class="ion-android-arrow-dropdown"></i></span>
       </div>
     </div>
   </ion-content>
@@ -28,8 +29,8 @@
           </div>
           <div class="mypage-info" ng-if="schedule.strapline != ''">
             <div class="item-divider mypage-info-title">{{schedule.strapline}}</div>
-            <div class="item-text-wrap mypage-info-content">
-              {{schedule.introduce}}
+            <div class="item-text-wrap mypage-info-content introduce-content">
+              <pre>{{schedule.introduce}}</pre>
             </div>
           </div>
           <div class="mypage-info" style="padding: 10px 10px 0px 10px !important;">
