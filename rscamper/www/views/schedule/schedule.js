@@ -4,7 +4,6 @@
 angular.module('App')
   .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule) {
     $rootScope.listCount = 0;
-    $rootScope.url = "http://192.168.0.190:";
     $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
       params :{
         uid : $rootScope.rootUser.userUid
@@ -19,15 +18,21 @@ angular.module('App')
     $scope.newSchedule = {
       title : "",
       startDate : "",
-      finishDate : ""
+      finishDate : "",
+      isOpen : 0
     };
-
     $ionicModal.fromTemplateUrl('views/schedule/makeSchedule.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
     $scope.createSchedule = function (s) {
+      console.log(s);
+      if (s.isOpen == 0) {
+        tourSchedulePopup.alertPopup('공개 여부','공개 여부를 선택하세요.', null);
+        return false;
+      }
+
       if (s.title == "") {
         tourSchedulePopup.alertPopup('여행 제목','여행 제목을 입력해주세요.','tourTitle');
         return false;
@@ -47,7 +52,8 @@ angular.module('App')
             uid   : $rootScope.rootUser.userUid,
             title : s.title,
             sDate : s.startDate,
-            fDate : s.finishDate
+            fDate : s.finishDate,
+            isOpen : s.isOpen
           }})
           .success(function (result) {
             $rootScope.scheduleList = result;
@@ -82,4 +88,13 @@ angular.module('App')
         $location.path("/detailSchedule/detail/"+no);
       }
 
+      $scope.openNewSchedule = function () {
+        $scope.newSchedule = {
+          title : "",
+          startDate : "",
+          finishDate : "",
+          isOpen : 0
+        };
+        $scope.modal.show();
+      }
   });

@@ -1,6 +1,6 @@
 <ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
   <ion-content  overflow-scroll="false">
-    <button class="button button-bar" ng-click="modal.show()" style="margin-top: 10px"><i class="ion-android-add" style="color: darkmagenta"></i> 새로운 일정 만들기</button>
+    <button class="button button-bar" ng-click="openNewSchedule()" style="margin-top: 10px"><i class="ion-android-add" style="color: darkmagenta"></i> 새로운 일정 만들기</button>
  <!--   <ion-list>
       <ion-item id="scheduleBox" ng-repeat="schedule in scheduleList"  href="#/schedule/schedule/{{}}">
         <img id="coverImg" src="img/defaultscheduleImg.jpg">
@@ -31,11 +31,20 @@
           </div>
           <div class="mypage-delbtn" ng-click="delSchedule($event, schedule.recordNo)"><i class="ion-trash-a mypage-delbtn-icon" style="color: #e6b500;"></i></div>
           <div class="mypage-info">
+            <div ng-if="schedule.strapline != ''">
             <div class="item-divider mypage-info-title">{{schedule.strapline}}</div>
-            <div class="item-text-wrap mypage-info-content">
-              {{schedule.introduce}}
+            <div class="item-text-wrap mypage-info-content introduce-content">
+              <pre>{{schedule.introduce}}</pre>
+            </div>
             </div>
           </div>
+          <div class="mypage-info" style="padding: 10px 10px 0px 10px !important;">
+            <div class="item-text-wrap mypage-info-content" style="border-top: 1px solid #e0e0e0; text-align: right; padding-right: 2%">
+              <i class="ion-thumbsup" style="font-size: larger"></i> {{schedule.likeCnt}}명 추천 &nbsp&nbsp&nbsp
+              <i class="ion-android-create" style="font: larger"></i> {{schedule.commentCnt}}개의 댓글
+            </div>
+          </div>
+        </div>
         </div>
       </ion-item>
     </ion-list>

@@ -56,13 +56,17 @@
   height: 10%;
   background-color: gainsboro;
 }
-#detailButtonBox > div {
+.detail-info > div {
   width: 25%;
   height: 100%;
   float: left;
   text-align: center;
+  font-size: small;
 }
-#detailButtonBox > div > span {
+.detail-info > div > i {
+  font-size: x-large;
+}
+.detail-info > div > span {
   font-size: 10px;
 }
 #tourBodgetBox {
@@ -177,3 +181,75 @@ text-align: center;
 .transparent1 {
   background: rgba(0,0,0,0.7);
 }
+
+.detailScheduleTitle {
+  font-weight: bold !important;
+  font-size: 13px !important;
+}
+
+.detail-img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+.detail-title {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: larger;
+  padding: 0px 50px;
+  white-space: normal;
+  text-shadow: 1px 1px 5px #303030;
+}
+.detail-author-div {
+  position: absolute;
+  top: 67%;
+}
+.detail-info {
+
+}
+
+.detail-info-content {
+  font-size: 13px !important;
+  color: dimgray !important;
+}
+
+.detail-info-content > span {
+  float: right;
+  padding-right: 5%;
+}
+.detail-info-title {
+  font-weight: bold !important;
+  font-size: 13px !important;
+  background-color: white !important;
+  min-height: 0px !important;
+}
+
+.detail-info {
+  padding-top: 8px;
+}
+
+.detail-timeline-block1 {
+  position: relative;
+  background-color: white;
+  /*margin: 2em 0;*/
+}
+
+#detail-timeline {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  margin-left: 10px !important;
+}
+.makeScheduleRadioBtn {
+  padding: 0px !important;
+  border: 1px solid #e0e0e0
+}
+
+.mypage-item > a {
+  padding: 0px !important;
+}
+

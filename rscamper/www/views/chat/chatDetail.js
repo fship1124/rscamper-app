@@ -86,6 +86,7 @@ angular.module('App')
     }
   });
   function writeText(data,user,type) {
+    var checkTime = getDate();
     var msgList = document.getElementById('msgList');
     var html = '<div class="item" style="padding: 0 !important; border: none">';
     if(type == 'text') {
@@ -109,7 +110,7 @@ angular.module('App')
       }
     }
     html += '<div class="message-detail"><span class="bold">' + data.name + '</span>,';
-    html += '<span>aaa</span></div>';
+    html += '<span>' + data.sendRegDate.getHours() + ':' + data.sendRegDate.getMinutes() + '</span></div>';
     html += '</div>';
     html += '</div>';
     msgList.innerHTML += html;
@@ -133,10 +134,12 @@ angular.module('App')
       type : "text",
       name : $rootScope.rootUser.displayName,
       message : $scope.msgContent,
-      uid : $rootScope.rootUser.userUid
+      uid : $rootScope.rootUser.userUid,
+      sendRegDate : new Date()
     }
     $rootScope.socket.emit('user',data);
-    writeText(data,"user","text");
+    $scope.data = data;
+    writeText($scope.data,"user","text");
     $scope.msgContent = "";
     $ionicScrollDelegate.scrollBottom();
   }
@@ -179,10 +182,12 @@ angular.module('App')
               type : "image",
               name : $rootScope.rootUser.displayName,
               imgUrl : e.target.result,
-              uid : $rootScope.rootUser.userUid
+              uid : $rootScope.rootUser.userUid,
+              sendRegDate : new Date()
             }
             $rootScope.socket.emit('user',data);
-            writeText(data,"user","image");
+            $scope.data = data;
+            writeText($scope.data,"user","image");
             console.log(e.target.result);
           };
           FR.readAsDataURL( input.files[0] );
@@ -246,10 +251,12 @@ angular.module('App')
             type : "image",
             name : $rootScope.rootUser.displayName,
             imgUrl : 'data:image/jpeg;base64,' + imageDATA,
-            uid : $rootScope.rootUser.userUid
+            uid : $rootScope.rootUser.userUid,
+            sendRegDate : new Date()
           }
           $rootScope.socket.emit('user',data);
-          writeText(data,"user","image");
+          $scope.data = data;
+          writeText($scope.data,"user","image");
         }, function (err) {
 
         }, options);
@@ -263,4 +270,28 @@ angular.module('App')
       $rootScope.socket.on('outMsg', function (msg) {
         initList.innerHTML += "<div style='width: 100%; text-align: center'>" + msg.message + "</div>";
       });
+
+      function getDate(writeDate) {
+        console.log(writeDate);
+        var wDate = new Date(writeDate);
+        var now = new Date();
+        var nTime = now.getTime() - wDate.getTime();
+        var year = nTime/1000/60/60/24/365;
+        var day = nTime/1000/60/60/24;
+        var hour = nTime/1000/60/60;
+        var mi = nTime/1000/60;
+        if(year >= 1) {
+          return parseInt(year) + "년전";
+        }
+        if (year == 0 && day >= 1) {
+          return parseInt(day) + "일전";
+        }
+        if (day == 0 && hour >= 1) {
+          return parseInt(hour) + "시간전";
+        }
+        if (hour == 0 && mi >= 1) {
+          return parseInt(mi) + "분전";
+        }
+        return parseInt(mi) +"초전";
+      }
 })

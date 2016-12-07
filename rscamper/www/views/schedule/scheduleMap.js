@@ -3,6 +3,12 @@
  */
 angular.module('App')
 .controller('scheduleMapCtrl', function ($scope, $http, $rootScope) {
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+  });
+
+  console.log($rootScope.getScheduleLocation);
+
   // 처음 맵 만드는 함수
   var infowindow;
   var markers = [];
@@ -66,7 +72,7 @@ angular.module('App')
       });
 
       markers.push(marker);
-      var content = '<a style="text-decoration: none; font-weight: bold" href="#/detailSchedule/mapLocation/' + $rootScope.dSchedule.recordNo + '/' + position.locationNo + '">' + position.title + '</a>';
+      var content = '<a style="text-decoration: none; font-weight: bold" href="#/detailSchedule/mapLocation/' + $rootScope.dSchedule.recordNo + '/' + position.contentCode + '">' + position.title + '</a>';
       console.log(content);
       infowindow = new google.maps.InfoWindow();
       marker.addListener('click',function () {

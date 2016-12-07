@@ -63,9 +63,50 @@
   font-size: 16px;
   color: white;
 }
+.main-comment-list-div {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ebcccc;
+}
+.main-comment-list {
+  width: 100%;
+  font-size: 11px;
+  padding: 3px 5px 0px 5px;
+  height: 20px !important;
+  min-height: 20px !important;
+  box-sizing: border-box;
+
+}
 .my-tabs  > div {
   height: 28px; !important;
 }
+.main-board-img {
+  height: 120px;
+}
+.main-board-info {
+  background-color: white;
+  padding: 5px 8px 10px 8px;
+  margin-top: -5px;
+}
+.main-board-short-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0px;
+  height: 30px;
+  line-height: 30px;
+}
+.main-board-long-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0px;
+  height: 30px;
+  line-height: 110%;
+}
+.main-board-author {
+  font-size: 11px;
+  color: dimgray;
+}
+
 
 /* tourInfo */
 #map {
@@ -140,11 +181,11 @@
 .mypage-img {
   width: 100%;
   height: 150px;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 .mypage-title {
   position: absolute;
-  top: 25%;
+  top: 60px;
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -167,6 +208,7 @@
   color: white !important;
   font-size: 11px !important;
   line-height: 25px;
+  text-shadow: 1px 1px 5px #303030;
 }
 .mypage-author-img {
   max-height: 25px !important;
@@ -185,6 +227,12 @@
 .mypage-info-content {
   font-size: 11px !important;
   color: dimgray !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 .mypage-delbtn {
   width: 25px;
