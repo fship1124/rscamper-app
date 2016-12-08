@@ -6,25 +6,29 @@
           <div class="col col-25" style="padding: 0px; height: 100px">
             <img class="wishBoard-img" ng-src="{{wishBoard.firstimage}}" />
           </div>
-          <div class="col col-40"  style="word-wrap: break-word;">
-            <div class="wishBoard-info">
-                <div class="item-divider mypage-info-title" style="padding-bottom: 2px">{{wishBoard.title}}</div>
+          <div class="col col-75"  style="word-wrap: break-word; position: relative; padding: 5px 8px 8px 8px;">
+            <div>
+                <div class="item-divider mypage-info-title" style="padding-bottom: 2px;">{{wishBoard.title}}</div>
                 <div class="item-text-wrap mypage-info-content introduce-content">
                   {{wishBoard.addr1}}
                 </div>
-                <div class="item-text-wrap wishBoard-info-content">
-                  <i class="ion-ios-list-outline"></i><span style="font-size: 10px"> {{wishBoard.postCnt}}개의 포스트</span>
-                </div>
             </div>
-          </div>
-          <div class="col col-34">
-            <div style="position: absolute; top: 68%; width: 30%; height: 20%">
-              <div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> {{wishBoard.likeCnt}}</span></div>
-              <div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> 2</span></div>
+            <div class="row wishboard-bottom-div">
+              <div class="item-text-wrap wishBoard-info-content col col-60" style="padding: 0; line-height: 1.5">
+                <i class="ion-ios-list-outline" style="font-size: 16px;"></i><span style="font-size: 10px; font-weight: bold"> {{wishBoard.postCnt}}개의 포스트</span>
+              </div>
+              <div class="col col-40" style="padding: 0">
+                <div class="row" style="padding: 0; width: 100%;">
+                  <div class="wishboard-like-btn col col-md-5" style="margin-right: 3px"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> 78</span></div>
+                  <div class="wishboard-like-btn col col-md-5"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> 2</span></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </ion-item>
     </ion-list>
   </ion-content>
+  <!--<div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> {{wishBoard.likeCnt}}</span></div>-->
+  <!--<div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> 2</span></div>-->
 </ion-view>

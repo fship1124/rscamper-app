@@ -52,13 +52,44 @@ angular.module('App')
         $scope.total = 1;
         $scope.myMainList = [];
         $scope.myMainCommentList = [];
+        $scope.myMainMessageList = [];
         $scope.getMainList();
         if ($rootScope.rootUser.userUid) {
           $scope.getMainCommentList();
+          $scope.getMainMessageList();
         }
         loadWeather();
       }
     };
+
+    $scope.loginUserUid = $rootScope.rootUser.userUid;
+
+    // 쪽지 불러오기
+    $scope.getMainMessageList = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
+      });
+
+      $http.get("http://192.168.0.187:8081/app/main/messageList", {
+        params :{
+          userUid : $rootScope.rootUser.userUid
+        }
+      }).success(function (response) {
+        angular.forEach(response, function (message) {
+          $scope.myMainMessageList.push(message);
+        });
+        // for (var i = 0; i < $scope.myMainMessageList.length; i++) {
+        //   if ($scope.myMainMessageList[i].title.length >= 4) {
+        //     $scope.myMainMessageList[i].title = $scope.myMainMessageList[i].title.substring(0, 3) + '...';
+        //   }
+        // }
+      })
+        .finally(function () {
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    }
 
     // 댓글 불러오기
     $scope.getMainCommentList = function () {
@@ -135,9 +166,11 @@ angular.module('App')
       $scope.total = 1;
       $scope.myMainList = [];
       $scope.myMainCommentList = [];
+      $scope.myMainMessageList = [];
       $scope.getMainList();
       if ($rootScope.rootUser.userUid) {
         $scope.getMainCommentList();
+        $scope.getMainMessageList();
       }
     }
 

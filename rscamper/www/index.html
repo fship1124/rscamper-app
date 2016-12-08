@@ -87,6 +87,8 @@
   <script src="views/main/mainController.js"></script>
   <script src="views/tour/tourInfo.js"></script>
   <script src="views/tour/tourDetail.js"></script>
+  <script src="views/message/message.js"></script>
+  <script src="views/message/messageDetail.js"></script>
 
   <script src="views/schedule/schedule.js"></script>
   <script src="views/schedule/scheduleTabs.js"></script>
@@ -184,6 +186,9 @@
         </ion-item>-->
         <ion-item nav-clear menu-close ui-sref="chat" ng-if="userStatus == true">
           <i class="icon ion-chatboxes"></i> 채팅
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="message">
+          <i class="icon ion-email"></i> 쪽지
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="scheduleTab.schedule" ng-if="userStatus == true">
           <i class="icon ion-android-person"></i> 마이페이지

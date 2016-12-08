@@ -80,6 +80,7 @@ angular.module('App')
     }
     var currentTop = viewScroll.getScrollPosition().top;
     console.log("currentTop",currentTop);
+    data.sendRegDate = new Date();
     var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
     console.log("maxScrollableDistanceFromTop",maxScrollableDistanceFromTop);
     writeText(initdata,"other", data.type);

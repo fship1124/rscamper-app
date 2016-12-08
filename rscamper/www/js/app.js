@@ -85,6 +85,17 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        .state('message', {
+          cache: false,
+          url: '/message',
+          templateUrl: 'views/message/message.html',
+          controller: 'MessageCtrl'
+        })
+        .state('messageDetail', {
+          url: '/message/:notesNo',
+          templateUrl: 'views/message/messageDetail.html',
+          controller: 'MessageDetailCtrl'
+        })
         .state('tourInfo', {
           cache: false,
           url: '/tourInfo',
