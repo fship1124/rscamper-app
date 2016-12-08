@@ -4,15 +4,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-          cordova.plugins.Keyboard.disableScroll(true);
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-        }
-      });
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
 
       // 로그인 로그아웃처리
       // rootUser : 로그인한 유저 정보(object)
@@ -85,6 +85,17 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
             }
           }
         })
+        .state('message', {
+          cache: false,
+          url: '/message',
+          templateUrl: 'views/message/message.html',
+          controller: 'MessageCtrl'
+        })
+        .state('messageDetail', {
+          url: '/message/:notesNo',
+          templateUrl: 'views/message/messageDetail.html',
+          controller: 'MessageDetailCtrl'
+        })
         .state('tourInfo', {
           cache: false,
           url: '/tourInfo',
@@ -139,6 +150,16 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url: '/postDetail/:postNo',
           templateUrl: 'views/post/schedulePostDetail.html',
           controller : 'schedulePostDetailCtrl'
+        })
+        .state('scheduleTab.wishBoard', {
+          cache : false,
+          url : '/wishBoard',
+          views: {
+            'userWishBoard-tab': {
+              templateUrl: 'views/wishboard/wishboardMain.html',
+              controller : 'wishboardMainCtrl'
+            }
+          }
         })
         .state('detailTab', {
           cache: false,

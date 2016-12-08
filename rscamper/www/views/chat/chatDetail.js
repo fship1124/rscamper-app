@@ -70,11 +70,20 @@ angular.module('App')
     initList.innerHTML += "<div style='width: 100%; text-align: center'>" + data.message + "</div>";
   });
   $rootScope.socket.on("message", function (data) {
+    console.log(data);
+    var initdata = {
+      type : data.type,
+      name : data.name,
+      message : data.message,
+      photoUrl : data.photoUrl,
+      sendRegDate : new Date()
+    }
     var currentTop = viewScroll.getScrollPosition().top;
     console.log("currentTop",currentTop);
+    data.sendRegDate = new Date();
     var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
     console.log("maxScrollableDistanceFromTop",maxScrollableDistanceFromTop);
-    writeText(data,"other", data.type);
+    writeText(initdata,"other", data.type);
     if (maxScrollableDistanceFromTop - currentTop >= 100) {
       $scope.writeRecentlyChat(data);
 /*      $("#chatUserImg").attr('src', data.photoUrl);
@@ -96,7 +105,7 @@ angular.module('App')
       }
       if (user =='user') {
         html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic right" src="' + $rootScope.rootUser.photoUrl + '" onerror="onProfilePicError(this)">';
-        html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + $scope.msgContent  + '</pre>';
+        html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + data.msgContent  + '</pre>';
       }
     }
     if (type == 'image') {

@@ -35,6 +35,9 @@ angular.module('App')
           }
         )
           .success(function (data) {
+ /*           $scope.mylocation.long = 35.84977;
+              $scope.mylocation.lat = 127.1596093;*/
+
             $scope.mapList = data.response.body.items.item;
             drop($scope.mapList, $scope.map);
 
