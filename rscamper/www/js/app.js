@@ -140,6 +140,16 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/post/schedulePostDetail.html',
           controller : 'schedulePostDetailCtrl'
         })
+        .state('scheduleTab.wishBoard', {
+          cache : false,
+          url : '/wishBoard',
+          views: {
+            'userWishBoard-tab': {
+              templateUrl: 'views/wishboard/wishboardMain.html',
+              controller : 'wishboardMainCtrl'
+            }
+          }
+        })
         .state('detailTab', {
           cache: false,
           url: '/detailSchedule',

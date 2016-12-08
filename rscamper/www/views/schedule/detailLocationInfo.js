@@ -7,6 +7,7 @@ angular.module('App')
       viewData.enableBack = true;
     });
     /*$scope.detailInfo = detailLocationInfo.getLocationInfo($stateParams.locationNo);*/
+    $scope.moreText = true;
     $scope.locationMap = {};
     $scope.likeCount = 0;
     console.log("정보 : ",$stateParams.locationNo);
@@ -18,7 +19,23 @@ angular.module('App')
       .success(function (data) {
         $scope.detailInfo = data.response.body.items.item;
         console.log($scope.detailInfo);
-
+        $http.get($rootScope.url + "8081/app/tourschedule/checkLocationLikeCnt", {
+          params : {
+            contentId : $stateParams.locationNo
+          }
+        })
+          .success(function (result) {
+            $scope.locationCnt = result;
+          });
+        $http.get($rootScope.url + "8081/app/tourschedule/getLocationMemo",{
+          params : {
+            contentId : $stateParams.locationNo
+          }
+        })
+          .success(function (memo) {
+            $scope.myPostList = memo;
+            console.log("정보???",memo);
+          })
 
         $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
           {params : {
@@ -29,9 +46,10 @@ angular.module('App')
             imageYN : 'Y'
           }})
           .success(function (data) {
-            $scope.images = data.response.body.items.item;
+            $scope.imageList = data.response.body.items.item;
+            console.log("이미지",$scope.imageList);
             $scope.isPhoto = true;
-            if (!$scope.images) {
+            if (!$scope.imageList) {
               $scope.isPhoto = false;
             }
             $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
@@ -125,6 +143,78 @@ angular.module('App')
               $scope.isLiked = false;
               $scope.likeCount = data;
             })
+        }
+
+        $scope.showImages = function (index) {
+          $scope.activeSlide = index;
+          $scope.showModal('templates/gallery-zoomview.html');
+        };
+
+        $scope.showModal = function (templateUrl) {
+          $ionicModal.fromTemplateUrl(templateUrl, {
+            scope: $scope
+          }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+          });
+        };
+
+        $scope.closeModal = function () {
+          $scope.modal.hide();
+          $scope.modal.remove();
+        };
+
+
+        $scope.moveMemoDetail = function (no) {
+          $location.path("/postDetail/"+no);
+        }
+
+        $scope.recommedComment = function ($event, commentNo) {
+          $event.stopPropagation();
+          $http.get($rootScope.url + '8081/app/tourschedule/addScheduleMemoLike', {
+            params : {
+              scheduleMemoNo : commentNo,
+              userUid : $rootScope.rootUser.userUid
+            }
+          })
+            .success(function (data) {
+              console.log("추천수 : ", data);
+              for (var i = 0; i < $scope.myPostList.length; i++) {
+                if ($scope.myPostList[i].scheduleMemoNo == commentNo) {
+                  $scope.myPostList[i].likeCnt = data;
+                  $scope.myPostList[i].isLike = 1;
+                }
+              }
+            })
+        }
+
+        $scope.cancelCommentLike = function ($event, commentNo) {
+          $event.stopPropagation();
+          $http.get($rootScope.url + '8081/app/tourschedule/cancelScheduleMemoLike', {
+            params: {
+              scheduleMemoNo: commentNo,
+              userUid: $rootScope.rootUser.userUid
+            }
+          })
+            .success(function (data) {
+              for (var i = 0; i < $scope.myPostList.length; i++) {
+                if ($scope.myPostList[i].scheduleMemoNo == commentNo) {
+                  $scope.myPostList[i].likeCnt = data;
+                  $scope.myPostList[i].isLike = 0;
+                }
+              }
+            })
+
+        }
+
+        $scope.moreDetail = function () {
+          $("#location-info").removeClass("detailLocation-moreText");
+          $scope.moreText = false;
+        }
+
+        $scope.closeDetail = function () {
+          $("#location-info").addClass("detailLocation-moreText");
+          $scope.moreText = true;
         }
       });
   })

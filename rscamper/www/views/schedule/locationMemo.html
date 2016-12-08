@@ -23,6 +23,7 @@
           <input type="text" id="memoTitle">
         </label>
     </div>
+  </ion-content>
     <!--<div class="list row" style="border-bottom: 1px solid #e0e0e0">-->
 
       <!--<div class="col col-33 item-select">-->
@@ -39,8 +40,8 @@
         <!--</label>-->
       <!--</div>-->
     <!--</div>-->
-
-        <div id="edit-text" contenteditable="true" style="width: 100%; height: 500px; border: 1px solid #e0e0e0; white-space:normal; overflow-y: scroll">
+  <ion-content scroll="true">
+        <div id="edit-text" contenteditable="true" style="width: 100%; height: 500px; border: 1px solid #e0e0e0; white-space:normal; overflow-y: scroll" ng-keyup="editTextBox()">
         </div>
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-energized">

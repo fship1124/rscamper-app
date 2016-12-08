@@ -1,0 +1,30 @@
+<ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="wishBoard in wishBoardList" ng-href="#/location/{{wishBoard.contentid}}">
+        <div class="item-content mypage-content mypage-item-div row">
+          <div class="col col-25" style="padding: 0px; height: 100px">
+            <img class="wishBoard-img" ng-src="{{wishBoard.firstimage}}" />
+          </div>
+          <div class="col col-40"  style="word-wrap: break-word;">
+            <div class="wishBoard-info">
+                <div class="item-divider mypage-info-title" style="padding-bottom: 2px">{{wishBoard.title}}</div>
+                <div class="item-text-wrap mypage-info-content introduce-content">
+                  {{wishBoard.addr1}}
+                </div>
+                <div class="item-text-wrap wishBoard-info-content">
+                  <i class="ion-ios-list-outline"></i><span style="font-size: 10px"> {{wishBoard.postCnt}}개의 포스트</span>
+                </div>
+            </div>
+          </div>
+          <div class="col col-34">
+            <div style="position: absolute; top: 68%; width: 30%; height: 20%">
+              <div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> {{wishBoard.likeCnt}}</span></div>
+              <div class="wishBoard-like" ><i class="ion-android-favorite-outline"></i><span style="font-size: small"> 2</span></div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

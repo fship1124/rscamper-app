@@ -64,17 +64,9 @@ img.profile-pic.left {
 img.profile-pic.right {
   right: 10px;
 }
-
-.ion-email {
-  float: right;
-  font-size: 32px;
-  vertical-align: middle;
-}
-
 .message {
   font-size: 14px;
 }
-
 .message-detail {
   white-space: nowrap;
   font-size: 14px;
