@@ -72,6 +72,7 @@ angular.module('App')
   $rootScope.socket.on("message", function (data) {
     var currentTop = viewScroll.getScrollPosition().top;
     console.log("currentTop",currentTop);
+    data.sendRegDate = new Date();
     var maxScrollableDistanceFromTop = viewScroll.getScrollView().__maxScrollTop;
     console.log("maxScrollableDistanceFromTop",maxScrollableDistanceFromTop);
     writeText(data,"other", data.type);
