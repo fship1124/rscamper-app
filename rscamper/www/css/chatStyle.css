@@ -64,11 +64,9 @@ img.profile-pic.left {
 img.profile-pic.right {
   right: 10px;
 }
-
 .message {
   font-size: 14px;
 }
-
 .message-detail {
   white-space: nowrap;
   font-size: 14px;
