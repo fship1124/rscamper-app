@@ -264,13 +264,8 @@ text-align: center;
 .wishBoard-info-content {
   font-size: 15px !important;
   color: #5e5e5e !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  padding-top: 14px;
+  display: table-cell;
+  vertical-align: middle;
 }
 .wishBoard-info {
   padding: 0 10px 0px 10px;
@@ -304,3 +299,23 @@ text-align: center;
   padding: 0 10px 5px 10px;
 }
 
+.wishboard-like-btn {
+  border: 1px solid #700700;
+
+  padding: 3px 0 0 0;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.wishboard-like-btn * {
+  color: #700700;
+}
+.wishboard-like-text {
+  font-size: 11px;
+  font-weight: bold;
+}
+.wishboard-bottom-div {
+  padding: 0;
+  margin-top: 10px;
+  width: 100%;
+}

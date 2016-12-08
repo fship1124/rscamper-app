@@ -1,6 +1,6 @@
 var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','contenteditable', 'ngSanitize'])
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
-      $rootScope.url = "http://192.168.0.187:";
+      $rootScope.url = "http://192.168.0.190:";
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
