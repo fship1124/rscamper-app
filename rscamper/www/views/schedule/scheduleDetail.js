@@ -431,11 +431,21 @@ angular.module('App')
   $scope.moveMemoDetail = function (no) {
     $location.path("/postDetail/"+no);
   }
-  
+
   $scope.editTextBox = function () {
     setTimeout(function () {
       console.log("누름");
       $("#edit-text").focus();
     },0);
+  }
+  //더보기 버튼
+  $ionicModal.fromTemplateUrl('views/schedule/moreRecommendView.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.moreRecommend = modal;
+  });
+
+  $scope.moreBtn = function () {
+    $scope.moreRecommend.show();
   }
 });

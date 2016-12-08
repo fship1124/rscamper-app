@@ -27,6 +27,7 @@ angular.module('App')
           .success(function (result) {
             $scope.locationCnt = result;
           });
+
         $http.get($rootScope.url + "8081/app/tourschedule/getLocationMemo",{
           params : {
             contentId : $stateParams.locationNo
@@ -75,14 +76,12 @@ angular.module('App')
           });
         $http.get($rootScope.url + "8081/app/tourschedule/checkedIsLike",
           {params : {
-            no : $scope.detailInfo.contentid,
+            contentId : $scope.detailInfo.contentid,
             uid : $rootScope.rootUser.userUid
           }})
           .success(function (data) {
-            $scope.isLiked = false;
-            if (data == true) {
-              $scope.isLiked = true;
-            }
+            $scope.isLiked = data.isLike;
+            $scope.isBack = data.isBack;
           });
         $ionicPlatform.ready(function () {
           if (window.cordova && window.cordova.plugins.keyboard) {
@@ -128,10 +127,23 @@ angular.module('App')
               uid : $rootScope.rootUser.userUid
             }})
             .success(function (data) {
-              $scope.isLiked = true;
-              $scope.likeCount = data;
+              $scope.isLiked = false;
+              $scope.locationCnt.likeCnt = data;
             })
         }
+
+        $scope.backLikePlus = function (code) {
+          $http.get($rootScope.url + "8081/app/tourschedule/addBackLocationLike",
+            {params : {
+              contentId : code,
+              uid : $rootScope.rootUser.userUid
+            }})
+            .success(function (data) {
+              $scope.isBack = false;
+              $scope.locationCnt.backLocationCnt = data;
+            })
+        }
+
 
         $scope.removeLiked = function (code) {
           $http.get($rootScope.url + "8081/app/tourschedule/removeLiked",
@@ -140,8 +152,20 @@ angular.module('App')
               uid : $rootScope.rootUser.userUid
             }})
             .success(function (data) {
-              $scope.isLiked = false;
-              $scope.likeCount = data;
+              $scope.isLiked = true;
+              $scope.locationCnt.likeCnt = data;
+            })
+        }
+
+        $scope.removeBackLiked = function (code) {
+          $http.get($rootScope.url + "8081/app/tourschedule/delBackLocationLike",
+            {params : {
+              contentId : code,
+              uid : $rootScope.rootUser.userUid
+            }})
+            .success(function (data) {
+              $scope.isBack = true;
+              $scope.locationCnt.backLocationCnt = data;
             })
         }
 
@@ -215,6 +239,55 @@ angular.module('App')
         $scope.closeDetail = function () {
           $("#location-info").addClass("detailLocation-moreText");
           $scope.moreText = true;
+        }
+
+
+        // 댓글
+        $ionicModal.fromTemplateUrl('views/schedule/locationComment.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.commentModal = modal;
+        });
+
+        $scope.commentOpen = function () {
+          $scope.commentModal.show();
+        }
+
+        $scope.resize = function () {
+          var obj = document.getElementById('inputText');
+          obj.style.height = "1px";
+          obj.style.height = (5+obj.scrollHeight) + "px";
+          $("#footerBar").css("height",(19+obj.scrollHeight) + "px");
+        }
+
+        $http.get($rootScope.url + '8081/app/tourschedule/getLocationComment', {
+          params : {
+            contentId : $stateParams.locationNo
+          }
+        })
+          .success(function (result) {
+            $scope.commentList = result;
+            console.log(result);
+          });
+
+        $scope.insertComment = function (data) {
+          $http({
+            url: $rootScope.url + '8081/app/tourschedule/addLocationComment',
+            method: 'POST',
+            data: $.param({
+              userUid : $rootScope.rootUser.userUid,
+              content : data,
+              contentId : $stateParams.locationNo
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+          })
+            .success(function (result) {
+              console.log(result);
+              $scope.commentList = result;
+              $("#inputText").val("");
+            });
         }
       });
   })
