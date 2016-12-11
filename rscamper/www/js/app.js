@@ -4,15 +4,15 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-          cordova.plugins.Keyboard.disableScroll(true);
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-        }
-      });
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
 
       // 로그인 로그아웃처리
       // rootUser : 로그인한 유저 정보(object)
@@ -235,6 +235,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           url : '/scheduleList/:recordNo',
           templateUrl : '/views/scheduleList/scheduleListDetail.html',
           controller : 'scheduleListDetailCtrl'
+        })
+        .state('travelPrice', {
+          cache : false,
+          url : '/travelPrice/:recordNo',
+          templateUrl : '/views/travelPrice/travelPrice.html',
+          controller : 'travelPriceCtrl'
         })
 
 
