@@ -69,6 +69,8 @@ angular.module('App')
           $scope.isBookMark = data.bookMark;
         });
 
+      $http.get()
+
       $scope.recommendSchedule = function () {
         $http.get($rootScope.url + '8081/app/tourschedule/addScheduleLike', {
           params : {

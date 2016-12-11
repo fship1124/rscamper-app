@@ -1,7 +1,7 @@
 <ion-view view-title="{{rootUser.displayName}}님의 페이지" id="myPageView">
   <ion-content>
     <ion-list>
-      <ion-item class="item-light item-complex mypage-item" ng-repeat="wishBoard in wishBoardList" ng-href="#/location/{{wishBoard.contentid}}">
+      <ion-item class="item-light item-complex mypage-item" ng-repeat="wishBoard in wishBoardList" ng-click="moveDetail(wishBoard.contentid)">
         <div class="item-content mypage-content mypage-item-div row">
           <div class="col col-25" style="padding: 0px; height: 100px">
             <img class="wishBoard-img" ng-src="{{wishBoard.firstimage}}" />
@@ -19,8 +19,10 @@
               </div>
               <div class="col col-40" style="padding: 0">
                 <div class="row" style="padding: 0; width: 100%;">
-                  <div class="wishboard-like-btn col col-md-5" style="margin-right: 3px"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> 78</span></div>
-                  <div class="wishboard-like-btn col col-md-5"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> 2</span></div>
+                  <div ng-hide="wishBoard.isLike" class="wishboard-like-btn col col-md-5" style="margin-right: 3px" ng-click="addLike($event,wishBoard.contentid)"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{wishBoard.likeCnt}}</span></div>
+                  <div ng-show="wishBoard.isLike" class="wishboard-unlike-btn col col-md-5" ng-click="addLike($event,wishBoard.contentid)"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{wishBoard.likeCnt}}</span></div>
+                  <div ng-hide="wishBoard.isBack" class="wishboard-like-btn col col-md-5"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{wishBoard.backLikeCnt}}</span></div>
+                  <div ng-show="wishBoard.isBack" class="wishboard-unlike-btn col col-md-5"><i class="ion-android-favorite-outline"></i><span class="wishboard-like-text"> {{wishBoard.backLikeCnt}}</span></div>
                 </div>
               </div>
             </div>

@@ -237,6 +237,12 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl : '/views/scheduleList/scheduleListDetail.html',
           controller : 'scheduleListDetailCtrl'
         })
+        .state('travelPrice', {
+          cache : false,
+          url : '/travelPrice/:recordNo',
+          templateUrl : '/views/travelPrice/travelPrice.html',
+          controller : 'travelPriceCtrl'
+        })
 
 
 

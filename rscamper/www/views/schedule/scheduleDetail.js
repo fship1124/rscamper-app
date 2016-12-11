@@ -6,8 +6,13 @@ angular.module('App')
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = true;
   });
-
+/*  $scope.budgetSetting = {
+    priceType : 1,
+    content : "",
+    price : 0
+  }*/
   var imgid = 1;
+  $scope.scheduleLikeCnt = {};
   $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
   $scope.updateBtn = true;
   $scope.strapline = {
@@ -25,6 +30,33 @@ angular.module('App')
         $rootScope.getScheduleLocation[i].isScheduleDetail = true;
       }
       console.log(data);
+    })
+
+  $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleSet', {
+    params : {
+      userUid : $rootScope.rootUser.userUid,
+      recordNo : $scope.dSchedule.recordNo,
+      targetType : 3
+    }
+  })
+    .success(function (data) {
+      console.log("check",data);
+      $scope.isLiked = data.scheduleLike;
+      $scope.isCustomizing = data.customizing;
+      $scope.isBookMark = data.bookMark;
+    });
+
+  $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleDetailCnt',{
+    params : {
+      userUid : $rootScope.rootUser.userUid,
+      recordNo : $scope.dSchedule.recordNo,
+      targetType : 3
+    }
+  })
+    .success(function (data) {
+        $scope.scheduleLikeCnt.likeCnt = data.likeCnt;
+        $scope.scheduleLikeCnt.customizingCnt = data.customizingCnt;
+        $scope.scheduleLikeCnt.bookMarkCnt = data.bookMarkCnt;
     })
 
   $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
@@ -142,6 +174,12 @@ angular.module('App')
     scope: $scope
   }).then(function(modal) {
     $scope.locationMemo = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('views/travelPrice/insertTravelPrice.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.insertBudget = modal;
   });
 
   $scope.openMemo = function (data) {
@@ -270,11 +308,90 @@ angular.module('App')
 
     }, options);
   }
-
+  // 여행 예산 부분
+  $scope.items = [{
+    id : 1,
+    name : '교통비'
+    },
+    {
+      id : 2,
+      name : '음식'
+    },
+    {
+      id : 3,
+      name : '오락, 엑티비티'
+    },
+    {
+      id : 4,
+      name : '쇼핑'
+    },
+    {
+      id : 5,
+      name : '숙박'
+    },
+    {
+      id : 6,
+      name : '기타'
+    }]
+  $scope.budgetList = [];
+  $scope.budgetSetting = {};
+  $scope.budgetList.push($scope.budgetSetting);
+  console.log($scope.budgetList);
   $scope.setBudget = function () {
-
+    $scope.insertBudget.show();
   }
 
+  $scope.addBudgetSet = function () {
+    $scope.budgetSetting = {};
+    $scope.budgetList.push($scope.budgetSetting);
+    console.log($scope.budgetList);
+  }
+
+  $scope.addBudgetList = function (data) {
+    console.log($scope.budgetList);
+    console.log("data",data);
+    for (var i = 0; i < $scope.budgetList.length; i++) {
+      $scope.budgetList[i].userUid = $rootScope.rootUser.userUid;
+      $scope.budgetList[i].recordNo = $stateParams.no;
+      $scope.budgetList[i].priceType = $scope.budgetList[i].priceType.id;
+      $scope.budgetList[i].contentId = $scope.memoLocation.contentCode;
+      $scope.budgetList[i].locationNo = $scope.memoLocation.locationNo;
+    }
+    console.log($scope.budgetList);
+/*    $http.get($rootScope.url + '8081/app/tourschedule/addTravelPrice', {
+      params : {
+        list : JSON.stringify($scope.budgetList)
+      }
+    })
+      .success(function () {
+        console.log("들어감");
+      })*/
+ /*     $.ajax({
+        url : $rootScope.url + '8081/app/tourschedule/addTravelPrice',
+        method : "post",
+        type : "json",
+        contentType : "application/json",
+        data : JSON.stringify($scope.budgetList),
+        success : function (result) {
+          console.log("tjdrhd");
+        }
+      })*/
+    $http({
+      url: $rootScope.url + '8081/app/tourschedule/addTravelPrice',
+      method: 'POST',
+      data: $.param({
+        list : JSON.stringify($scope.budgetList)
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    })
+      .success(function (result) {
+        console.log("성공");
+      })
+  }
+
+  // 카메라
   $("#cameraTest").click(function () {
     var aaaa = document.getElementById('edit-text');
     if (aaaa.createTextRange) {
@@ -447,5 +564,102 @@ angular.module('App')
 
   $scope.moreBtn = function () {
     $scope.moreRecommend.show();
+  }
+
+
+  $scope.recommendSchedule = function () {
+    $http.get($rootScope.url + '8081/app/tourschedule/addScheduleLike', {
+      params : {
+        userUid : $rootScope.rootUser.userUid,
+        recordNo : $scope.dSchedule.recordNo
+      }
+    })
+      .success(function (result) {
+        $scope.scheduleLikeCnt.likeCnt = result;
+        $scope.isLiked = false;
+      });
+  }
+  $scope.cancelRecommend = function () {
+    $http.get($rootScope.url + '8081/app/tourschedule/cancelScheduleLike', {
+      params : {
+        userUid : $rootScope.rootUser.userUid,
+        recordNo : $scope.dSchedule.recordNo
+      }
+    })
+      .success(function (result) {
+        console.log("추천수 : " , result);
+
+        $scope.scheduleLikeCnt.likeCnt = result;
+        $scope.isLiked = true;
+      });
+  }
+  $scope.customizing = function () {
+    $http({
+      url: $rootScope.url + '8081/app/tourschedule/addCustomizing',
+      method: 'POST',
+      data: $.param({
+        recordNo : $scope.dSchedule.recordNo,
+        budGet : $scope.dSchedule.budGet,
+        period : $scope.dSchedule.period,
+        strapline : $scope.dSchedule.strapline,
+        title : $scope.dSchedule.title,
+        arriveDate : new Date($scope.dSchedule.arriveDate),
+        departureDate : new Date($scope.dSchedule.departureDate),
+        isOpen : 2,
+        userUid : $rootScope.rootUser.userUid
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    })
+      .success(function (result) {
+        $scope.scheduleLikeCnt.customizingCnt = result;
+        $scope.isCustomizing = false;
+      })
+  }
+
+  $scope.cancelCustomizing = function () {
+    $http.get($rootScope.url + '8081/app/tourschedule/cancelCustomizing', {
+      params : {
+        recordNo : $scope.dSchedule.recordNo,
+        userUid : $rootScope.rootUser.userUid
+      }
+    })
+      .success(function (result) {
+        $scope.scheduleLikeCnt.customizingCnt = result;
+        $scope.isCustomizing = true;
+      })
+  }
+
+  $scope.addBookmark = function () {
+    $http.get($rootScope.url + '8081/app/tourschedule/addScheduleBookmark',{
+      params : {
+        targetNo : $scope.dSchedule.recordNo,
+        targetType : 3,
+        userUid : $rootScope.rootUser.userUid
+      }
+    })
+      .success(function (result) {
+        $scope.scheduleLikeCnt.bookMarkCnt = result;
+        $scope.isBookMark = false;
+      })
+  }
+
+  $scope.cancelBookMark = function () {
+    $http.get($rootScope.url + '8081/app/tourschedule/cancelScheduleBookMark', {
+      params: {
+        targetNo: $scope.dSchedule.recordNo,
+        targetType: 3,
+        userUid: $rootScope.rootUser.userUid
+      }
+    })
+      .success(function (result) {
+        $scope.scheduleLikeCnt.bookMarkCnt = result;
+        $scope.isBookMark = true;
+      });
+  }
+
+  $scope.movePrice = function (no) {
+    $location.path("travelPrice/"+no);
   }
 });
