@@ -1,6 +1,6 @@
 angular.module('App')
   // 전체
-  .controller('MainTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location, $cordovaGeolocation, $ionicScrollDelegate, $timeout) {
+  .controller('MainTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, MyConfig, MyPopup, $location, $cordovaGeolocation, $ionicScrollDelegate, $timeout) {
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins.keyboard) {
         cordova.plugin.keyboard.hideKeyboardAccessoryBar(true);
@@ -21,7 +21,11 @@ angular.module('App')
               loadWeather();
             })
             .error(function () {
-              alert("현재 위치를 몰라용");
+              var alertPopup = $ionicPopup.alert({
+                title: 'Error!',
+              });
+              alertPopup.then(function (res) {
+              });
             });
         })
 
@@ -30,7 +34,7 @@ angular.module('App')
       $http({
         method: "GET",
         url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-        headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
+        // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
       })
         .success(function(data) {
           $scope.today = data.weather.minutely[0];

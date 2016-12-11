@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','contenteditable', 'ngSanitize'])
+var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordova', 'ngCordovaOauth','contenteditable', 'ngSanitize', 'cera.ionicSuperPopup'])
     .run(function ($ionicPlatform, $firebaseAuth, $rootScope, Localstorage, DbService) {
       $rootScope.url = "http://192.168.0.190:";
       $ionicPlatform.ready(function () {
@@ -86,7 +86,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           }
         })
         .state('message', {
-          cache: false,
           url: '/message',
           templateUrl: 'views/message/message.html',
           controller: 'MessageCtrl'

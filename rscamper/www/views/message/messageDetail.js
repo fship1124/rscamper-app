@@ -7,7 +7,4 @@ angular.module('App')
     $scope.message = response;
     console.log($scope.message);
   })
-    .error(function (error) {
-      // MyPopup.alert("에러", "서버접속불가");
-    })
 })

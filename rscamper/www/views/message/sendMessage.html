@@ -1,19 +1,28 @@
 <ion-modal-view class="sendMessage-modal">
   <ion-content scroll="false">
-    <div style="width: 100%; height: 60%; background-color: white; position: absolute; top:20%;">
-      <div style="text-align: center; width: 100%; height: 9%; font-size: large; background-color: #ffc900; padding-top: 2%">
-        <span style="font-weight: bold; color: white">쪽지 보내기</span>
-        <a ng-click="modal.hide()" style="float: right; margin-right: 2%; text-decoration: none;"><i class="ion-close-round" style="color: white"></i></a>
-        <!--<a ng-click="makeRoom(createRoom)" style="float: right; margin-right: 2%; text-decoration: none;"><i class="ion-checkmark-round" style="color: white"></i></a>-->
+    <div class="message-wrap-div">
+      <div class="message-wrap-title-div">
+        <span style="font-weight: bold; color: white; font-size: 17px; margin-bottom: 3px">쪽지 보내기</span>
+        <a ng-click="closeModal();" style="float: right; margin-right: 5%; text-decoration: none;"><i class="ion-close-round" style="color: white"></i></a>
       </div>
-      <div>
-        받는사람선택하는거!
-      </div>
-      <div>
-        <textarea></textarea>
-      </div>
-      <div>
-        <button>보내기</button>
+      <div style="padding: 5px; margin-top: 3px; height: 91%;">
+        <div style="width: 100%;">
+          <input id="message-receiver-box" type="text" placeholder="받을 사람" ng-keyup="getUserList(event=$event)">
+          <input id="message-title" type="text" placeholder="제목을 입력하세요" ng-model="message.title">
+          <div id="message-wrap-userlist-div">
+            <div id="message-userlist-div">
+              <ul>
+                <li class="message-userlist-li" ng-repeat="word in wordList" ng-click="selectUser(word.userUid, word.displayName)">{{word.displayName}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="message-content-div">
+          <textarea id="message-content" ng-model="message.content" placeholder="내용을 입력하세요"></textarea>
+        </div>
+        <div style="text-align: right">
+          <button class="button button-small button-outline button-energized" id="message-send-btn" ng-click="sendMessage(message)">보내기</button>
+        </div>
       </div>
     </div>
   </ion-content>
