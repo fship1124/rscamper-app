@@ -15,6 +15,7 @@
     "ionic-numberpicker": "^1.1.4",
     "angular-contenteditable": "^0.3.8",
     "jsSHA": "1.6.2",
-    "ngCordova": "^0.1.27-alpha"
+    "ngCordova": "^0.1.27-alpha",
+    "angular-sweetalert": "latest"
   }
 }

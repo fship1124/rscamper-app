@@ -1,11 +1,12 @@
 <ion-view view-title="일정 찾기" id="myPageView">
   <ion-content scroll="false">
     <div class="bar bar-header" style="height: 4% !important; width: 100%">
-      <div style="position: absolute; top: 20%; left: 2%">
-        <i class="ion-clipboard title-left" style="color: #9c9c9c;"></i>
-        <span style="color: #d1782d; font-size: small">{{totalCount}}</span>
-        <span style="color: #9c9c9c; font-size: small">개의 여행일정이 있습니다.</span>
-        <span><i class="ion-android-arrow-dropdown"></i></span>
+      <div style="position: absolute; top: 20%; left: 2%; width: 100%">
+        <i class="ion-clipboard title-left" style="color: #9c9c9c; float: left"></i>
+        <span style="color: #d1782d; font-size: x-small; float: left">{{totalCount}}</span>
+        <span style="color: #9c9c9c; font-size: x-small; float: left">개의 여행일정이 있습니다.</span>
+        <div style="color: #9c9c9c; font-size: x-small; float: right; padding-right: 5%" ng-click="soltPopular()"> 인기순 ▼</div>
+        <div style="color: #9c9c9c; font-size: x-small; float: right; padding-right: 5%" ng-click="soltDate()">전체 ▼</div>
       </div>
     </div>
   </ion-content>
@@ -13,7 +14,7 @@
     <div style="width: 100%; height: 4%"></div>
 
     <!-- 위로 드래그시 새로고침 -->
-    <ion-refresher on-refresh="load()" pulling-text="새로고침" spinner="crescent"></ion-refresher>
+    <ion-refresher on-refresh="soltLoad()" pulling-text="새로고침" spinner="crescent" ng-model="soltType"></ion-refresher>
 
     <ion-list>
       <ion-item ng-repeat="schedule in allScheduleList" class="item-light item-complex mypage-item" ng-href="#/scheduleList/{{schedule.recordNo}}">
@@ -44,7 +45,7 @@
     </ion-list>
 
     <!-- 무한 스크롤 -->
-    <ion-infinite-scroll on-infinite="getScheduleList()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
+    <ion-infinite-scroll on-infinite="infinteScroll()" ng-if="total > page" immediate-check="false"></ion-infinite-scroll>
 
   </ion-content>
 </ion-view>
