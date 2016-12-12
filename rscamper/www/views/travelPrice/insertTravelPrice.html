@@ -2,7 +2,7 @@
   <ion-header-bar class="bar bar-header bar-energized">
     <h1 class="title">메모</h1>
 
-    <button class="button button-clear" ng-click="insertBudget.hide()"><i class="ion-android-arrow-back"></i></button>
+    <button class="button button-clear" ng-click="closeBudgetList()"><i class="ion-android-arrow-back"></i></button>
     <button class="button button-clear" ng-click="addBudgetList(budgetList)"><i class="ion-checkmark-round"></i></button>
   </ion-header-bar>
 
@@ -27,7 +27,7 @@
                 <option value=""></option>
             </select>
           </div>
-          <div class="col col-10">
+          <div class="col col-10" ng-click="delAddPrice($index)">
             <i class="ion-ios-trash" style="font-size: x-large; line-height: 1.5"></i>
           </div>
         </div>

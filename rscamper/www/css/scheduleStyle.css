@@ -345,3 +345,8 @@ text-align: center;
   margin-top: 10px;
   width: 100%;
 }
+.travelPrice-info-content {
+  font-size: 11px !important;
+  color: dimgray !important;
+  overflow: hidden;
+}
