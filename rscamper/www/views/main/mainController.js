@@ -148,7 +148,7 @@ angular.module('App')
 
         for (var i = 0; i < $scope.myMainList.length; i++) {
           var rNum = Math.floor(Math.random() * 36) + 1;
-          if ($scope.myMainList[i].targetType == '1' || $scope.myMainList[i].picture == 0) {
+          if ($scope.myMainList[i].targetType == '1' || $scope.myMainList[i].picture == 0 || $scope.myMainList[i].targetType == '2') {
             $scope.myMainList[i].coverImgUrl = 'img/example_img/example' + rNum + '.jpg';
           }
         }

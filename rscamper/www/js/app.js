@@ -106,6 +106,11 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/tour/tourDetail.html',
           controller: 'TourDetailCtrl'
         })
+        .state('route', {
+          url: '/route',
+          templateUrl: 'views/route/route.html',
+          controller: 'RouteCtrl'
+        })
 
 
 
@@ -362,7 +367,7 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
         })
         // 커뮤니티 - 디테일
         .state('communityDetail', {
-          url: '/communityDetail/:boardNo',
+          url: '/communityDetail/:targetType/:boardNo',
           templateUrl: 'views/community/detail.html',
           controller: 'CommunityDetailCtrl'
         })
