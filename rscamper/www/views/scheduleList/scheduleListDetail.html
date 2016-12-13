@@ -35,7 +35,7 @@
               <pre>{{scheduleListDetail.introduce}}</pre>
             </div>
           </div>
-          <div class="item-text-wrap detail-info-content" style="margin-top: 8px">여행 예산<span>KRW {{scheduleListDetail.budGet}}<i class="ion-chevron-right"></i></span></div>
+          <div class="item-text-wrap detail-info-content" style="margin-top: 8px" ng-click="movePrice(scheduleListDetail.recordNo)">여행 예산<span> {{scheduleListDetail.totalPrice | currency : "" : 0}} 원<i class="ion-chevron-right"></i></span></div>
         </div>
       </ion-item>
     </ion-list>
@@ -65,6 +65,22 @@
                       {{scheduleMemo.title}}
                     </div>
                     <div class="item-text-wrap mypage-info-content" ng-bind-html="scheduleMemo.content">
+                    </div>
+                  </div>
+                  <div style="padding-top: 10px">
+                    <div id="location-priceList" ng-repeat="budget in scheduleMemo.price">
+                      <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                        <i class="ion-cash"></i>
+                        <span ng-if="budget.priceType == 1">교통비</span>
+                        <span ng-if="budget.priceType == 2">음식</span>
+                        <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                        <span ng-if="budget.priceType == 4">쇼핑</span>
+                        <span ng-if="budget.priceType == 5">숙박</span>
+                        <span ng-if="budget.priceType == 6">기타</span>
+                        |
+                        <span>{{budget.content}}</span> |
+                        <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+                      </div>
                     </div>
                   </div>
                   <div class="row" style="border-top: 1px solid #e0e0e0">

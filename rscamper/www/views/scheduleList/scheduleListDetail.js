@@ -30,7 +30,7 @@ angular.module('App')
           for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
             $rootScope.getScheduleLocation[i].isScheduleDetail = true;
           }
-          console.log($rootScope.getScheduleLocation);
+          console.log("tkdtp",$rootScope.getScheduleLocation);
         })
 
       $http.get($rootScope.url + '8081/app/tourschedule/getScheduleMemo', {
@@ -275,6 +275,10 @@ angular.module('App')
 
       $scope.toUserComment = function (comment) {
         console.log(comment);
+      }
+
+      $scope.movePrice = function (no) {
+        $location.path("travelPrice/" + no);
       }
     });
 });

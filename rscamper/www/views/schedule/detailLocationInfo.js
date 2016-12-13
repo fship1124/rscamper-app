@@ -2,7 +2,7 @@
  * Created by Bitcamp on 2016-11-08.
  */
 angular.module('App')
-  .controller('detailLocationInfoCtrl',function ($scope, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicPlatform, $ionicPopover, $ionicModal, $ionicScrollDelegate, pickerView, $location, detailLocationInfo) {
+  .controller('detailLocationInfoCtrl',function ($scope, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicPlatform, $ionicPopover, $ionicModal, $ionicScrollDelegate, pickerView, $location, detailLocationInfo, tourSchedulePopup) {
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
     });
@@ -288,6 +288,225 @@ angular.module('App')
               $scope.commentList = result;
               $("#inputText").val("");
             });
+        }
+
+        // 리뷰 쓰기
+        // memo 모달 설정
+        $ionicModal.fromTemplateUrl('views/schedule/locationMemo.html', {
+          scope: $scope
+        }).then(function (modal) {
+          $scope.locationMemo = modal;
+        });
+        // 모달 호출
+        $scope.openMemo = function (data) {
+          $scope.memoLocation = data;
+          console.log(data);
+          $scope.locationMemo.show();
+          $scope.showBudgetList = [];
+
+          $("#edit-text").on('click', "img", function (e) {
+            $('img').remove("#" + e.target.id);
+          })
+        }
+        // 텍스트 창 크기 조절
+        $scope.editTextBox = function () {
+          var obj = document.getElementById("edit-text");
+          if(obj.scrollHeight > 300) {
+            obj.style.height = "1px";
+            obj.style.height = (5 + obj.scrollHeight) + "px";
+            $("#footerBar").css("height", (19 + obj.scrollHeight) + "px");
+          } else {
+            obj.style.height = '300px';
+          }
+        }
+        // 텍스트 창 클릭 시 포커스 이동
+        $scope.clickMemo = function () {
+          setTimeout(function () {
+            $("#edit-text").focus();
+          }, 0);
+        }
+
+        $scope.insertMemo = function () {
+          /*    console.log('제목 : ', $("#memoTitle").val());
+           console.log($("#edit-text").html());
+           console.log($scope.memoLocation.contentCode);
+           console.log($stateParams.no);
+           console.log($("#memoType").val());*/
+
+          /* memoType == 1 :  메모*/
+          /* memoType == 2 :  정보*/
+          $http({
+            url: $rootScope.url + '8081/app/tourschedule/addWishBoardReview',
+            method: 'POST',
+            data: $.param({
+              contentId: $scope.memoLocation.contentid,
+              userUid: $rootScope.rootUser.userUid,
+              title: $("#memoTitle").val(),
+              content: $("#edit-text").html(),
+              regDate: new Date(),
+              memoType: $("#memoType").val()
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+          }).success(function (result) {
+            tourSchedulePopup.alertPopup("등록 완료", "등록이 완료되었습니다.", null);
+            $scope.myPostList = result.list;
+            console.log($scope.myPostList);
+            for (var i=0; i < $scope.showBudgetList.length; i++) {
+              $scope.showBudgetList[i].scheduleMemoNo = result.scheduleMemoNo;
+            }
+            for (var i=0; i<$scope.myPostList.length; i++) {
+              if ($scope.myPostList[i].scheduleMemoNo == result.scheduleMemoNo) {
+                $scope.myPostList[i].price = $scope.showBudgetList;
+              }
+            }
+            console.log($scope.showBudgetList);
+            if ($scope.showBudgetList.length > 0) {
+              $http({
+                url: $rootScope.url + '8081/app/tourschedule/addTravelPrice',
+                method: 'POST',
+                data: $.param({
+                  list : JSON.stringify($scope.showBudgetList)
+                }),
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+              })
+                .success(function (result) {
+                  console.log("예산 입력 결과 : ",result);
+                })
+            }
+          });
+          $scope.locationMemo.hide();
+        }
+
+
+        // 카메라
+        $scope.openCamera = function () {
+          var options = {
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+          };
+          navigator.camera.getPicture(function (imageDATA) {
+            $scope.imgId = 1;
+            var img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/>";
+            var diva = "<div id='div" + imgid + "'></div>";
+            document.execCommand('insertHTML', true, img);
+            var asd = document.getElementById("edit-text");
+            asd.innerHTML += img;
+            asd.innerHTML += diva;
+            asd.innerHTML += "　";
+            $("#edit-text").focus();
+            imgid++;
+          }, function (err) {
+
+          }, options);
+        }
+
+
+        // 갤러리
+        $scope.openGallary = function () {
+          var options = {
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+          };
+          navigator.camera.getPicture(function (imageDATA) {
+            var img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/><div id='div" + imgid + "'></div>";
+            var diva = "<div id='div" + imgid + "'></div>";
+            document.execCommand('insertHTML', true, img);
+            imgid++;
+            var asd = document.getElementById("edit-text");
+            asd.innerHTML += img;
+            asd.innerHTML += diva;
+            asd.innerHTML += "　";
+            $("#edit-text").focus();
+          }, function (err) {
+
+          }, options);
+        }
+
+
+        // 여행 예산 부분
+        $ionicModal.fromTemplateUrl('views/travelPrice/insertTravelPrice.html', {
+          scope: $scope
+        }).then(function (modal) {
+          $scope.insertBudget = modal;
+        });
+
+        $scope.items = [{
+          id: 1,
+          name: '교통비'
+        },
+          {
+            id: 2,
+            name: '음식'
+          },
+          {
+            id: 3,
+            name: '오락, 엑티비티'
+          },
+          {
+            id: 4,
+            name: '쇼핑'
+          },
+          {
+            id: 5,
+            name: '숙박'
+          },
+          {
+            id: 6,
+            name: '기타'
+          }]
+        $scope.setBudget = function () {
+          $scope.budgetList = [];
+          $scope.budgetSetting = {};
+          $scope.budgetList.push($scope.budgetSetting);
+          console.log($scope.budgetList);
+          $scope.insertBudget.show();
+        }
+
+        $scope.closeBudgetList = function () {
+          $scope.budgetList = [];
+          $scope.insertBudget.hide();
+        }
+
+        $scope.addBudgetSet = function () {
+          $scope.budgetSetting = {};
+          $scope.budgetList.push($scope.budgetSetting);
+          console.log($scope.budgetList);
+        }
+
+        $scope.addBudgetList = function (data) {
+          console.log($scope.budgetList);
+          console.log("data", data);
+          for (var i = 0; i < $scope.budgetList.length; i++) {
+            $scope.budgetList[i].userUid = $rootScope.rootUser.userUid;
+            $scope.budgetList[i].recordNo = $stateParams.no;
+            $scope.budgetList[i].priceType = $scope.budgetList[i].priceType.id;
+            $scope.budgetList[i].contentId = $scope.memoLocation.contentCode;
+            $scope.budgetList[i].locationNo = $scope.memoLocation.locationNo;
+          }
+          console.log($scope.budgetList);
+          for (var i=0; i<$scope.budgetList.length; i++) {
+            $scope.showBudgetList.push($scope.budgetList[i]);
+          }
+          $scope.insertBudget.hide();
+          console.log($scope.budgetList);
         }
       });
   })

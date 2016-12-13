@@ -4,7 +4,7 @@
       <ion-item class="item-light item-complex mypage-item">
         <div class="item-divider detail-info-title" style="border-bottom: 1px solid #e0e0e0; color: #777777 !important;">
           <span style=" margin-left: 3%">여행 예산</span>
-          <span style="float: right; margin-right: 3%"><span style="color: #ff9c00">{{travelPriceInfo.totalSum}}</span> 원</span>
+          <span style="float: right; margin-right: 3%"><span style="color: #ff9c00">{{travelPriceInfo.totalSum | currency : "" : 0}}</span> 원</span>
         </div>
         <div class="row" style="max-height: 78px; margin-top: 10px">
           <div class="col col-20">
@@ -14,7 +14,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">교통비</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type1}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type1 | currency : "" : 0}}</div>
           </div>
 
           <div class="col col-20">
@@ -24,7 +24,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">음식</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type2}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type2 | currency : "" : 0}}</div>
           </div>
         </div>
 
@@ -37,7 +37,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">오락, 엑티비티</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type3}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type3 | currency : "" : 0}}</div>
           </div>
 
           <div class="col col-20">
@@ -47,7 +47,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">쇼핑</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type4}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type4 | currency : "" : 0}}</div>
           </div>
         </div>
 
@@ -59,7 +59,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">숙박</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type5}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type5 | currency : "" : 0}}</div>
           </div>
 
           <div class="col col-20">
@@ -69,7 +69,7 @@
           </div>
           <div class="col col-30 detail-info-title" style="color: #777777 !important;">
             <div class="row">기타</div>
-            <div class="row" style="margin-top: 0">{{travelPriceInfo.type6}}</div>
+            <div class="row" style="margin-top: 0">{{travelPriceInfo.type6 | currency : "" : 0}}</div>
           </div>
         </div>
       </ion-item>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col col-90" style="padding: 0">
                       <div>
-                        <span style="font-weight: bold">{{list.travelPrice}}</span>
+                        <span style="font-weight: bold">{{list.travelPrice | currency : "" : 0}}</span>
                       </div>
                       <div>{{list.content}}</div>
                    </div>

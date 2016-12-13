@@ -14,65 +14,70 @@ angular.module('App')
     var imgid = 1;
     $scope.scheduleLikeCnt = {};
     $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
+    console.log($rootScope.dSchedule);
     $scope.updateBtn = true;
     $scope.strapline = {
       title: "",
       content: ""
     }
-    $rootScope.getScheduleLocation = {};
-    $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
-      {
+
+    $scope.getDetailDate = function () {
+      $rootScope.getScheduleLocation = {};
+      $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
+        {
+          params: {
+            no: $stateParams.no
+          }
+        })
+        .success(function (data) {
+          $rootScope.getScheduleLocation = data;
+          for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
+            $rootScope.getScheduleLocation[i].isScheduleDetail = true;
+          }
+          console.log("추가된 지역 정보",data);
+        })
+
+      $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleSet', {
         params: {
-          no: $stateParams.no
+          userUid: $rootScope.rootUser.userUid,
+          recordNo: $scope.dSchedule.recordNo,
+          targetType: 3
         }
       })
-      .success(function (data) {
-        $rootScope.getScheduleLocation = data;
-        for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
-          $rootScope.getScheduleLocation[i].isScheduleDetail = true;
-        }
-        console.log("추가된 지역 정보",data);
-      })
+        .success(function (data) {
+          console.log("check", data);
+          $scope.isLiked = data.scheduleLike;
+          $scope.isCustomizing = data.customizing;
+          $scope.isBookMark = data.bookMark;
+        });
 
-    $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleSet', {
-      params: {
-        userUid: $rootScope.rootUser.userUid,
-        recordNo: $scope.dSchedule.recordNo,
-        targetType: 3
-      }
-    })
-      .success(function (data) {
-        console.log("check", data);
-        $scope.isLiked = data.scheduleLike;
-        $scope.isCustomizing = data.customizing;
-        $scope.isBookMark = data.bookMark;
-      });
-
-    $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleDetailCnt', {
-      params: {
-        userUid: $rootScope.rootUser.userUid,
-        recordNo: $scope.dSchedule.recordNo,
-        targetType: 3
-      }
-    })
-      .success(function (data) {
-        $scope.scheduleLikeCnt.likeCnt = data.likeCnt;
-        $scope.scheduleLikeCnt.customizingCnt = data.customizingCnt;
-        $scope.scheduleLikeCnt.bookMarkCnt = data.bookMarkCnt;
-      })
-
-    $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
-      {
+      $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleDetailCnt', {
         params: {
-          dDate: $rootScope.dSchedule.departureDate,
-          aDate: $rootScope.dSchedule.arriveDate
+          userUid: $rootScope.rootUser.userUid,
+          recordNo: $scope.dSchedule.recordNo,
+          targetType: 3
         }
       })
-      .success(function (result) {
-        $rootScope.period = result;
-        console.log("기간 : " + result);
-      });
+        .success(function (data) {
+          $scope.scheduleLikeCnt.likeCnt = data.likeCnt;
+          $scope.scheduleLikeCnt.customizingCnt = data.customizingCnt;
+          $scope.scheduleLikeCnt.bookMarkCnt = data.bookMarkCnt;
+        })
 
+      $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
+        {
+          params: {
+            dDate: $rootScope.dSchedule.departureDate,
+            aDate: $rootScope.dSchedule.arriveDate
+          }
+        })
+        .success(function (result) {
+          $rootScope.period = result;
+          console.log("기간 : " + result);
+        });
+    }
+
+    $scope.getDetailDate();
 
     $scope.changeCover = function () {
 // Show the action sheet
@@ -724,5 +729,71 @@ angular.module('App')
 
     $scope.delAddPrice = function (index) {
       $scope.budgetList.splice(index, 1);
+    }
+
+    //설정
+    $ionicModal.fromTemplateUrl('views/schedule/scheduleSetting.html', {
+      scope: $scope
+    }).then(function (modal) {
+      $scope.scheduleSettingModal = modal;
+    });
+    $scope.scheduleSetting = function () {
+      $scope.scheduleSettingModal.show();
+    }
+    $scope.newSchedule = {
+      title : $rootScope.dSchedule.title,
+      startDate : new Date($rootScope.dSchedule.departureDate),
+      finishDate : new Date($rootScope.dSchedule.arriveDate),
+      isOpen : 0
+    };
+    $scope.updateSchedule = function (s) {
+
+      // 유효성 체크
+     if (s.isOpen == 0) {
+        tourSchedulePopup.alertPopup('공개 여부','공개 여부를 선택하세요.', null);
+        return false;
+      }
+
+      if (s.title == "") {
+        tourSchedulePopup.alertPopup('여행 제목','여행 제목을 입력해주세요.','tourTitle');
+        return false;
+      }
+
+      if (s.startDate == "") {
+        tourSchedulePopup.alertPopup('출발 일자','출발 일자를 선택하세요.','sDate');
+        return false;
+      }
+
+      if (s.finishDate == "") {
+        tourSchedulePopup.alertPopup('도착 일자','도착 일자를 선택하세요.','fDate');
+        return false;
+      }
+      console.log("수정된 값",s);
+     var updateType = 2;
+     if (new Date($rootScope.dSchedule.departureDate).getTime() == s.startDate.getTime() && new Date($rootScope.dSchedule.arriveDate).getTime() == s.finishDate.getTime()) {
+       updateType = 1;
+     }
+
+      $http({
+        url: $rootScope.url + '8081/app/tourschedule/updateSchedule',
+        method: 'POST',
+        data: $.param({
+          recordNo : $rootScope.dSchedule.recordNo,
+          departureDate : s.startDate,
+          arriveDate : s.finishDate,
+          isOpen : s.isOpen,
+          title : s.title,
+          type : updateType
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      })
+       .success(function (data) {
+         console.log("수정후",data);
+         $rootScope.dSchedule = data;
+         $scope.getDetailDate();
+         $scope.scheduleSettingModal.hide();
+       })
     }
   });
