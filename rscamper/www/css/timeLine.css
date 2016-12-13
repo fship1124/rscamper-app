@@ -63,7 +63,6 @@ Main components
   width: 2px;
   background: gray;
 }
-
 .cd-timeline-block {
   position: relative;
   /*margin: 2em 0;*/
@@ -97,6 +96,7 @@ Main components
   border-width: 2px;
   padding-top:5px;
   background: white;
+  text-align: center;
 }
 .cd-timeline-icon i {
   color: #e6b500;
@@ -130,6 +130,7 @@ Main components
   border-style: solid;
   border-width: 2px;
   margin-bottom: 10px;
+  padding: 10px;
 }
 .cd-timeline-content:after {
   content: "";
@@ -215,7 +216,7 @@ Main components
 }
 /*LIGHT*/
 .stable {
-  color : #b2b2b2;
+  border-color : #b2b2b2;
 }
 
 .stable i {
@@ -223,7 +224,7 @@ Main components
 }
 
 .light {
-  color: #dddddd;
+  border-color: #dddddd;
 }
 .light i {
   color: #dddddd;
@@ -249,4 +250,27 @@ Main components
   margin-top: 2em;
   margin-bottom: 2em;
   margin-left: 10px !important;
+}
+
+
+
+.timelinePreText {
+  color: black !important;
+  margin: 10px 0 0 0;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-size: 12px;
+}
+#line-div {
+  /* this is the vertical line */
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 2px;
+  background: #b2b2b2;
+  /*background: #ffbbc8;*/
+}
+.myPink {
+  border-color: #ffbbc8;
+  color: #ffaec0 !important;
 }

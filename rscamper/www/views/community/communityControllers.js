@@ -18,7 +18,7 @@ angular.module('App')
     };
 
     // 좋아요
-    $scope.likeBoard = function (boardNo, index) {
+    $scope.likeBoard = function (targetType, boardNo, index) {
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -27,7 +27,7 @@ angular.module('App')
         method: "POST",
         data: $.param({
           targetNo: boardNo,
-          targetType: 1,
+          targetType: targetType,
           userUid: $rootScope.rootUser.userUid
         }),
         headers: {
@@ -58,7 +58,8 @@ angular.module('App')
       if ($stateParams.categoryNo) {
         var url = MyConfig.backEndURL + "/community/select/boardByCategory?page=" + $scope.page + "&count=" + $scope.count + "&categoryNo=" + $stateParams.categoryNo;
       } else {
-        var url = MyConfig.backEndURL + "/community/select/board?page=" + $scope.page + "&count=" + $scope.count;
+        // var url = MyConfig.backEndURL + "/community/select/board?page=" + $scope.page + "&count=" + $scope.count;
+        var url = "http://192.168.0.187:8081/app/community/board?page=" + $scope.page + "&count=" + $scope.count;
       }
 
       $http({
@@ -67,8 +68,9 @@ angular.module('App')
       }).success(function (response) {
         angular.forEach(response.boardList, function (board) {
           $scope.boardList.push(board);
-        })
+        });
         $scope.total = response.totalPages;
+        console.log($scope.boardList);
       })
         .error(function (error) {
           MyPopup.alert("에러", "서버접속불가");
@@ -241,20 +243,39 @@ angular.module('App')
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
-      $http({
-        url: MyConfig.backEndURL + "/community/select/oneBoard?boardNo=" + $stateParams.boardNo,
-        method: "GET",
-      }).success(function (response) {
-        $scope.board = response;
-      })
-        .error(function (error) {
-          MyPopup.alert("에러", "서버접속불가");
+
+      if ($stateParams.targetType == '1') {
+        $http({
+          url: MyConfig.backEndURL + "/community/select/oneBoard?boardNo=" + $stateParams.boardNo,
+          method: "GET",
+        }).success(function (response) {
+          $scope.board = response;
         })
-        .finally(function () {
-          $ionicLoading.hide();
-          $scope.$broadcast('scroll.refreshComplete');
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-        });
+          .error(function (error) {
+            MyPopup.alert("에러", "서버접속불가");
+          })
+          .finally(function () {
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          });
+      } else if ($stateParams.targetType == '2') {
+        $http({
+          url: "http://192.168.0.187:8081/app/community/oneBoard?boardNo=" + $stateParams.boardNo,
+          method: "GET",
+        }).success(function (response) {
+          $scope.board = response;
+          console.log($scope.board);
+        })
+          .error(function (error) {
+            MyPopup.alert("에러", "서버접속불가");
+          })
+          .finally(function () {
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          });
+      }
     }
 
     // 액션 시트 (게시글)
@@ -507,7 +528,7 @@ angular.module('App')
     };
 
     // 좋아요
-    $scope.likeBoard = function () {
+    $scope.likeBoard = function (targetType) {
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -516,7 +537,7 @@ angular.module('App')
         method: "POST",
         data: $.param({
           targetNo: $stateParams.boardNo,
-          targetType: 1,
+          targetType: targetType,
           userUid: $rootScope.rootUser.userUid
         }),
         headers: {
@@ -540,7 +561,7 @@ angular.module('App')
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
       $http({
-        url: MyConfig.backEndURL + "/community/select/bookMark?targetNo=" + $stateParams.boardNo + "&userUid="+ $rootScope.rootUser.userUid + "&targetType=1",
+        url: MyConfig.backEndURL + "/community/select/bookMark?targetNo=" + $stateParams.boardNo + "&userUid="+ $rootScope.rootUser.userUid + "&targetType=" + $stateParams.targetType,
         method: "GET"
       })
         .success(function (response) {
@@ -555,7 +576,7 @@ angular.module('App')
     }
 
     // 북마크 추가 삭제
-    $scope.addBookMark = function () {
+    $scope.addBookMark = function (targetType) {
       $ionicLoading.show({
         template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
@@ -564,7 +585,7 @@ angular.module('App')
         method: "POST",
         data: $.param({
           targetNo: $stateParams.boardNo,
-          targetType: 1,
+          targetType: targetType,
           userUid: $rootScope.rootUser.userUid
         }),
         headers: {
