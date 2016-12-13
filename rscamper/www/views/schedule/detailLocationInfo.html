@@ -17,7 +17,7 @@
           </div>
             <div ng-show="moreText" style="width: 10%; height: 20px; margin-left: 45%; font-size: 12px; text-align: center;" ng-click="moreDetail()">▼더보기</div>
             <div ng-hide="moreText" style="width: 10%; height: 20px; margin-left: 45%; font-size: 12px; text-align: center;" ng-click="closeDetail()">▲접기</div>
-          <div class="detail-info" style="border-top: 1px solid #e0e0e0">
+          <div class="detail-info" style="border-top: 1px solid #e0e0e0; height: 57px; background-color: #fffad9;">
             <div ng-show="isLiked" ng-click="likePlus(locationMap.contentid)"><i class="ion-ios-heart-outline" style="font-size: x-large"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
             <div ng-hide="isLiked" ng-click="removeLiked(locationMap.contentid)"><i class="ion-heart" style="font-size: x-large; color: red"></i><br><span style="font-size: xx-small">가고싶어요!</span></div>
             <div ng-show="isBack" ng-click="backLikePlus(locationMap.contentid)" class="detailLocationBtn"><i class="ion-android-pin" style="font-size: x-large"></i><br><span style="font-size: xx-small">다녀왔어요!</span></div>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
-          <div class="item-text-wrap mypage-info-content" style="font-size: small !important;">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; font-weight: bold !important;">
             <i class="ion-android-phone-portrait"></i> 번호
           </div>
           <div style="font-size: small; padding-top: 1%">
@@ -48,17 +48,17 @@
           </div>
         </div>
         <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
-          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; padding-top: 1%">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; padding-top: 1%; font-weight: bold !important; ">
             <i class="ion-home"></i> 주소
           </div>
-          <div style="font-size: small; padding-top: 1%">
+          <div style="font-size: 12px; padding-top: 1%">
             {{locationMap.addr1}} {{locationMap.addr2}}
           </div>
           <div id="scheduleMap" data-tap-disabled="true" style="padding-top: 1%"></div>
         </div>
 
         <div style="width: 100%; border-top: 1px solid #e0e0e0; padding: 4%; padding-left: 3%">
-          <div class="item-text-wrap mypage-info-content" style="font-size: small !important;">
+          <div class="item-text-wrap mypage-info-content" style="font-size: small !important; font-weight: bold !important;">
             <i class="ion-images"></i> 이미지
           </div>
           <a class="item item-list-detail">
