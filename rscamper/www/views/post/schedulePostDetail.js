@@ -15,6 +15,7 @@ angular.module('App')
     })
       .success(function (data) {
         $scope.myPost = data;
+        console.log("detailPost",data);
       })
 
     $http.get($rootScope.url + '8081/app/tourschedule/getMemoComment', {

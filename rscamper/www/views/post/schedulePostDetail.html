@@ -32,6 +32,24 @@
             <div class="item-text-wrap mypage-info-content" ng-bind-html="myPost.content">
             </div>
           </div>
+
+          <div style="padding-top: 10px">
+            <div id="location-priceList" ng-repeat="budget in myPost.price">
+              <div class="item-text-wrap mypage-info-content" style="padding-left: 10px;">
+                <i class="ion-cash"></i>
+                <span ng-if="budget.priceType == 1">교통비</span>
+                <span ng-if="budget.priceType == 2">음식</span>
+                <span ng-if="budget.priceType == 3">오락, 엑티비티</span>
+                <span ng-if="budget.priceType == 4">쇼핑</span>
+                <span ng-if="budget.priceType == 5">숙박</span>
+                <span ng-if="budget.priceType == 6">기타</span>
+                |
+                <span>{{budget.content}}</span> |
+                <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
+              </div>
+            </div>
+          </div>
+
           <div class="row" style="border-top: 1px solid #e0e0e0">
             <div class="col col-50 mypage-info-content" style="text-align: center" ng-click="recommedComment($event, myPost.scheduleMemoNo)" ng-if="myPost.isLike == 0">
               <i class="ion-thumbsup"></i> 추천 {{myPost.likeCnt}}

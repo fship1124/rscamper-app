@@ -26,7 +26,7 @@
             <div ng-hide="updateBtn"><i class="ion-eye" ng-click="updateBtnChange()"></i><br><span>일정보기</span></div>
             <div ng-hide="updateBtn"><i class="ion-image" ng-click="changeCover()"></i><br><span>커버변경</span></div>
             <div ng-hide="updateBtn"><i class="ion-ios-paper-outline" ng-click="modal.show()"></i><br><span>인트로 수정</span></div>
-            <div ng-hide="updateBtn"><i class="ion-ios-gear-outline"  ng-click="httptest()"></i><br><span>test</span></div>
+            <div ng-hide="updateBtn"><i class="ion-ios-gear-outline"  ng-click="scheduleSetting()"></i><br><span>설정</span></div>
           </div>
         </div>
       </ion-item>
@@ -38,7 +38,7 @@
             {{dSchedule.introduce}}
           </div>
           </div>
-          <div class="item-text-wrap detail-info-content" style="margin-top: 8px" ng-click="movePrice(dSchedule.recordNo)">여행 예산<span>{{dSchedule.totalPrice}} 원<i class="ion-chevron-right"></i></span></div>
+          <div class="item-text-wrap detail-info-content" style="margin-top: 8px" ng-click="movePrice(dSchedule.recordNo)">여행 예산<span>{{dSchedule.totalPrice | currency : "" : 0}} 원<i class="ion-chevron-right"></i></span></div>
         </div>
       </ion-item>
     </ion-list>
@@ -135,7 +135,7 @@
                         <span ng-if="budget.priceType == 6">기타</span>
                         |
                         <span>{{budget.content}}</span> |
-                        <span>{{budget.travelPrice}} 원</span>
+                        <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
                       </div>
                     </div>
                   </div>
