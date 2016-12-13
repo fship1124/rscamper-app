@@ -14,6 +14,9 @@ angular.module('App')
           long: position.coords.longitude
         }
 
+        // $scope.mylocation.long = 127.1596093;
+        // $scope.mylocation.lat = 35.84977;
+
         console.log($scope.mylocation.long, $scope.mylocation.lat);
 
         initialize();
@@ -35,9 +38,6 @@ angular.module('App')
           }
         )
           .success(function (data) {
- /*           $scope.mylocation.long = 35.84977;
-              $scope.mylocation.lat = 127.1596093;*/
-
             $scope.mapList = data.response.body.items.item;
             drop($scope.mapList, $scope.map);
 
