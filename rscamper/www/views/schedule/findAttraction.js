@@ -14,6 +14,12 @@ angular.module('App')
     .success(function (data) {
       qweqwe = data;
       console.log(data);
+
+/*      $http.get($rootScope.url + "8081/app/tourschedule/getLocationCnt",{
+        params : {
+          contentIdJson : JSON.stringify($scope.showBudgetList)
+        }
+      })*/
     })
   $scope.mama = function () {
     $scope.qaz = 1;
@@ -47,7 +53,23 @@ angular.module('App')
     )
       .success(function (data) {
         $scope.getPlaces = data.response.body.items.item;
-        console.log(data.response.body.items.item);
+        console.log("getPlace",data.response.body.items.item);
+
+        $scope.contentIdList = [];
+        for (var i=0; i<$scope.getPlaces.length; i++) {
+          $scope.contentIdList.push(data.response.body.items.item[i].contentid);
+        }
+        console.log("리스트",$scope.contentIdList);
+
+        $http.get($rootScope.url + "8081/app/tourschedule/getLocationCnt",{
+         params : {
+         contentIdJson : JSON.stringify($scope.contentIdList)
+         }
+         })
+          .success(function (result) {
+            console.log("받아온 데이터",result);
+            $scope.getLocationCnt(result, $scope.getPlaces);
+          })
       })
   }
 
@@ -170,4 +192,42 @@ angular.module('App')
     }
   };
 
+  $scope.getLocationCnt = function (data, locationInfo) {
+    var dataInfo = data;
+    $scope.locationCheckList = [];
+    console.log("locationInfo",locationInfo);
+          $scope.wishBoardList = locationInfo;
+          console.log("list",$scope.wishBoardList[0]);
+            for (var j = 0; j < dataInfo.length; j++) {
+              for (var k = 0; k < $scope.wishBoardList.length; k++) {
+                if (dataInfo[j].contentId == $scope.wishBoardList[k].contentid) {
+                  console.log("들어옴");
+                  $http.get($rootScope.url + '8081/app/tourschedule/checkedIsLike', {
+                    params : {
+                      contentId : $scope.wishBoardList[k].contentid,
+                      uid : $rootScope.rootUser.userUid
+                    }
+                  })
+                    .success(function (check) {
+                      $scope.locationCheckList.push(check);
+                      if ($scope.locationCheckList.length == $scope.wishBoardList.length) {
+                        for (var a = 0; a < $scope.locationCheckList.length; a++) {
+                          for (var b = 0; b < $scope.wishBoardList.length; b++) {
+                            if ($scope.wishBoardList[b].contentid == $scope.locationCheckList[a].contentId) {
+                              $scope.wishBoardList[b].isLike = $scope.locationCheckList[a].isLike;
+                              $scope.wishBoardList[b].isBack = $scope.locationCheckList[a].isBack;
+                              console.log("asdasd");
+                            }
+                          }
+                        }
+                      }
+                    })
+                  $scope.wishBoardList[k].likeCnt = dataInfo[j].likeCnt;
+                  $scope.wishBoardList[k].postCnt = dataInfo[j].postCnt;
+                  $scope.wishBoardList[k].backLikeCnt = dataInfo[j].backLikeCnt;
+                }
+              }
+            }
+            console.log("최종", $scope.wishBoardList);
+  }
 })

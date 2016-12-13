@@ -2,19 +2,31 @@
  * Created by Bitcamp on 2016-10-31.
  */
 angular.module('App')
-  .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule) {
-    $rootScope.listCount = 0;
-    $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
-      params :{
-        uid : $rootScope.rootUser.userUid
-      }
-    })
-      .success(function (result) {
-        $rootScope.scheduleList = result;
-        console.log(result);
-        $rootScope.listCount = result.length;
-        console.log("scheduleCtrl");
+  .controller('ScheduleCtrl', function ($ionicPlatform, $cordovaGeolocation, $http, $state, $scope, $ionicModal, $ionicPopup, tourSchedulePopup, $rootScope, $location, detailSchedule, $ionicLoading) {
+    $scope.loadSchedule = function () {
+      $ionicLoading.show({
+        template: '<strong class="balanced-900 bold balanced-100-bg"><div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></svg></div></strong>'
       });
+
+      $rootScope.listCount = 0;
+      $http.get($rootScope.url + "8081/app/tourschedule/getschedule",{
+        params :{
+          uid : $rootScope.rootUser.userUid
+        }
+      })
+        .success(function (result) {
+          $rootScope.scheduleList = result;
+          console.log(result);
+          $rootScope.listCount = result.length;
+          console.log("scheduleCtrl");
+        })
+        .finally(function () {
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    }
+    $scope.loadSchedule();
     $scope.newSchedule = {
       title : "",
       startDate : "",
@@ -95,6 +107,7 @@ angular.module('App')
           finishDate : "",
           isOpen : 0
         };
+        console.log("gkdl");
         $scope.modal.show();
       }
   });

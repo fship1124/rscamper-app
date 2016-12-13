@@ -13,7 +13,7 @@ angular.module('App')
       })
         .success(function (data) {
           var dataInfo = data;
-          console.log(dataInfo);
+          console.log("받아온 정보",dataInfo);
 
           for (var i = 0; i < data.length; i++) {
             $http.get(url,{

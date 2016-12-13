@@ -21,7 +21,7 @@
           <div class="detail-info">
             <div ng-show="updateBtn"><i class="ion-compose" ng-click="updateBtnChange()"></i><br><span>수정</span></div>
             <div ng-show="updateBtn"><i class="ion-ios-download-outline"></i><br><span>다운로드</span></div>
-            <div ng-show="updateBtn"><i class="ion-android-share-alt"></i><br><span>공유하기</span></div>
+            <div ng-show="updateBtn" ng-click="sharing()"><i class="ion-android-share-alt"></i><br><span>공유하기</span></div>
             <div ng-show="updateBtn"><i class="ion-ios-more-outline" ng-click="moreBtn()"></i><br><span>더보기</span></div>
             <div ng-hide="updateBtn"><i class="ion-eye" ng-click="updateBtnChange()"></i><br><span>일정보기</span></div>
             <div ng-hide="updateBtn"><i class="ion-image" ng-click="changeCover()"></i><br><span>커버변경</span></div>

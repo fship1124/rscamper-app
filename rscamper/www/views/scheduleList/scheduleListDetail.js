@@ -280,5 +280,27 @@ angular.module('App')
       $scope.movePrice = function (no) {
         $location.path("travelPrice/" + no);
       }
+
+      // 공유하기 설정
+      var options = {
+        message: '일정을 공유해보세요!', // not supported on some apps (Facebook, Instagram)
+        subject: $scope.scheduleListDetail.title, // fi. for email
+        files: ['', ''], // an array of filenames either locally or remotely
+        url: 'https://192.168.0.190/#/scheduleList/'+ $scope.scheduleListDetail.recordNo,
+        chooserTitle: '공유하기' // Android only, you can override the default share sheet title
+      }
+
+      var onSuccess = function(result) {
+        console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+        console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+      }
+
+      var onError = function(msg) {
+        console.log("Sharing failed with message: " + msg);
+      }
+
+      $scope.sharing = function () {
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+      }
     });
 });

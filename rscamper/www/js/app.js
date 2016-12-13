@@ -121,7 +121,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           templateUrl: 'views/schedule/scheduleTabs.html'
         })
         .state('scheduleTab.schedule', {
-          cache : false,
           url: '/schedule',
           views: {
             's-tab': {
@@ -187,7 +186,6 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'detailLocationInfoCtrl'
         })
         .state('detailTab.scheduleMap', {
-          cache: false,
           url: '/scheduleMap/:no',
           views : {
             'scheduleMap-tab' : {

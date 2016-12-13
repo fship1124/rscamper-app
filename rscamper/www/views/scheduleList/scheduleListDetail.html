@@ -23,7 +23,7 @@
             <div ng-hide="isBookMark"><i class="ion-ios-download-outline" style="color: red" ng-click="cancelBookMark()"></i><br><span>북마크</span></div>
             <div ng-show="isCustomizing"><i class="ion-clipboard" ng-click="customizing()"></i><br><span>커스텀마이징</span></div>
             <div ng-hide="isCustomizing"><i class="ion-clipboard" style="color : red" ng-click="cancelCustomizing()"></i><br><span>커스텀마이징</span></div>
-            <div><i class="ion-ios-more-outline"></i><br><span>더보기</span></div>
+            <div ng-click="sharing()"><i class="ion-android-share-alt"></i><br><span>공유하기</span></div>
           </div>
         </div>
       </ion-item>
