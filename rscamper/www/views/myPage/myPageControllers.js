@@ -18,7 +18,7 @@ app.controller("MyPageMainCtrl", function ($rootScope, $scope, $stateParams, $ht
 
       for (var i = 0; i < $scope.myBookMarkList.length; i++) {
         var rNum = Math.floor(Math.random() * 36) + 1;
-        if ($scope.myBookMarkList[i].targetType == '1' || $scope.myBookMarkList[i].picture == 0) {
+        if ($scope.myBookMarkList[i].targetType == '1' || $scope.myBookMarkList[i].picture == 0 || $scope.myBookMarkList[i].targetType == '2') {
           $scope.myBookMarkList[i].coverImgUrl = 'img/example_img/example' + rNum + '.jpg';
         }
       }
@@ -49,7 +49,10 @@ app.controller("MyPageMainCtrl", function ($rootScope, $scope, $stateParams, $ht
   $scope.moveDetail = function (no, targetType) {
     switch (targetType) {
       case '1':
-        $location.path("/communityDetail/"+no);
+        $location.path("/communityDetail/"+targetType+"/"+no);
+        break;
+      case '2':
+        $location.path("/communityDetail/"+targetType+"/"+no);
         break;
       case '3':
         $location.path("/scheduleList/"+no);

@@ -24,20 +24,50 @@
         <p>{{board.regDate | timesince : 'kr' }}</p>
       </div>
 
-      <!-- TITLE -->
-      <div class="item item-divider">
-        <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
+      <!-- targetType == 1 -->
+      <div ng-if="board.targetType != '2'">
+        <!-- TITLE -->
+        <div class="item item-divider">
+          <a>{{board.categoryName}}</a> <b>{{board.title}}</b>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="item item-body" style="min-height:200px; overflow: hidden">
+          <div ng-bind-html="board.content"></div>
+        </div>
       </div>
 
-      <!-- CONTENT -->
-      <div class="item item-body" style="min-height:200px; overflow: hidden">
-        <div ng-bind-html="board.content"></div>
+      <!-- targetType == 2 -->
+      <div ng-if="board.targetType == '2'">
+        <!-- TITLE -->
+        <div class="item item-divider" style="line-height: 1.4; height: 100%; overflow: visible; white-space: normal">
+          <a>{{board.title}}</a><br>
+          <i class="ion-quote" style="font-size: 16px; color: #ffbbc8;"></i>
+          <b style="font-size: 11px" ng-repeat="routeDetail in board.routeDetailList" ng-show="$index == 0">{{routeDetail.place}}</b>
+          <b style="font-size: 11px" ng-repeat="routeDetail in board.routeDetailList" ng-show="$index >= 1"> - {{routeDetail.place}}</b>
+        </div>
+        <div>
+          <section id="cd-timeline" class="cd-container">
+            <div id="line-div" class="dfsdf"></div>
+            <div ng-repeat="routeDetail in board.routeDetailList">
+              <div class="cd-timeline-block">
+                <div class="cd-timeline-icon myPink">
+                  <i class="ion-location timelineIcon myPink"></i>
+                </div>
+                <div class="cd-timeline-content stable">
+                  <h5 class="marginBottom0 marginTop0" style="font-weight: bold; color: black;"><i class="ion-flag" style="color: #ffaec0;"></i> {{routeDetail.place}}</h5>
+                  <pre class="timelinePreText">{{routeDetail.content}}</pre>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
 
       <!-- BUTTONS -->
       <div class="button-bar bar-energized">
-        <a class="button button-raised ink-dark" ng-click="likeBoard();"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
-        <a class="button button-raised ink-dark" ng-click="addBookMark();"><span class="ion-bookmark" ></span> <b ng-if="bookMark"> 북마크취소</b> <b ng-if="!bookMark"> 북마크</b></a>
+        <a class="button button-raised ink-dark" ng-click="likeBoard(board.targetType);"><span class="ion-thumbsup"></span> 좋아요 <b style="color: #f49335;">{{board.likeCnt}}</b></a>
+        <a class="button button-raised ink-dark" ng-click="addBookMark(board.targetType);"><span class="ion-bookmark" ></span> <b ng-if="bookMark"> 북마크취소</b> <b ng-if="!bookMark"> 북마크</b></a>
         <a class="button button-raised ink-dark" ng-click="focusCommentBox();"><span class="ion-chatbubbles"></span> 댓글 <b style="color: #f49335;">{{board.commentCnt}}</b></a>
       </div>
 

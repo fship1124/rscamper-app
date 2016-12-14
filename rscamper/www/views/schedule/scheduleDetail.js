@@ -2,10 +2,7 @@
  * Created by Bitcamp on 2016-11-02.
  */
 angular.module('App')
-  .controller('dScheduleCtrl', function ($scope, $rootScope, $stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal, tourSchedulePopup, $location) {
-    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
-      viewData.enableBack = true;
-    });
+  .controller('dScheduleCtrl', function ($scope, $rootScope, $stateParams, $http, detailSchedule, $ionicActionSheet, $timeout, $ionicModal, tourSchedulePopup, $location, $cordovaSocialSharing) {
     /*  $scope.budgetSetting = {
      priceType : 1,
      content : "",
@@ -14,65 +11,70 @@ angular.module('App')
     var imgid = 1;
     $scope.scheduleLikeCnt = {};
     $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
+    console.log($rootScope.dSchedule);
     $scope.updateBtn = true;
     $scope.strapline = {
       title: "",
       content: ""
     }
-    $rootScope.getScheduleLocation = {};
-    $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
-      {
+
+    $scope.getDetailDate = function () {
+      $rootScope.getScheduleLocation = {};
+      $http.get($rootScope.url + '8081/app/tourschedule/getScheduleLocation',
+        {
+          params: {
+            no: $stateParams.no
+          }
+        })
+        .success(function (data) {
+          $rootScope.getScheduleLocation = data;
+          for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
+            $rootScope.getScheduleLocation[i].isScheduleDetail = true;
+          }
+          console.log("추가된 지역 정보",data);
+        })
+
+      $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleSet', {
         params: {
-          no: $stateParams.no
+          userUid: $rootScope.rootUser.userUid,
+          recordNo: $scope.dSchedule.recordNo,
+          targetType: 3
         }
       })
-      .success(function (data) {
-        $rootScope.getScheduleLocation = data;
-        for (var i = 0; i < $rootScope.getScheduleLocation.length; i++) {
-          $rootScope.getScheduleLocation[i].isScheduleDetail = true;
-        }
-        console.log("추가된 지역 정보",data);
-      })
+        .success(function (data) {
+          console.log("check", data);
+          $scope.isLiked = data.scheduleLike;
+          $scope.isCustomizing = data.customizing;
+          $scope.isBookMark = data.bookMark;
+        });
 
-    $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleSet', {
-      params: {
-        userUid: $rootScope.rootUser.userUid,
-        recordNo: $scope.dSchedule.recordNo,
-        targetType: 3
-      }
-    })
-      .success(function (data) {
-        console.log("check", data);
-        $scope.isLiked = data.scheduleLike;
-        $scope.isCustomizing = data.customizing;
-        $scope.isBookMark = data.bookMark;
-      });
-
-    $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleDetailCnt', {
-      params: {
-        userUid: $rootScope.rootUser.userUid,
-        recordNo: $scope.dSchedule.recordNo,
-        targetType: 3
-      }
-    })
-      .success(function (data) {
-        $scope.scheduleLikeCnt.likeCnt = data.likeCnt;
-        $scope.scheduleLikeCnt.customizingCnt = data.customizingCnt;
-        $scope.scheduleLikeCnt.bookMarkCnt = data.bookMarkCnt;
-      })
-
-    $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
-      {
+      $http.get($rootScope.url + '8081/app/tourschedule/checkScheduleDetailCnt', {
         params: {
-          dDate: $rootScope.dSchedule.departureDate,
-          aDate: $rootScope.dSchedule.arriveDate
+          userUid: $rootScope.rootUser.userUid,
+          recordNo: $scope.dSchedule.recordNo,
+          targetType: 3
         }
       })
-      .success(function (result) {
-        $rootScope.period = result;
-        console.log("기간 : " + result);
-      });
+        .success(function (data) {
+          $scope.scheduleLikeCnt.likeCnt = data.likeCnt;
+          $scope.scheduleLikeCnt.customizingCnt = data.customizingCnt;
+          $scope.scheduleLikeCnt.bookMarkCnt = data.bookMarkCnt;
+        })
 
+      $http.get($rootScope.url + '8081/app/tourschedule/getTourDate',
+        {
+          params: {
+            dDate: $rootScope.dSchedule.departureDate,
+            aDate: $rootScope.dSchedule.arriveDate
+          }
+        })
+        .success(function (result) {
+          $rootScope.period = result;
+          console.log("기간 : " + result);
+        });
+    }
+
+    $scope.getDetailDate();
 
     $scope.changeCover = function () {
 // Show the action sheet
@@ -275,14 +277,32 @@ angular.module('App')
       };
       navigator.camera.getPicture(function (imageDATA) {
         $scope.imgId = 1;
+        var img = "";
         var img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/>";
         var diva = "<div id='div" + imgid + "'></div>";
         document.execCommand('insertHTML', true, img);
         var asd = document.getElementById("edit-text");
+        var caretId = ' caret';
+        var cc = document.createElement('span');
+        cc.id = caretId;
+
+        window.getSelection().getRangeAt(0).insertNode(cc);
+
+        asd.blur();
         asd.innerHTML += img;
         asd.innerHTML += diva;
         asd.innerHTML += "　";
-        $("#edit-text").focus();
+        setTimeout(function () {
+          $("#edit-text").focus();
+        }, 0);
+
+        var range = document.createRange();
+        cc = document.getElementById(caretId);
+        range.selectNode(cc);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        range.deleteContents();
         imgid++;
       }, function (err) {
 
@@ -302,15 +322,28 @@ angular.module('App')
         saveToPhotoAlbum: false
       };
       navigator.camera.getPicture(function (imageDATA) {
-        var img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/><div id='div" + imgid + "'></div>";
+        var img = "";
+        img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/><div id='div" + imgid + "'></div>";
         var diva = "<div id='div" + imgid + "'></div>";
         document.execCommand('insertHTML', true, img);
         imgid++;
         var asd = document.getElementById("edit-text");
+
+
         asd.innerHTML += img;
         asd.innerHTML += diva;
-        asd.innerHTML += "　";
-        $("#edit-text").focus();
+        setTimeout(function () {
+          $("#edit-text").focus();
+        }, 0);
+
+        var range = document.createRange();
+        cc = document.getElementById(caretId);
+        range.selectNode(cc);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        range.deleteContents();
+
       }, function (err) {
 
       }, options);
@@ -604,12 +637,16 @@ angular.module('App')
         obj.style.height = '300px';
       }
     }
-
-    $scope.clickMemo = function () {
+    $("#edit-text").click(function () {
+      var self = $(this);
+      var scroll = self.offset().top;
       setTimeout(function () {
+        var height = $(window).height();
+        var conScroll = $("#edit-text").scrollTop() + scroll - $(window).height() / 2;
+        $("#edit-text").animate({scrollTop:conScroll},200,"swing");
         $("#edit-text").focus();
-      }, 0);
-    }
+      },200);
+    });
     //더보기 버튼
     $ionicModal.fromTemplateUrl('views/schedule/moreRecommendView.html', {
       scope: $scope
@@ -724,5 +761,99 @@ angular.module('App')
 
     $scope.delAddPrice = function (index) {
       $scope.budgetList.splice(index, 1);
+    }
+
+    //설정
+    $ionicModal.fromTemplateUrl('views/schedule/scheduleSetting.html', {
+      scope: $scope
+    }).then(function (modal) {
+      $scope.scheduleSettingModal = modal;
+    });
+    $scope.scheduleSetting = function () {
+      $scope.scheduleSettingModal.show();
+    }
+    $scope.newSchedule = {
+      title : $rootScope.dSchedule.title,
+      startDate : new Date($rootScope.dSchedule.departureDate),
+      finishDate : new Date($rootScope.dSchedule.arriveDate),
+      isOpen : 0
+    };
+    $scope.updateSchedule = function (s) {
+      $scope.comfirmPop = tourSchedulePopup.comfirmPopup("수정 확인", "수정 시 일정이 초기화됩니다.");
+      $scope.comfirmPop.then(function (res) {
+        if (res) {
+          // 유효성 체크
+          if (s.isOpen == 0) {
+            tourSchedulePopup.alertPopup('공개 여부','공개 여부를 선택하세요.', null);
+            return false;
+          }
+
+          if (s.title == "") {
+            tourSchedulePopup.alertPopup('여행 제목','여행 제목을 입력해주세요.','tourTitle');
+            return false;
+          }
+
+          if (s.startDate == "") {
+            tourSchedulePopup.alertPopup('출발 일자','출발 일자를 선택하세요.','sDate');
+            return false;
+          }
+
+          if (s.finishDate == "") {
+            tourSchedulePopup.alertPopup('도착 일자','도착 일자를 선택하세요.','fDate');
+            return false;
+          }
+          console.log("수정된 값",s);
+          var updateType = 2;
+          if (new Date($rootScope.dSchedule.departureDate).getTime() == s.startDate.getTime() && new Date($rootScope.dSchedule.arriveDate).getTime() == s.finishDate.getTime()) {
+            updateType = 1;
+          }
+
+          $http({
+            url: $rootScope.url + '8081/app/tourschedule/updateSchedule',
+            method: 'POST',
+            data: $.param({
+              recordNo : $rootScope.dSchedule.recordNo,
+              departureDate : s.startDate,
+              arriveDate : s.finishDate,
+              isOpen : s.isOpen,
+              title : s.title,
+              type : updateType
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+          })
+            .success(function (data) {
+              tourSchedulePopup.alertPopup('수정 완료','수정 완료했습니다.', null);
+              console.log("수정후",data);
+              $rootScope.dSchedule = data;
+              $scope.getDetailDate();
+              $scope.scheduleSettingModal.hide();
+            })
+        } else {
+          tourSchedulePopup.alertPopup('수정 취소','수정 취소했습니다.', null);
+        }
+      })
+    }
+    // 공유하기 설정
+    var options = {
+      message: '일정을 공유해보세요!', // not supported on some apps (Facebook, Instagram)
+      subject: $rootScope.dSchedule.title, // fi. for email
+      files: ['', ''], // an array of filenames either locally or remotely
+      url: 'https://192.168.0.190/#/scheduleList/'+ $rootScope.dSchedule.recordNo,
+      chooserTitle: '공유하기' // Android only, you can override the default share sheet title
+    }
+
+    var onSuccess = function(result) {
+      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+    }
+
+    var onError = function(msg) {
+      console.log("Sharing failed with message: " + msg);
+    }
+
+    $scope.sharing = function () {
+      window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
     }
   });

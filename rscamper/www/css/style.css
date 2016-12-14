@@ -144,6 +144,29 @@
 .item-myactive {
   background-color: lightgray;
 }
+.tourInfo-wrap-a {
+  margin-bottom: 8px;
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.tourInfo-infodiv {
+  height: 80px;
+  padding-top: 5px;
+}
+.tourInfo-title {
+  font-weight: bold !important;
+  font-size: 15px !important;
+}
+.tourInfo-distance {
+  margin-top: 8px;
+  font-size: 12px !important;
+  color: #ff5391 !important;
+}
+.tourInfo-address {
+  font-size: 12px !important;
+}
+
+
 
 /* tourdetail */
 .myDetailIcon {
@@ -384,6 +407,47 @@
   padding-top: 10px;
   font-size: 12px;
   color: dimgray;
+}
+.message-item a {
+  margin-bottom: 8px;
+  background-color: white !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  height: 96px !important;
+}
+
+.message-ion-list>div .message-item:nth-child(2n)>a {
+  /*background-color: #ffdde2 !important;*/
+  /*background-color: #FFFFFF !important;*/
+  background-color: #fbffe9 !important;
+}
+.message-ion-list>div .message-item:nth-child(2n + 1)>a {
+  background-color: #fff1c6 !important;
+}
+/*.message-item a:nth-child(2n) {*/
+  /*background-color: #ffbbc8 !important;*/
+/*}*/
+/*.message-item a:nth-child(2n+1) {*/
+  /*background-color: lightgray !important;*/
+/*}*/
+/*.message-item:nth-child(2n) {*/
+  /*background-color: #ffbbc8 !important;*/
+/*}*/
+/*.message-item:nth-child(2n + 1) {*/
+  /*background-color: lightgray !important;*/
+/*}*/
+.message-infodiv {
+  height: 80px;
+}
+.message-title {
+  font-size: 15px !important;
+}
+.message-dateSent {
+  margin-top: 8px;
+  font-size: 12px !important;
+  color: #666 !important;
+}
+.message-displayName {
+  font-size: 12px !important;
 }
 
 

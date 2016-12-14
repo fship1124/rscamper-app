@@ -20,7 +20,7 @@
       <ion-item ng-repeat="schedule in allScheduleList" class="item-light item-complex mypage-item" ng-href="#/scheduleList/{{schedule.recordNo}}">
         <div class="item-content mypage-content mypage-item-div">
           <img class="mypage-img" ng-src="{{schedule.cover.filePath}}" ng-if="schedule.picture == 1"/>
-          <img class="mypage-img" src="img/defaultscheduleImg.jpg" ng-if="schedule.picture == 0">
+          <img class="mypage-img" src="img/defaultcatImg.png" ng-if="schedule.picture == 0">
           <div class="mypage-title">{{schedule.title}}<br><br><span>{{schedule.period}}</span></div>
           <div class="mypage-author-div">
             <a class="item item-avatar mypage-author-a" href="#">
@@ -31,7 +31,7 @@
           <div class="mypage-info" ng-if="schedule.strapline != ''">
             <div class="item-divider mypage-info-title">{{schedule.strapline}}</div>
             <div class="item-text-wrap mypage-info-content introduce-content">
-              <pre>{{schedule.introduce}}</pre>
+              <pre class="pre-text">{{schedule.introduce}}</pre>
             </div>
           </div>
           <div class="mypage-info" style="padding: 10px 10px 0px 10px !important;">

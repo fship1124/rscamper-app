@@ -23,7 +23,7 @@
               <option value="5">숙박</option>
               <option value="6">기타</option>
             </ion-select>-->
-            <select ng-model="budget.priceType" ng-options="i.name for i in items">
+            <select ng-model="budget.priceType" ng-options="i.name for i in items" style="border: none">
                 <option value=""></option>
             </select>
           </div>
@@ -47,4 +47,5 @@
         </div>
       </ion-item>
     </ion-list>
+  </ion-content>
 </ion-modal-view>
