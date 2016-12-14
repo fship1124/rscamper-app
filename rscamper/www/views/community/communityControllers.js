@@ -67,6 +67,9 @@ angular.module('App')
         method: "GET"
       }).success(function (response) {
         angular.forEach(response.boardList, function (board) {
+          if (board.targetType != '2') {
+            board.targetType = '1'
+          }
           $scope.boardList.push(board);
         });
         $scope.total = response.totalPages;

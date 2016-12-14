@@ -35,6 +35,13 @@
   text-decoration: underline;
 }
 
+
+/* tab */
+.custom-tabs>div a span {
+  color: white !important;
+  font-size: 11px !important;
+}
+
 /* main */
 .mainTab {
   height: 20px;
