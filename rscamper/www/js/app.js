@@ -52,39 +52,116 @@ var app = angular.module('App', ['ionic', 'ionic-material', 'firebase', 'ngCordo
           controller: 'MainCtrl'
         })
         .state('main.main', {
-          cache: false,
-          url: '/main',
-          views: {
-            'main-tab': {
-              templateUrl: 'views/main/mainTab.html',
-              controller: 'MainTabCtrl'
-            },
-            'tour-tab': {
-              templateUrl: 'views/main/tourTab.html',
-              controller: 'TourTabCtrl'
-            },
-            'schedule-tab': {
-              templateUrl: 'views/main/scheduleTab.html',
-              controller: 'ScheduleTabCtrl'
-            },
-            'route-tab': {
-              templateUrl: 'views/main/routeTab.html',
-              controller: 'RouteTabCtrl'
-            },
-            'info-tab': {
-              templateUrl: 'views/main/infoTab.html',
-              controller: 'InfoTabCtrl'
-            },
-            'review-tab': {
-              templateUrl: 'views/main/reviewTab.html',
-              controller: 'ReviewTabCtrl'
-            },
-            'freeBoard-tab': {
-              templateUrl: 'views/main/freeBoardTab.html',
-              controller: 'freeBoardTabCtrl'
+            cache: false,
+            url: '/main',
+            views: {
+              'main-tab': {
+                templateUrl: 'views/main/mainTab.html',
+                controller: 'MainTabCtrl'
+              }
             }
-          }
-        })
+          })
+        .state('main.tour', {
+            cache: false,
+            url: '/tour',
+            views: {
+              'tour-tab': {
+                templateUrl: 'views/main/tourTab.html',
+                controller: 'TourTabCtrl'
+              }
+            }
+          })
+        .state('main.schedule', {
+            cache: false,
+            url: '/schedule',
+            views: {
+              'schedule-tab': {
+                templateUrl: 'views/main/scheduleTab.html',
+                controller: 'ScheduleTabCtrl'
+              }
+            }
+          })
+        .state('main.route', {
+            cache: false,
+            url: '/route',
+            views: {
+              'route-tab': {
+                templateUrl: 'views/main/routeTab.html',
+                controller: 'RouteTabCtrl'
+              }
+            }
+          })
+        .state('main.info', {
+            cache: false,
+            url: '/info',
+            views: {
+              'info-tab': {
+                templateUrl: 'views/main/infoTab.html',
+                controller: 'InfoTabCtrl'
+              }
+            }
+          })
+        .state('main.review', {
+            cache: false,
+            url: '/review',
+            views: {
+              'review-tab': {
+                templateUrl: 'views/main/reviewTab.html',
+                controller: 'ReviewTabCtrl'
+              }
+            }
+          })
+        .state('main.freeBoard', {
+            cache: false,
+            url: '/freeBoard',
+            views: {
+              'freeBoard-tab': {
+                templateUrl: 'views/main/freeBoardTab.html',
+                controller: 'freeBoardTabCtrl'
+              }
+            }
+          })
+
+
+
+
+        // .state('main.main', {
+        //   cache: false,
+        //   url: '/main',
+        //   views: {
+        //     'main-tab': {
+        //       templateUrl: 'views/main/mainTab.html',
+        //       controller: 'MainTabCtrl'
+        //     },
+        //     'tour-tab': {
+        //       templateUrl: 'views/main/tourTab.html',
+        //       controller: 'TourTabCtrl'
+        //     },
+        //     'schedule-tab': {
+        //       templateUrl: 'views/main/scheduleTab.html',
+        //       controller: 'ScheduleTabCtrl'
+        //     },
+        //     'route-tab': {
+        //       templateUrl: 'views/main/routeTab.html',
+        //       controller: 'RouteTabCtrl'
+        //     },
+        //     'info-tab': {
+        //       templateUrl: 'views/main/infoTab.html',
+        //       controller: 'InfoTabCtrl'
+        //     },
+        //     'review-tab': {
+        //       templateUrl: 'views/main/reviewTab.html',
+        //       controller: 'ReviewTabCtrl'
+        //     },
+        //     'freeBoard-tab': {
+        //       templateUrl: 'views/main/freeBoardTab.html',
+        //       controller: 'freeBoardTabCtrl'
+        //     }
+        //   }
+        // })
+
+
+
         .state('message', {
           url: '/message',
           templateUrl: 'views/message/message.html',

@@ -34,7 +34,7 @@ angular.module('App')
       $http({
         method: "GET",
         url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-       /* headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}*/
+        // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
       })
         .success(function(data) {
           $scope.today = data.weather.minutely[0];
@@ -141,7 +141,11 @@ angular.module('App')
         url: "http://192.168.0.187:8081/app/main/list?page=" + $scope.page + "&count=" + $scope.count,
         method: "GET"
       }).success(function (response) {
+        console.log(response.mainList);
         angular.forEach(response.mainList, function (main) {
+          if (main.targetType != '2' && main.targetType != '3') {
+            main.targetType = '1';
+          }
           $scope.myMainList.push(main);
         })
         $scope.total = response.totalPages;
@@ -184,8 +188,8 @@ angular.module('App')
     // 상세페이지 이동
     $scope.moveDetail = function (no, targetType) {
       switch (targetType) {
-        case '1':
-          $location.path("/communityDetail/"+no);
+        case '1', '2':
+          $location.path("/communityDetail/"+targetType+"/"+no);
           break;
         case '3':
           $location.path("/scheduleList/"+no);
@@ -214,6 +218,9 @@ angular.module('App')
         method: "GET"
       }).success(function (response) {
         angular.forEach(response.categoryBoardList, function (board) {
+          if (board.targetType != '2' && board.targetType != '3') {
+            board.targetType = '1';
+          }
           $scope.mainBoardList.push(board);
         })
         $scope.total = response.totalPages;
@@ -247,9 +254,9 @@ angular.module('App')
     $scope.load();
 
     // 상세페이지 이동
-    // $scope.moveDetail = function (no) {
-    //     $location.path("/communityDetail/"+no);
-    // }
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/communityDetail/"+targetType+"/"+no);
+    }
   })
   // 베스트 일정
   .controller('ScheduleTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {
@@ -300,9 +307,9 @@ angular.module('App')
     $scope.load();
 
     // 상세페이지 이동
-    // $scope.moveDetail = function (no) {
-    //     $location.path("/communityDetail/"+no);
-    // }
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/scheduleList/"+no);
+    }
   })
   // 추천 루트
   .controller('RouteTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {
@@ -321,6 +328,7 @@ angular.module('App')
         angular.forEach(response.routeList, function (route) {
           $scope.mainRouteList.push(route);
         });
+        console.log($scope.mainRouteList);
         $scope.total = response.totalPages;
 
         for (var i = 0; i < $scope.mainRouteList.length; i++) {
@@ -349,6 +357,10 @@ angular.module('App')
 
     // 페이지 로딩 시 데이터 불러오기
     $scope.load();
+
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/communityDetail/"+targetType+"/"+no);
+    }
   })
   // 추천 정보
   .controller('InfoTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {
@@ -365,6 +377,9 @@ angular.module('App')
         method: "GET"
       }).success(function (response) {
         angular.forEach(response.categoryBoardList, function (board) {
+          if (board.targetType != '2' && board.targetType != '3') {
+            board.targetType = '1';
+          }
           $scope.mainBoardList.push(board);
         })
         $scope.total = response.totalPages;
@@ -398,9 +413,9 @@ angular.module('App')
     $scope.load();
 
     // 상세페이지 이동
-    // $scope.moveDetail = function (no) {
-    //     $location.path("/communityDetail/"+no);
-    // }
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/communityDetail/"+targetType+"/"+no);
+    }
   })
   // 추천 리뷰
   .controller('ReviewTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {
@@ -417,6 +432,9 @@ angular.module('App')
         method: "GET"
       }).success(function (response) {
         angular.forEach(response.categoryBoardList, function (board) {
+          if (board.targetType != '2' && board.targetType != '3') {
+            board.targetType = '1';
+          }
           $scope.mainBoardList.push(board);
         })
         $scope.total = response.totalPages;
@@ -450,9 +468,9 @@ angular.module('App')
     $scope.load();
 
     // 상세페이지 이동
-    // $scope.moveDetail = function (no) {
-    //     $location.path("/communityDetail/"+no);
-    // }
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/communityDetail/"+targetType+"/"+no);
+    }
   })
   // 자유게시판
   .controller('freeBoardTabCtrl', function ($rootScope, $scope, $stateParams, $http, $ionicPlatform, $ionicModal, $ionicLoading, MyConfig, MyPopup, $location) {
@@ -469,6 +487,9 @@ angular.module('App')
         method: "GET"
       }).success(function (response) {
         angular.forEach(response.categoryBoardList, function (board) {
+          if (board.targetType != '2' && board.targetType != '3') {
+            board.targetType = '1';
+          }
           $scope.mainBoardList.push(board);
         })
         $scope.total = response.totalPages;
@@ -501,8 +522,7 @@ angular.module('App')
     // 페이지 로딩 시 데이터 불러오기
     $scope.load();
 
-    // 상세페이지 이동
-    // $scope.moveDetail = function (no) {
-    //     $location.path("/communityDetail/"+no);
-    // }
+    $scope.moveDetail = function (no, targetType) {
+      $location.path("/communityDetail/"+targetType+"/"+no);
+    }
   });
