@@ -230,21 +230,23 @@ angular.module('App')
     }
 
     $scope.qweqweqwe = function () {
-      /*   var asd = document.getElementById("edit-text");
+      var asd = document.getElementById("edit-text");
        $scope.imgId = 1;
        var img = "<div id='div" + imgid + "'><img id='img"+ imgid + "' src='img/defaultscheduleImg.jpg' style='width: 100%; height: 100px'/></div><br>";
        //document.execCommand('insertHTML',true, img);
        asd.innerHTML += img;
+      var obj = document.getElementById("edit-text");
+      if(obj.scrollHeight > 300) {
+        obj.style.height = "1px";
+        obj.style.height = (5 + obj.scrollHeight) + "px";
+        $("#footerBar").css("height", (19 + obj.scrollHeight) + "px");
+      } else {
+        obj.style.height = '300px';
+      }
        setTimeout(function () {
        $("#edit-text").select();
        },0);
-       imgid++;*/
-
-      var input = document.getElementById("edit-text");
-      setTimeout(function () {
-        input.focus();
-        input.setSelectionRange(2, 5);
-      }, 0);
+       imgid++;
     }
 
     $scope.textResult = function () {
@@ -277,32 +279,24 @@ angular.module('App')
       };
       navigator.camera.getPicture(function (imageDATA) {
         $scope.imgId = 1;
-        var img = "";
         var img = "<img id='img" + imgid + "' src='data:image/jpeg;base64," + imageDATA + "'  style='width: 100%; height: 100px'/>";
         var diva = "<div id='div" + imgid + "'></div>";
-        document.execCommand('insertHTML', true, img);
         var asd = document.getElementById("edit-text");
-        var caretId = ' caret';
-        var cc = document.createElement('span');
-        cc.id = caretId;
-
-        window.getSelection().getRangeAt(0).insertNode(cc);
-
-        asd.blur();
         asd.innerHTML += img;
         asd.innerHTML += diva;
-        asd.innerHTML += "　";
-        setTimeout(function () {
-          $("#edit-text").focus();
-        }, 0);
 
-        var range = document.createRange();
-        cc = document.getElementById(caretId);
-        range.selectNode(cc);
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        range.deleteContents();
+        var obj = document.getElementById("edit-text");
+        if(obj.scrollHeight > 300) {
+          obj.style.height = "1px";
+          obj.style.height = (5 + obj.scrollHeight) + "px";
+          $("#footerBar").css("height", (19 + obj.scrollHeight) + "px");
+        } else {
+          obj.style.height = '300px';
+        }
+        setTimeout(function () {
+          $("#edit-text").select();
+        },0);
+
         imgid++;
       }, function (err) {
 
@@ -335,14 +329,6 @@ angular.module('App')
         setTimeout(function () {
           $("#edit-text").focus();
         }, 0);
-
-        var range = document.createRange();
-        cc = document.getElementById(caretId);
-        range.selectNode(cc);
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        range.deleteContents();
 
       }, function (err) {
 
@@ -627,7 +613,23 @@ angular.module('App')
       $location.path("/postDetail/" + no);
     }
 
+    $scope.viewTextBox = function (s) {
+      setTimeout(function () {
+        $("#edit-text").focus();
+      },0)
+      console.log("클릭");
+      var self = $("#edit-text");
+      var scroll = self.offset().top;
+      setTimeout(function () {
+        var height = $(window).height();
+        var conScroll = $("#icontent").scrollTop() + scroll - $(window).height() / 2;
+        $("#icontent").animate({scrollBottom:conScroll},200,"swing");
+        $("#edit-text").focus();
+      },200);
+    }
+
     $scope.editTextBox = function () {
+      console.log("여기에?");
       var obj = document.getElementById("edit-text");
       if(obj.scrollHeight > 300) {
         obj.style.height = "1px";
@@ -637,16 +639,6 @@ angular.module('App')
         obj.style.height = '300px';
       }
     }
-    $("#edit-text").click(function () {
-      var self = $(this);
-      var scroll = self.offset().top;
-      setTimeout(function () {
-        var height = $(window).height();
-        var conScroll = $("#edit-text").scrollTop() + scroll - $(window).height() / 2;
-        $("#edit-text").animate({scrollTop:conScroll},200,"swing");
-        $("#edit-text").focus();
-      },200);
-    });
     //더보기 버튼
     $ionicModal.fromTemplateUrl('views/schedule/moreRecommendView.html', {
       scope: $scope

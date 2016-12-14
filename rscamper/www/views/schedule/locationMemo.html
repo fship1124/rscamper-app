@@ -5,7 +5,7 @@
     <button class="button button-clear" ng-click="locationMemo.hide()"><i class="ion-android-arrow-back"></i></button>
     <button class="button button-clear" ng-click="insertMemo()"><i class="ion-checkmark-round"></i></button>
   </ion-header-bar>
-  <ion-content class="padding has-footer" scroll="true">
+  <ion-content class="padding has-footer" scroll="true" id="iContent">
     <div class="list" style="background-color: white !important;">
 
       <label class="item item-input item-select" style="background-color: white !important;">
@@ -22,7 +22,8 @@
           <input type="text" id="memoTitle" style="border-bottom: 1px solid #e0e0e0; background-color: white !important;" placeholder="제목을 입력하세요.">
         </label>
     </div>
-    <div id="edit-text" contenteditable="true" style="width: 100%; height: 300px; border: 1px solid #e0e0e0; white-space:normal; overflow-y: scroll"></div>
+    <div id="edit-text" contenteditable="true" style="width: 100%; height: 300px; border: 1px solid #e0e0e0; white-space:normal;" ng-keyup="editTextBox()" ng-click="viewTextBox(this)"></div>
+
     <div style="width: 100%; color: #b1b1b1; font-size: smaller">
       <div>
         <i class="ion-location" style="margin-top: 2%; font-size: larger"></i>
@@ -36,33 +37,13 @@
         <span ng-if="budget.priceType == 4">쇼핑</span>
         <span ng-if="budget.priceType == 5">숙박</span>
         <span ng-if="budget.priceType == 6">기타</span>
-         |
+        |
         <span>{{budget.content}}</span> |
         <span>{{budget.travelPrice | currency : "" : 0}} 원</span>
         <span style="float: right; padding-right: 10px" ng-click="delPrice($index)"><i class="ion-close-round"></i></span>
-     </div>
+      </div>
     </div>
   </ion-content>
-    <!--<div class="list row" style="border-bottom: 1px solid #e0e0e0">-->
-
-      <!--<div class="col col-33 item-select">-->
-        <!--<label class="item item-input item-select">-->
-          <!--<select style="width: 100%">-->
-          <!--<option>메모</option>-->
-          <!--<option>정보</option>-->
-          <!--</select>-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="col col-67">-->
-        <!--<label class="item item-input">-->
-         <!--<input id="memoTitle" type="text" style="background-color: white !important;" placeholder="제목">-->
-        <!--</label>-->
-      <!--</div>-->
-    <!--</div>-->
-<!--  <ion-content scroll="true">
-        <div id="edit-text" contenteditable="true" style="width: 100%; height: 500px; border: 1px solid #e0e0e0; white-space:normal; overflow-y: scroll" ng-keyup="editTextBox()">
-        </div>
-  </ion-content>-->
   <ion-footer-bar align-title="left" class="bar-energized">
     <div style="width: 100%; height: 100%">
       <div class="memoBtn" style="width: 33%; text-align: center">

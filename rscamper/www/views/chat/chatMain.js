@@ -30,16 +30,16 @@ angular.module('App')
     codeNo : 0
   }
 
-  $scope.makeRoom = function (c) {
-    if (c.codeNo == 0) {
-      tourSchedulePopup.alertPopup('지역 선택','지역을 선택해주세요.','locationCategory');
-      return false;
-    }
+    $scope.makeRoom = function (c) {
+      if (c.codeNo == 0) {
+        tourSchedulePopup.alertPopup('지역 선택','지역을 선택해주세요.','locationCategory');
+        return false;
+      }
 
-    if (c.roomTitle == "") {
-      tourSchedulePopup.alertPopup('제목 입력','제목을 입력해주세요.','roomTitle');
-      return false;
-    }
+      if (c.roomTitle == "") {
+        tourSchedulePopup.alertPopup('제목 입력','제목을 입력해주세요.','roomTitle');
+        return false;
+      }
     $http({
       method : 'POST',
       url : $rootScope.url + "8081/app/chat/createRoom",

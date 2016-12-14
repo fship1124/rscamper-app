@@ -105,7 +105,7 @@ angular.module('App')
       }
       if (user =='user') {
         html += '<div ng-if="user._id !== message.userId"><img ng-click="viewProfile(message)" class="profile-pic right" src="' + $rootScope.rootUser.photoUrl + '" onerror="onProfilePicError(this)">';
-        html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + data.msgContent  + '</pre>';
+        html += '<div class="chat-bubble right" style="white-space:normal;"><pre>' + data.message  + '</pre>';
       }
     }
     if (type == 'image') {
@@ -148,7 +148,7 @@ angular.module('App')
     }
     $rootScope.socket.emit('user',data);
     $scope.data = data;
-    writeText($scope.data,"user","text");
+    writeText(data,"user","text");
     $scope.msgContent = "";
     $ionicScrollDelegate.scrollBottom();
   }

@@ -15,14 +15,6 @@
         <div class="row" style="border-bottom: 1px solid #e0e0e0">
           <div class="col col-10 detail-info-title" style="line-height: 3">구분</div>
           <div class="col col-80"  style="line-height: 3">
-            <!--<ion-select style="border: none">
-              <option selected value="1">교통비</option>
-              <option value="2">음식</option>
-              <option value="3">오락, 엑티비티</option>
-              <option value="4">쇼핑</option>
-              <option value="5">숙박</option>
-              <option value="6">기타</option>
-            </ion-select>-->
             <select ng-model="budget.priceType" ng-options="i.name for i in items" style="border: none">
                 <option value=""></option>
             </select>

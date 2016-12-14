@@ -7,14 +7,12 @@
         <a ng-click="makeRoom(createRoom)" style="float: right; margin-right: 2%; text-decoration: none;"><i class="ion-checkmark-round" style="color: white"></i></a>
       </div>
       <div class="item">지역 선택</div>
-      <div style="width: 100%; height: 50%; padding-top: 0%;overflow-y: scroll; border-top: 1px gainsboro solid; border-bottom: 1px gainsboro solid" ng-mousedown="qweqwe($event)" ng-click="qweqwe($event)">
-        <ion-list onscroll="true">
+      <ion-scroll style="width: 100%; height: 50%; padding-top: 0%;overflow-y: scroll; border-top: 1px gainsboro solid; border-bottom: 1px gainsboro solid" ng-mousedown="qweqwe($event)" ng-click="qweqwe($event)">
           <ion-radio id="locationCategory" ng-repeat="code in codeTb" ng-value="code.codeNo" ng-model="createRoom.codeNo">
             {{code.codeName}}
           </ion-radio>
-        </ion-list>
-      </div>
-      <div class="item">제목 입력</div>
+      </ion-scroll>
+      <div class="item">방제목 입력</div>
       <div class="item item-input"><input id="roomTitle" type="text" ng-model="createRoom.roomTitle"></div>
     </div>
     <!-- <button class="button" ng-click="qweqweqwe()">사진</button>
