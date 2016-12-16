@@ -81,18 +81,30 @@ angular.module('App')
         StatusBar.styleDefault();
       }
 
-      $cordovaGeolocation.getCurrentPosition().then(function (data) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude}})
-          .success(function (response) {
-            $scope.location = {
-              lat : data.coords.latitude,
-              lang: data.coords.longitude,
-              city: response.results[0].formatted_address,
-              current: true
-            };
-            $scope.getPlaceInfo(data.coords.longitude,data.coords.latitude);
-          });
-      })
+      $scope.location = {
+        lat: 0,
+        long: 0,
+        city: ''
+      };
+
+      $scope.location.lat = 37.4943314;
+      $scope.location.long = 127.02780369999999;
+      $scope.location.city = "대한민국 서울특별시 서초구 서초2동 1327-49";
+
+      $scope.getPlaceInfo($scope.location.long, $scope.location.lat);
+
+      // $cordovaGeolocation.getCurrentPosition().then(function (data) {
+      //   $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude}})
+      //     .success(function (response) {
+      //       $scope.location = {
+      //         lat : data.coords.latitude,
+      //         lang: data.coords.longitude,
+      //         city: response.results[0].formatted_address,
+      //         current: true
+      //       };
+      //       $scope.getPlaceInfo(data.coords.longitude,data.coords.latitude);
+      //     });
+      // })
     })
   $scope.qqwe = function () {
     $scope.showSearchBox = !$scope.showSearchBox;

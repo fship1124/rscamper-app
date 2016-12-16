@@ -8,16 +8,13 @@ angular.module('App')
         StatusBar.styleDefault();
       }
 
-      navigator.geolocation.getCurrentPosition(function (position) {
         $scope.mylocation = {
-          lat: position.coords.latitude,
-          long: position.coords.longitude
-        }
+          lat: 0,
+          long: 0,
+        };
 
-        // $scope.mylocation.long = 127.1596093;
-        // $scope.mylocation.lat = 35.84977;
-
-        console.log($scope.mylocation.long, $scope.mylocation.lat);
+        $scope.mylocation.lat = 37.4943314;
+        $scope.mylocation.long = 127.02780369999999;
 
         initialize();
 
@@ -50,8 +47,51 @@ angular.module('App')
               }
             }
             console.log("mapList", $scope.mapList);
-          })
-      });
+          });
+      // navigator.geolocation.getCurrentPosition(function (position) {
+      //   $scope.mylocation = {
+      //     lat: position.coords.latitude,
+      //     long: position.coords.longitude
+      //   }
+      //
+      //   // $scope.mylocation.long = 127.1596093;
+      //   // $scope.mylocation.lat = 35.84977;
+      //
+      //   console.log($scope.mylocation.long, $scope.mylocation.lat);
+      //
+      //   initialize();
+      //
+      //   $http.get('http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=3DmpkuLpruIBYk6zhr6YKNveBk7HgaAuFRZy54iH5nxxt23BRbs8yzfCdsp%2BYhTxwez01fmdHXwXiPP1WTMGag%3D%3D',
+      //     {
+      //       params: {
+      //         contentTypeId: 12,
+      //         mapX: $scope.mylocation.long,
+      //         mapY: $scope.mylocation.lat,
+      //         radius: 2000,
+      //         listYN: 'Y',
+      //         MobileOS: 'ETC',
+      //         MobileApp: "TourAPI3.0_Guide",
+      //         arrange: 'A',
+      //         numOfRows: 12,
+      //         pageNo: '1'
+      //       }
+      //     }
+      //   )
+      //     .success(function (data) {
+      //       $scope.mapList = data.response.body.items.item;
+      //       drop($scope.mapList, $scope.map);
+      //
+      //       // api 호출 데이터들과 나와의 거리 $scope.mapList에 추가
+      //       $scope.distanceList = [];
+      //       for (var i = 0; i < $scope.mapList.length; i++) {
+      //         $scope.mapList[i].myDistance = computeDistance($scope.mylocation.long, $scope.mylocation.lat, $scope.mapList[i].mapx, $scope.mapList[i].mapy);
+      //         if (!$scope.mapList[i].firstimage) {
+      //           $scope.mapList[i].firstimage = "../../img/default-thumbnail.jpg";
+      //         }
+      //       }
+      //       console.log("mapList", $scope.mapList);
+      //     })
+      // });
 
       var map = null;
 

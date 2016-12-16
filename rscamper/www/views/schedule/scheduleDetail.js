@@ -9,6 +9,9 @@ angular.module('App')
      price : 0
      }*/
     var imgid = 1;
+    $("#memoTitle").val("");
+    $("#edit-text").html("");
+    $scope.memoTItle = "";
     $scope.scheduleLikeCnt = {};
     $rootScope.dSchedule = detailSchedule.getScheduleInfo($stateParams.no);
     console.log($rootScope.dSchedule);
@@ -190,6 +193,8 @@ angular.module('App')
 
     $scope.openMemo = function (data) {
       console.log("가져온 정보",data);
+      $("#memoTitle").val("");
+      $("#edit-text").html("");
       $scope.memoLocation = data;
       $scope.showBudgetList = [];
       $scope.locationMemo.show();
@@ -450,7 +455,11 @@ angular.module('App')
        console.log($scope.memoLocation.contentCode);
        console.log($stateParams.no);
        console.log($("#memoType").val());*/
-
+      console.log("script",document.getElementById('memoTitle').value);
+      console.log("script",document.getElementById('edit-text').innerHTML);
+      console.log("angular",$scope.memoTItle);
+      console.log($("#memoTitle").val());
+      console.log($("#edit-text").html());
       /* memoType == 1 :  메모*/
       /* memoType == 2 :  정보*/
       $http({

@@ -114,6 +114,7 @@
   background-color: white;
   padding: 5px 8px 10px 8px;
   margin-top: -5px;
+  height: 66px;
 }
 .main-board-short-title {
   font-weight: bold;
@@ -125,9 +126,15 @@
 .main-board-long-title {
   font-weight: bold;
   font-size: 12px;
-  margin: 0px;
-  height: 30px;
+  margin: 0 0 5px 0;
+  height: 25px;
   line-height: 110%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 .main-board-author {
   font-size: 11px;
@@ -149,7 +156,7 @@
   /*overflow: scroll;*/
 }
 .item-myactive {
-  background-color: lightgray;
+  background-color: lightgray !important;
 }
 .tourInfo-wrap-a {
   margin-bottom: 8px;

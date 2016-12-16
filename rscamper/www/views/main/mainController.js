@@ -9,32 +9,43 @@ angular.module('App')
         StatusBar.styleDefault();
       }
       $scope.loadMain = function () {
-        $cordovaGeolocation.getCurrentPosition().then(function (data) {
-          $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
-            .success(function (response) {
-              $scope.location = {
-                lat : data.coords.latitude,
-                long: data.coords.longitude,
-                city: response.results[0].formatted_address,
-                current: true
-              };
-              loadWeather();
-            })
-            .error(function () {
-              var alertPopup = $ionicPopup.alert({
-                title: 'Error!',
-              });
-              alertPopup.then(function (res) {
-              });
-            });
-        })
+        // $cordovaGeolocation.getCurrentPosition().then(function (data) {
+        //   $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params : {latlng: data.coords.latitude + ',' + data.coords.longitude, sensor: true}})
+        //     .success(function (response) {
+        //       $scope.location = {
+        //         lat : data.coords.latitude,
+        //         long: data.coords.longitude,
+        //         city: response.results[0].formatted_address,
+        //         current: true
+        //       };
+        //       loadWeather();
+        //     })
+        //     .error(function () {
+        //       var alertPopup = $ionicPopup.alert({
+        //         title: 'Error!',
+        //       });
+        //       alertPopup.then(function (res) {
+        //       });
+        //     });
+        // })
+
+        $scope.location = {
+          lat: 0,
+          long: 0,
+          city: ''
+        };
+
+        $scope.location.lat = 37.4943314;
+        $scope.location.long = 127.02780369999999;
+        $scope.location.city = "대한민국 서울특별시 서초구 서초2동 1327-49";
+        loadWeather();
 
     // 날씨 불러오기
     function loadWeather() {
       $http({
         method: "GET",
         url: "http://apis.skplanetx.com/weather/current/minutely?version=1&lat=" + $scope.location.lat + "&lon=" + $scope.location.long,
-        // headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
+         headers: {'appKey': '1358f380-3444-3adb-bcf0-fbb5a2dfd042'}
       })
         .success(function(data) {
           $scope.today = data.weather.minutely[0];

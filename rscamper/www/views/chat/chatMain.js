@@ -3,7 +3,8 @@
  */
 angular.module('App')
 .controller('chatMainCtrl',function ($scope, $ionicModal, $http, $rootScope, tourSchedulePopup, $location) {
-  $rootScope.socket = io.connect("http://192.168.0.190:10001");
+  // $rootScope.socket = io.connect("http://192.168.0.190:10001");
+  $rootScope.socket = io.connect("http://14.32.66.104:8084");
   $http.get($rootScope.url + "8081/app/chat/getCodeName", {
     params : {
       codeName : 'chat_areacode'

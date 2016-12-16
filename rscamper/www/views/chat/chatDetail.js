@@ -6,12 +6,13 @@ angular.module('App')
       var initTextSize = $("#inputText").css('height');
       var initFooterSize = $("#footerBar").css('height');
 
-      $rootScope.socket = io.connect("http://192.168.0.190:10001");
+      // $rootScope.socket = io.connect("http://192.168.0.190:10001");
+      $rootScope.socket = io.connect("http://14.32.66.104:8084");
       /*     $http.get($rootScope.url + "8081/app/chat/getChatRoomInfo", {
         params : {
           roomNo : $stateParams.chatRoomNo
         }
-      })
+      })q
         .success(function (data) {
           $scope.roomInfo = data;
           console.log($scope.roomInfo);
@@ -76,6 +77,7 @@ angular.module('App')
       name : data.name,
       message : data.message,
       photoUrl : data.photoUrl,
+      imgUrl : data.imgUrl,
       sendRegDate : new Date()
     }
     var currentTop = viewScroll.getScrollPosition().top;
